@@ -10,11 +10,10 @@ precision.
 ## Some Examples
 
 Here is a date-time string that’s all ISO 8601:2004:
-`2018-07-24 14:44:22.234343-07:00`. Let’s take that as our input going
-forward.
+`2018-07-30T22:40:43-07:00`. Let’s take that as our input going forward.
 
 ``` r
-input <- "2018-07-24 14:44:22.234343-07:00"
+input <- "2018-07-30T22:40:43-07:00"
 ```
 
 There are standardized date forms across all locales. They come in 4
@@ -26,7 +25,7 @@ input %>%
   dt_format_standard(
     locale = "en",
     width = "short")
-#> [1] "7/24/2018 A, 2:44 PM"
+#> [1] "7/30/2018 A, 10:40 PM"
 ```
 
 ``` r
@@ -34,7 +33,7 @@ input %>%
   dt_format_standard(
     locale = "de",
     width = "medium")
-#> [1] "24.07.2018 n. Chr., 14:44:22"
+#> [1] "30.07.2018 n. Chr., 22:40:43"
 ```
 
 We can also apply a smattering of different simple date format presets
@@ -47,7 +46,7 @@ input %>%
     date_format = fdf("yMd"),
     time_format = NULL,
     locale = "es")
-#> [1] "24/7/2018"
+#> [1] "30/7/2018"
 ```
 
 Here is a comparison table of localized dates for all the presets
