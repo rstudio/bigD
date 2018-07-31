@@ -6,6 +6,7 @@
 #' be included in the output date-time string.
 #' @param combination an appending pattern for the date and time components.
 #' @param locale the output locale for the printing of the date-time string.
+#' @importFrom stringr str_extract str_extract_all str_replace str_replace_all
 #' @export
 format_w_pattern <- function(input,
                              date_format = NULL,
@@ -56,7 +57,7 @@ format_w_pattern <- function(input,
   }
 
   extracted_text <-
-    str_extract_all(pattern, "'.*?'") %>%
+    stringr::str_extract_all(pattern, "'.*?'") %>%
     unlist() %>%
     stringr::str_replace_all("'", "")
 
