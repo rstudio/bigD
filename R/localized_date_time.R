@@ -8,6 +8,8 @@
 #' @noRd
 localized_date_time <- function(date_input = NULL,
                                 time_input = NULL,
+                                tz_offset = NULL,
+                                iana_tz_name = NULL,
                                 subst_pattern,
                                 locale) {
 
@@ -367,6 +369,49 @@ localized_date_time <- function(date_input = NULL,
       f_sec_v <- c(f_sec_1, f_sec_2, f_sec_3, f_sec_4)
     }
 
+    # Time zone information
+    if (!is.null(iana_tz_name)) {
+
+      specific_nonloc_tz <-
+        subset(
+          tz_tbl_dst,
+          zone_name == iana_tz_name & date_start < as.Date(date_input))
+
+      if (nrow(specific_nonloc_tz) > 0) {
+
+        specific_nonloc_tz <- specific_nonloc_tz[nrow(specific_nonloc_tz), ]
+
+        full_name <- specific_nonloc_tz$full_name
+        abbrev <- specific_nonloc_tz$abbrev
+        country_code <- specific_nonloc_tz$country_code
+        country_name <- specific_nonloc_tz$country_name
+
+      } else {
+
+        full_name <- NA_character_
+        abbrev <- NA_character_
+        country_code <- NA_character_
+        country_name <- NA_character_
+      }
+    } else {
+
+      full_name <- NA_character_
+      abbrev <- NA_character_
+      country_code <- NA_character_
+      country_name <- NA_character_
+    }
+
+    if (!is.null(tz_offset)) {
+
+      long_local_gmt <- get_long_local_gmt(tz_offset)
+      short_local_gmt <- get_short_local_gmt(tz_offset)
+
+    } else {
+
+      long_local_gmt <- NA_character_
+      short_local_gmt <- NA_character_
+    }
+
     # Replacement of `a`
     if (grepl("a", subst_pattern)) {
       a <- l_fmt_a(locale = locale)
@@ -425,12 +470,75 @@ localized_date_time <- function(date_input = NULL,
       idx <- idx + 1L
     }
 
+    # Replacement of `zzzz`
+    if (grepl("zzzz", subst_pattern)) {
+
+      if (!is.na(full_name)) {
+        subst_pattern <- gsub("zzzz", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, full_name)
+        idx <- idx + 1L
+
+      } else {
+
+        subst_pattern <- gsub("zzzz", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, long_local_gmt)
+        idx <- idx + 1L
+      }
+    }
+
+    # Replacement of `zzz`
+    if (grepl("zzz", subst_pattern)) {
+
+      if (!is.na(full_name)) {
+        subst_pattern <- gsub("zzz", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, full_name)
+        idx <- idx + 1L
+
+      } else {
+
+        subst_pattern <- gsub("zzz", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, long_local_gmt)
+        idx <- idx + 1L
+      }
+    }
+
+    # Replacement of `zz`
+    if (grepl("zz", subst_pattern)) {
+
+      if (!is.na(full_name)) {
+        subst_pattern <- gsub("zz", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, full_name)
+        idx <- idx + 1L
+
+      } else {
+
+        subst_pattern <- gsub("zz", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, long_local_gmt)
+        idx <- idx + 1L
+      }
+    }
+
+    # Replacement of `z`
+    if (grepl("z", subst_pattern)) {
+
+      if (!is.na(abbrev)) {
+        subst_pattern <- gsub("z", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, abbrev)
+        idx <- idx + 1L
+
+      } else {
+
+        subst_pattern <- gsub("z", braced(idx), subst_pattern)
+        replace_stack <- c(replace_stack, short_local_gmt)
+        idx <- idx + 1L
+      }
+    }
+
     # NOTE the missing components:
     #  - k (hour in day: 1-24)
     #  - K (hour in am/pm: 0-11)
     #  - S (fractional second S, SS, SSS, SSSS)
     #  - A (milliseconds in day)
-    #  - z (TZ specific non-location)
     #  - Z (TZ)
     #  - O (TZ)
     #  - v (TZ generic non-location)
@@ -442,7 +550,6 @@ localized_date_time <- function(date_input = NULL,
   # Add in replacements from the `replace_stack`
   if (!is.null(replace_stack)) {
     for (i in seq_along(replace_stack)) {
-
       subst_pattern <-
         gsub(paste0("\\{", i, "\\}"), replace_stack[i], subst_pattern)
     }
