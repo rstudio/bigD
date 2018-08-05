@@ -31,7 +31,7 @@ get_wrapped_iana_pattern <- function() {
 }
 
 get_attached_iana_pattern <- function() {
-  "(\\s-\\s|\\/|\\|)([a-zA-Z0-9\\/ -\\+_]*?)"
+  "(\\s-\\s|\\s|\\/|\\|)([a-zA-Z0-9\\/ -\\+_]*?)"
 }
 
 is_date_present <- function(input) {
