@@ -106,18 +106,18 @@ get_tz_offset <- function(input) {
       offset <- 0.0
     },
     hh = {
-      iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hh(), ".*"), "\\3", input)
+      iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hh(), ".*"), "\\4", input)
       offset <- as.numeric(iso_tz_component)
     },
     hh_mm = {
-      iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hh_mm(), ".*"), "\\3", input)
+      iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hh_mm(), ".*"), "\\4", input)
       offset_sign <- ifelse(substr(iso_tz_component, 1, 1) == "-", -1L, 1L)
       offset_h <- as.numeric(substr(iso_tz_component, 1, 3))
       offset_min <- as.numeric(substr_right(iso_tz_component, 2)) / 60.0
       offset <- (abs(offset_h) + offset_min) * offset_sign
     },
     hhmm = {
-      iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hhmm(), ".*"), "\\3", input)
+      iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hhmm(), ".*"), "\\4", input)
       offset_sign <- ifelse(substr(iso_tz_component, 1, 1) == "-", -1L, 1L)
       offset_h <- as.numeric(substr(iso_tz_component, 1, 3))
       offset_min <- as.numeric(substr_right(iso_tz_component, 2)) / 60.0
@@ -125,6 +125,24 @@ get_tz_offset <- function(input) {
     })
 
   offset
+}
+
+get_date_component <- function(input) {
+
+  if (!is_date_present(input)) {
+    return(NA_character_)
+  }
+
+  gsub(paste0(".*", get_date_pattern(), ".*"), "\\1", input)
+}
+
+get_time_component <- function(input) {
+
+  if (!is_time_present(input)) {
+    return(NA_character_)
+  }
+
+  gsub(paste0(".*", get_time_pattern(), ".*"), "\\2", input)
 }
 
 get_iana_tz <- function(input) {
