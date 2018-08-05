@@ -1,9 +1,9 @@
 get_date_pattern <- function() {
-  "(\\d+?-\\d\\d-\\d\\d)"
+  "([\\+-]?\\d{4}-\\d\\d-\\d\\d)"
 }
 
 get_time_pattern <- function() {
-  "(T| )(\\d|\\d\\d):\\d\\d[0-9:.]*"
+  "(T| )((\\d|\\d\\d):\\d\\d[0-9:.]*)"
 }
 
 get_tz_pattern <- function() {
