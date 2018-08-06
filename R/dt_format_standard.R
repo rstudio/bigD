@@ -14,86 +14,45 @@ dt_format_standard <- function(input,
                                locale = "en_US",
                                width = "medium") {
 
-  # Extract the date component if it exists
-  date_component <- stringr::str_extract(input, "^\\d+?-\\d\\d-\\d\\d")
-
   # Is a date component present?
-  date_present <- ifelse(!is.na(date_component), TRUE, FALSE)
+  date_present <- is_date_present(input)
 
   if (!date_present) {
     stop("There is no detectable date component.", call. = FALSE)
   }
 
-  # Extract the time component if it exists
-  time_component <- stringr::str_extract(input, "(\\d|\\d\\d):\\d\\d[0-9:.]*")
-
   # Is a time component present?
-  time_present <- ifelse(!is.na(time_component), TRUE, FALSE)
+  time_present <- is_time_present(input)
 
   if (!time_present) {
     stop("There is no detectable time component.", call. = FALSE)
   }
 
-  # Extract the time zone if it exists
+  # Extract the date component
+  date_component <- get_date_component(input)
 
-  # <time>Z
-  # <time>±hh:mm
-  # <time>±hhmm
-  # <time>±hh
+  # Extract the time component
+  time_component <- get_time_component(input)
 
-  tz_component_z <-
-    grepl(".*(\\d|\\d\\d):(\\d\\d|\\d\\d:\\d\\d)[0-9:.]*Z$", input, perl = TRUE)
+  # Is a time zone component present?
+  tz_present <- is_tz_present(input)
 
-  tz_component_hh_mm <-
-    grepl(".*(\\d|\\d\\d):(\\d\\d|\\d\\d:\\d\\d)[0-9:.]*(\\+|-)\\d\\d:\\d\\d$", input, perl = TRUE)
-
-  tz_component_hhmm <-
-    grepl(".*(\\d|\\d\\d):(\\d\\d|\\d\\d:\\d\\d)[0-9:.]*(\\+|-)\\d\\d\\d\\d$", input, perl = TRUE)
-
-  tz_component_hh <-
-    grepl(".*(\\d|\\d\\d):(\\d\\d|\\d\\d:\\d\\d)[0-9:.]*(\\+|-)\\d\\d$", input, perl = TRUE)
-
-  # Is a time zone present?
-  tz_present <-
-    ifelse(
-      any(
-        c(tz_component_z, tz_component_hh_mm,
-          tz_component_hhmm, tz_component_hh)), TRUE, FALSE)
-
+  # If a time zone component is not present and a `full` or
+  # `long` width is requested, stop the function
   if (!tz_present & width %in% c("full", "long")) {
 
     stop("A time zone component must be present to render `full` and `long` date-times.",
          .call = FALSE)
   }
 
-  if (tz_present) {
+  # Extract the time zone if it exists
+  tz_offset <- get_tz_offset(input)
 
-    tz_component_provided <-
-      which(
-        c(tz_component_z, tz_component_hh_mm,
-          tz_component_hhmm, tz_component_hh))
+  # Extract the IANA time zone name if it exists
+  iana_tz_name <- get_iana_tz(input)
 
-    if (tz_component_provided == 1) {
-      offset <- 0
-    }
-
-    if (tz_component_provided == 2) {
-      offset_l_char <- substr(substr_right(input, 6), 1, 3)
-      offset_r_char <- substr_right(input, 2)
-      offset <- as.numeric(paste0(offset_l_char, ".", offset_r_char))
-    }
-
-    if (tz_component_provided == 3) {
-      offset_l_char <- substr_right(input, 5) %>% substr(1, 3)
-      offset_r_char <- substr_right(input, 2)
-      offset <- as.numeric(paste0(offset_l_char, ".", offset_r_char))
-    }
-
-    if (tz_component_provided == 4) {
-      offset <- as.numeric(substr_right(input, 3))
-    }
-  }
-
+  # Obtain the data section that corresponds to
+  # standard date formats of the requested width
   date_section_name <- paste0("formats_standard_date_formats_", width)
 
   date_pattern <-
@@ -102,6 +61,8 @@ dt_format_standard <- function(input,
       section = date_section_name,
       locale = locale)
 
+  # Obtain the time section that corresponds to
+  # standard time formats of the requested width
   time_section_name <- paste0("formats_standard_time_formats_", width)
 
   time_pattern <-
@@ -110,38 +71,51 @@ dt_format_standard <- function(input,
       section = time_section_name,
       locale = locale)
 
+  # Obtain the date-time combination section that
+  # corresponds to those formats of the requested width
   combination_section_name <-
     paste0("formats_standard_date_time_combination_formats_", width)
 
-  combination_pattern <-
+  subst_pattern <-
     get_localized_value(
       type = "date_and_time_gregorian",
       section = combination_section_name,
       locale = locale)
 
-  pattern <- combination_pattern
-  pattern <- gsub("\\{0\\}", time_pattern, pattern)
-  pattern <- gsub("\\{1\\}", date_pattern, pattern)
+  # Substitute the `time_pattern` and `date_pattern`
+  # into the correct `subst_pattern` locations
+  subst_pattern <- gsub("\\{0\\}", time_pattern, subst_pattern)
+  subst_pattern <- gsub("\\{1\\}", date_pattern, subst_pattern)
 
-  extracted_text <-
-    str_extract_all(pattern, "'.*?'") %>%
-    unlist() %>%
-    stringr::str_replace_all("'", "")
+  # Create an empty vector to hold string literals
+  extracted_text <- c()
 
-  subst_pattern <-
-    stringr::str_replace_all(pattern, "'.*?'", "***")
+  repeat {
+    match <- gsub(".*('.*?').*", "\\1", subst_pattern)
+
+    if (match != subst_pattern) {
+      extracted_text <- c(extracted_text, gsub("'", "", match))
+      subst_pattern <- sub("'.*?'", "***", subst_pattern)
+    }
+
+    if (match == subst_pattern) break
+  }
 
   # Perform replacements to the `subst_pattern` string
   subst_pattern <-
     localized_date_time(
       date_input = date_component,
       time_input = time_component,
+      tz_offset = tz_offset,
+      iana_tz_name = iana_tz_name,
       subst_pattern = subst_pattern,
       locale = locale)
 
-  if (str_detect(subst_pattern, "\\*\\*\\*")) {
-    for (i in seq(extracted_text)) {
-      subst_pattern <- stringr::str_replace(subst_pattern, "\\*\\*\\*", extracted_text[i])
+  # Replace `subst_pattern` placeholders with
+  # the reserved literal strings
+  if (grepl("\\*\\*\\*", subst_pattern)) {
+    for (i in seq_along(extracted_text)) {
+      subst_pattern <- sub("\\*\\*\\*", extracted_text[i], subst_pattern)
     }
   }
 
