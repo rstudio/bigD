@@ -8,17 +8,30 @@ format_w_pattern(input, date_format = NULL, time_format = NULL,
   combination = NULL, locale = "en_US")
 }
 \arguments{
-\item{input}{the input date, time, or date-time string.}
+\item{input}{the input date-time. The appropriate representation should use
+the following construction outlined in the ISO 8601:2004 standard:
+\code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to
+ease this restrictiveness (for example, the literal \code{T} separating the
+date and time components is optional). Fractional seconds are optional as is
+the time-zone designation (TZD).}
 
-\item{date_format}{an option for whether the date portion of the \code{input}
-should be included in the output date-time string.}
+\item{date_format}{a date format specification using the rules of the
+SimpleDateFormat.}
 
-\item{time_format}{an option for whether the time portion of the \code{input}
-should be included in the output date-time string.}
+\item{time_format}{a time format specification using the rules of the
+SimpleDateFormat.}
 
-\item{combination}{an appending pattern for the date and time components.}
+\item{combination}{a combining pattern for the localized date and time
+components. If this is not provided, then the combining pattern will come
+from the specified locale's \code{"full"} designation. If providing a
+pattern, the string should be composed with the \code{{0}} and \code{{1}}
+placeholders, representing time and date components, respectively. All
+other characters are taken to be string literals.}
 
-\item{locale}{the output locale for the printing of the date-time string.}
+\item{locale}{the output locale to use for formatting the \code{input} value
+according to the specified locale's rules. Example locale names include
+\code{"en_US"} for English (United States) and \code{"fr_FR"} for French
+(France).}
 }
 \description{
 Get a localized date, time, or date-time string in a standard form.
