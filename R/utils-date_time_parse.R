@@ -103,28 +103,53 @@ get_tz_offset <- function(input) {
   switch(
     tz_pattern,
     z = {
-      offset <- 0.0
+      tz_offset <- 0.0
     },
     hh = {
       iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hh(), ".*"), "\\4", input)
-      offset <- as.numeric(iso_tz_component)
+      tz_offset <- as.numeric(iso_tz_component)
     },
     hh_mm = {
       iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hh_mm(), ".*"), "\\4", input)
       offset_sign <- ifelse(substr(iso_tz_component, 1, 1) == "-", -1L, 1L)
       offset_h <- as.numeric(substr(iso_tz_component, 1, 3))
       offset_min <- as.numeric(substr_right(iso_tz_component, 2)) / 60.0
-      offset <- (abs(offset_h) + offset_min) * offset_sign
+      tz_offset <- (abs(offset_h) + offset_min) * offset_sign
     },
     hhmm = {
       iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hhmm(), ".*"), "\\4", input)
       offset_sign <- ifelse(substr(iso_tz_component, 1, 1) == "-", -1L, 1L)
       offset_h <- as.numeric(substr(iso_tz_component, 1, 3))
       offset_min <- as.numeric(substr_right(iso_tz_component, 2)) / 60.0
-      offset <- (abs(offset_h) + offset_min) * offset_sign
+      tz_offset <- (abs(offset_h) + offset_min) * offset_sign
     })
 
-  offset
+  tz_offset
+}
+
+get_long_local_gmt <- function(tz_offset) {
+
+  minutes <- formatC(round((abs(tz_offset) %% 1) * 60, 0), width = 2, flag = "0")
+  hours <- formatC(trunc(abs(tz_offset)), width = 2, flag = "0")
+  sign <- ifelse(tz_offset < 0, "-", "+")
+
+  paste0("GMT", sign, hours, ":", minutes)
+}
+
+get_short_local_gmt <- function(tz_offset) {
+
+  minutes <- formatC(round((abs(tz_offset) %% 1) * 60, 0), width = 2, flag = "0")
+
+  if (minutes == "00") {
+    minutes <- ""
+  } else {
+    minutes <- paste0(":", minutes)
+  }
+
+  hours <- as.character(trunc(abs(tz_offset)))
+  sign <- ifelse(tz_offset < 0, "-", "+")
+
+  paste0("GMT", sign, hours, minutes)
 }
 
 get_date_component <- function(input) {
