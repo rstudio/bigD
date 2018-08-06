@@ -87,6 +87,8 @@ format_w_pattern <- function(input,
           type = "date_and_time_gregorian",
           section = combination_section_name,
           locale = locale)
+    } else {
+      subst_pattern <- combination
     }
 
   } else if (exists("date_pattern") & !exists("time_pattern")) {
