@@ -48,16 +48,16 @@ fdf_types <- function() {
 ftf_12_types <- function() {
 
   c(
-    "Bh",
-    "Bhm",
-    "Bhms",
-    "EBhm",
-    "EBhms",
+    "hms",
+    "hm",
+    "h",
     "Ehm",
     "Ehms",
-    "h",
-    "hm",
-    "hms",
+    "EBhms",
+    "Bhms",
+    "EBhm",
+    "Bhm",
+    "Bh",
     "hmsv",
     "hmv")
 }
