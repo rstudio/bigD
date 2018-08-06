@@ -5,16 +5,16 @@
 \title{Get a localized date, time, or date-time string in a standard form.}
 \usage{
 format_w_pattern(input, date_format = NULL, time_format = NULL,
-  combination = "{0} {1}", locale = "en_US")
+  combination = NULL, locale = "en_US")
 }
 \arguments{
 \item{input}{the input date, time, or date-time string.}
 
-\item{date_format}{an option for whether the date portion of the \code{input} should
-be included in the output date-time string.}
+\item{date_format}{an option for whether the date portion of the \code{input}
+should be included in the output date-time string.}
 
-\item{time_format}{an option for whether the time portion of the \code{input} should
-be included in the output date-time string.}
+\item{time_format}{an option for whether the time portion of the \code{input}
+should be included in the output date-time string.}
 
 \item{combination}{an appending pattern for the date and time components.}
 
