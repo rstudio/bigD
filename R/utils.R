@@ -65,11 +65,11 @@ ftf_12_types <- function() {
 ftf_24_types <- function() {
 
   c(
+    "Hms",
+    "Hm",
+    "H",
     "EHm",
     "EHms",
-    "H",
-    "Hm",
-    "Hms",
     "Hmsv",
     "Hmv",
     "ms")
