@@ -1,17 +1,16 @@
 #' Get a localized date, time, or date-time string in a standard form.
 #' @param input the input date, time, or date-time string.
-#' @param date_format an option for whether the date portion of the \code{input} should
-#' be included in the output date-time string.
-#' @param time_format an option for whether the time portion of the \code{input} should
-#' be included in the output date-time string.
+#' @param date_format an option for whether the date portion of the \code{input}
+#' should be included in the output date-time string.
+#' @param time_format an option for whether the time portion of the \code{input}
+#' should be included in the output date-time string.
 #' @param combination an appending pattern for the date and time components.
 #' @param locale the output locale for the printing of the date-time string.
-#' @importFrom stringr str_extract str_extract_all str_replace str_replace_all
 #' @export
 format_w_pattern <- function(input,
                              date_format = NULL,
                              time_format = NULL,
-                             combination = "{0} {1}",
+                             combination = NULL,
                              locale = "en_US") {
 
   # Stop function if both date_format and time_format are NULL
@@ -28,53 +27,123 @@ format_w_pattern <- function(input,
         type = "date_and_time_gregorian",
         section = paste0("formats_flexible_date_formats_", fdf_str),
         locale = locale)
+
+  } else if (inherits(date_format, "character")) {
+
+    date_pattern <- date_format
   }
 
-  #time_pattern <- NULL
+  if (inherits(time_format, "ftf_12")) {
+
+    fdf_str <- as.character(time_format) %>% tolower()
+
+    time_pattern <-
+      get_localized_value(
+        type = "date_and_time_gregorian",
+        section = paste0("formats_flexible_12_hour_time_formats_", fdf_str),
+        locale = locale)
+
+  } else if (inherits(time_format, "ftf_24")) {
+
+    fdf_str <- as.character(time_format) %>% tolower()
+
+    time_pattern <-
+      get_localized_value(
+        type = "date_and_time_gregorian",
+        section = paste0("formats_flexible_24_hour_time_formats_", fdf_str),
+        locale = locale)
+
+  } else if (inherits(time_format, "character")) {
+
+    time_pattern <- time_format
+  }
+
 
   if (exists("date_pattern") & exists("time_pattern")) {
 
     # Create pattern with date and time
-  } else if (exists("date_pattern")) {
+    if (is.null(combination)) {
 
-    pattern <- date_pattern
+      width <- "full"
+
+      combination_section_name <-
+        paste0("formats_standard_date_time_combination_formats_", width)
+
+      subst_pattern <-
+        get_localized_value(
+          type = "date_and_time_gregorian",
+          section = combination_section_name,
+          locale = locale)
+    }
+
+  } else if (exists("date_pattern") & !exists("time_pattern")) {
+
+    subst_pattern <- date_pattern
+
+  } else if (exists("time_pattern") & !exists("date_pattern")) {
+
+    subst_pattern <- time_pattern
   }
 
-  # Extract the date component if it exists
-  date_component <- stringr::str_extract(input, "^\\d+?-\\d\\d-\\d\\d")
-
   # Is a date component present?
-  date_present <- ifelse(!is.na(date_component), TRUE, FALSE)
-
-  # Extract the time component if it exists
-  time_component <- stringr::str_extract(input, "(\\d|\\d\\d):\\d\\d[0-9:.]*")
+  date_present <- is_date_present(input)
 
   # Is a time component present?
-  time_present <- ifelse(!is.na(time_component), TRUE, FALSE)
+  time_present <- is_time_present(input)
 
   if (!date_present & !time_present) {
     stop("There are no detectable date or time components.", call. = FALSE)
   }
 
-  extracted_text <-
-    stringr::str_extract_all(pattern, "'.*?'") %>%
-    unlist() %>%
-    stringr::str_replace_all("'", "")
+  # Extract the date component if it exists
+  date_component <- get_date_component(input)
 
-  subst_pattern <-
-    stringr::str_replace_all(pattern, "'.*?'", "***")
+  # Extract the time component if it exists
+  time_component <- get_time_component(input)
+
+  # Extract the time zone if it exists
+  tz_offset <- get_tz_offset(input)
+
+  # Extract the IANA time zone name if it exists
+  iana_tz_name <- get_iana_tz(input)
+
+  if (exists("date_pattern") & exists("time_pattern")) {
+
+    # Substitute the `time_pattern` and `date_pattern`
+    # into the correct `subst_pattern` locations
+    subst_pattern <- gsub("\\{0\\}", time_pattern, subst_pattern)
+    subst_pattern <- gsub("\\{1\\}", date_pattern, subst_pattern)
+  }
+
+  # Create an empty vector to hold string literals
+  extracted_text <- c()
+
+  repeat {
+    match <- gsub(".*('.*?').*", "\\1", subst_pattern)
+
+    if (match != subst_pattern) {
+      extracted_text <- c(extracted_text, gsub("'", "", match))
+      subst_pattern <- sub("'.*?'", "***", subst_pattern)
+    }
+
+    if (match == subst_pattern) break
+  }
 
   # Perform replacements to the `subst_pattern` string
   subst_pattern <-
     localized_date_time(
       date_input = date_component,
       time_input = time_component,
+      tz_offset = tz_offset,
+      iana_tz_name = iana_tz_name,
       subst_pattern = subst_pattern,
       locale = locale)
 
-  if (str_detect(subst_pattern, "\\*\\*\\*")) {
-    for (i in seq(extracted_text)) {
-      subst_pattern <- stringr::str_replace(subst_pattern, "\\*\\*\\*", extracted_text[i])
+  # Replace `subst_pattern` placeholders with
+  # the reserved literal strings
+  if (grepl("\\*\\*\\*", subst_pattern)) {
+    for (i in seq_along(extracted_text)) {
+      subst_pattern <- sub("\\*\\*\\*", extracted_text[i], subst_pattern)
     }
   }
 
