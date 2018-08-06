@@ -39,6 +39,36 @@ fdf_types <- function() {
     "E")
 }
 
+ftf_12_types <- function() {
+
+  c(
+    "Bh",
+    "Bhm",
+    "Bhms",
+    "EBhm",
+    "EBhms",
+    "Ehm",
+    "Ehms",
+    "h",
+    "hm",
+    "hms",
+    "hmsv",
+    "hmv")
+}
+
+ftf_24_types <- function() {
+
+  c(
+    "EHm",
+    "EHms",
+    "H",
+    "Hm",
+    "Hms",
+    "Hmsv",
+    "Hmv",
+    "ms")
+}
+
 
 l_fmt_EEEEEE <- function(locale) {
 
