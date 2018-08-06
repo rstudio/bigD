@@ -2,11 +2,14 @@
 #' @param input the input date-time. The appropriate representation should use
 #' the following construction outlined in the ISO 8601:2004 standard:
 #' \code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to
-#' ease this restrictiveness. For example, the literal \code{T} is optional,
-#' fractional seconds are optional, and the time-zone designation (TZD) is only
-#' required if the \code{long} and \code{full} standardized forms are requested
-#' in \code{width}
-#' @param locale the output locale for the printing of the date-time string.
+#' ease this restrictiveness (for example, the literal \code{T} separating the
+#' date and time components is optional). Fractional seconds are optional as is
+#' the time-zone designation (TZD) (but only if the \code{short} or
+#' \code{medium} standardized forms are requested in \code{width}.
+#' @param locale the output locale to use for formatting the \code{input} value
+#' according to the specified locale's rules. Example locale names include
+#' \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
+#' (France).
 #' @param width The standardized output date-time format, which can be one of
 #' either \code{short}, \code{medium}, \code{long}, or \code{full}.
 #' @export

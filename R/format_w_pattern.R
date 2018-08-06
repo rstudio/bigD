@@ -1,11 +1,24 @@
 #' Get a localized date, time, or date-time string in a standard form.
-#' @param input the input date, time, or date-time string.
-#' @param date_format an option for whether the date portion of the \code{input}
-#' should be included in the output date-time string.
-#' @param time_format an option for whether the time portion of the \code{input}
-#' should be included in the output date-time string.
-#' @param combination an appending pattern for the date and time components.
-#' @param locale the output locale for the printing of the date-time string.
+#' @param input the input date-time. The appropriate representation should use
+#' the following construction outlined in the ISO 8601:2004 standard:
+#' \code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to
+#' ease this restrictiveness (for example, the literal \code{T} separating the
+#' date and time components is optional). Fractional seconds are optional as is
+#' the time-zone designation (TZD).
+#' @param date_format a date format specification using the rules of the
+#' SimpleDateFormat.
+#' @param time_format a time format specification using the rules of the
+#' SimpleDateFormat.
+#' @param combination a combining pattern for the localized date and time
+#' components. If this is not provided, then the combining pattern will come
+#' from the specified locale's \code{"full"} designation. If providing a
+#' pattern, the string should be composed with the \code{{0}} and \code{{1}}
+#' placeholders, representing time and date components, respectively. All
+#' other characters are taken to be string literals.
+#' @param locale the output locale to use for formatting the \code{input} value
+#' according to the specified locale's rules. Example locale names include
+#' \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
+#' (France).
 #' @export
 format_w_pattern <- function(input,
                              date_format = NULL,
