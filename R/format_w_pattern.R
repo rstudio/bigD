@@ -87,7 +87,7 @@ format_w_pattern <- function(input,
   if (exists("date_pattern") & exists("time_pattern")) {
 
     # Create pattern with date and time
-    if (is.null(combination)) {
+    if (is.null(combination) & !is.null(locale)) {
 
       width <- "full"
 
@@ -99,6 +99,11 @@ format_w_pattern <- function(input,
           type = "date_and_time_gregorian",
           section = combination_section_name,
           locale = locale)
+
+    } else if (is.null(combination) & is.null(locale)) {
+
+      subst_pattern <- "{1} {0}"
+
     } else {
       subst_pattern <- combination
     }
