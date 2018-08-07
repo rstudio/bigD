@@ -11,10 +11,14 @@ localized_date_time <- function(date_input = NULL,
                                 tz_offset = NULL,
                                 iana_tz_name = NULL,
                                 subst_pattern,
-                                locale) {
+                                locale = NULL) {
 
   idx <- 1L
   replace_stack <- c()
+
+  if (is.null(locale)) {
+    locale <- "en"
+  }
 
   if (!is.null(date_input)) {
 
