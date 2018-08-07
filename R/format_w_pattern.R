@@ -6,29 +6,41 @@
 #' date and time components is optional). Fractional seconds are optional as is
 #' the time-zone designation (TZD).
 #' @param date_format a date format specification using the rules of the
-#' SimpleDateFormat.
+#' SimpleDateFormat. The helper function \code{fdf()} could be used with a
+#' predefined format name or format number. The information function
+#' \code{info_fdf_types()} provides information on which date formatting presets
+#' are available and includes output samples for each of them.
 #' @param time_format a time format specification using the rules of the
-#' SimpleDateFormat.
+#' SimpleDateFormat. There are two useful helper functions to use 12-hour and
+#' 24-hour preset formats: \code{ftf_12()} and \code{ftf_24()}. Either could be
+#' used with a predefined format name or format number. The information
+#' functions \code{info_ftf_12_types()} and \code{info_ftf_24_types()} both
+#' provide information on which 12-hour and 24-hour time formatting presets
+#' are available. They also include output samples for each time preset.
 #' @param combination a combining pattern for the localized date and time
 #' components. If this is not provided, then the combining pattern will come
-#' from the specified locale's \code{"full"} designation. If providing a
-#' pattern, the string should be composed with the \code{{0}} and \code{{1}}
-#' placeholders, representing time and date components, respectively. All
-#' other characters are taken to be string literals.
-#' @param locale the output locale to use for formatting the \code{input} value
-#' according to the specified locale's rules. Example locale names include
-#' \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
-#' (France).
+#' from the specified locale's \code{"full"} designation. If there is neither a
+#' \code{combination} nor a \code{locale} provided, then the time component
+#' will follow the date after a space character. If providing a pattern, the
+#' string should be composed with the \code{{0}} and \code{{1}} placeholders,
+#' representing time and date components, respectively. All other characters are
+#' taken to be string literals.
+#' @param locale an optional output locale to use for formatting the
+#' \code{input} value according to the specified locale's rules. Example locale
+#' names include \code{"en_US"} for English (United States) and \code{"fr_FR"}
+#' for French (France). If a locale isn't provided and certain require locale-
+#' based formatting then the \code{"en_US"} locale is used for this purpose.
 #' @export
 format_w_pattern <- function(input,
                              date_format = NULL,
                              time_format = NULL,
                              combination = NULL,
-                             locale = "en_US") {
+                             locale = NULL) {
 
   # Stop function if both date_format and time_format are NULL
   if (is.null(date_format) & is.null(time_format)) {
-    stop("At least one of `date_format` and `time_format` must have a pattern.", call. = FALSE)
+    stop("At least one of `date_format` and `time_format` must be provided.",
+         call. = FALSE)
   }
 
   if (inherits(date_format, "fdf")) {
