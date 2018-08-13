@@ -46,7 +46,7 @@ ftf_12 <- function(format) {
 ftf_24 <- function(format) {
 
   if (inherits(format, "numeric") &&
-      !(format_name %in% seq(ftf_24_types()))) {
+      !(format %in% seq(ftf_24_types()))) {
 
     stop("The supplied format number is not within the range of 1-",
          length(ftf_24_types()), ".")
@@ -61,5 +61,25 @@ ftf_24 <- function(format) {
   x <- format
 
   class(x) <- "ftf_24"
+  x
+}
+
+#' @export
+date_time_combine <- function(format) {
+
+  if (inherits(format, "numeric") &&
+      !(format %in% seq(date_time_combine_types()))) {
+    stop("The format must be one of 4 types: `short`, `medium`, `long` or `full`",
+         call. = FALSE)
+
+  } else if (inherits(format, "numeric") &&
+             format %in% seq(date_time_combine_types())) {
+
+    format <- date_time_combine_types()[format]
+  }
+
+  x <- format
+
+  class(x) <- "date_time_combine"
   x
 }
