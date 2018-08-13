@@ -10,10 +10,11 @@ precision.
 ## Some Examples
 
 Here is a date-time string that’s all ISO 8601:2004:
-`2018-07-30T22:40:43-07:00`. Let’s take that as our input going forward.
+`"2018-07-24T14:44:22.234343-0800(America/Vancouver)"`. Let’s take that
+as our input going forward.
 
 ``` r
-input <- "2018-07-30T22:40:43-07:00"
+input <- "2018-07-24T14:44:22.234343-0800(America/Vancouver)"
 ```
 
 There are standardized date forms across all locales. They come in 4
@@ -22,32 +23,72 @@ date-time into the first two, with random locales:
 
 ``` r
 input %>%
-  dt_format_standard(
+  fmt_date_time_standard(
     locale = "en",
     width = "short")
-#> [1] "7/30/2018 A, 10:40 PM"
+#> [1] "7/24/2018 A, 2:44 PM"
 ```
 
 ``` r
 input %>%
-  dt_format_standard(
+  fmt_date_time_standard(
     locale = "de",
     width = "medium")
-#> [1] "30.07.2018 n. Chr., 22:40:43"
+#> [1] "24.07.2018 n. Chr., 14:44:22"
 ```
 
 We can also apply a smattering of different simple date format presets
 to this input. The `format_w_pattern()` function is useful for this. We
-can choose to keep the date portion, the time portion, or both.
+can choose to keep the date portion, the time portion, or both. The
+`fdf()` helper function is useful for choosing a preset date format from
+the flexible date format (FDF).
 
 ``` r
 input %>%
-  format_w_pattern(
+  fmt_date_time(
     date_format = fdf("yMd"),
     time_format = NULL,
     locale = "es")
-#> [1] "30/7/2018"
+#> [1] "24/7/2018"
 ```
+
+Time components have presets under the flexible time format (FTF), which
+is split into 12- and 24-hour variants. There are `ftf_12()` and
+`ftf_24()` helper functions enable selections of presets within those.
+
+``` r
+input %>%
+  fmt_date_time(
+    date_format = fdf("yMd"),
+    time_format = ftf_24("EHms"),
+    locale = "es_MX")
+#> [1] "24/7/2018, lun. 14:44:22"
+```
+
+It’s hard to know what the format names are for `fdf()`, `ftf_12()`, and
+`ftf_24()`, so, there are information functions that provide the names
+and yield previews. These info functions are:
+
+  - `info_fdf_types()`
+  - `info_ftf_12_types()`
+  - `info_ftf_24_types()`
+
+Here, we can specify a combining pattern by using a locale specific
+version with the `date_time_combine()` helper function. In this case, we
+select the `"full"` combining pattern for the `"de_AT"` locale.
+
+``` r
+input %>%
+  fmt_date_time(
+    date_format = fdf("yMd"),
+    time_format = ftf_24("Hms"),
+    combination = date_time_combine("full"),
+    locale = "de_AT")
+#> [1] "24.7.2018 um 14:44:22"
+```
+
+There is indeed an info function available to help determine which
+combining pattern to use, it’s `info_date_time_combine()`.
 
 Here is a comparison table of localized dates for all the presets
 available in the flexible date format:
