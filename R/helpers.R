@@ -2,7 +2,7 @@
 fdf <- function(format) {
 
   if (inherits(format, "numeric") &&
-      !(format_name %in% seq(fdf_types()))) {
+      !(format %in% seq(fdf_types()))) {
 
     stop("The supplied format number is not within the range of 1-",
          length(fdf_types()), ".")
@@ -24,7 +24,7 @@ fdf <- function(format) {
 ftf_12 <- function(format) {
 
   if (inherits(format, "numeric") &&
-      !(format_name %in% seq(ftf_12_types()))) {
+      !(format %in% seq(ftf_12_types()))) {
 
     stop("The supplied format number is not within the range of 1-",
          length(ftf_12_types()), ".")
