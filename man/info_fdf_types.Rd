@@ -8,7 +8,7 @@ info_fdf_types(locale = NULL, input = NULL)
 }
 \arguments{
 \item{locale}{an optional output locale for inspecting the \code{input} value
-across all of the different fdf types. Example locale names include
+across all of the different formatting types. Example locale names include
 \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
 (France). If a locale name is not provided then \code{"en_US"} will be used.}
 
