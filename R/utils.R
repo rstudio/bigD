@@ -84,6 +84,67 @@ date_time_combine_types <- function() {
     "full")
 }
 
+str_rev <- function(x) {
+
+  nc <- nchar(x)
+  paste(substring(x, nc:1, nc:1), collapse = "")
+}
+
+split_str_by_index <- function(target, index) {
+
+  index <- sort(index)
+
+  substr(
+    rep(target, length(index) + 1),
+    start = c(1, index),
+    stop = c(index -1, nchar(target)))
+}
+
+interleave <- function(v1, v2) {
+
+  ord_1 <- 2 * (1:length(v1)) - 1
+  ord_2 <- 2 * (1:length(v2))
+
+  c(v1, v2)[order(c(ord_1, ord_2))]
+}
+
+insert_str <- function(target, insert, index) {
+
+  insert <- insert[order(index)]
+  index <- sort(index)
+
+  paste(
+    interleave(
+      split_str_by_index(target, index), insert),
+    collapse = "")
+}
+
+get_insertion_sequence <- function(number, grouping) {
+
+  number <- strsplit(as.character(number), "\\.")[[1]][1]
+
+  nchar_n <- nchar(number)
+
+  x <- 1
+
+  repeat {
+
+    pattern <- rep(grouping, x) %>% cumsum() + 1
+
+    if (max(pattern) >= nchar_n) {
+
+      pattern <- pattern[pattern <= nchar_n]
+
+      break
+    } else {
+      x <- x + 1
+    }
+  }
+
+  pattern
+}
+
+# Date-time formatting
 
 l_fmt_EEEEEE <- function(locale) {
 
