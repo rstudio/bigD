@@ -61,13 +61,74 @@ get_standard_date_time_combining_pattern <- function(locale,
     locale = locale)
 }
 
-# currency_name_table <- function() {
-#
-# }
-#
-# get_currency_symbol <- function(name, locale, type = c("symbol", "narrow")) {
-#
-# }
+#' Get the locale-specific form of a currency symbol
+#' @noRd
+get_currency_symbol <- function(name,
+                                locale,
+                                type = c("symbol", "variant", "narrow")) {
+
+  name <- tolower(name)
+  type_ <- type
+  locale_ <- locale
+
+  if (grepl("_", locale_)) {
+    base_lang <- strsplit(locale_, "_")[[1]][1]
+    if (grepl("_[A-Z][A-Z]", locale_)) {
+      region <- gsub(".*?_([A-Z][A-Z])", "\\1", locale_)
+    } else {
+      region <- NA_character_
+    }
+  } else {
+    base_lang <- locale_
+  }
+
+  if (!(name %in% currency_symbols$symbol)) {
+
+    stop("The provided currency `name` is not in the list of currency codes.",
+         call. = FALSE)
+  }
+
+  # Get a filtered table corresponding to the
+  # currency `name` and representation `type`
+  subset_tbl_f <-
+    subset(currency_symbols, symbol == name & type == type_)
+
+  # If the `variant` form of the currency symbol doesn't exist, then
+  # switch to the `narrow` form
+  if (type_ == "variant" & nrow(subset_tbl_f) == 0) {
+
+    type_ <- "narrow"
+
+    subset_tbl_f <-
+      subset(currency_symbols, symbol == name & type == type_)
+  }
+
+  # If the `narrow` form of the currency symbol doesn't exist, then
+  # switch to the `symbol` form
+  if (type_ == "narrow" & nrow(subset_tbl_f) == 0) {
+
+    type_ <- "symbol"
+
+    subset_tbl_f <-
+      subset(currency_symbols, symbol == name & type == type_)
+  }
+
+  if (locale_ %in% subset_tbl_f$locale) {
+    subset_tbl_f <-
+      subset(subset_tbl_f, locale == locale_)
+  } else if (base_lang %in% subset_tbl_f$locale) {
+    subset_tbl_f <-
+      subset(subset_tbl_f, locale == base_lang)
+  } else if ("all_others" %in% subset_tbl_f$locale) {
+    subset_tbl_f <-
+      subset(subset_tbl_f, locale == "all_others")
+  } else {
+    return(NA_character_)
+  }
+
+  # Get the value
+  subset_tbl_f[["value"]]
+}
 
 #' Get the locale-specific percent pattern
 #' @noRd
