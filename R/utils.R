@@ -75,6 +75,15 @@ ftf_24_types <- function() {
     "ms")
 }
 
+date_time_combine_types <- function() {
+
+  c(
+    "short",
+    "medium",
+    "long",
+    "full")
+}
+
 
 l_fmt_EEEEEE <- function(locale) {
 
