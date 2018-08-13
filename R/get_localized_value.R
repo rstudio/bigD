@@ -12,29 +12,30 @@ get_localized_value <- function(type,
   sections_ <- sections
   locale_ <- locale
 
-  switch(
-    type,
-    date_and_time_fields = { l18n_tbl <- date_and_time_fields },
-    date_and_time_gregorian = { l18n_tbl <- date_and_time_gregorian },
-    date_and_time_generic = { l18n_tbl <- date_and_time_generic },
-    numbers_symbols = { l18n_tbl <- numbers_symbols },
-    numbers_minimal_pairs = { l18n_tbl <- numbers_minimal_pairs },
-    numbers_number_formatting_patterns = { l18n_tbl <- numbers_number_formatting_patterns },
-    numbers_compact_decimal_formatting = { l18n_tbl <- numbers_compact_decimal_formatting },
-    timezones_africa = { l18n_tbl <- timezones_africa },
-    timezones_antarctica = { l18n_tbl <- timezones_antarctica },
-    timezones_australasia = { l18n_tbl <- timezones_australasia },
-    timezones_central_asia = { l18n_tbl <- timezones_central_asia },
-    timezones_eastern_asia = { l18n_tbl <- timezones_eastern_asia },
-    timezones_europe = { l18n_tbl <- timezones_europe },
-    timezones_north_america = { l18n_tbl <- timezones_north_america },
-    timezones_oceania = { l18n_tbl <- timezones_oceania },
-    timezones_overrides = { l18n_tbl <- timezones_overrides },
-    timezones_russia = { l18n_tbl <- timezones_russia },
-    timezones_south_america = { l18n_tbl <- timezones_south_america },
-    timezones_southeast_asia = { l18n_tbl <- timezones_southeast_asia },
-    timezones_southern_asia = { l18n_tbl <- timezones_southern_asia },
-    timezones_western_asia = { l18n_tbl <- timezones_western_asia })
+  l18n_tbl <-
+    switch(
+      type,
+      date_and_time_fields = date_and_time_fields,
+      date_and_time_gregorian = date_and_time_gregorian,
+      date_and_time_generic = date_and_time_generic,
+      numbers_symbols = numbers_symbols,
+      numbers_minimal_pairs = numbers_minimal_pairs,
+      numbers_number_formatting_patterns = numbers_number_formatting_patterns,
+      numbers_compact_decimal_formatting = numbers_compact_decimal_formatting,
+      timezones_africa = timezones_africa,
+      timezones_antarctica = timezones_antarctica,
+      timezones_australasia = timezones_australasia,
+      timezones_central_asia = timezones_central_asia,
+      timezones_eastern_asia = timezones_eastern_asia,
+      timezones_europe = timezones_europe,
+      timezones_north_america = timezones_north_america,
+      timezones_oceania = timezones_oceania,
+      timezones_overrides = timezones_overrides,
+      timezones_russia = timezones_russia,
+      timezones_south_america = timezones_south_america,
+      timezones_southeast_asia = timezones_southeast_asia,
+      timezones_southern_asia = timezones_southern_asia,
+      timezones_western_asia = timezones_western_asia)
 
   if (grepl("_", locale_)) {
     base_lang <- strsplit(locale_, "_")[[1]][1]
