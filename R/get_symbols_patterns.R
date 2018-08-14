@@ -1,5 +1,6 @@
 #' Get the locale-specific decimal pattern
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_dec_pattern <- function(locale) {
 
   get_localized_value(
@@ -9,7 +10,8 @@ get_dec_pattern <- function(locale) {
 }
 
 #' Get the locale-specific currency pattern
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_currency_pattern <- function(locale) {
 
   get_localized_value(
@@ -19,7 +21,8 @@ get_currency_pattern <- function(locale) {
 }
 
 #' Get the locale-specific accounting currency pattern
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_acct_currency_pattern <- function(locale) {
 
   get_localized_value(
@@ -29,9 +32,17 @@ get_acct_currency_pattern <- function(locale) {
 }
 
 #' Get the locale-specific standard date pattern
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @param width one of four standardized widths for the output representation.
+#' These are either of \code{"short"}, \code{"medium"}, \code{"long"}, or
+#' \code{"full"}. Some locales will provide unique values for each of these
+#' options but it is often the case that the \code{"short"} and \code{"medium"}
+#' forms will be equivalent (as is the case with the \code{"long"} and the
+#' \code{"full"} forms) due to a lack of variation.
+#' @export
 get_standard_date_pattern <- function(locale,
-                                      width = c("short", "medium", "long", "full")) {
+                                      width = c("short", "medium",
+                                                "long", "full")) {
 
   get_localized_value(
     type = "date_and_time_generic",
@@ -40,9 +51,12 @@ get_standard_date_pattern <- function(locale,
 }
 
 #' Get the locale-specific standard time pattern
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @inheritParams get_standard_date_pattern
+#' @export
 get_standard_time_pattern <- function(locale,
-                                      width = c("short", "medium", "long", "full")) {
+                                      width = c("short", "medium",
+                                                "long", "full")) {
 
   get_localized_value(
     type = "date_and_time_gregorian",
@@ -51,9 +65,12 @@ get_standard_time_pattern <- function(locale,
 }
 
 #' Get the locale-specific standard date-time combining pattern
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @inheritParams get_standard_date_pattern
+#' @export
 get_standard_date_time_combining_pattern <- function(locale,
-                                                     width = c("short", "medium", "long", "full")) {
+                                                     width = c("short", "medium",
+                                                               "long", "full")) {
 
   get_localized_value(
     type = "date_and_time_gregorian",
@@ -62,10 +79,17 @@ get_standard_date_time_combining_pattern <- function(locale,
 }
 
 #' Get the locale-specific form of a currency symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @param name the ISO 4217:2015 alphabetic code (three-letter) that defines
+#' a currency. Examples include \code{"USD"} for U.S. Dollars and \code{"JPY"}
+#' for Japanese Yen.
+#' @param type the output representation of the currency symbol in the provided
+#' \code{locale}. This can be \code{"symbol"}, \code{"narrow"}, or
+#' \code{"variant"}.
+#' @export
 get_currency_symbol <- function(name,
                                 locale,
-                                type = c("symbol", "variant", "narrow")) {
+                                type = c("symbol", "narrow", "variant")) {
 
   name <- tolower(name)
   type_ <- type
@@ -131,7 +155,8 @@ get_currency_symbol <- function(name,
 }
 
 #' Get the locale-specific percent pattern
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_percent_pattern <- function(locale) {
 
   get_localized_value(
@@ -141,7 +166,8 @@ get_percent_pattern <- function(locale) {
 }
 
 #' Get the locale-specific decimal mark symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_dec_mark <- function(locale) {
 
   get_localized_value(
@@ -151,7 +177,8 @@ get_dec_mark <- function(locale) {
 }
 
 #' Get the locale-specific grouping separator symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_sep_mark <- function(locale) {
 
   get_localized_value(
@@ -161,7 +188,8 @@ get_sep_mark <- function(locale) {
 }
 
 #' Get the locale-specific plus sign symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_plus_sign <- function(locale) {
 
   get_localized_value(
@@ -171,7 +199,8 @@ get_plus_sign <- function(locale) {
 }
 
 #' Get the locale-specific minus sign symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_minus_sign <- function(locale) {
 
   get_localized_value(
@@ -181,7 +210,8 @@ get_minus_sign <- function(locale) {
 }
 
 #' Get the locale-specific percent sign symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_percent_sign <- function(locale) {
 
   get_localized_value(
@@ -191,7 +221,8 @@ get_percent_sign <- function(locale) {
 }
 
 #' Get the locale-specific per mille sign symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_permille_sign <- function(locale) {
 
   get_localized_value(
@@ -201,7 +232,8 @@ get_permille_sign <- function(locale) {
 }
 
 #' Get the locale-specific time separator symbol
-#' @noRd
+#' @inheritParams fmt_date_time
+#' @export
 get_time_sep <- function(locale) {
 
   get_localized_value(
