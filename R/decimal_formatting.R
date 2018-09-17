@@ -1,14 +1,14 @@
-#' For a non-decimal number string, insert separators
-#' according to the grouping pattern
+#' For a non-decimal number string, insert separators according to the grouping
+#' pattern
 #' @param integer the integer portion of a numeric vaue. Can be supplied as an
-#' integer value or a string. If supplied as a string, it must only contain
-#' numeral characters.
+#'   integer value or a string. If supplied as a string, it must only contain
+#'   numeral characters.
 #' @param grouping the CLDR grouping pattern of either \code{"#,##0.###"} or
-#' \code{"#,##,##0.###"}.
+#'   \code{"#,##,##0.###"}.
 #' @param sep_mark the character to use as the separator mark.
 #' @export
 insert_number_seps <- function(integer,
-                               grouping = c("#,##0.###", "#,##,##0.###"),
+                               grouping,
                                sep_mark) {
 
   if (inherits(integer, "integer")) {

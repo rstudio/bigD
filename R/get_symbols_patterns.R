@@ -34,15 +34,18 @@ get_acct_currency_pattern <- function(locale) {
 #' Get the locale-specific standard date pattern
 #' @inheritParams fmt_date_time
 #' @param width one of four standardized widths for the output representation.
-#' These are either of \code{"short"}, \code{"medium"}, \code{"long"}, or
-#' \code{"full"}. Some locales will provide unique values for each of these
-#' options but it is often the case that the \code{"short"} and \code{"medium"}
-#' forms will be equivalent (as is the case with the \code{"long"} and the
-#' \code{"full"} forms) due to a lack of variation.
+#'   These are either of \code{"short"}, \code{"medium"}, \code{"long"}, or
+#'   \code{"full"}. Some locales will provide unique values for each of these
+#'   options but it is often the case that the \code{"short"} and
+#'   \code{"medium"} forms will be equivalent (as is the case with the
+#'   \code{"long"} and the \code{"full"} forms) due to a lack of variation.
 #' @export
 get_standard_date_pattern <- function(locale,
-                                      width = c("short", "medium",
-                                                "long", "full")) {
+                                      width = NULL) {
+
+  if (is.null(width)) {
+    width <- "full"
+  }
 
   get_localized_value(
     type = "date_and_time_generic",
@@ -55,8 +58,11 @@ get_standard_date_pattern <- function(locale,
 #' @inheritParams get_standard_date_pattern
 #' @export
 get_standard_time_pattern <- function(locale,
-                                      width = c("short", "medium",
-                                                "long", "full")) {
+                                      width = NULL) {
+
+  if (is.null(width)) {
+    width <- "full"
+  }
 
   get_localized_value(
     type = "date_and_time_gregorian",
@@ -69,8 +75,11 @@ get_standard_time_pattern <- function(locale,
 #' @inheritParams get_standard_date_pattern
 #' @export
 get_standard_date_time_combining_pattern <- function(locale,
-                                                     width = c("short", "medium",
-                                                               "long", "full")) {
+                                                     width = NULL) {
+
+  if (is.null(width)) {
+    width <- "full"
+  }
 
   get_localized_value(
     type = "date_and_time_gregorian",
@@ -80,16 +89,20 @@ get_standard_date_time_combining_pattern <- function(locale,
 
 #' Get the locale-specific form of a currency symbol
 #' @inheritParams fmt_date_time
-#' @param name the ISO 4217:2015 alphabetic code (three-letter) that defines
-#' a currency. Examples include \code{"USD"} for U.S. Dollars and \code{"JPY"}
-#' for Japanese Yen.
+#' @param name the ISO 4217:2015 alphabetic code (three-letter) that defines a
+#'   currency. Examples include \code{"USD"} for U.S. Dollars and \code{"JPY"}
+#'   for Japanese Yen.
 #' @param type the output representation of the currency symbol in the provided
-#' \code{locale}. This can be \code{"symbol"}, \code{"narrow"}, or
-#' \code{"variant"}.
+#'   \code{locale}. This can be \code{"symbol"}, \code{"narrow"}, or
+#'   \code{"variant"}.
 #' @export
 get_currency_symbol <- function(name,
                                 locale,
-                                type = c("symbol", "narrow", "variant")) {
+                                type = NULL) {
+
+  if (is.null(type)) {
+    type <- "symbol"
+  }
 
   name <- tolower(name)
   type_ <- type

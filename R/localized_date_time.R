@@ -3,7 +3,7 @@
 #' @param time_input the time component of the input date-time.
 #' @param subst_pattern a partial pattern string.
 #' @param locale a locale ID. Examples include \code{"en_US"} for English
-#' (United States) and \code{"fr_FR"} for French (France).
+#'   (United States) and \code{"fr_FR"} for French (France).
 #' @return an augmented pattern string.
 #' @noRd
 localized_date_time <- function(date_input = NULL,

@@ -2,7 +2,7 @@
 #' @param type the localization category.
 #' @param sections the section name within the localization category.
 #' @param locale a locale ID. Examples include \code{"en_US"} for English
-#' (United States) and \code{"fr_FR"} for French (France).
+#'   (United States) and \code{"fr_FR"} for French (France).
 #' @return a localized value.
 #' @noRd
 get_localized_value <- function(type,
