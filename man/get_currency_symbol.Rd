@@ -4,7 +4,8 @@
 \alias{get_currency_symbol}
 \title{Get the locale-specific form of a currency symbol}
 \usage{
-get_currency_symbol(name, locale, type = c("symbol", "narrow", "variant"))
+get_currency_symbol(name, locale, type = c("symbol", "narrow",
+  "variant"))
 }
 \arguments{
 \item{name}{the ISO 4217:2015 alphabetic code (three-letter) that defines

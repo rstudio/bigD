@@ -4,8 +4,8 @@
 \alias{get_standard_date_time_combining_pattern}
 \title{Get the locale-specific standard date-time combining pattern}
 \usage{
-get_standard_date_time_combining_pattern(locale, width = c("short", "medium",
-  "long", "full"))
+get_standard_date_time_combining_pattern(locale, width = c("short",
+  "medium", "long", "full"))
 }
 \arguments{
 \item{locale}{an optional output locale to use for formatting the
