@@ -112,8 +112,8 @@ fmt_date_time_standard <- function(input,
     # Replace `subst_pattern` placeholders with
     # the reserved literal strings
     if (grepl("\\*\\*\\*", subst_pattern)) {
-      for (i in seq_along(extracted_text)) {
-        subst_pattern <- sub("\\*\\*\\*", extracted_text[i], subst_pattern)
+      for (j in seq_along(extracted_text)) {
+        subst_pattern <- sub("\\*\\*\\*", extracted_text[j], subst_pattern)
       }
     }
 
