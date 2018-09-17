@@ -2,11 +2,10 @@
 % Please edit documentation in R/decimal_formatting.R
 \name{insert_number_seps}
 \alias{insert_number_seps}
-\title{For a non-decimal number string, insert separators
-according to the grouping pattern}
+\title{For a non-decimal number string, insert separators according to the grouping
+pattern}
 \usage{
-insert_number_seps(integer, grouping = c("#,##0.###", "#,##,##0.###"),
-  sep_mark)
+insert_number_seps(integer, grouping, sep_mark)
 }
 \arguments{
 \item{integer}{the integer portion of a numeric vaue. Can be supplied as an
@@ -19,6 +18,6 @@ numeral characters.}
 \item{sep_mark}{the character to use as the separator mark.}
 }
 \description{
-For a non-decimal number string, insert separators
-according to the grouping pattern
+For a non-decimal number string, insert separators according to the grouping
+pattern
 }

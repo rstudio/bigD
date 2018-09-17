@@ -4,19 +4,19 @@
 \alias{get_currency_symbol}
 \title{Get the locale-specific form of a currency symbol}
 \usage{
-get_currency_symbol(name, locale, type = c("symbol", "narrow",
-  "variant"))
+get_currency_symbol(name, locale, type = NULL)
 }
 \arguments{
-\item{name}{the ISO 4217:2015 alphabetic code (three-letter) that defines
-a currency. Examples include \code{"USD"} for U.S. Dollars and \code{"JPY"}
+\item{name}{the ISO 4217:2015 alphabetic code (three-letter) that defines a
+currency. Examples include \code{"USD"} for U.S. Dollars and \code{"JPY"}
 for Japanese Yen.}
 
 \item{locale}{an optional output locale to use for formatting the
-\code{input} value according to the specified locale's rules. Example locale
-names include \code{"en_US"} for English (United States) and \code{"fr_FR"}
-for French (France). If a locale isn't provided and certain require locale-
-based formatting then the \code{"en_US"} locale is used for this purpose.}
+\code{input} value according to the specified locale's rules. Example
+locale names include \code{"en_US"} for English (United States) and
+\code{"fr_FR"} for French (France). If a locale isn't provided and certain
+require locale- based formatting then the \code{"en_US"} locale is used for
+this purpose.}
 
 \item{type}{the output representation of the currency symbol in the provided
 \code{locale}. This can be \code{"symbol"}, \code{"narrow"}, or

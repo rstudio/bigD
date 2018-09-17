@@ -10,16 +10,17 @@ fmt_date_time(input, date_format = NULL, time_format = NULL,
 \arguments{
 \item{input}{the input date-time. The appropriate representation should use
 the following construction outlined in the ISO 8601:2004 standard:
-\code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to
-ease this restrictiveness (for example, the literal \code{T} separating the
-date and time components is optional). Fractional seconds are optional as is
-the time-zone designation (TZD).}
+\code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to ease
+this restrictiveness (for example, the literal \code{T} separating the date
+and time components is optional). Fractional seconds are optional as is the
+time-zone designation (TZD).}
 
 \item{date_format}{a date format specification using the rules of the
-SimpleDateFormat. The helper function \code{\link{fdf}()} could be used with
-a predefined format name or format number. The information function
-\code{\link{info_fdf_types}()} provides information on which date formatting
-presets are available and includes output samples for each of them.}
+SimpleDateFormat. The helper function \code{\link{fdf}()} could be used
+with a predefined format name or format number. The information function
+\code{\link{info_fdf_types}()} provides information on which date
+formatting presets are available and includes output samples for each of
+them.}
 
 \item{time_format}{a time format specification using the rules of the
 SimpleDateFormat. There are two useful helper functions to use 12-hour and
@@ -32,18 +33,19 @@ samples for each time preset.}
 
 \item{combination}{a combining pattern for the localized date and time
 components. If this is not provided, then the combining pattern will come
-from the specified locale's \code{"full"} designation. If there is neither a
-\code{combination} nor a \code{locale} provided, then the time component
+from the specified locale's \code{"full"} designation. If there is neither
+a \code{combination} nor a \code{locale} provided, then the time component
 will follow the date after a space character. If providing a pattern, the
 string should be composed with the \code{{0}} and \code{{1}} placeholders,
-representing time and date components, respectively. All other characters are
-taken to be string literals.}
+representing time and date components, respectively. All other characters
+are taken to be string literals.}
 
 \item{locale}{an optional output locale to use for formatting the
-\code{input} value according to the specified locale's rules. Example locale
-names include \code{"en_US"} for English (United States) and \code{"fr_FR"}
-for French (France). If a locale isn't provided and certain require locale-
-based formatting then the \code{"en_US"} locale is used for this purpose.}
+\code{input} value according to the specified locale's rules. Example
+locale names include \code{"en_US"} for English (United States) and
+\code{"fr_FR"} for French (France). If a locale isn't provided and certain
+require locale- based formatting then the \code{"en_US"} locale is used for
+this purpose.}
 }
 \description{
 Get a localized date, time, or date-time string in a standard form.

@@ -10,7 +10,8 @@ info_ftf_24_types(locale = NULL, input = NULL)
 \item{locale}{an optional output locale for inspecting the \code{input} value
 across all of the different formatting types. Example locale names include
 \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
-(France). If a locale name is not provided then \code{"en_US"} will be used.}
+(France). If a locale name is not provided then \code{"en_US"} will be
+used.}
 
 \item{input}{an optional input date-time string. The appropriate
 representation should use the following construction outlined in the ISO
