@@ -3,7 +3,7 @@
 
 # i18n
 
-The goal of i18n is to simply get localized variants of dates, times,
+The goal of i18n is to easily get localized variants of dates, times,
 currencies, and other stuff that can be localized with some degree of
 precision.
 
@@ -18,14 +18,15 @@ input <- "2018-07-24T14:44:22.234343-0800(America/Vancouver)"
 ```
 
 There are standardized date forms across all locales. They come in 4
-flavors: `short`, `medium`, `long`, or `full`. Let’s just get that
-date-time into the first two, with random locales:
+flavors: `short`, `medium`, `long`, or `full`. Let’s get that date-time
+into each of these forms, with random locales:
 
 ``` r
 input %>%
   fmt_date_time_standard(
     locale = "en",
-    width = "short")
+    width = "short"
+  )
 #> [1] "7/24/2018 A, 2:44 PM"
 ```
 
@@ -33,8 +34,27 @@ input %>%
 input %>%
   fmt_date_time_standard(
     locale = "de",
-    width = "medium")
+    width = "medium"
+  )
 #> [1] "24.07.2018 n. Chr., 14:44:22"
+```
+
+``` r
+input %>%
+  fmt_date_time_standard(
+    locale = "fr_BE",
+    width = "long"
+  )
+#> [1] "24 juillet 2018 ap. J.-C. à 14:44:22 PDT"
+```
+
+``` r
+input %>%
+  fmt_date_time_standard(
+    locale = "es_MX",
+    width = "full"
+  )
+#> [1] "lunes, 24 de julio de 2018 d. C., 14:44:22 Pacific Daylight Time"
 ```
 
 We can also apply a smattering of different simple date format presets
@@ -97,10 +117,10 @@ available in the flexible date format:
 
 ## Installation
 
-You can install i18n if you dare from GitHub. Use:
+You can install **i18n** from GitHub with:
 
 ``` r
-devtools::install_github("rich-iannone/i18n")
+remotes::install_github("rich-iannone/i18n")
 ```
 
 ## Code of Conduct
