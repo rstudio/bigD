@@ -541,13 +541,3 @@ l_fmt_a <- function(locale) {
   c(am, pm)
 }
 
-
-# l_fmt_tz_full_name <- function(full_name,
-#                                locale) {
-#
-#   get_localized_value(
-#     type = "date_and_time_gregorian",
-#     sections = "day_periods_abbreviated_formatting_am",
-#     locale = locale)
-#
-# }
