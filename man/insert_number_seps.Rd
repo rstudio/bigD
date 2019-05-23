@@ -2,22 +2,21 @@
 % Please edit documentation in R/decimal_formatting.R
 \name{insert_number_seps}
 \alias{insert_number_seps}
-\title{For a non-decimal number string, insert separators according to the grouping
-pattern}
+\title{Provide separators to a numeric value with a grouping pattern}
 \usage{
-insert_number_seps(integer, grouping, sep_mark)
+insert_number_seps(integer, grouping = c("333", "322"), sep_mark = ",")
 }
 \arguments{
-\item{integer}{the integer portion of a numeric vaue. Can be supplied as an
+\item{integer}{The integer portion of a numeric value. Can be supplied as an
 integer value or a string. If supplied as a string, it must only contain
 numeral characters.}
 
-\item{grouping}{the CLDR grouping pattern of either \code{"#,##0.###"} or
-\code{"#,##,##0.###"}.}
+\item{grouping}{The grouping pattern of either "#,##0.###" with \code{"333"} or
+"#,##,##0.###" with \code{"322"}.}
 
-\item{sep_mark}{the character to use as the separator mark.}
+\item{sep_mark}{The character to use as the separator mark. By default, this
+is the comma character.}
 }
 \description{
-For a non-decimal number string, insert separators according to the grouping
-pattern
+Provide separators to a numeric value with a grouping pattern
 }

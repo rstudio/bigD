@@ -7,12 +7,11 @@
 get_dec_pattern(locale)
 }
 \arguments{
-\item{locale}{an optional output locale to use for formatting the
-\code{input} value according to the specified locale's rules. Example
-locale names include \code{"en_US"} for English (United States) and
-\code{"fr_FR"} for French (France). If a locale isn't provided and certain
-require locale- based formatting then the \code{"en_US"} locale is used for
-this purpose.}
+\item{locale}{an optional output locale to use for formatting the \code{input}
+value according to the specified locale's rules. Example locale names
+include \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
+(France). If a locale isn't provided and certain require locale- based
+formatting then the \code{"en_US"} locale is used for this purpose.}
 }
 \description{
 Get the locale-specific decimal pattern

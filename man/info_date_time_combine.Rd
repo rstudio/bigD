@@ -7,19 +7,18 @@
 info_date_time_combine(locale = NULL, input = NULL)
 }
 \arguments{
-\item{locale}{an optional output locale for inspecting the \code{input} value
+\item{locale}{An optional output locale for inspecting the \code{input} value
 across all of the different formatting types. Example locale names include
-\code{"en_US"} for English (United States) and \code{"fr_FR"} for French
-(France). If a locale name is not provided then \code{"en_US"} will be
-used.}
+\code{"en_US"} for English (United States) and \code{"fr_FR"} for French (France). If
+a locale name is not provided then \code{"en_US"} will be used.}
 
 \item{input}{an optional input date-time string. The appropriate
 representation should use the following construction outlined in the ISO
-8601:2004 standard: \code{YYYY-MM-DDThh:mm:ss.sTZD} although some
-allowances made here to ease this restrictiveness (for example, the literal
-\code{T} separating the date and time components is optional). Fractional
-seconds are optional as is the time-zone designation (TZD). If a value is
-not provided then a default date-time string will be used.}
+8601:2004 standard: \code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances
+made here to ease this restrictiveness (for example, the literal \code{T}
+separating the date and time components is optional). Fractional seconds
+are optional as is the time-zone designation (TZD). If a value is not
+provided then a default date-time string will be used.}
 }
 \description{
 Get information on the date-time combining formats

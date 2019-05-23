@@ -7,22 +7,21 @@
 fmt_date_time_standard(input, locale = "en_US", width = "medium")
 }
 \arguments{
-\item{input}{the input date-time. The appropriate representation should use
+\item{input}{The input date-time. The appropriate representation should use
 the following construction outlined in the ISO 8601:2004 standard:
-\code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to ease
-this restrictiveness (for example, the literal \code{T} separating the date
-and time components is optional). Fractional seconds are optional as is the
+\code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to ease this
+restrictiveness (for example, the literal \code{T} separating the date and time
+components is optional). Fractional seconds are optional as is the
 time-zone designation (TZD).}
 
-\item{locale}{an optional output locale to use for formatting the
-\code{input} value according to the specified locale's rules. Example
-locale names include \code{"en_US"} for English (United States) and
-\code{"fr_FR"} for French (France). If a locale isn't provided and certain
-require locale- based formatting then the \code{"en_US"} locale is used for
-this purpose.}
+\item{locale}{an optional output locale to use for formatting the \code{input}
+value according to the specified locale's rules. Example locale names
+include \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
+(France). If a locale isn't provided and certain require locale- based
+formatting then the \code{"en_US"} locale is used for this purpose.}
 
 \item{width}{The standardized output date-time format, which can be one of
-either \code{short}, \code{medium}, \code{long}, or \code{full}.}
+either \code{"short"}, \code{"medium"}, \code{"long"}, or \code{"full"}.}
 }
 \description{
 Get a localized date-time in a standardized form.
