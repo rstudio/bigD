@@ -1,15 +1,15 @@
-#' For a non-decimal number string, insert separators according to the grouping
-#' pattern
-#' @param integer the integer portion of a numeric vaue. Can be supplied as an
+#' Provide separators to a numeric value with a grouping pattern
+#' @param integer The integer portion of a numeric value. Can be supplied as an
 #'   integer value or a string. If supplied as a string, it must only contain
 #'   numeral characters.
-#' @param grouping the CLDR grouping pattern of either \code{"#,##0.###"} or
-#'   \code{"#,##,##0.###"}.
-#' @param sep_mark the character to use as the separator mark.
+#' @param grouping The grouping pattern of either "#,##0.###" with `"333"` or
+#'   "#,##,##0.###" with `"322"`.
+#' @param sep_mark The character to use as the separator mark. By default, this
+#'   is the comma character.
 #' @export
 insert_number_seps <- function(integer,
-                               grouping,
-                               sep_mark) {
+                               grouping = c("333", "322"),
+                               sep_mark = ",") {
 
   if (inherits(integer, "integer")) {
     integer <- as.character(integer)
@@ -20,9 +20,9 @@ insert_number_seps <- function(integer,
          call. = FALSE)
   }
 
-  if (grouping == "#,##0.###") {
+  if (grouping == "333") {
     grouping <- c(3, 3, 3)
-  } else if (grouping == "#,##,##0.###") {
+  } else if (grouping == "322") {
     grouping <- c(3, 2, 2)
   }
 

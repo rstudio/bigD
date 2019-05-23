@@ -1,7 +1,7 @@
 #' Get a localized date-time in a standardized form.
 #' @inheritParams fmt_date_time
 #' @param width The standardized output date-time format, which can be one of
-#'   either \code{short}, \code{medium}, \code{long}, or \code{full}.
+#'   either `"short"`, `"medium"`, `"long"`, or `"full"`.
 #' @export
 fmt_date_time_standard <- function(input,
                                    locale = "en_US",

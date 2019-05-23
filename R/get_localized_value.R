@@ -1,9 +1,10 @@
 #' Get a localized value from the l18n tables.
-#' @param type the localization category.
-#' @param sections the section name within the localization category.
-#' @param locale a locale ID. Examples include \code{"en_US"} for English
+#'
+#' @param type The localization category.
+#' @param sections The section name within the localization category.
+#' @param locale A locale ID. Examples include \code{"en_US"} for English
 #'   (United States) and \code{"fr_FR"} for French (France).
-#' @return a localized value.
+#' @return A localized value.
 #' @noRd
 get_localized_value <- function(type,
                                 sections,

@@ -1,16 +1,16 @@
 #' Get information on the different flexible date formats
-#' @param locale an optional output locale for inspecting the \code{input} value
+#'
+#' @param locale An optional output locale for inspecting the `input` value
 #'   across all of the different formatting types. Example locale names include
-#'   \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
-#'   (France). If a locale name is not provided then \code{"en_US"} will be
-#'   used.
+#'   `"en_US"` for English (United States) and `"fr_FR"` for French (France). If
+#'   a locale name is not provided then `"en_US"` will be used.
 #' @param input an optional input date-time string. The appropriate
 #'   representation should use the following construction outlined in the ISO
-#'   8601:2004 standard: \code{YYYY-MM-DDThh:mm:ss.sTZD} although some
-#'   allowances made here to ease this restrictiveness (for example, the literal
-#'   \code{T} separating the date and time components is optional). Fractional
-#'   seconds are optional as is the time-zone designation (TZD). If a value is
-#'   not provided then a default date-time string will be used.
+#'   8601:2004 standard: `YYYY-MM-DDThh:mm:ss.sTZD` although some allowances
+#'   made here to ease this restrictiveness (for example, the literal `T`
+#'   separating the date and time components is optional). Fractional seconds
+#'   are optional as is the time-zone designation (TZD). If a value is not
+#'   provided then a default date-time string will be used.
 #' @export
 info_fdf_types <- function(locale = NULL,
                            input = NULL) {
@@ -46,6 +46,7 @@ info_fdf_types <- function(locale = NULL,
 }
 
 #' Get information on the different 12-hour flexible time formats
+#'
 #' @inheritParams info_fdf_types
 #' @export
 info_ftf_12_types <- function(locale = NULL,
@@ -82,6 +83,7 @@ info_ftf_12_types <- function(locale = NULL,
 }
 
 #' Get information on the different 24-hour flexible time formats
+#'
 #' @inheritParams info_fdf_types
 #' @export
 info_ftf_24_types <- function(locale = NULL,

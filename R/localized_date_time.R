@@ -1,9 +1,10 @@
 #' Augment a pattern string with date and time parts.
-#' @param date_input the date component of the input date-time.
-#' @param time_input the time component of the input date-time.
-#' @param subst_pattern a partial pattern string.
-#' @param locale a locale ID. Examples include \code{"en_US"} for English
-#'   (United States) and \code{"fr_FR"} for French (France).
+#'
+#' @param date_input The date component of the input date-time.
+#' @param time_input The time component of the input date-time.
+#' @param subst_pattern A partial pattern string.
+#' @param locale A locale ID. Examples include `"en_US"` for English (United
+#'   States) and `"fr_FR"` for French (France).
 #' @return an augmented pattern string.
 #' @noRd
 localized_date_time <- function(date_input = NULL,
