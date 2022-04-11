@@ -32,16 +32,20 @@
 #'   (France). If a locale isn't provided and certain require locale- based
 #'   formatting then the `"en_US"` locale is used for this purpose.
 #' @export
-fmt_date_time <- function(input,
-                          date_format = NULL,
-                          time_format = NULL,
-                          combination = NULL,
-                          locale = NULL) {
+fmt_date_time <- function(
+    input,
+    date_format = NULL,
+    time_format = NULL,
+    combination = NULL,
+    locale = NULL
+) {
 
   # Stop function if both date_format and time_format are NULL
   if (is.null(date_format) & is.null(time_format)) {
-    stop("At least one of `date_format` and `time_format` must be provided.",
-         call. = FALSE)
+    stop(
+      "At least one of `date_format` and `time_format` must be provided.",
+      call. = FALSE
+    )
   }
 
   if (inherits(date_format, "fdf")) {
@@ -52,7 +56,8 @@ fmt_date_time <- function(input,
       get_localized_value(
         type = "date_and_time_gregorian",
         section = paste0("formats_flexible_date_formats_", fdf_str),
-        locale = locale)
+        locale = locale
+      )
 
   } else if (inherits(date_format, "character")) {
 
@@ -77,13 +82,13 @@ fmt_date_time <- function(input,
       get_localized_value(
         type = "date_and_time_gregorian",
         section = paste0("formats_flexible_24_hour_time_formats_", fdf_str),
-        locale = locale)
+        locale = locale
+      )
 
   } else if (inherits(time_format, "character")) {
 
     time_pattern <- time_format
   }
-
 
   if (exists("date_pattern") & exists("time_pattern")) {
 
@@ -117,7 +122,8 @@ fmt_date_time <- function(input,
         get_localized_value(
           type = "date_and_time_gregorian",
           section = combination_section_name,
-          locale = locale)
+          locale = locale
+        )
 
     } else if (is.null(combination) & is.null(locale)) {
 
