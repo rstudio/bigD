@@ -14,13 +14,13 @@ knitr::opts_chunk$set(
 ```
 
 ```{r load_packages, include=FALSE}
-library(i18n)
+library(i18nExtras)
 ```
 
 
-# i18n
+# i18nExtras
 
-The goal of i18n is to easily get localized variants of dates, times, currencies, and other stuff that can be localized with some degree of precision.
+The goal of i18nExtras is to easily get localized variants of dates, times, currencies, and other stuff that can be localized with some degree of precision.
 
 ## Some Examples
 
@@ -64,14 +64,15 @@ input %>%
   )
 ```
 
-We can also apply a smattering of different simple date format presets to this input. The `format_w_pattern()` function is useful for this. We can choose to keep the date portion, the time portion, or both. The `fdf()` helper function is useful for choosing a preset date format from the flexible date format (FDF).
+We can also apply a smattering of different simple date format presets to this input. The `fmt_date_time()` function is useful for this. We can choose to keep the date portion, the time portion, or both. The `fdf()` helper function is useful for choosing a preset date format from the flexible date format (FDF).
 
 ```{r format_w_pattern_es_date}
 input %>%
   fmt_date_time(
     date_format = fdf("yMd"),
     time_format = NULL,
-    locale = "es")
+    locale = "es"
+  )
 ```
 
 Time components have presets under the flexible time format (FTF), which is split into 12- and 24-hour variants. There are `ftf_12()` and `ftf_24()` helper functions enable selections of presets within those.
@@ -81,7 +82,8 @@ input %>%
   fmt_date_time(
     date_format = fdf("yMd"),
     time_format = ftf_24("EHms"),
-    locale = "es_MX")
+    locale = "es_MX"
+  )
 ```
 
 It's hard to know what the format names are for `fdf()`, `ftf_12()`, and `ftf_24()`, so, there are information functions that provide the names and yield previews. These info functions are: 
@@ -109,10 +111,10 @@ Here is a comparison table of localized dates for all the presets available in t
 
 ## Installation
 
-You can install **i18n** from GitHub with:
+You can install **i18nExtras** from GitHub with:
 
 ``` r
-remotes::install_github("rich-iannone/i18n")
+remotes::install_github("rich-iannone/i18nExtras")
 ```
 
 ## Code of Conduct
