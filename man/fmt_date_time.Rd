@@ -4,8 +4,13 @@
 \alias{fmt_date_time}
 \title{Get a localized date, time, or date-time string in a standard form.}
 \usage{
-fmt_date_time(input, date_format = NULL, time_format = NULL,
-  combination = NULL, locale = NULL)
+fmt_date_time(
+  input,
+  date_format = NULL,
+  time_format = NULL,
+  combination = NULL,
+  locale = NULL
+)
 }
 \arguments{
 \item{input}{The input date-time. The appropriate representation should use
