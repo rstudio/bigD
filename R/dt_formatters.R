@@ -208,17 +208,28 @@ dt_dd <- function(input) {
 
 # Day of year, numeric, 1-3 digits
 dt_D <- function(input) {
-  "D"
+
+  as.character(lubridate::yday(input))
 }
 
 # Day of year, numeric, 2-3 digits zero-padded
 dt_DD <- function(input) {
-  "DD"
+
+  out <- lubridate::yday(input)
+  if (out < 10) out <- paste0("0", out)
+  as.character(out)
 }
 
 # Day of year, numeric, 3 digits zero-padded
 dt_DDD <- function(input) {
-  "DDD"
+
+  out <- lubridate::yday(input)
+  if (out < 10) {
+    out <- paste0("00", out)
+  } else if (out < 100) {
+    out <- paste0("0", out)
+  }
+  as.character(out)
 }
 
 # Day of week in month, numeric, 1 digit
@@ -243,17 +254,29 @@ dt_E <- function(input, locale = NULL) {
 
 # Day of Week Name // wide (e.g., "Tuesday")
 dt_EEEE <- function(input, locale = NULL) {
-  "EEEE"
+
+  cldr_dates(
+    locale = locale,
+    element = dates_elements$days_standalone_wide
+  )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
 # Day of Week Name // narrow (e.g., "T")
 dt_EEEEE <- function(input, locale = NULL) {
-  "EEEEE"
+
+  cldr_dates(
+    locale = locale,
+    element = dates_elements$days_standalone_narrow
+  )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
 # Day of Week Name // short (e.g., "Tu")
 dt_EEEEEE <- function(input, locale = NULL) {
-  "EEEEEE"
+
+  cldr_dates(
+    locale = locale,
+    element = dates_elements$days_standalone_short
+  )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
 # Local Day of Week Name/Number // 1 digit
@@ -336,7 +359,11 @@ dt_aaaa <- function(input, locale = NULL) {
 
 # Period: am, pm // narrow
 dt_aaaaa <- function(input, locale = NULL) {
-  "aaaaa"
+
+  cldr_dates(
+    locale = locale,
+    element = dates_elements$dayperiods_format_narrow
+  )[[ifelse(lubridate::am(input), "am", "pm")]]
 }
 
 # Period: am, pm, noon, midnight // abbreviated (b..bbb)
@@ -373,42 +400,61 @@ dt_BBBBB <- function(input, locale = NULL) {
 dt_h <- function(input) {
   out <- lubridate::hour(input)
   if (out > 12) out <- out - 12
-  out
+  out <- out + 1
+  as.character(out)
 }
 
 # Hour [1-12] // numeric, 2 digits, zero padded
 dt_hh <- function(input) {
-  "hh"
+
+  out <- lubridate::hour(input)
+  if (out > 12) out <- out - 12
+  out <- out + 1
+  if (out < 10) out <- paste0("0", out)
+  as.character(out)
 }
 
 # Hour [0-23] // numeric, 1-2 digits
 dt_H <- function(input) {
-  "H"
+  as.character(lubridate::hour(input))
 }
 
 # Hour [0-23] // numeric, 2 digits, zero padded
 dt_HH <- function(input) {
-  "HH"
+  out <- lubridate::hour(input)
+  if (out < 10) out <- paste0("0", out)
+  as.character(out)
 }
 
 # Hour [0-11] // numeric, 1-2 digits
 dt_K <- function(input) {
-  "K"
+
+  out <- lubridate::hour(input)
+  if (out > 12) out <- out - 12
+  as.character(out)
 }
 
 # Hour [0-11] // numeric, 2 digits, zero padded
 dt_KK <- function(input) {
-  "KK"
+
+  out <- lubridate::hour(input)
+  if (out > 12) out <- out - 12
+  if (out < 10) out <- paste0("0", out)
+  as.character(out)
 }
 
 # Hour [1-24] // numeric, 1-2 digits
 dt_k <- function(input) {
-  "k"
+
+  as.character(lubridate::hour(input) + 1L)
 }
 
 # Hour [1-24] // numeric, 2 digits, zero padded
 dt_kk <- function(input) {
-  "kk"
+
+  out <- lubridate::hour(input) + 1L
+  if (out < 10) out <- paste0("0", out)
+  as.character(out)
 }
 
 # Hour (Input Skeleton Symbol) // numeric, 1-2 digits + abbrev day period
@@ -483,11 +529,13 @@ dt_CCCCCC <- function(input) {
 
 # Minute // numeric, 1-2 digits
 dt_m <- function(input) {
+
   as.character(lubridate::minute(input))
 }
 
 # Minute // numeric, 2 digits, zero padded
 dt_mm <- function(input) {
+
   out <- lubridate::minute(input)
   if (out < 10) out <- paste0("0", out)
   as.character(out)
@@ -495,11 +543,13 @@ dt_mm <- function(input) {
 
 # Second // numeric, 1-2 digits
 dt_s <- function(input) {
+
   as.character(trunc(lubridate::second(input)))
 }
 
 # Second // numeric, 2 digits, zero padded
 dt_ss <- function(input) {
+
   out <- lubridate::second(input)
   if (out < 10) out <- paste0("0", out)
   as.character(out)
