@@ -3,7 +3,7 @@ get_date_pattern <- function() {
 }
 
 get_time_pattern <- function() {
-  "(T| )((\\d|\\d\\d):\\d\\d[0-9:.]*)"
+  "((T| )((\\d|\\d\\d):\\d\\d[0-9:.]*)|^((\\d|\\d\\d):\\d\\d[0-9:.]*))"
 }
 
 get_tz_pattern <- function() {
@@ -44,11 +44,71 @@ is_time_present <- function(input) {
 
 is_tz_present <- function(input) {
 
-  any(c(
-    grepl(get_tz_pattern_z(), input),
-    grepl(get_tz_pattern_hh(), input),
-    grepl(get_tz_pattern_hh_mm(), input),
-    grepl(get_tz_pattern_hhmm(), input)))
+  any(
+    c(
+      grepl(get_tz_pattern_z(), input),
+      grepl(get_tz_pattern_hh(), input),
+      grepl(get_tz_pattern_hh_mm(), input),
+      grepl(get_tz_pattern_hhmm(), input)
+    )
+  )
+}
+
+get_tz_str <- function(input) {
+
+  if (!is_tz_present(input = input)) {
+    return("")
+  }
+
+  if (grepl("+", input, fixed = TRUE)) {
+
+    out <- unlist(strsplit(input, split = "+", fixed = TRUE))[[2]]
+    out <- paste0("+", out)
+
+  } else if (grepl("Z", input)) {
+
+    out <- "Z"
+
+  } else {
+
+    out <- unlist(strsplit(input, split = "-", fixed = TRUE))
+    out <- out[length(out)]
+    out <- paste0("-", out)
+  }
+
+  out
+}
+
+get_tz_offset_val <- function(input) {
+
+  if (!is_tz_present(input = input)) {
+    return(NA_real_)
+  }
+
+  tz_str <- get_tz_str(input = input)
+
+  if (tz_str == "Z") {
+
+    offset_val <- 0
+
+  } else {
+
+    offset_val <-
+      as.numeric(substr(tz_str, 2, 3)) +
+      as.numeric(substr(tz_str, nchar(tz_str) - 1, nchar(tz_str))) / 60
+
+    if (grepl("-", tz_str)) {
+      offset_val <- offset_val * (-1)
+    }
+  }
+
+  offset_val
+}
+
+strip_tz <- function(input) {
+
+  tz_str <- get_tz_str(input = input)
+  gsub(tz_str, "", input, fixed = TRUE)
 }
 
 is_iana_present <- function(input) {
@@ -57,7 +117,8 @@ is_iana_present <- function(input) {
     paste0(
       get_time_pattern(), get_tz_pattern(),
       "(", get_wrapped_iana_pattern(), "|", get_attached_iana_pattern(), ")"),
-    input)
+    input
+  )
 }
 
 which_tz_pattern <- function(input) {
@@ -126,6 +187,14 @@ get_tz_offset <- function(input) {
 
   tz_offset
 }
+
+
+# The short specific non-location format (e.g., PDT)
+get_tz_short_specific <- function(tz_str) {
+
+  return(NA_character_)
+}
+
 
 get_long_local_gmt <- function(tz_offset) {
 
