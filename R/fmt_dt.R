@@ -23,11 +23,55 @@
 fmt_dt <- function(
     input,
     dt_format = NULL,
+    use_tz = NULL,
     locale = NULL
 ) {
 
+  if (is.null(locale)) {
+    locale <- "en"
+  }
+
   # Modify the `dt_format` string so it is `glue_dt()` formattable
   pattern_list <- dt_format_to_glue_pattern(dt_format = dt_format)
+
+  if (is.character(input)) {
+
+    date_present <- is_date_present(input = input)
+    time_present <- is_time_present(input = input)
+
+    # Extract the time zone offset if it exists and strip
+    # any tz information from the input
+    if (is_tz_present(input = input)) {
+
+      tz_str <- get_tz_str(input = input)
+      tz_offset <- get_tz_offset_val(input = input)
+      input <- strip_tz(input = input)
+      tz_short_specific <- get_tz_short_specific(tz_str = tz_str)
+
+    } else {
+
+      tz_offset <- NA_real_
+      tz_str <- NA_character_
+      tz_short_specific <- NA_character_
+    }
+
+    if (date_present && time_present) {
+      input_dt <- lubridate::ymd_hms(input, tz = "UTC", quiet = TRUE)
+    } else if (date_present && !time_present) {
+      input_dt <- lubridate::ymd(input, tz = "UTC", quiet = TRUE)
+    } else if (!date_present && time_present) {
+      input <- paste0("2015-01-01T", input)
+      input_dt <- lubridate::ymd_hms(input, tz = "UTC",  quiet = TRUE)
+    }
+
+  } else if (inherits(input, "POSIXct")) {
+
+    input_dt <- input
+
+    # Extract the input time zone
+    tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
+    tz_offset <- NULL
+  }
 
   # Prepare the output vector
   output <- rep(NA_character_, length(input))
@@ -133,8 +177,8 @@ fmt_dt <- function(
         ZZZ = dt_Z(input, locale),
         ZZZZ = dt_ZZZZ(input, locale),
         ZZZZZ = dt_ZZZZZ(input, locale),
-        O = dt_O(input, locale),
-        OOOO = dt_OOOO(input, locale),
+        O = dt_O(input, locale, tz_offset),
+        OOOO = dt_OOOO(input, locale, tz_offset),
         v = dt_v(input, locale),
         vvvv = dt_vvvv(input, locale),
         V = dt_V(input, locale),
@@ -211,16 +255,19 @@ sub_letters <- function() {
   )
 }
 
-extract_strings_from_pattern <- function(string, pattern) {
-  as.character(regmatches(string, gregexpr(pattern, string)))
+extract_literals_from_pattern <- function(string) {
+
+  gsub(
+    "(^'|'$)", "",
+    unlist(regmatches(string, gregexpr(pattern = "'.*?'", text = string)))
+  )
 }
 
 dt_format_to_glue_pattern <- function(dt_format) {
 
   literals <-
-    extract_strings_from_pattern(
-      string = dt_format,
-      pattern = "'.*?'"
+    extract_literals_from_pattern(
+      string = dt_format
     )
 
   for (i in seq_along(literals)) {
