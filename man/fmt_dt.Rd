@@ -4,7 +4,7 @@
 \alias{fmt_dt}
 \title{Format a datetime using a SDF formatting string}
 \usage{
-fmt_dt(input, dt_format = NULL, locale = NULL)
+fmt_dt(input, dt_format = NULL, use_tz = NULL, locale = NULL)
 }
 \arguments{
 \item{input}{The input date-time. The appropriate representation should use
