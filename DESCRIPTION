@@ -9,7 +9,9 @@ Description: Format numbers, dates, times, durations, and currencies in
 License: MIT + file LICENSE
 URL: https://github.com/rich-iannone/i18nExtras
 BugReports: https://github.com/rich-iannone/i18nExtras/issues
-Depends: R (>= 3.2.0)
+Depends: 
+    R (>= 3.2.0),
+    i18n (>= 0.1.0)
 Imports: 
     i18n (>= 0.1.0),
     lubridate (>= 1.8.0),
@@ -18,3 +20,6 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
