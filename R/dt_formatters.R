@@ -135,23 +135,30 @@ dt_MM <- function(input) {
 # Month (format), abbreviated (e.g. "Sep")
 dt_MMM <- function(input, locale = NULL) {
 
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
-    element = dates_elements$months_format_abbrev
+    element = i18n::dates_elements$months_format_abbrev
   )[[lubridate::month(input)]]
 }
 
 # Month (format), full (e.g. "September")
 dt_MMMM <- function(input, locale = NULL) {
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
-    element = dates_elements$months_format_wide
+    element = i18n::dates_elements$months_format_wide
   )[[lubridate::month(input)]]
 }
 
 # Month (format), narrow (e.g. "S")
 dt_MMMMM <- function(input, locale = NULL) {
-  "MMMMM"
+
+  substr(
+    i18n::cldr_dates(
+      locale = locale,
+      element = i18n::dates_elements$months_format_abbrev
+    )[[lubridate::month(input)]],
+    1, 1
+  )
 }
 
 # Month (standalone), numeric form (1 digit) (e.g. "9")
@@ -246,7 +253,7 @@ dt_g_plus <- function(input, length) {
 dt_E <- function(input, locale = NULL) {
 
   # FIXME: should be abbreviated and not short (provides "Tu")
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
     element = dates_elements$days_standalone_short
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
@@ -255,7 +262,7 @@ dt_E <- function(input, locale = NULL) {
 # Day of Week Name // wide (e.g., "Tuesday")
 dt_EEEE <- function(input, locale = NULL) {
 
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
     element = dates_elements$days_standalone_wide
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
@@ -264,7 +271,7 @@ dt_EEEE <- function(input, locale = NULL) {
 # Day of Week Name // narrow (e.g., "T")
 dt_EEEEE <- function(input, locale = NULL) {
 
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
     element = dates_elements$days_standalone_narrow
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
@@ -273,7 +280,7 @@ dt_EEEEE <- function(input, locale = NULL) {
 # Day of Week Name // short (e.g., "Tu")
 dt_EEEEEE <- function(input, locale = NULL) {
 
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
     element = dates_elements$days_standalone_short
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
@@ -342,7 +349,7 @@ dt_cccccc <- function(input, locale = NULL) {
 # Period: am, pm // abbreviated (a..aaa)
 dt_a <- function(input, locale = NULL) {
 
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
     element = dates_elements$dayperiods_format_abbrev
   )[[ifelse(lubridate::am(input), "am", "pm")]]
@@ -351,7 +358,7 @@ dt_a <- function(input, locale = NULL) {
 # Period: am, pm // wide
 dt_aaaa <- function(input, locale = NULL) {
 
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
     element = dates_elements$dayperiods_format_wide
   )[[ifelse(lubridate::am(input), "am", "pm")]]
@@ -360,7 +367,7 @@ dt_aaaa <- function(input, locale = NULL) {
 # Period: am, pm // narrow
 dt_aaaaa <- function(input, locale = NULL) {
 
-  cldr_dates(
+  i18n::cldr_dates(
     locale = locale,
     element = dates_elements$dayperiods_format_narrow
   )[[ifelse(lubridate::am(input), "am", "pm")]]
@@ -567,8 +574,19 @@ dt_A_plus <- function(input, length) {
 
 # TZ // short specific non-location format (e.g., "PDT") (z..zzz)
 # Fallback to "O"
-dt_z <- function(input, locale = NULL) {
-  "z"
+dt_z <- function(
+    input,
+    locale = NULL,
+    tz_short_specific = NULL,
+    tz_offset = NULL
+) {
+
+  if (is.null(tz_short_specific) & !is.null(tz_offset)) {
+    out <-
+      dt_O(input = input, locale = locale, tz_offset = tz_offset)
+  }
+
+  lubridate::tz(input)
 }
 
 # TZ // long specific non-location format (e.g., "Pacific Daylight Time")
@@ -596,12 +614,12 @@ dt_ZZZZZ <- function(input, locale = NULL) {
 }
 
 # TZ // short localized GMT format (e.g., "GMT-8")
-dt_O <- function(input, locale = NULL) {
+dt_O <- function(input, locale = NULL, tz_offset = NULL) {
   "O"
 }
 
 # TZ // long localized GMT format (e.g., "GMT-8:00")
-dt_OOOO <- function(input, locale = NULL) {
+dt_OOOO <- function(input, locale = NULL, tz_offset = NULL) {
   "OOOO"
 }
 
