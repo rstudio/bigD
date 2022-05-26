@@ -1,14 +1,14 @@
 Type: Package
-Package: i18nExtras
-Title: Experiments and More with the 'i18n' Package.
+Package: bigD
+Title: Flexibly format dates and times to a given locale.
 Version: 0.1.0.9000
 Authors@R: person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3925-190X"))
-Description: Format numbers, dates, times, durations, and currencies in
-    whichever locales make sense.
+Description: Format dates and times flexibly and to whichever locales
+    make sense.
 License: MIT + file LICENSE
-URL: https://github.com/rich-iannone/i18nExtras
-BugReports: https://github.com/rich-iannone/i18nExtras/issues
+URL: https://github.com/rich-iannone/bigD
+BugReports: https://github.com/rich-iannone/bigD/issues
 Depends: 
     R (>= 3.2.0),
     i18n (>= 0.1.0)
