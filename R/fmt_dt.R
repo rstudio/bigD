@@ -1,23 +1,19 @@
-#' Format a datetime using a SDF formatting string
+#' Format a datetime with a formatting string
 #'
-#' @param input The input date-time. The appropriate representation should use
-#'   the following construction outlined in the ISO 8601:2004 standard:
-#'   `YYYY-MM-DDThh:mm:ss.sTZD` although some allowances made here to ease this
-#'   restrictiveness (for example, the literal `T` separating the date and time
-#'   components is optional). Fractional seconds are optional as is the
-#'   time-zone designation (TZD).
-#' @param date_format a date format specification using the rules of the
-#'   SimpleDateFormat.
-#' @param time_format a time format specification using the rules of the
-#'   SimpleDateFormat.
-#' @param combination a combining pattern for the localized date and time
-#'   components. If this is not provided, then the combining pattern will come
-#'   from the specified locale's `"full"` designation.
+#' @param input The input datetime value. The appropriate representation should
+#'   use the following construction outlined in the ISO 8601:2004 standard:
+#'   `YYYY-MM-DDThh:mm:ss.s<TZD>` although some allowances made here to ease
+#'   this restrictiveness (for example, the literal `T` separating the date and
+#'   time components is optional). Seconds, fractional seconds, and the
+#'   time-zone designation are all optional.
+#' @param dt_format The datetime formatting string.
+#' @param use_tz We can optionally override any time zone information in the
+#'   datetime input with a time-zone designation provided here.
 #' @param locale The output locale to use for formatting the `input`
 #'   value according to the specified locale's rules. Example locale names
 #'   include `"en_US"` for English (United States) and `"fr_FR"` for French
-#'   (France). If a locale isn't provided and certain require locale- based
-#'   formatting then the `"en_US"` locale is used for this purpose.
+#'   (France). If a locale isn't provided and certain locale-based formatting
+#'   is to be done then the `"en_US"` locale will be used.
 #'
 #' @export
 fmt_dt <- function(
@@ -41,160 +37,183 @@ fmt_dt <- function(
 
     # Extract the time zone offset if it exists and strip
     # any tz information from the input
-    if (is_tz_present(input = input)) {
+    if (
+      is_tz_present(input = input) ||
+      is_tzid_present(input = input)
+    ) {
 
       tz_str <- get_tz_str(input = input)
       tz_offset <- get_tz_offset_val(input = input)
-      input <- strip_tz(input = input)
+      tz_id <- get_tzid_str(input = input)
       tz_short_specific <- get_tz_short_specific(tz_str = tz_str)
+
+      input_str <- strip_tz(input = input)
 
     } else {
 
-      tz_offset <- NA_real_
       tz_str <- NA_character_
+      tz_offset <- NA_real_
+      tz_id <- NA_character_
       tz_short_specific <- NA_character_
+      input_str <- input
     }
 
     if (date_present && time_present) {
-      input_dt <- lubridate::ymd_hms(input, tz = "UTC", quiet = TRUE)
+      input_dt <- lubridate::ymd_hms(input_str, tz = "UTC", quiet = TRUE)
     } else if (date_present && !time_present) {
-      input_dt <- lubridate::ymd(input, tz = "UTC", quiet = TRUE)
+      input_dt <- lubridate::ymd(input_str, tz = "UTC", quiet = TRUE)
     } else if (!date_present && time_present) {
-      input <- paste0("2015-01-01T", input)
-      input_dt <- lubridate::ymd_hms(input, tz = "UTC",  quiet = TRUE)
+      input_str <- paste0("2015-01-01T", input_str)
+      input_dt <- lubridate::ymd_hms(input_str, tz = "UTC",  quiet = TRUE)
     }
+  }
 
-  } else if (inherits(input, "POSIXct")) {
+  if (inherits(input, "POSIXct")) {
 
     input_dt <- input
+    input_str <- NA_character_
 
     # Extract the input time zone
     tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
     tz_offset <- NULL
+    tz_id <- NA_character_
+    tz_short_specific <- NA_character_
   }
 
-  # Prepare the output vector
-  output <- rep(NA_character_, length(input))
+  tz_info <-
+    list(
+      tz_str = tz_str,
+      tz_offset = tz_offset,
+      tz_id = tz_id,
+      tz_short_specific = tz_short_specific
+    )
 
   output_dt <-
     glue_dt(
       list(
-        G = dt_G(input, locale),
-        GG  = dt_G(input, locale),
-        GGG = dt_G(input, locale),
-        GGGG = dt_GGGG(input, locale),
-        GGGGG = dt_GGGGG(input, locale),
-        y = dt_y(input),
-        yy = dt_yy(input),
-        Y = dt_Y(input),
-        YY = dt_YY(input),
-        u = dt_u(input),
-        U = dt_U(input),
-        UU = dt_U(input),
-        UUU = dt_U(input),
-        UUUU = dt_UUUU(input, locale),
-        UUUUU = dt_UUUUU(input, locale),
-        Q = dt_Q(input),
-        QQ = dt_QQ(input),
-        QQQ = dt_QQQ(input, locale),
-        QQQQ = dt_QQQQ(input, locale),
-        QQQQQ = dt_QQQQQ(input, locale),
-        q = dt_q(input),
-        qq = dt_qq(input),
-        qqq = dt_qqq(input, locale),
-        qqqq = dt_qqqq(input, locale),
-        qqqqq = dt_qqqqq(input, locale),
-        M = dt_M(input),
-        MM = dt_MM(input),
-        MMM = dt_MMM(input, locale),
-        MMMM = dt_MMMM(input, locale),
-        MMMMM = dt_MMMMM(input, locale),
-        L = dt_L(input),
-        LL = dt_LL(input),
-        LLL = dt_LLL(input, locale),
-        LLLL = dt_LLLL(input, locale),
-        LLLLL = dt_LLLLL(input, locale),
-        w = dt_w(input),
-        ww = dt_ww(input),
-        W = dt_W(input),
-        d = dt_d(input),
-        dd = dt_dd(input),
-        D = dt_D(input),
-        DD = dt_DD(input),
-        DDD = dt_DDD(input),
-        F = dt_F(input),
-        E = dt_E(input, locale),
-        EE = dt_E(input, locale),
-        EEE = dt_E(input, locale),
-        EEEE = dt_EEEE(input, locale),
-        EEEEE = dt_EEEEE(input, locale),
-        EEEEEE = dt_EEEEEE(input, locale),
-        e = dt_e(input, locale),
-        ee = dt_ee(input, locale),
-        eee = dt_eee(input, locale),
-        eeee = dt_eeee(input, locale),
-        eeeee = dt_eeeee(input, locale),
-        eeeeee = dt_eeeeee(input, locale),
-        c = dt_c(input, locale),
-        cc = dt_cc(input, locale),
-        ccc = dt_ccc(input, locale),
-        cccc = dt_cccc(input, locale),
-        ccccc = dt_ccccc(input, locale),
-        cccccc = dt_cccccc(input, locale),
-        a = dt_a(input, locale),
-        aa = dt_a(input, locale),
-        aaa = dt_a(input, locale),
-        aaaa = dt_aaaa(input, locale),
-        aaaaa = dt_aaaaa(input, locale),
-        b = dt_b(input, locale),
-        bb = dt_b(input, locale),
-        bbb = dt_b(input, locale),
-        bbbb = dt_bbbb(input, locale),
-        bbbbb = dt_bbbbb(input, locale),
-        B = dt_B(input, locale),
-        BB = dt_B(input, locale),
-        BBB = dt_B(input, locale),
-        BBBB = dt_BBBB(input, locale),
-        BBBBB = dt_BBBBB(input, locale),
-        h = dt_h(input),
-        hh = dt_hh(input),
-        H = dt_H(input),
-        HH = dt_HH(input),
-        K = dt_K(input),
-        KK = dt_KK(input),
-        k = dt_k(input),
-        kk = dt_kk(input),
-        m = dt_m(input),
-        mm = dt_mm(input),
-        s = dt_s(input),
-        ss = dt_ss(input),
-        z = dt_z(input, locale),
-        zz = dt_z(input, locale),
-        zzz = dt_z(input, locale),
-        zzzz = dt_zzzz(input, locale),
-        Z = dt_Z(input, locale),
-        ZZ = dt_Z(input, locale),
-        ZZZ = dt_Z(input, locale),
-        ZZZZ = dt_ZZZZ(input, locale),
-        ZZZZZ = dt_ZZZZZ(input, locale),
-        O = dt_O(input, locale, tz_offset),
-        OOOO = dt_OOOO(input, locale, tz_offset),
-        v = dt_v(input, locale),
-        vvvv = dt_vvvv(input, locale),
-        V = dt_V(input, locale),
-        VV = dt_VV(input, locale),
-        VVV = dt_VVV(input, locale),
-        VVVV = dt_VVVV(input, locale),
-        X = dt_X(input, locale),
-        XX = dt_XX(input, locale),
-        XXX = dt_XXX(input, locale),
-        XXXX = dt_XXXX(input, locale),
-        XXXXX = dt_XXXXX(input, locale),
-        x = dt_x(input, locale),
-        xx = dt_xx(input, locale),
-        xxx = dt_xxx(input, locale),
-        xxxx = dt_xxxx(input, locale),
-        xxxxx = dt_xxxxx(input, locale)
+        G = dt_G(input_dt, locale),
+        GG  = dt_G(input_dt, locale),
+        GGG = dt_G(input_dt, locale),
+        GGGG = dt_GGGG(input_dt, locale),
+        GGGGG = dt_GGGGG(input_dt, locale),
+        y = dt_y(input_dt),
+        yy = dt_yy(input_dt),
+        yyy = dt_yyy(input_dt),
+        yyyy = dt_yyyy(input_dt),
+        yyyyy = dt_yyyyy(input_dt),
+        yyyyyy = dt_yyyyyy(input_dt),
+        yyyyyyy = dt_yyyyyyy(input_dt),
+        yyyyyyyy = dt_yyyyyyyy(input_dt),
+        yyyyyyyyy = dt_yyyyyyyyy(input_dt),
+        Y = dt_Y(input_dt),
+        YY = dt_YY(input_dt),
+        u = dt_u(input_dt),
+        U = dt_U(input_dt),
+        UU = dt_U(input_dt),
+        UUU = dt_U(input_dt),
+        UUUU = dt_UUUU(input_dt, locale),
+        UUUUU = dt_UUUUU(input_dt, locale),
+        Q = dt_Q(input_dt),
+        QQ = dt_QQ(input_dt),
+        QQQ = dt_QQQ(input_dt, locale),
+        QQQQ = dt_QQQQ(input_dt, locale),
+        QQQQQ = dt_QQQQQ(input_dt, locale),
+        q = dt_q(input_dt),
+        qq = dt_qq(input_dt),
+        qqq = dt_qqq(input_dt, locale),
+        qqqq = dt_qqqq(input_dt, locale),
+        qqqqq = dt_qqqqq(input_dt, locale),
+        M = dt_M(input_dt),
+        MM = dt_MM(input_dt),
+        MMM = dt_MMM(input_dt, locale),
+        MMMM = dt_MMMM(input_dt, locale),
+        MMMMM = dt_MMMMM(input_dt, locale),
+        L = dt_L(input_dt),
+        LL = dt_LL(input_dt),
+        LLL = dt_LLL(input_dt, locale),
+        LLLL = dt_LLLL(input_dt, locale),
+        LLLLL = dt_LLLLL(input_dt, locale),
+        w = dt_w(input_dt),
+        ww = dt_ww(input_dt),
+        W = dt_W(input_dt),
+        d = dt_d(input_dt),
+        dd = dt_dd(input_dt),
+        D = dt_D(input_dt),
+        DD = dt_DD(input_dt),
+        DDD = dt_DDD(input_dt),
+        F = dt_F(input_dt),
+        E = dt_E(input_dt, locale),
+        EE = dt_E(input_dt, locale),
+        EEE = dt_E(input_dt, locale),
+        EEEE = dt_EEEE(input_dt, locale),
+        EEEEE = dt_EEEEE(input_dt, locale),
+        EEEEEE = dt_EEEEEE(input_dt, locale),
+        e = dt_e(input_dt, locale),
+        ee = dt_ee(input_dt, locale),
+        eee = dt_eee(input_dt, locale),
+        eeee = dt_eeee(input_dt, locale),
+        eeeee = dt_eeeee(input_dt, locale),
+        eeeeee = dt_eeeeee(input_dt, locale),
+        c = dt_c(input_dt, locale),
+        cc = dt_cc(input_dt, locale),
+        ccc = dt_ccc(input_dt, locale),
+        cccc = dt_cccc(input_dt, locale),
+        ccccc = dt_ccccc(input_dt, locale),
+        cccccc = dt_cccccc(input_dt, locale),
+        a = dt_a(input_dt, locale),
+        aa = dt_a(input_dt, locale),
+        aaa = dt_a(input_dt, locale),
+        aaaa = dt_aaaa(input_dt, locale),
+        aaaaa = dt_aaaaa(input_dt, locale),
+        b = dt_b(input_dt, locale),
+        bb = dt_b(input_dt, locale),
+        bbb = dt_b(input_dt, locale),
+        bbbb = dt_bbbb(input_dt, locale),
+        bbbbb = dt_bbbbb(input_dt, locale),
+        B = dt_B(input_dt, locale),
+        BB = dt_B(input_dt, locale),
+        BBB = dt_B(input_dt, locale),
+        BBBB = dt_BBBB(input_dt, locale),
+        BBBBB = dt_BBBBB(input_dt, locale),
+        h = dt_h(input_dt),
+        hh = dt_hh(input_dt),
+        H = dt_H(input_dt),
+        HH = dt_HH(input_dt),
+        K = dt_K(input_dt),
+        KK = dt_KK(input_dt),
+        k = dt_k(input_dt),
+        kk = dt_kk(input_dt),
+        m = dt_m(input_dt),
+        mm = dt_mm(input_dt),
+        s = dt_s(input_dt),
+        ss = dt_ss(input_dt),
+        z = dt_z(input_dt, tz_info, locale),
+        zz = dt_z(input_dt, tz_info, locale),
+        zzz = dt_z(input_dt, tz_info, locale),
+        zzzz = dt_zzzz(input_dt, tz_info, locale),
+        Z = dt_Z(input_dt, tz_info, locale),
+        ZZ = dt_Z(input_dt, tz_info, locale),
+        ZZZ = dt_Z(input_dt, tz_info, locale),
+        ZZZZ = dt_ZZZZ(input_dt, tz_info, locale),
+        ZZZZZ = dt_ZZZZZ(input_dt, tz_info, locale),
+        O = dt_O(input_dt, tz_info, locale),
+        OOOO = dt_OOOO(input_dt, tz_info, locale),
+        v = dt_v(input_dt, tz_info, locale),
+        vvvv = dt_vvvv(input_dt, tz_info, locale),
+        V = dt_V(input_dt, tz_info, locale),
+        VV = dt_VV(input_dt, tz_info, locale),
+        VVV = dt_VVV(input_dt, tz_info, locale),
+        VVVV = dt_VVVV(input_dt, tz_info, locale),
+        X = dt_X(input_dt, tz_info, locale),
+        XX = dt_XX(input_dt, tz_info, locale),
+        XXX = dt_XXX(input_dt, tz_info, locale),
+        XXXX = dt_XXXX(input_dt, tz_info, locale),
+        XXXXX = dt_XXXXX(input_dt, tz_info, locale),
+        x = dt_x(input_dt, tz_info, locale),
+        xx = dt_xx(input_dt, tz_info, locale),
+        xxx = dt_xxx(input_dt, tz_info, locale),
+        xxxx = dt_xxxx(input_dt, tz_info, locale),
+        xxxxx = dt_xxxxx(input_dt, tz_info, locale)
       ),
       pattern_list$dt_format
     )
