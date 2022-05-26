@@ -1,4 +1,4 @@
 library(testthat)
-library(i18nExtras)
+library(bigD)
 
-test_check("i18nExtras")
+test_check("bigD")
