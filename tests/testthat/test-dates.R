@@ -51,9 +51,17 @@ test_that("ISO dates can be parsed from a string and formatted", {
   fmt_dt(input = iso_date_1, dt_format = "dd 'Day' dd 'Month' MM (yy)") %>%
     expect_equal("04 'Day' 04 'Month' 07 (18)")
 
-  #yyyy-MM-dd'T'HH:mm:ss*SSSZZZZ	2018-08-20'T'13:20:10*633+0000
-  #yyyy MMM dd HH:mm:ss.SSS zzz	2017 Mar 03 05:12:41.211 PDT
+
+  fmt_dt(input = iso_date_1, dt_format = "yyyy-MM-dd'T'HH:mm:ss") %>%
+    expect_equal("2018-07-04'T'00:00:00")
+
+  fmt_dt(input = iso_date_1, dt_format = "MMM dd HH:mm:ss ZZZZ yyyy") %>%
+    expect_equal("Jul 04 00:00:00 ZZZZ 2018")
+
   #MMM dd HH:mm:ss ZZZZ yyyy	Jan 21 18:20:11 +0000 2017
+
+
+  #yyyy MMM dd HH:mm:ss.SSS zzz	2017 Mar 03 05:12:41.211 PDT
   #dd/MMM/yyyy:HH:mm:ss ZZZZ	19/Apr/2017:06:36:15 -0700
   #MMM dd, yyyy hh:mm:ss a	Dec 2, 2017 2:39:58 AM
   #MMM dd yyyy HH:mm:ss	Jun 09 2018 15:28:14
@@ -61,8 +69,7 @@ test_that("ISO dates can be parsed from a string and formatted", {
   #MMM dd HH:mm:ss ZZZZ	Sep 28 19:00:00 +0000
   #MMM dd HH:mm:ss	Mar 16 08:12:04
   #yyyy-MM-dd'T'HH:mm:ssZZZZ	2017-10-14T22:11:20+0000
-  #yyyy-MM-dd'T'HH:mm:ss.SSS'Z'	2017-07-01T14:59:55.711'+0000'
-  #2017-07-01T14:59:55.711Z
+  #yyyy-MM-dd'T'HH:mm:ss.SSS'Z'	2017-07-01T14:59:55.711'+0000' 2017-07-01T14:59:55.711Z
   #yyyy-MM-dd HH:mm:ss ZZZZ	2017-08-19 12:17:55 -0400
   #yyyy-MM-dd HH:mm:ssZZZZ	2017-08-19 12:17:55-0400
   #yyyy-MM-dd HH:mm:ss,SSS	2017-06-26 02:31:29,573
