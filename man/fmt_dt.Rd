@@ -2,34 +2,29 @@
 % Please edit documentation in R/fmt_dt.R
 \name{fmt_dt}
 \alias{fmt_dt}
-\title{Format a datetime using a SDF formatting string}
+\title{Format a datetime with a formatting string}
 \usage{
 fmt_dt(input, dt_format = NULL, use_tz = NULL, locale = NULL)
 }
 \arguments{
-\item{input}{The input date-time. The appropriate representation should use
-the following construction outlined in the ISO 8601:2004 standard:
-\code{YYYY-MM-DDThh:mm:ss.sTZD} although some allowances made here to ease this
-restrictiveness (for example, the literal \code{T} separating the date and time
-components is optional). Fractional seconds are optional as is the
-time-zone designation (TZD).}
+\item{input}{The input datetime value. The appropriate representation should
+use the following construction outlined in the ISO 8601:2004 standard:
+\verb{YYYY-MM-DDThh:mm:ss.s<TZD>} although some allowances made here to ease
+this restrictiveness (for example, the literal \code{T} separating the date and
+time components is optional). Seconds, fractional seconds, and the
+time-zone designation are all optional.}
+
+\item{dt_format}{The datetime formatting string.}
+
+\item{use_tz}{We can optionally override any time zone information in the
+datetime input with a time-zone designation provided here.}
 
 \item{locale}{The output locale to use for formatting the \code{input}
 value according to the specified locale's rules. Example locale names
 include \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
-(France). If a locale isn't provided and certain require locale- based
-formatting then the \code{"en_US"} locale is used for this purpose.}
-
-\item{date_format}{a date format specification using the rules of the
-SimpleDateFormat.}
-
-\item{time_format}{a time format specification using the rules of the
-SimpleDateFormat.}
-
-\item{combination}{a combining pattern for the localized date and time
-components. If this is not provided, then the combining pattern will come
-from the specified locale's \code{"full"} designation.}
+(France). If a locale isn't provided and certain locale-based formatting
+is to be done then the \code{"en_US"} locale will be used.}
 }
 \description{
-Format a datetime using a SDF formatting string
+Format a datetime with a formatting string
 }
