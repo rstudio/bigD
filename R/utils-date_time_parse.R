@@ -54,6 +54,19 @@ is_tz_present <- function(input) {
   )
 }
 
+is_tzid_present <- function(input) {
+  grepl("^.*\\([^']*\\)$", input)
+}
+
+get_tzid_str <- function(input) {
+
+  if (!is_tzid_present(input = input)) {
+    return(NA_character_)
+  }
+
+  grepl("^.*\\([^']*\\)$", input)
+}
+
 get_tz_str <- function(input) {
 
   if (!is_tz_present(input = input)) {
@@ -74,6 +87,11 @@ get_tz_str <- function(input) {
     out <- unlist(strsplit(input, split = "-", fixed = TRUE))
     out <- out[length(out)]
     out <- paste0("-", out)
+  }
+
+  # If there is an attached tzid string then remove it
+  if (is_tzid_present(input = out)) {
+    out <- gsub("\\s*\\([^']*\\)$", "", out)
   }
 
   out
@@ -108,7 +126,11 @@ get_tz_offset_val <- function(input) {
 strip_tz <- function(input) {
 
   tz_str <- get_tz_str(input = input)
-  gsub(tz_str, "", input, fixed = TRUE)
+
+  out <- gsub(tz_str, "", input, fixed = TRUE)
+  out <- gsub("\\s*\\([^']*\\)$", "", out)
+
+  out
 }
 
 is_iana_present <- function(input) {
