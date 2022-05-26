@@ -1,49 +1,113 @@
 
-# Era // abbreviated (G..GGG)
+zero_pad_to_width <- function(value, width) {
+  formatC(value, width = width, flag = "0", format = "d")
+}
+
+format_tz_offset_min_sec <- function(
+    tz_offset,
+    use_colon = TRUE,
+    optional_min = TRUE,
+    use_z = FALSE,
+    hours_width = 2,
+    prepend_with = NULL
+) {
+
+  if (tz_offset == 0 && use_z) {
+    return("Z")
+  }
+
+  hours_val <- zero_pad_to_width(abs(trunc(tz_offset)), hours_width)
+  minutes_val <- zero_pad_to_width(abs((tz_offset - trunc(tz_offset))) * 60, 2)
+
+  paste0(
+    if (!is.null(prepend_with)) prepend_with,
+    ifelse(tz_offset >= 0, "+", "-"),
+    hours_val,
+    if ((optional_min && minutes_val == "00")) {
+      ""
+    } else {
+      paste0(ifelse(use_colon, ":", ""), minutes_val)
+    }
+  )
+}
+
+# TZ // ISO 8601 basic format ("-08"), optional minutes,
+# doesn't use "Z"
+dt_x <- function(input, tz_info, locale = NULL) {
+  "x"
+}
+
+# Era // abbreviated (G..GGG) (AD, variant: CE)
 dt_G <- function(input, locale = NULL) {
   "G"
 }
 
-# Era // wide
+# Era // wide (Anno Domini, variant: Common Era)
 dt_GGGG <- function(input, locale = NULL) {
   "GGGG"
 }
 
-# Era // narrow
+# Era // narrow (A)
 dt_GGGGG <- function(input, locale = NULL) {
   "GGGGG"
 }
 
-# Full year
+# Calendar year
 dt_y <- function(input) {
   as.character(lubridate::year(input))
 }
 
-# Abbreviated year (2 digit)
+# Abbreviated year (final 2 digits)
 dt_yy <- function(input) {
-  substring(as.character(lubridate::year(input)), 3, 4)
+  year_str <- as.character(lubridate::year(input))
+  substr(year_str, nchar(year_str) - 1, nchar(year_str))
 }
 
 # Full year with minimum zero padding (yyy -> 2, yyyy -> 3, etc.)
 dt_yyy_plus <- function(input, length) {
-  "yyy_plus"
+  zero_pad_to_width(
+    value = lubridate::year(input),
+    width = length
+  )
 }
+
+# Calendar year (min 3-9 digits wide)
+dt_yyy <- function(input) dt_yyy_plus(input = input, length = 3)
+dt_yyyy <- function(input) dt_yyy_plus(input = input, length = 4)
+dt_yyyyy <- function(input) dt_yyy_plus(input = input, length = 5)
+dt_yyyyyy <- function(input) dt_yyy_plus(input = input, length = 6)
+dt_yyyyyyy <- function(input) dt_yyy_plus(input = input, length = 7)
+dt_yyyyyyyy <- function(input) dt_yyy_plus(input = input, length = 8)
+dt_yyyyyyyyy <- function(input) dt_yyy_plus(input = input, length = 9)
 
 # Full year (week in year calendar)
 dt_Y <- function(input) {
-  "Y"
+  as.character(lubridate::isoyear(input))
 }
 
 # Abbreviated year (2 digit) (week in year calendar)
 dt_YY <- function(input) {
-  "YY"
+  year_str <- as.character(lubridate::isoyear(input))
+  substr(year_str, nchar(year_str) - 1, nchar(year_str))
 }
 
 # Full year with minimum zero padding (yyy -> 2, yyyy -> 3, etc.)
 # (week in year calendar)
 dt_YYY_plus <- function(input, length) {
-  "YYY_plus"
+  zero_pad_to_width(
+    value = lubridate::isoyear(input),
+    width = length
+  )
 }
+
+# Calendar year (week in year calendar, min 3-9 digits wide)
+dt_YYY <- function(input) dt_YYY_plus(input = input, length = 3)
+dt_YYYY <- function(input) dt_YYY_plus(input = input, length = 4)
+dt_YYYYY <- function(input) dt_YYY_plus(input = input, length = 5)
+dt_YYYYYY <- function(input) dt_YYY_plus(input = input, length = 6)
+dt_YYYYYYY <- function(input) dt_YYY_plus(input = input, length = 7)
+dt_YYYYYYYY <- function(input) dt_YYY_plus(input = input, length = 8)
+dt_YYYYYYYYY <- function(input) dt_YYY_plus(input = input, length = 9)
 
 # Extended year (numeric)
 dt_u <- function(input) {
@@ -120,28 +184,26 @@ dt_qqqqq <- function(input, locale = NULL) {
   "qqqqq"
 }
 
-# Month (format), numeric form (1 digit) (e.g. "9")
+# Month (format), numeric form (1 digit) ("9")
 dt_M <- function(input) {
   as.character(lubridate::month(input))
 }
 
-# Month (format), numeric form (2 digit, zero padded) (e.g. "09")
+# Month (format), numeric form (2 digit, zero padded) ("09")
 dt_MM <- function(input) {
-  out <- lubridate::month(input)
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  month_val <- lubridate::month(input)
+  zero_pad_to_width(value = month_val, width = 2)
 }
 
-# Month (format), abbreviated (e.g. "Sep")
+# Month (format), abbreviated ("Sep")
 dt_MMM <- function(input, locale = NULL) {
-
   i18n::cldr_dates(
     locale = locale,
     element = i18n::dates_elements$months_format_abbrev
   )[[lubridate::month(input)]]
 }
 
-# Month (format), full (e.g. "September")
+# Month (format), full ("September")
 dt_MMMM <- function(input, locale = NULL) {
   i18n::cldr_dates(
     locale = locale,
@@ -149,9 +211,8 @@ dt_MMMM <- function(input, locale = NULL) {
   )[[lubridate::month(input)]]
 }
 
-# Month (format), narrow (e.g. "S")
+# Month (format), narrow ("S")
 dt_MMMMM <- function(input, locale = NULL) {
-
   substr(
     i18n::cldr_dates(
       locale = locale,
@@ -161,27 +222,27 @@ dt_MMMMM <- function(input, locale = NULL) {
   )
 }
 
-# Month (standalone), numeric form (1 digit) (e.g. "9")
+# Month (standalone), numeric form (1 digit) ("9")
 dt_L <- function(input) {
   dt_M(input)
 }
 
-# Month (standalone), numeric form (2 digit, zero padded) (e.g. "09")
+# Month (standalone), numeric form (2 digit, zero padded) ("09")
 dt_LL <- function(input) {
   dt_MM(input)
 }
 
-# Month (standalone), abbreviated (e.g. "Sep")
+# Month (standalone), abbreviated ("Sep")
 dt_LLL <- function(input, locale = NULL) {
   "LLL"
 }
 
-# Month (standalone), full (e.g. "September")
+# Month (standalone), full ("September")
 dt_LLLL <- function(input, locale = NULL) {
   "LLLL"
 }
 
-# Month (standalone), narrow (e.g. "S")
+# Month (standalone), narrow ("S")
 dt_LLLLL <- function(input, locale = NULL) {
   "LLLLL"
 }
@@ -203,40 +264,27 @@ dt_W <- function(input) {
 
 # Day of month, numeric, 1-2 digits
 dt_d <- function(input) {
-  as.character(lubridate::day(input))
+  zero_pad_to_width(lubridate::day(input), 1)
 }
 
 # Day of month, numeric, 2 digits zero padded
 dt_dd <- function(input) {
-  out <- lubridate::day(input)
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(lubridate::day(input), 2)
 }
 
 # Day of year, numeric, 1-3 digits
 dt_D <- function(input) {
-
-  as.character(lubridate::yday(input))
+  zero_pad_to_width(lubridate::yday(input), 1)
 }
 
 # Day of year, numeric, 2-3 digits zero-padded
 dt_DD <- function(input) {
-
-  out <- lubridate::yday(input)
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(lubridate::yday(input), 2)
 }
 
 # Day of year, numeric, 3 digits zero-padded
 dt_DDD <- function(input) {
-
-  out <- lubridate::yday(input)
-  if (out < 10) {
-    out <- paste0("00", out)
-  } else if (out < 100) {
-    out <- paste0("0", out)
-  }
-  as.character(out)
+  zero_pad_to_width(lubridate::yday(input), 3)
 }
 
 # Day of week in month, numeric, 1 digit
@@ -249,7 +297,7 @@ dt_g_plus <- function(input, length) {
   "g_plus"
 }
 
-# Day of Week Name // abbreviated (E..EEE) (e.g., "Tue")
+# Day of Week Name // abbreviated (E..EEE) ("Tue")
 dt_E <- function(input, locale = NULL) {
 
   # FIXME: should be abbreviated and not short (provides "Tu")
@@ -259,27 +307,24 @@ dt_E <- function(input, locale = NULL) {
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
-# Day of Week Name // wide (e.g., "Tuesday")
+# Day of Week Name // wide ("Tuesday")
 dt_EEEE <- function(input, locale = NULL) {
-
   i18n::cldr_dates(
     locale = locale,
     element = dates_elements$days_standalone_wide
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
-# Day of Week Name // narrow (e.g., "T")
+# Day of Week Name // narrow ("T")
 dt_EEEEE <- function(input, locale = NULL) {
-
   i18n::cldr_dates(
     locale = locale,
     element = dates_elements$days_standalone_narrow
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
-# Day of Week Name // short (e.g., "Tu")
+# Day of Week Name // short ("Tu")
 dt_EEEEEE <- function(input, locale = NULL) {
-
   i18n::cldr_dates(
     locale = locale,
     element = dates_elements$days_standalone_short
@@ -296,22 +341,22 @@ dt_ee <- function(input, locale = NULL) {
   "ee"
 }
 
-# Local Day of Week Name/Number // abbreviated (e.g., "Tue")
+# Local Day of Week Name/Number // abbreviated ("Tue")
 dt_eee <- function(input, locale = NULL) {
   dt_E(input, locale)
 }
 
-# Local Day of Week Name/Number // wide (e.g., "Tuesday")
+# Local Day of Week Name/Number // wide ("Tuesday")
 dt_eeee <- function(input, locale = NULL) {
   dt_EEEE(input, locale)
 }
 
-# Local Day of Week Name/Number // narrow (e.g., "T")
+# Local Day of Week Name/Number // narrow ("T")
 dt_eeeee <- function(input, locale = NULL) {
   dt_EEEEE(input, locale)
 }
 
-# Local Day of Week Name/Number // short (e.g., "Tu")
+# Local Day of Week Name/Number // short ("Tu")
 dt_eeeeee <- function(input, locale = NULL) {
   dt_EEEEEE(input, locale)
 }
@@ -326,29 +371,28 @@ dt_cc <- function(input, locale = NULL) {
   dt_ee(input_locale)
 }
 
-# Standalone Local Day of Week Name/Number // abbreviated (e.g., "Tue")
+# Standalone Local Day of Week Name/Number // abbreviated ("Tue")
 dt_ccc <- function(input, locale = NULL) {
   "ccc"
 }
 
-# Standalone Local Day of Week Name/Number // wide (e.g., "Tuesday")
+# Standalone Local Day of Week Name/Number // wide ("Tuesday")
 dt_cccc <- function(input, locale = NULL) {
   "cccc"
 }
 
-# Standalone Local Day of Week Name/Number // narrow (e.g., "T")
+# Standalone Local Day of Week Name/Number // narrow ("T")
 dt_ccccc <- function(input, locale = NULL) {
   "ccccc"
 }
 
-# Standalone Local Day of Week Name/Number // short (e.g., "Tu")
+# Standalone Local Day of Week Name/Number // short ("Tu")
 dt_cccccc <- function(input, locale = NULL) {
   "cccccc"
 }
 
 # Period: am, pm // abbreviated (a..aaa)
 dt_a <- function(input, locale = NULL) {
-
   i18n::cldr_dates(
     locale = locale,
     element = dates_elements$dayperiods_format_abbrev
@@ -357,7 +401,6 @@ dt_a <- function(input, locale = NULL) {
 
 # Period: am, pm // wide
 dt_aaaa <- function(input, locale = NULL) {
-
   i18n::cldr_dates(
     locale = locale,
     element = dates_elements$dayperiods_format_wide
@@ -366,7 +409,6 @@ dt_aaaa <- function(input, locale = NULL) {
 
 # Period: am, pm // narrow
 dt_aaaaa <- function(input, locale = NULL) {
-
   i18n::cldr_dates(
     locale = locale,
     element = dates_elements$dayperiods_format_narrow
@@ -405,37 +447,26 @@ dt_BBBBB <- function(input, locale = NULL) {
 
 # Hour [1-12] // numeric, 1-2 digits
 dt_h <- function(input) {
-  out <- lubridate::hour(input)
-  if (out > 12) out <- out - 12
-  out <- out + 1
-  as.character(out)
+  zero_pad_to_width(lubridate::hour(input), 1)
 }
 
 # Hour [1-12] // numeric, 2 digits, zero padded
 dt_hh <- function(input) {
-
-  out <- lubridate::hour(input)
-  if (out > 12) out <- out - 12
-  out <- out + 1
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(lubridate::hour(input), 2)
 }
 
 # Hour [0-23] // numeric, 1-2 digits
 dt_H <- function(input) {
-  as.character(lubridate::hour(input))
+  zero_pad_to_width(lubridate::hour(input), 1)
 }
 
 # Hour [0-23] // numeric, 2 digits, zero padded
 dt_HH <- function(input) {
-  out <- lubridate::hour(input)
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(lubridate::hour(input), 2)
 }
 
 # Hour [0-11] // numeric, 1-2 digits
 dt_K <- function(input) {
-
   out <- lubridate::hour(input)
   if (out > 12) out <- out - 12
   as.character(out)
@@ -443,7 +474,6 @@ dt_K <- function(input) {
 
 # Hour [0-11] // numeric, 2 digits, zero padded
 dt_KK <- function(input) {
-
   out <- lubridate::hour(input)
   if (out > 12) out <- out - 12
   if (out < 10) out <- paste0("0", out)
@@ -452,13 +482,11 @@ dt_KK <- function(input) {
 
 # Hour [1-24] // numeric, 1-2 digits
 dt_k <- function(input) {
-
   as.character(lubridate::hour(input) + 1L)
 }
 
 # Hour [1-24] // numeric, 2 digits, zero padded
 dt_kk <- function(input) {
-
   out <- lubridate::hour(input) + 1L
   if (out < 10) out <- paste0("0", out)
   as.character(out)
@@ -536,30 +564,22 @@ dt_CCCCCC <- function(input) {
 
 # Minute // numeric, 1-2 digits
 dt_m <- function(input) {
-
-  as.character(lubridate::minute(input))
+  zero_pad_to_width(lubridate::minute(input), 1)
 }
 
 # Minute // numeric, 2 digits, zero padded
 dt_mm <- function(input) {
-
-  out <- lubridate::minute(input)
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(lubridate::minute(input), 2)
 }
 
 # Second // numeric, 1-2 digits
 dt_s <- function(input) {
-
-  as.character(trunc(lubridate::second(input)))
+  zero_pad_to_width(trunc(lubridate::second(input)), 1)
 }
 
 # Second // numeric, 2 digits, zero padded
 dt_ss <- function(input) {
-
-  out <- lubridate::second(input)
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(trunc(lubridate::second(input)), 2)
 }
 
 # Fractional Second
@@ -572,140 +592,302 @@ dt_A_plus <- function(input, length) {
   "A_plus"
 }
 
-# TZ // short specific non-location format (e.g., "PDT") (z..zzz)
+# TZ // short specific non-location format ("PDT") (z..zzz)
 # Fallback to "O"
-dt_z <- function(
-    input,
-    locale = NULL,
-    tz_short_specific = NULL,
-    tz_offset = NULL
-) {
+dt_z <- function(input, tz_info, locale = NULL) {
 
-  if (is.null(tz_short_specific) & !is.null(tz_offset)) {
+  tz_short_specific <- tz_info$tz_short_specific
+  tz_offset <- tz_info$tz_offset
+
+  if (is.na(tz_short_specific) & !is.na(tz_offset)) {
     out <-
-      dt_O(input = input, locale = locale, tz_offset = tz_offset)
+      dt_O(
+        input = input,
+        tz_info = tz_info,
+        locale = locale
+      )
+    return(out)
   }
 
   lubridate::tz(input)
 }
 
-# TZ // long specific non-location format (e.g., "Pacific Daylight Time")
+# TZ // long specific non-location format ("Pacific Daylight Time") (Z..ZZZ)
 # Fallback to "OOOO"
-dt_zzzz <- function(input, locale = NULL) {
+dt_zzzz <- function(input, tz_info, locale = NULL) {
   "zzzz"
 }
 
-# TZ // short specific non-location format (e.g., "-0800") (Z..ZZZ)
+# TZ // short specific non-location format ("-0800") (Z..ZZZ)
 # Equivalent to "xxxx"
-dt_Z <- function(input, locale = NULL) {
-  "Z"
+dt_Z <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = FALSE,
+    optional_min = FALSE,
+    use_z = FALSE
+  )
 }
 
-# TZ // long localized GMT format (e.g., "GMT-8:00")
+# TZ // long localized GMT format ("GMT-8:00")
 # Equivalent to "OOOO"
-dt_ZZZZ <- function(input, locale = NULL) {
-  "ZZZZ"
+dt_ZZZZ <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = FALSE,
+    use_z = FALSE,
+    hours_width = 1,
+    prepend_with = "GMT"
+  )
 }
 
-# TZ // ISO8601 extended format (e.g., "-08:00")
+# TZ // ISO8601 extended format ("-08:00")
 # Equivalent to "XXXXX"
-dt_ZZZZZ <- function(input, locale = NULL) {
-  "ZZZZZ"
+dt_ZZZZZ <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = FALSE,
+    use_z = TRUE
+  )
 }
 
-# TZ // short localized GMT format (e.g., "GMT-8")
-dt_O <- function(input, locale = NULL, tz_offset = NULL) {
-  "O"
+# TZ // short localized GMT format ("GMT-8")
+dt_O <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = TRUE,
+    use_z = FALSE,
+    hours_width = 1,
+    prepend_with = "GMT"
+  )
 }
 
-# TZ // long localized GMT format (e.g., "GMT-8:00")
-dt_OOOO <- function(input, locale = NULL, tz_offset = NULL) {
-  "OOOO"
+# TZ // long localized GMT format ("GMT-08:00")
+dt_OOOO <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = FALSE,
+    use_z = FALSE,
+    hours_width = 2,
+    prepend_with = "GMT"
+  )
 }
 
-# TZ // short generic non-location format (e.g., "PT")
-dt_v <- function(input, locale = NULL) {
+# TZ // short generic non-location format ("PT")
+#
+# Where that is unavailable, falls back to the generic location
+# format ("VVVV"), then the short localized GMT format as the
+# final fallback.
+dt_v <- function(input, tz_info, locale = NULL) {
   "v"
 }
 
-# TZ // long generic non-location format (e.g., "Pacific Time")
-dt_vvvv <- function(input, locale = NULL) {
+# TZ // long generic non-location format ("Pacific Time")
+#
+# Where that is unavailable, falls back to generic location
+# format ("VVVV").
+dt_vvvv <- function(input, tz_info, locale = NULL) {
   "vvvv"
 }
 
-# TZ // short time zone ID (e.g., "uslax")
-dt_V <- function(input, locale = NULL) {
+# TZ // short time zone ID ("uslax")
+dt_V <- function(input, tz_info, locale = NULL) {
   "V"
 }
 
-# TZ // long time zone ID (e.g., "America/Los_Angeles")
-dt_VV <- function(input, locale = NULL) {
+# TZ // long time zone ID ("America/Los_Angeles")
+dt_VV <- function(input, tz_info, locale = NULL) {
   "VV"
 }
 
-# TZ // long time zone ID (e.g., "America/Los_Angeles")
-dt_VVV <- function(input, locale = NULL) {
+# TZ // exemplar city locaation ("Los_Angeles")
+#
+# The exemplar city (location) for the time zone. Where that is
+# unavailable, the localized exemplar city name for the special
+# zone `Etc/Unknown` is used as the fallback (for example, "Unknown City").
+dt_VVV <- function(input, tz_info, locale = NULL) {
   "VVV"
 }
 
-# TZ // generic location format (e.g., "Los Angeles Time")
-dt_VVVV <- function(input, locale = NULL) {
+# TZ // generic location format ("Los Angeles Time")
+#
+# Where that is unavailable, falls back to the long localized
+# GMT format ("OOOO"; Note: Fallback is only necessary with a
+# GMT-style Time Zone ID, like Etc/GMT-830.)
+# This is especially useful when presenting possible timezone
+# choices for user selection, since the naming is more uniform
+# than the "v" format.
+dt_VVVV <- function(input, tz_info, locale = NULL) {
   "VVVV"
 }
 
-# TZ // ISO 8601 basic format (e.g., "-08"), optional minutes, uses "Z"
-dt_X <- function(input, locale = NULL) {
-  "X"
+# TZ // ISO 8601 basic format ("-08"), optional minutes, uses "Z"
+dt_X <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = FALSE,
+    optional_min = TRUE,
+    use_z = TRUE
+  )
 }
 
-# TZ // ISO 8601 basic format (e.g., "-0800"), uses minutes, uses "Z"
-dt_XX <- function(input, locale = NULL) {
-  "XX"
+# TZ // ISO 8601 basic format ("-0800"), uses minutes, uses "Z"
+dt_XX <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = FALSE,
+    optional_min = FALSE,
+    use_z = TRUE
+  )
 }
 
-# TZ // ISO 8601 extended format (e.g., "-08:00"), uses minutes, uses "Z"
-dt_XXX <- function(input, locale = NULL) {
-  "XXX"
+# TZ // ISO 8601 extended format ("-08:00"), uses minutes, uses "Z"
+dt_XXX <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = FALSE,
+    use_z = TRUE
+  )
 }
 
-# TZ // ISO 8601 basic format (e.g., "-0800"), uses minutes, optional seconds,
+# TZ // ISO 8601 basic format ("-0800"), uses minutes, optional seconds,
 # uses "Z"
-dt_XXXX <- function(input, locale = NULL) {
-  "XXXX"
+dt_XXXX <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = FALSE,
+    optional_min = FALSE,
+    use_z = TRUE
+  )
 }
 
-# TZ // ISO 8601 extended format (e.g., "-08:00"), uses minutes, optional seconds,
+# TZ // ISO 8601 extended format ("-08:00"), uses minutes, optional seconds,
 # uses "Z"
-dt_XXXXX <- function(input, locale = NULL) {
-  "XXXXX"
+dt_XXXXX <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = FALSE,
+    use_z = TRUE
+  )
 }
 
-# TZ // ISO 8601 basic format (e.g., "-08"), optional minutes,
+# TZ // ISO 8601 basic format ("-08"), optional minutes,
 # doesn't use "Z"
-dt_x <- function(input, locale = NULL) {
-  "x"
+dt_x <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = FALSE,
+    optional_min = TRUE,
+    use_z = FALSE
+  )
 }
 
-# TZ // ISO 8601 basic format (e.g., "-0800"), uses minutes,
+# TZ // ISO 8601 basic format ("-0800"), uses minutes,
 # doesn't use "Z"
-dt_xx <- function(input, locale = NULL) {
-  "xx"
+dt_xx <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = FALSE,
+    optional_min = FALSE,
+    use_z = FALSE
+  )
 }
 
-# TZ // ISO 8601 extended format (e.g., "-08:00"), uses minutes,
+# TZ // ISO 8601 extended format ("-08:00"), uses minutes,
 # doesn't use "Z"
-dt_xxx <- function(input, locale = NULL) {
-  "xxx"
+dt_xxx <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = FALSE,
+    use_z = FALSE
+  )
 }
 
-# TZ // ISO 8601 basic format (e.g., "-0800"), uses minutes, optional seconds,
+# TZ // ISO 8601 basic format ("-0800"), uses minutes, optional seconds,
 # doesn't use "Z"
-dt_xxxx <- function(input, locale = NULL) {
-  "xxxx"
+dt_xxxx <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = FALSE,
+    optional_min = FALSE,
+    use_z = FALSE
+  )
 }
 
-# TZ // ISO 8601 extended format (e.g., "-08:00"), uses minutes, optional seconds,
+# TZ // ISO 8601 extended format ("-08:00"), uses minutes, optional seconds,
 # doesn't use "Z"
-dt_xxxxx <- function(input, locale = NULL) {
-  "xxxxx"
+dt_xxxxx <- function(input, tz_info, locale = NULL) {
+
+  tz_offset <- tz_info$tz_offset
+  if (is.na(tz_offset)) tz_offset <- 0
+
+  format_tz_offset_min_sec(
+    tz_offset = tz_offset,
+    use_colon = TRUE,
+    optional_min = FALSE,
+    use_z = FALSE
+  )
 }
