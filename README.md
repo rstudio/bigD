@@ -1,134 +1,83 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# i18n
+# bigD
 
-The goal of i18n is to easily get localized variants of dates, times,
-currencies, and other stuff that can be localized with some degree of
-precision.
+The goal of **bigD** is to flexibly format dates and times to a given
+locale.
 
-## Some Examples
-
-Here is a date-time string that’s all ISO 8601:2004:
-`"2018-07-24T14:44:22.234343-0800(America/Vancouver)"`. Let’s take that
-as our input going forward.
+Given the ISO-8601 date string `"2018-07-04"` we can use formatting
+strings to precisely get the date in the form we need.
 
 ``` r
-input <- "2018-07-24T14:44:22.234343-0800(America/Vancouver)"
+fmt_dt(input = "2018-07-04", dt_format = "y/M/d")
 ```
 
-There are standardized date forms across all locales. They come in 4
-flavors: `short`, `medium`, `long`, or `full`. Let’s get that date-time
-into each of these forms, with random locales:
+    2018/7/4
 
 ``` r
-input %>%
-  fmt_date_time_standard(
-    locale = "en",
-    width = "short"
-  )
-#> [1] "7/24/2018 A, 2:44 PM"
+fmt_dt(input = "2018-07-04", dt_format = "MMMM d, y.")
 ```
+
+    July 4, 2018.
+
+With the `locale` option, we can localize the date.
 
 ``` r
-input %>%
-  fmt_date_time_standard(
-    locale = "de",
-    width = "medium"
-  )
-#> [1] "24.07.2018 n. Chr., 14:44:22"
+fmt_dt(input = "2018-07-04", dt_format = "d. MMMM y (EEEE).", locale = "de")
 ```
+
+    4. Juli 2018 (Mittwoch).
+
+With a datetime string, we have more possibilities.
 
 ``` r
-input %>%
-  fmt_date_time_standard(
-    locale = "fr_BE",
-    width = "long"
-  )
-#> [1] "24 juillet 2018 ap. J.-C. à 14:44:22 PDT"
+fmt_dt(
+  input = "2018-07-24T14:44:22.234343-0800",
+  dt_format = "MMM dd HH:mm:ss ZZZZ yyyy",
+  locale = "fr"
+)
 ```
+
+    juil. 24 14:44:22 GMT-8:00 2018
 
 ``` r
-input %>%
-  fmt_date_time_standard(
-    locale = "es_MX",
-    width = "full"
-  )
-#> [1] "lunes, 24 de julio de 2018 d. C., 14:44:22 Pacific Daylight Time"
+fmt_dt(
+  input = "2018-07-24T14:44:22.234343-0800",
+  dt_format = "MMMM dd HH:mm:ss 'yy XX",
+  locale = "fi"
+)
 ```
 
-We can also apply a smattering of different simple date format presets
-to this input. The `format_w_pattern()` function is useful for this. We
-can choose to keep the date portion, the time portion, or both. The
-`fdf()` helper function is useful for choosing a preset date format from
-the flexible date format (FDF).
+    heinäkuuta 24 14:44:22 '18 -0800
+
+### Installation
+
+Want to try this out? The **bigD** package can be installed from CRAN:
 
 ``` r
-input %>%
-  fmt_date_time(
-    date_format = fdf("yMd"),
-    time_format = NULL,
-    locale = "es")
-#> [1] "24/7/2018"
+install.packages("bigD")
 ```
 
-Time components have presets under the flexible time format (FTF), which
-is split into 12- and 24-hour variants. There are `ftf_12()` and
-`ftf_24()` helper functions enable selections of presets within those.
+Also, you can install the development version of **bigD** from
+**GitHub**:
 
 ``` r
-input %>%
-  fmt_date_time(
-    date_format = fdf("yMd"),
-    time_format = ftf_24("EHms"),
-    locale = "es_MX")
-#> [1] "24/7/2018, lun. 14:44:22"
+devtools::install_github("rich-iannone/bigD")
 ```
 
-It’s hard to know what the format names are for `fdf()`, `ftf_12()`, and
-`ftf_24()`, so, there are information functions that provide the names
-and yield previews. These info functions are:
+If you encounter a bug, have usage questions, or want to share ideas to
+make this package better, feel free to file an
+[issue](https://github.com/rich-iannone/bigD/issues).
 
-  - `info_fdf_types()`
-  - `info_ftf_12_types()`
-  - `info_ftf_24_types()`
+##### Code of Conduct
 
-Here, we can specify a combining pattern by using a locale specific
-version with the `date_time_combine()` helper function. In this case, we
-select the `"full"` combining pattern for the `"de_AT"` locale.
+Please note that the `rich-iannone/bigD` project is released with a
+[contributor code of
+conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By
+participating in this project you agree to abide by its terms.
 
-``` r
-input %>%
-  fmt_date_time(
-    date_format = fdf("yMd"),
-    time_format = ftf_24("Hms"),
-    combination = date_time_combine("full"),
-    locale = "de_AT")
-#> [1] "24.7.2018 um 14:44:22"
-```
+##### 🏛️ Governance
 
-There is indeed an info function available to help determine which
-combining pattern to use, it’s `info_date_time_combine()`.
-
-Here is a comparison table of localized dates for all the presets
-available in the flexible date format:
-
-<img src="man/figures/i18n_tbl.png">
-
-## Installation
-
-You can install **i18n** from GitHub with:
-
-``` r
-remotes::install_github("rich-iannone/i18n")
-```
-
-## Code of Conduct
-
-Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
-
-## License
-
-MIT © Richard Iannone
+This project is maintained by [Rich
+Iannone](https://github.com/rich-iannone).

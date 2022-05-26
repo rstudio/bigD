@@ -14,113 +14,89 @@ knitr::opts_chunk$set(
 ```
 
 ```{r load_packages, include=FALSE}
-library(i18nExtras)
+library(bigD)
 ```
 
 
-# i18nExtras
+# bigD
 
-The goal of i18nExtras is to easily get localized variants of dates, times, currencies, and other stuff that can be localized with some degree of precision.
+The goal of **bigD** is to flexibly format dates and times to a given locale.
 
-## Some Examples
+Given the ISO-8601 date string `"2018-07-04"` we can use formatting strings to precisely get the date in the form we need.
 
-Here is a date-time string that's all ISO 8601:2004: `"2018-07-24T14:44:22.234343-0800(America/Vancouver)"`. Let's take that as our input going forward.
-
-```{r input}
-input <- "2018-07-24T14:44:22.234343-0800(America/Vancouver)"
+```r
+fmt_dt(input = "2018-07-04", dt_format = "y/M/d")
 ```
 
-There are standardized date forms across all locales. They come in 4 flavors: `short`, `medium`, `long`, or `full`. Let's get that date-time into each of these forms, with random locales:
-
-```{r short_en}
-input %>%
-  fmt_date_time_standard(
-    locale = "en",
-    width = "short"
-  )
+```
+2018/7/4
 ```
 
-```{r medium_de}
-input %>%
-  fmt_date_time_standard(
-    locale = "de",
-    width = "medium"
-  )
+```r
+fmt_dt(input = "2018-07-04", dt_format = "MMMM d, y.")
 ```
 
-```{r long_fr_BE}
-input %>%
-  fmt_date_time_standard(
-    locale = "fr_BE",
-    width = "long"
-  )
+```
+July 4, 2018.
 ```
 
-```{r full_es_MX}
-input %>%
-  fmt_date_time_standard(
-    locale = "es_MX",
-    width = "full"
-  )
+With the `locale` option, we can localize the date.
+
+```r
+fmt_dt(input = "2018-07-04", dt_format = "d. MMMM y (EEEE).", locale = "de")
 ```
 
-We can also apply a smattering of different simple date format presets to this input. The `fmt_date_time()` function is useful for this. We can choose to keep the date portion, the time portion, or both. The `fdf()` helper function is useful for choosing a preset date format from the flexible date format (FDF).
-
-```{r format_w_pattern_es_date}
-input %>%
-  fmt_date_time(
-    date_format = fdf("yMd"),
-    time_format = NULL,
-    locale = "es"
-  )
+```
+4. Juli 2018 (Mittwoch).
 ```
 
-Time components have presets under the flexible time format (FTF), which is split into 12- and 24-hour variants. There are `ftf_12()` and `ftf_24()` helper functions enable selections of presets within those.
+With a datetime string, we have more possibilities.
 
-```{r format_w_pattern_es_mx_date_time}
-input %>%
-  fmt_date_time(
-    date_format = fdf("yMd"),
-    time_format = ftf_24("EHms"),
-    locale = "es_MX"
-  )
+
+```r
+fmt_dt(
+  input = "2018-07-24T14:44:22.234343-0800",
+  dt_format = "MMM dd HH:mm:ss ZZZZ yyyy",
+  locale = "fr"
+)
 ```
 
-It's hard to know what the format names are for `fdf()`, `ftf_12()`, and `ftf_24()`, so, there are information functions that provide the names and yield previews. These info functions are: 
-
-- `info_fdf_types()`
-- `info_ftf_12_types()`
-- `info_ftf_24_types()`
-
-Here, we can specify a combining pattern by using a locale specific version with the `date_time_combine()` helper function. In this case, we select the `"full"` combining pattern for the `"de_AT"` locale.
-
-```{r format_w_pattern_de_at_dt_combine}
-input %>%
-  fmt_date_time(
-    date_format = fdf("yMd"),
-    time_format = ftf_24("Hms"),
-    combination = date_time_combine("full"),
-    locale = "de_AT")
+```
+juil. 24 14:44:22 GMT-8:00 2018
 ```
 
-There is indeed an info function available to help determine which combining pattern to use, it's `info_date_time_combine()`.
+```r
+fmt_dt(
+  input = "2018-07-24T14:44:22.234343-0800",
+  dt_format = "MMMM dd HH:mm:ss 'yy XX",
+  locale = "fi"
+)
+```
 
-Here is a comparison table of localized dates for all the presets available in the flexible date format:
+```
+heinäkuuta 24 14:44:22 '18 -0800
+```
 
-<img src="man/figures/i18n_tbl.png">
+### Installation
 
-## Installation
-
-You can install **i18nExtras** from GitHub with:
+Want to try this out? The **bigD** package can be installed from CRAN:
 
 ``` r
-remotes::install_github("rich-iannone/i18nExtras")
+install.packages("bigD")
 ```
 
-## Code of Conduct
+Also, you can install the development version of **bigD** from **GitHub**:
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+``` r
+devtools::install_github("rich-iannone/bigD")
+```
 
-## License
+If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/bigD/issues).
 
-MIT &copy; Richard Iannone
+##### Code of Conduct
+
+Please note that the `rich-iannone/bigD` project is released with a [contributor code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By participating in this project you agree to abide by its terms.
+
+##### 🏛️ Governance
+
+This project is maintained by [Rich Iannone](https://github.com/rich-iannone).
