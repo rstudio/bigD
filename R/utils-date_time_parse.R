@@ -54,17 +54,40 @@ is_tz_present <- function(input) {
   )
 }
 
-is_tzid_present <- function(input) {
+is_long_tzid_present <- function(input) {
   grepl("^.*\\([^']*\\)$", input)
 }
 
-get_tzid_str <- function(input) {
+get_long_tzid_str <- function(input) {
 
-  if (!is_tzid_present(input = input)) {
+  if (!is_long_tzid_present(input = input)) {
     return(NA_character_)
   }
 
-  grepl("^.*\\([^']*\\)$", input)
+  gsub("^.*\\((.*)\\)$", "\\1", input)
+}
+
+# A long tzid can be provided in parentheses as `(America/Vancouver)` at the
+# end of a datetime string; the `get_long_tzid_str()` function will remove the
+# parentheses (and should only be invoked if the datetime input contains a
+# long tzid)
+# The `long_tzid_to_tz_str` will convert a long tzid to a valid tz string in
+# the (+/-)hhmm form
+long_tzid_to_tz_str <- function(long_tzid, input_dt) {
+
+  input_date <- as.Date(input_dt)
+
+  tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
+
+  tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
+
+  tz_offset <- tzdb_entries_tzid[tzdb_idx, ]$gmt_offset_h
+
+  minutes <- formatC(round((abs(tz_offset) %% 1) * 60, 0), width = 2, flag = "0")
+  hours <- formatC(trunc(abs(tz_offset)), width = 2, flag = "0")
+  sign <- ifelse(tz_offset < 0, "-", "+")
+
+  paste0(sign, hours, minutes)
 }
 
 get_tz_str <- function(input) {
@@ -90,20 +113,14 @@ get_tz_str <- function(input) {
   }
 
   # If there is an attached tzid string then remove it
-  if (is_tzid_present(input = out)) {
+  if (is_long_tzid_present(input = out)) {
     out <- gsub("\\s*\\([^']*\\)$", "", out)
   }
 
   out
 }
 
-get_tz_offset_val <- function(input) {
-
-  if (!is_tz_present(input = input)) {
-    return(NA_real_)
-  }
-
-  tz_str <- get_tz_str(input = input)
+get_tz_offset_val_from_tz_str <- function(tz_str) {
 
   if (tz_str == "Z") {
 
@@ -123,6 +140,17 @@ get_tz_offset_val <- function(input) {
   offset_val
 }
 
+get_tz_offset_val <- function(input) {
+
+  if (!is_tz_present(input = input)) {
+    return(NA_real_)
+  }
+
+  tz_str <- get_tz_str(input = input)
+
+  get_tz_offset_val_from_tz_str(tz_str = tz_str)
+}
+
 strip_tz <- function(input) {
 
   tz_str <- get_tz_str(input = input)
@@ -131,6 +159,13 @@ strip_tz <- function(input) {
   out <- gsub("\\s*\\([^']*\\)$", "", out)
 
   out
+}
+
+strip_long_tzid <- function(input) {
+
+  long_tzid <- get_long_tzid_str(input = input)
+
+  gsub(paste0("(", long_tzid, ")"), "", input, fixed = TRUE)
 }
 
 is_iana_present <- function(input) {
@@ -210,12 +245,40 @@ get_tz_offset <- function(input) {
   tz_offset
 }
 
+# The short specific non-location format (e.g., 'PST') from a `long_tzid`
+get_tz_short_specific <- function(long_tzid, input_dt) {
 
-# The short specific non-location format (e.g., PDT)
-get_tz_short_specific <- function(tz_str) {
+  input_date <- as.Date(input_dt)
 
-  return(NA_character_)
+  tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
+
+  tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
+
+  tz_short_specific <- tzdb_entries_tzid[tzdb_idx, ]$abbrev
+
+  # TODO: add check to ensure that the `abbrev` value is a valid
+  # short specific non-location time zone
+
+  tz_short_specific
 }
+
+# The long specific non-location format (e.g., 'Pacific Standard Time') from
+# a `long_tzid`
+# TODO: this requires a change to the internal dataset; right now,
+# this is no different than `get_tz_short_specific()`
+get_tz_long_specific <- function(long_tzid, input_dt) {
+
+  input_date <- as.Date(input_dt)
+
+  tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
+
+  tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
+
+  tz_long_specific <- tzdb_entries_tzid[tzdb_idx, ]$abbrev
+
+  tz_long_specific
+}
+
 
 
 get_long_local_gmt <- function(tz_offset) {
