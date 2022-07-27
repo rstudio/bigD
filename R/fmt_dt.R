@@ -37,34 +37,50 @@ fmt_dt <- function(
 
     # Extract the time zone offset if it exists and strip
     # any tz information from the input
-    if (
-      is_tz_present(input = input) ||
-      is_tzid_present(input = input)
-    ) {
+    if (is_tz_present(input = input)) {
 
       tz_str <- get_tz_str(input = input)
       tz_offset <- get_tz_offset_val(input = input)
-      tz_id <- get_tzid_str(input = input)
-      tz_short_specific <- get_tz_short_specific(tz_str = tz_str)
-
+      long_tzid <- NA_character_
+      tz_short_specific <- NA_character_
+      tz_long_specific <- NA_character_
       input_str <- strip_tz(input = input)
+
+    } else if (is_long_tzid_present(input = input)) {
+
+      input_str <- strip_long_tzid(input = input)
 
     } else {
 
       tz_str <- NA_character_
       tz_offset <- NA_real_
-      tz_id <- NA_character_
+      long_tzid <- NA_character_
       tz_short_specific <- NA_character_
+      tz_long_specific <- NA_character_
       input_str <- input
     }
 
+    # Obtain the date and time
     if (date_present && time_present) {
-      input_dt <- lubridate::ymd_hms(input_str, tz = "UTC", quiet = TRUE)
+      if (grepl("(T| )[0-2][0-9]:[0-5][0-9]:[0-5][0-9]", input_str)) {
+        input_dt <- lubridate::ymd_hms(input_str, tz = "UTC", quiet = TRUE)
+      } else {
+        input_dt <- lubridate::ymd_hm(input_str, tz = "UTC", quiet = TRUE)
+      }
     } else if (date_present && !time_present) {
       input_dt <- lubridate::ymd(input_str, tz = "UTC", quiet = TRUE)
     } else if (!date_present && time_present) {
       input_str <- paste0("2015-01-01T", input_str)
       input_dt <- lubridate::ymd_hms(input_str, tz = "UTC",  quiet = TRUE)
+    }
+
+    if (is_long_tzid_present(input = input)) {
+
+      long_tzid <- get_long_tzid_str(input = input)
+      tz_str <- long_tzid_to_tz_str(long_tzid = long_tzid, input_dt = input_dt)
+      tz_offset <- get_tz_offset_val_from_tz_str(tz_str = tz_str)
+      tz_short_specific <- get_tz_short_specific(long_tzid = long_tzid, input_dt = input_dt)
+      tz_long_specific <- get_tz_long_specific(long_tzid = long_tzid, input_dt = input_dt)
     }
   }
 
@@ -74,18 +90,20 @@ fmt_dt <- function(
     input_str <- NA_character_
 
     # Extract the input time zone
+    long_tzid <- NA_character_
     tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
     tz_offset <- NULL
-    tz_id <- NA_character_
     tz_short_specific <- NA_character_
+    tz_long_specific <- NA_character_
   }
 
   tz_info <-
     list(
       tz_str = tz_str,
       tz_offset = tz_offset,
-      tz_id = tz_id,
-      tz_short_specific = tz_short_specific
+      long_tzid = long_tzid,
+      tz_short_specific = tz_short_specific,
+      tz_long_specific = tz_long_specific
     )
 
   output_dt <-
@@ -218,6 +236,7 @@ fmt_dt <- function(
       pattern_list$dt_format
     )
 
+  # Replace string literal markers `'<#>'` with captured literal values
   for (i in seq_along(pattern_list$literals)) {
 
     output_dt <-
@@ -228,6 +247,9 @@ fmt_dt <- function(
         fixed = TRUE
       )
   }
+
+  # Replace each instance of `''` with `'`
+  output_dt <- gsub("''", "'", output_dt, fixed = TRUE)
 
   output_dt
 }
@@ -284,13 +306,12 @@ extract_literals_from_pattern <- function(string) {
 
 dt_format_to_glue_pattern <- function(dt_format) {
 
-  literals <-
-    extract_literals_from_pattern(
-      string = dt_format
-    )
+  literals <- extract_literals_from_pattern(string = dt_format)
 
   for (i in seq_along(literals)) {
-    dt_format <- sub(literals[i], paste0("'", i, "'"), dt_format)
+    if (literals[i] != "") {
+      dt_format <- sub(literals[i], i, dt_format)
+    }
   }
 
   dt_letters <-
@@ -312,5 +333,7 @@ dt_format_to_glue_pattern <- function(dt_format) {
 }
 
 glue_dt <- function (.x, ...) {
-  glue::glue_data(.x, ..., .transformer = get, .envir = emptyenv())
+  as.character(
+    glue::glue_data(.x, ..., .transformer = get, .envir = emptyenv())
+  )
 }
