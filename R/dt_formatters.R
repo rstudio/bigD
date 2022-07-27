@@ -599,7 +599,14 @@ dt_z <- function(input, tz_info, locale = NULL) {
   tz_short_specific <- tz_info$tz_short_specific
   tz_offset <- tz_info$tz_offset
 
-  if (is.na(tz_short_specific) & !is.na(tz_offset)) {
+  # If the short specific non-location format tz is present, return that
+  if (!is.na(tz_short_specific)) {
+    return(tz_short_specific)
+  }
+
+  # If we don't have the former tz type but have an offset, use the short
+  # localized GMT format
+  if (is.na(tz_short_specific) && !is.na(tz_offset)) {
     out <-
       dt_O(
         input = input,
@@ -609,7 +616,8 @@ dt_z <- function(input, tz_info, locale = NULL) {
     return(out)
   }
 
-  lubridate::tz(input)
+  # If we don't have either, return `character(0)`
+  character(0)
 }
 
 # TZ // long specific non-location format ("Pacific Daylight Time") (Z..ZZZ)
@@ -715,13 +723,24 @@ dt_vvvv <- function(input, tz_info, locale = NULL) {
 }
 
 # TZ // short time zone ID ("uslax")
+# TODO: requires a lookup to bcp47 timezone data; this internal table needs
+# to be generated
 dt_V <- function(input, tz_info, locale = NULL) {
   "V"
 }
 
 # TZ // long time zone ID ("America/Los_Angeles")
 dt_VV <- function(input, tz_info, locale = NULL) {
-  "VV"
+
+  long_tzid <- tz_info$long_tzid
+
+  # If a long time zone ID is available, return it
+  if (!is.na(long_tzid)) {
+    return(long_tzid)
+  }
+
+  # Otherwise return an empty string
+  ""
 }
 
 # TZ // exemplar city locaation ("Los_Angeles")
