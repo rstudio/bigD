@@ -1,6 +1,6 @@
 Type: Package
 Package: bigD
-Title: Flexibly format dates and times to a given locale.
+Title: Flexibly Format Dates and Times to a Given Locale
 Version: 0.1.0.9000
 Authors@R: person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3925-190X"))
@@ -14,11 +14,11 @@ Depends:
     i18n (>= 0.1.0)
 Imports: 
     i18n (>= 0.1.0),
+    glue (>= 1.6.2),
     lubridate (>= 1.8.0),
     magrittr
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)
 Suggests: 
     testthat (>= 3.0.0)
