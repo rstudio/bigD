@@ -9,17 +9,15 @@ Description: Format dates and times flexibly and to whichever locales
 License: MIT + file LICENSE
 URL: https://github.com/rich-iannone/bigD
 BugReports: https://github.com/rich-iannone/bigD/issues
-Depends: 
-    R (>= 3.2.0),
-    i18n (>= 0.1.0)
-Imports: 
-    i18n (>= 0.1.0),
+Depends:
+    R (>= 3.2.0)
+Imports:
     glue (>= 1.6.2),
     lubridate (>= 1.8.0),
     magrittr
 Encoding: UTF-8
 RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)
-Suggests: 
+Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
