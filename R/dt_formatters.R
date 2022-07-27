@@ -197,26 +197,26 @@ dt_MM <- function(input) {
 
 # Month (format), abbreviated ("Sep")
 dt_MMM <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = i18n::dates_elements$months_format_abbrev
+    element = dates_elements_bigd$months_format_abbrev
   )[[lubridate::month(input)]]
 }
 
 # Month (format), full ("September")
 dt_MMMM <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = i18n::dates_elements$months_format_wide
+    element = dates_elements_bigd$months_format_wide
   )[[lubridate::month(input)]]
 }
 
 # Month (format), narrow ("S")
 dt_MMMMM <- function(input, locale = NULL) {
   substr(
-    i18n::cldr_dates(
+    cldr_dates_bigd(
       locale = locale,
-      element = i18n::dates_elements$months_format_abbrev
+      element = dates_elements_bigd$months_format_abbrev
     )[[lubridate::month(input)]],
     1, 1
   )
@@ -301,33 +301,33 @@ dt_g_plus <- function(input, length) {
 dt_E <- function(input, locale = NULL) {
 
   # FIXME: should be abbreviated and not short (provides "Tu")
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = dates_elements$days_standalone_short
+    element = dates_elements_bigd$days_standalone_short
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
 # Day of Week Name // wide ("Tuesday")
 dt_EEEE <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = dates_elements$days_standalone_wide
+    element = dates_elements_bigd$days_standalone_wide
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
 # Day of Week Name // narrow ("T")
 dt_EEEEE <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = dates_elements$days_standalone_narrow
+    element = dates_elements_bigd$days_standalone_narrow
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
 # Day of Week Name // short ("Tu")
 dt_EEEEEE <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = dates_elements$days_standalone_short
+    element = dates_elements_bigd$days_standalone_short
   )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
 }
 
@@ -393,25 +393,25 @@ dt_cccccc <- function(input, locale = NULL) {
 
 # Period: am, pm // abbreviated (a..aaa)
 dt_a <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = dates_elements$dayperiods_format_abbrev
+    element = dates_elements_bigd$dayperiods_format_abbrev
   )[[ifelse(lubridate::am(input), "am", "pm")]]
 }
 
 # Period: am, pm // wide
 dt_aaaa <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = dates_elements$dayperiods_format_wide
+    element = dates_elements_bigd$dayperiods_format_wide
   )[[ifelse(lubridate::am(input), "am", "pm")]]
 }
 
 # Period: am, pm // narrow
 dt_aaaaa <- function(input, locale = NULL) {
-  i18n::cldr_dates(
+  cldr_dates_bigd(
     locale = locale,
-    element = dates_elements$dayperiods_format_narrow
+    element = dates_elements_bigd$dayperiods_format_narrow
   )[[ifelse(lubridate::am(input), "am", "pm")]]
 }
 
