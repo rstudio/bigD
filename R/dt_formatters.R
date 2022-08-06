@@ -623,7 +623,8 @@ dt_z <- function(input, tz_info, locale = NULL) {
 # TZ // long specific non-location format ("Pacific Daylight Time") (Z..ZZZ)
 # Fallback to "OOOO"
 dt_zzzz <- function(input, tz_info, locale = NULL) {
-  "zzzz"
+
+  tz_info$tz_long_specific
 }
 
 # TZ // short specific non-location format ("-0800") (Z..ZZZ)
@@ -711,7 +712,22 @@ dt_OOOO <- function(input, tz_info, locale = NULL) {
 # format ("VVVV"), then the short localized GMT format as the
 # final fallback.
 dt_v <- function(input, tz_info, locale = NULL) {
-  "v"
+
+  long_tzid <- tz_info$long_tzid
+
+  tz_generic_non_location_short <-
+    get_tz_non_location(
+      long_tzid = long_tzid,
+      locale = locale,
+      short_long = "short",
+      type = "generic"
+    )
+
+  if (is.na(tz_generic_non_location_short)) {
+    return(dt_VVVV(input = input, tz_info = tz_info, locale = locale))
+  }
+
+  tz_generic_non_location_short
 }
 
 # TZ // long generic non-location format ("Pacific Time")
@@ -719,14 +735,36 @@ dt_v <- function(input, tz_info, locale = NULL) {
 # Where that is unavailable, falls back to generic location
 # format ("VVVV").
 dt_vvvv <- function(input, tz_info, locale = NULL) {
-  "vvvv"
+
+  long_tzid <- tz_info$long_tzid
+
+  tz_generic_non_location_long <-
+    get_tz_non_location(
+      long_tzid = long_tzid,
+      locale = locale,
+      short_long = "long",
+      type = "generic"
+    )
+
+  if (is.na(tz_generic_non_location_long)) {
+    return(dt_VVVV(input = input, tz_info = tz_info, locale = locale))
+  }
+
+  tz_generic_non_location_long
 }
 
 # TZ // short time zone ID ("uslax")
-# TODO: requires a lookup to bcp47 timezone data; this internal table needs
-# to be generated
 dt_V <- function(input, tz_info, locale = NULL) {
-  "V"
+
+  long_tzid <- tz_info$long_tzid
+
+  bcp_id <- get_tz_bcp_id(long_tzid = long_tzid)
+
+  if (is.na(bcp_id)) {
+    return("unk")
+  }
+
+  bcp_id
 }
 
 # TZ // long time zone ID ("America/Los_Angeles")
@@ -749,7 +787,16 @@ dt_VV <- function(input, tz_info, locale = NULL) {
 # unavailable, the localized exemplar city name for the special
 # zone `Etc/Unknown` is used as the fallback (for example, "Unknown City").
 dt_VVV <- function(input, tz_info, locale = NULL) {
-  "VVV"
+
+  long_tzid <- tz_info$long_tzid
+
+  # TODO: Validate `long_tzid`
+
+  # create the `get_localized_examplar_city()` function
+  examplar_city <-
+    get_localized_exemplar_city(long_tzid = long_tzid, locale = locale)
+
+  examplar_city
 }
 
 # TZ // generic location format ("Los Angeles Time")
@@ -761,7 +808,27 @@ dt_VVV <- function(input, tz_info, locale = NULL) {
 # choices for user selection, since the naming is more uniform
 # than the "v" format.
 dt_VVVV <- function(input, tz_info, locale = NULL) {
-  "VVVV"
+
+  long_tzid <- tz_info$long_tzid
+
+  # TODO: Validate `long_tzid`
+
+  # Get the localized variant of the exemplar city
+  exemplar_city_localized <-
+    get_localized_exemplar_city(
+      long_tzid = long_tzid,
+      locale = locale,
+      yield_unknown = FALSE
+    )
+
+  if (is.na(exemplar_city_localized)) {
+    return(dt_OOOO(input = input, tz_info = tz_info, locale = locale))
+  }
+
+  tz_generic_location_pattern <-
+    tz_formats[tz_formats$locale == locale, ][["region_format"]]
+
+  gsub("{0}", exemplar_city_localized, tz_generic_location_pattern, fixed = TRUE)
 }
 
 # TZ // ISO 8601 basic format ("-08"), optional minutes, uses "Z"
