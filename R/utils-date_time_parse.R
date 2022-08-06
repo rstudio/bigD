@@ -245,6 +245,40 @@ get_tz_offset <- function(input) {
   tz_offset
 }
 
+get_exemplar_city <- function(long_tzid) {
+
+  exemplar_city <- unlist(strsplit(long_tzid, "/")[[1]])[2]
+
+  exemplar_city
+}
+
+get_localized_exemplar_city <- function(
+    long_tzid,
+    locale,
+    yield_unknown = TRUE
+) {
+
+  exemplar_city <- unlist(strsplit(long_tzid, "/")[[1]])[2]
+
+  # TODO: Resolve links of exemplar cities to a canonical exemplar city
+  #       This will require a separate lookup table
+
+  if (!(exemplar_city %in% colnames(tz_exemplar)[-1])) {
+
+    # Get localized variant of 'Unknown City'
+    if (yield_unknown) {
+      return(tz_exemplar[tz_exemplar$locale == locale, ][["Unknown"]])
+    } else {
+      return(NA_character_)
+    }
+  }
+
+  exemplar_city_localized <-
+    tz_exemplar[tz_exemplar$locale == locale, ][[exemplar_city]]
+
+  exemplar_city_localized
+}
+
 # The short specific non-location format (e.g., 'PST') from a `long_tzid`
 get_tz_short_specific <- function(long_tzid, input_dt) {
 
@@ -266,7 +300,7 @@ get_tz_short_specific <- function(long_tzid, input_dt) {
 # a `long_tzid`
 # TODO: this requires a change to the internal dataset; right now,
 # this is no different than `get_tz_short_specific()`
-get_tz_long_specific <- function(long_tzid, input_dt) {
+get_tz_long_specific <- function(long_tzid, input_dt, locale) {
 
   input_date <- as.Date(input_dt)
 
@@ -274,12 +308,129 @@ get_tz_long_specific <- function(long_tzid, input_dt) {
 
   tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
 
-  tz_long_specific <- tzdb_entries_tzid[tzdb_idx, ]$abbrev
+  tzdb_entries_tzid_ln <- tzdb_entries_tzid[tzdb_idx, ]
 
-  tz_long_specific
+  if (tzdb_entries_tzid_ln$dst) {
+    pattern_col_tz_formats <- "region_format_daylight"
+  } else {
+    pattern_col_tz_formats <- "region_format"
+  }
+
+  tz_long_specific_pattern <-
+    tz_formats[tz_formats$locale == locale, ][[pattern_col_tz_formats]]
+
+  exemplar_city_localized <-
+    get_localized_exemplar_city(
+      long_tzid = long_tzid,
+      locale = locale
+    )
+
+  gsub("{0}", exemplar_city_localized, tz_long_specific_pattern, fixed = TRUE)
 }
 
+get_tz_bcp_id <- function(long_tzid) {
 
+  # If the supplied `long_tzid` value is NA, return NA
+  if (is.na(long_tzid)) {
+    return(NA_character_)
+  }
+
+  tz_name <- tz_bcp_id[tz_bcp_id$tz_canonical == long_tzid, ][["tz_bcp_id"]]
+
+  tz_name
+}
+
+# Get the non-location formatted time zone names (e.g., 'Pacific Time', 'PT')
+# from a `long_tzid` (canonical tz name)
+#
+# The non-location format reflects "wall time" (what is on
+# a clock on the wall). It's used for recurring events, meetings, or anywhere
+# people do not want to be overly specific. For example, "10 am Pacific Time"
+# will be GMT-8 in the winter, and GMT-7 in the summer.
+get_tz_non_location <- function(
+    long_tzid,
+    locale,
+    short_long,
+    type
+) {
+
+  if (!(short_long %in% c("long", "short"))) {
+    stop("The `short_long` keyword should either be 'long' or 'short'.")
+  }
+
+  if (!(type %in% c("generic", "standard", "daylight"))) {
+    stop("The `short_long` keyword should either be 'long' or 'short'.")
+  }
+
+  # If the supplied `long_tzid` value is NA, return NA
+  if (is.na(long_tzid)) {
+    return(NA_character_)
+  }
+
+  # Get the metazone in its long ID format
+  metazone_long_id <- long_tz_id_to_metazone_long_id(long_tzid = long_tzid)
+
+  # Check if metazone is NA and return NA if that is so
+  if (is.na(metazone_long_id)) {
+    return(NA_character_)
+  }
+
+  # Get the row of the `tz_metazone_names` table based on the supplied locale
+  tz_metazone_names_row <- tz_metazone_names[tz_metazone_names$locale == locale, ]
+
+  # Get the list entry corresponding to the metazone and the locale
+  tz_metazone_names_entry <-
+    unlist(
+      tz_metazone_names_row[, colnames(tz_metazone_names_row) == metazone_long_id],
+      recursive = FALSE
+    )
+
+  if (length(tz_metazone_names_entry) == 2 &&
+      c("long", "short") %in% names(tz_metazone_names_entry)
+  ) {
+    tz_names_entry <- tz_metazone_names_entry
+  } else if (length(tz_metazone_names_entry) == 1) {
+
+    tz_names_entry <- tz_metazone_names_entry[[1]]
+
+    if (length(tz_names_entry) == 1) {
+      return(tz_names_entry[[1]])
+    }
+  }
+
+  if (!(short_long %in% names(tz_names_entry))) {
+    short_long <- names(tz_names_entry)[1]
+  }
+
+  short_long_tz_names <- tz_names_entry[[short_long]]
+
+  if (!(type %in% names(short_long_tz_names))) {
+    type <- "standard"
+  }
+
+  tz_name <- short_long_tz_names[[type]]
+
+  tz_name
+}
+
+long_tz_id_to_metazone_long_id <- function(long_tzid) {
+
+  # TODO: validate the input `long_tzid` value
+
+  tz_metazone_users_rows <-
+    tz_metazone_users[tz_metazone_users$canonical_tz_name == long_tzid, ]
+
+  # Return NA if number of rows in `tz_metazone_users_rows` is zero
+  if (nrow(tz_metazone_users_rows) < 1) {
+    return(NA_character_)
+  }
+
+  # TODO: develop routine to further filter multirow `tz_metazone_users_rows`
+  # to a single row based on `locale`; for now, obtain the first metazone
+  metazone <- tz_metazone_users_rows[1, ][["metazone_long_id"]]
+
+  metazone
+}
 
 get_long_local_gmt <- function(tz_offset) {
 
