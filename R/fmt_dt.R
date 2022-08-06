@@ -80,7 +80,7 @@ fmt_dt <- function(
       tz_str <- long_tzid_to_tz_str(long_tzid = long_tzid, input_dt = input_dt)
       tz_offset <- get_tz_offset_val_from_tz_str(tz_str = tz_str)
       tz_short_specific <- get_tz_short_specific(long_tzid = long_tzid, input_dt = input_dt)
-      tz_long_specific <- get_tz_long_specific(long_tzid = long_tzid, input_dt = input_dt)
+      tz_long_specific <- get_tz_long_specific(long_tzid = long_tzid, input_dt = input_dt, locale = locale)
     }
   }
 
