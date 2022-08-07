@@ -6,7 +6,7 @@
 #'   this restrictiveness (for example, the literal `T` separating the date and
 #'   time components is optional). Seconds, fractional seconds, and the
 #'   time-zone designation are all optional.
-#' @param dt_format The datetime formatting string.
+#' @param format The datetime formatting string.
 #' @param use_tz We can optionally override any time zone information in the
 #'   datetime input with a time-zone designation provided here.
 #' @param locale The output locale to use for formatting the `input`
@@ -18,7 +18,7 @@
 #' @export
 fmt_dt <- function(
     input,
-    dt_format = NULL,
+    format = NULL,
     use_tz = NULL,
     locale = NULL
 ) {
@@ -27,8 +27,8 @@ fmt_dt <- function(
     locale <- "en"
   }
 
-  # Modify the `dt_format` string so it is `glue_dt()` formattable
-  pattern_list <- dt_format_to_glue_pattern(dt_format = dt_format)
+  # Modify the `format` string so it is `glue_dt()` formattable
+  pattern_list <- dt_format_to_glue_pattern(format = format)
 
   if (is.character(input)) {
 
@@ -233,7 +233,7 @@ fmt_dt <- function(
         xxxx = dt_xxxx(input_dt, tz_info, locale),
         xxxxx = dt_xxxxx(input_dt, tz_info, locale)
       ),
-      pattern_list$dt_format
+      pattern_list$format
     )
 
   # Replace string literal markers `'<#>'` with captured literal values
@@ -304,30 +304,30 @@ extract_literals_from_pattern <- function(string) {
   )
 }
 
-dt_format_to_glue_pattern <- function(dt_format) {
+dt_format_to_glue_pattern <- function(format) {
 
-  literals <- extract_literals_from_pattern(string = dt_format)
+  literals <- extract_literals_from_pattern(string = format)
 
   for (i in seq_along(literals)) {
     if (literals[i] != "") {
-      dt_format <- sub(literals[i], i, dt_format)
+      format <- sub(literals[i], i, format)
     }
   }
 
   dt_letters <-
     base::intersect(
-      unique(unlist(strsplit(dt_format, ""))),
+      unique(unlist(strsplit(format, ""))),
       sub_letters()
     )
 
   pattern <- paste0("(", paste0("[", dt_letters, "]+", collapse = "|"), ")")
 
-  dt_format <- gsub(pattern, "\\{\\1\\}", dt_format)
+  format <- gsub(pattern, "\\{\\1\\}", format)
 
   literals <- gsub("(^'|'$)", "", literals)
 
   list(
-    dt_format = dt_format,
+    format = format,
     literals = literals
   )
 }
