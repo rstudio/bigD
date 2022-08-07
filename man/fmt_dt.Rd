@@ -4,7 +4,7 @@
 \alias{fmt_dt}
 \title{Format a datetime with a formatting string}
 \usage{
-fmt_dt(input, dt_format = NULL, use_tz = NULL, locale = NULL)
+fmt_dt(input, format = NULL, use_tz = NULL, locale = NULL)
 }
 \arguments{
 \item{input}{The input datetime value. The appropriate representation should
@@ -14,7 +14,7 @@ this restrictiveness (for example, the literal \code{T} separating the date and
 time components is optional). Seconds, fractional seconds, and the
 time-zone designation are all optional.}
 
-\item{dt_format}{The datetime formatting string.}
+\item{format}{The datetime formatting string.}
 
 \item{use_tz}{We can optionally override any time zone information in the
 datetime input with a time-zone designation provided here.}
