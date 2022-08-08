@@ -19,11 +19,11 @@ time-zone designation are all optional.}
 \item{use_tz}{We can optionally override any time zone information in the
 datetime input with a time-zone designation provided here.}
 
-\item{locale}{The output locale to use for formatting the \code{input}
-value according to the specified locale's rules. Example locale names
-include \code{"en_US"} for English (United States) and \code{"fr_FR"} for French
-(France). If a locale isn't provided and certain locale-based formatting
-is to be done then the \code{"en_US"} locale will be used.}
+\item{locale}{The output locale to use for formatting the input value
+according to the specified locale's rules. Example locale names include
+\code{"en_US"} for English (United States) and \code{"fr_FR"} for French (France). If
+a locale isn't provided and certain locale-based formatting is to be done
+then the \code{"en_US"} locale will be used.}
 }
 \description{
 Format a datetime with a formatting string
