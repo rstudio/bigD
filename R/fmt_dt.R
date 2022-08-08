@@ -9,11 +9,11 @@
 #' @param format The datetime formatting string.
 #' @param use_tz We can optionally override any time zone information in the
 #'   datetime input with a time-zone designation provided here.
-#' @param locale The output locale to use for formatting the `input`
-#'   value according to the specified locale's rules. Example locale names
-#'   include `"en_US"` for English (United States) and `"fr_FR"` for French
-#'   (France). If a locale isn't provided and certain locale-based formatting
-#'   is to be done then the `"en_US"` locale will be used.
+#' @param locale The output locale to use for formatting the input value
+#'   according to the specified locale's rules. Example locale names include
+#'   `"en_US"` for English (United States) and `"fr_FR"` for French (France). If
+#'   a locale isn't provided and certain locale-based formatting is to be done
+#'   then the `"en_US"` locale will be used.
 #'
 #' @export
 fmt_dt <- function(
