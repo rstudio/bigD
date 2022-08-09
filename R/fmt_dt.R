@@ -27,6 +27,16 @@ fmt_dt <- function(
     locale <- "en"
   }
 
+  # Initialize an empty `tz_info` list
+  tz_info <-
+    list(
+      tz_str = NA_character_,
+      tz_offset = NA_real_,
+      long_tzid = NA_character_,
+      tz_short_specific = NA_character_,
+      tz_long_specific = NA_character_
+    )
+
   # Modify the `format` string so it is `glue_dt()` formattable
   pattern_list <- dt_format_to_glue_pattern(format = format)
 
@@ -35,28 +45,19 @@ fmt_dt <- function(
     date_present <- is_date_present(input = input)
     time_present <- is_time_present(input = input)
 
-    # Extract the time zone offset if it exists and strip
-    # any tz information from the input
-    if (is_tz_present(input = input)) {
+    # Determine if tz information is present, either as:
+    # [1] a tz offset in hours from GMT
+    # [2] a long tz identifier (either canonical or an alias)
 
-      tz_str <- get_tz_str(input = input)
-      tz_offset <- get_tz_offset_val(input = input)
-      long_tzid <- NA_character_
-      tz_short_specific <- NA_character_
-      tz_long_specific <- NA_character_
+    tz_present <- is_tz_present(input = input)
+    long_tzid_present <- is_long_tzid_present(input = input)
+
+    # Strip away tz information from the input and return as `input_str`
+    if (tz_present) {
       input_str <- strip_tz(input = input)
-
-    } else if (is_long_tzid_present(input = input)) {
-
+    } else if (long_tzid_present) {
       input_str <- strip_long_tzid(input = input)
-
     } else {
-
-      tz_str <- NA_character_
-      tz_offset <- NA_real_
-      long_tzid <- NA_character_
-      tz_short_specific <- NA_character_
-      tz_long_specific <- NA_character_
       input_str <- input
     }
 
@@ -74,37 +75,29 @@ fmt_dt <- function(
       input_dt <- lubridate::ymd_hms(input_str, tz = "UTC",  quiet = TRUE)
     }
 
-    if (is_long_tzid_present(input = input)) {
+    # Derive more detailed time zone information from the `long_tzid` value
+    if (long_tzid_present) {
 
-      long_tzid <- get_long_tzid_str(input = input)
-      tz_str <- long_tzid_to_tz_str(long_tzid = long_tzid, input_dt = input_dt)
-      tz_offset <- get_tz_offset_val_from_tz_str(tz_str = tz_str)
-      tz_short_specific <- get_tz_short_specific(long_tzid = long_tzid, input_dt = input_dt)
-      tz_long_specific <- get_tz_long_specific(long_tzid = long_tzid, input_dt = input_dt, locale = locale)
+      tz_info$long_tzid <- get_long_tzid_str(input = input)
+      tz_info$tz_str <- long_tzid_to_tz_str(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+      tz_info$tz_offset <- get_tz_offset_val_from_tz_str(tz_str = tz_info$tz_str)
+      tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+      tz_info$tz_long_specific <- get_tz_long_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt, locale = locale)
+
+    } else if (tz_present) {
+
+      tz_info$tz_str <- get_tz_str(input = input)
+      tz_info$tz_offset <- get_tz_offset_val(input = input)
     }
   }
 
   if (inherits(input, "POSIXct")) {
 
     input_dt <- input
-    input_str <- NA_character_
 
     # Extract the input time zone
-    long_tzid <- NA_character_
-    tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
-    tz_offset <- NULL
-    tz_short_specific <- NA_character_
-    tz_long_specific <- NA_character_
+    tz_info$tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
   }
-
-  tz_info <-
-    list(
-      tz_str = tz_str,
-      tz_offset = tz_offset,
-      long_tzid = long_tzid,
-      tz_short_specific = tz_short_specific,
-      tz_long_specific = tz_long_specific
-    )
 
   output_dt <-
     glue_dt(
