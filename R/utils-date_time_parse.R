@@ -55,7 +55,16 @@ is_tz_present <- function(input) {
 }
 
 is_long_tzid_present <- function(input) {
-  grepl("^.*\\([^']*\\)$", input)
+
+  if (!grepl("^.*\\([^']*\\)$", input)) {
+    return(FALSE)
+  }
+
+  long_tzid <- extract_long_tzid(input = input)
+
+  validate_long_tzid(long_tzid = long_tzid)
+
+  TRUE
 }
 
 get_long_tzid_str <- function(input) {
