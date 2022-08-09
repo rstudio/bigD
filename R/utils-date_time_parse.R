@@ -77,6 +77,8 @@ get_long_tzid_str <- function(input) {
 
   normalize_long_tzid(long_tzid = long_tzid)
 }
+
+extract_long_tzid <- function(input) {
   gsub("^.*\\((.*)\\)$", "\\1", input)
 }
 
