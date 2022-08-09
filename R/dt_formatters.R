@@ -624,7 +624,13 @@ dt_z <- function(input, tz_info, locale = NULL) {
 # Fallback to "OOOO"
 dt_zzzz <- function(input, tz_info, locale = NULL) {
 
-  tz_info$tz_long_specific
+  tz_long_specific <- tz_info$tz_long_specific
+
+  if (is.na(tz_long_specific)) {
+    return(dt_OOOO(input = input, tz_info = tz_info, locale = locale))
+  }
+
+  tz_long_specific
 }
 
 # TZ // short specific non-location format ("-0800") (Z..ZZZ)
