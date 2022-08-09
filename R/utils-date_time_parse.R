@@ -82,6 +82,30 @@ extract_long_tzid <- function(input) {
   gsub("^.*\\((.*)\\)$", "\\1", input)
 }
 
+validate_long_tzid <- function(long_tzid) {
+
+  known_long_tzid_vals <-
+    c(unique(tz_name_resolution$tz_canonical), tz_name_resolution$tz_alt)
+
+  if (!(long_tzid %in% known_long_tzid_vals)) {
+    stop("The long time zone provided is not valid.", call. = FALSE)
+  }
+
+  invisible(TRUE)
+}
+
+normalize_long_tzid <- function(long_tzid) {
+
+  if (long_tzid %in% tz_name_resolution$tz_alt) {
+
+    long_tzid <-
+      tz_name_resolution[
+        tz_name_resolution$tz_alt == long_tzid, ][["tz_canonical"]]
+  }
+
+  long_tzid
+}
+
 # A long tzid can be provided in parentheses as `(America/Vancouver)` at the
 # end of a datetime string; the `get_long_tzid_str()` function will remove the
 # parentheses (and should only be invoked if the datetime input contains a
@@ -90,9 +114,20 @@ extract_long_tzid <- function(input) {
 # the (+/-)hhmm form
 long_tzid_to_tz_str <- function(long_tzid, input_dt) {
 
-  input_date <- as.Date(input_dt)
+  if (grepl("^Etc/", long_tzid)) {
+
+    if (long_tzid %in% c("Etc/GMT", "Etc/UTC")) {
+      return("+0000")
+    }
+  }
 
   tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
+
+  if (nrow(tzdb_entries_tzid) < 1) {
+    return(NA_character_)
+  }
+
+  input_date <- as.Date(input_dt)
 
   tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
 
@@ -180,7 +215,10 @@ strip_long_tzid <- function(input) {
 
   long_tzid <- get_long_tzid_str(input = input)
 
-  gsub(paste0("(", long_tzid, ")"), "", input, fixed = TRUE)
+  input_str <- gsub(paste0("(", long_tzid, ")"), "", input, fixed = TRUE)
+  input_str <- strip_surrounding_whitespace(input = input_str)
+
+  input_str
 }
 
 is_iana_present <- function(input) {
@@ -321,6 +359,10 @@ get_tz_long_specific <- function(long_tzid, input_dt, locale) {
 
   tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
 
+  if (nrow(tzdb_entries_tzid) < 1) {
+    return(NA_character_)
+  }
+
   tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
 
   tzdb_entries_tzid_ln <- tzdb_entries_tzid[tzdb_idx, ]
@@ -396,41 +438,54 @@ get_tz_non_location <- function(
   # Get the list entry corresponding to the metazone and the locale
   tz_metazone_names_entry <-
     unlist(
-      tz_metazone_names_row[, colnames(tz_metazone_names_row) == metazone_long_id],
-      recursive = FALSE
+      tz_metazone_names_row[, colnames(tz_metazone_names_row) == metazone_long_id][[1]]
     )
 
-  if (length(tz_metazone_names_entry) == 2 &&
-      c("long", "short") %in% names(tz_metazone_names_entry)
-  ) {
-    tz_names_entry <- tz_metazone_names_entry
-  } else if (length(tz_metazone_names_entry) == 1) {
+  target_item <- paste0(short_long, ".", type)
+  available_items <- names(tz_metazone_names_entry)
+  has_long_items <- any(grepl("long", names(tz_metazone_names_entry)))
+  has_short_items <- any(grepl("short", names(tz_metazone_names_entry)))
 
-    tz_names_entry <- tz_metazone_names_entry[[1]]
-
-    if (length(tz_names_entry) == 1) {
-      return(tz_names_entry[[1]])
+  if (length(available_items) == 1) {
+    tz_name <- tz_metazone_names_entry[[available_items]]
+  } else if (target_item %in% available_items) {
+    tz_name <- tz_metazone_names_entry[[target_item]]
+  } else if (short_long == "short" && !has_short_items) {
+    if (!any(grepl(type, available_items))) {
+      tz_name <- tz_metazone_names_entry[["long.standard"]]
+    } else {
+      tz_name <- tz_metazone_names_entry[[paste0("long.", type)]]
     }
+  } else {
+    tz_name <- tz_metazone_names_entry[[available_items[1]]]
   }
-
-  if (!(short_long %in% names(tz_names_entry))) {
-    short_long <- names(tz_names_entry)[1]
-  }
-
-  short_long_tz_names <- tz_names_entry[[short_long]]
-
-  if (!(type %in% names(short_long_tz_names))) {
-    type <- "standard"
-  }
-
-  tz_name <- short_long_tz_names[[type]]
 
   tz_name
 }
 
 long_tz_id_to_metazone_long_id <- function(long_tzid) {
 
-  # TODO: validate the input `long_tzid` value
+  tzid_in_tz_metazone_users <- long_tzid %in% tz_metazone_users$canonical_tz_name
+
+  if (!tzid_in_tz_metazone_users) {
+
+    if (long_tzid %in% unique(tz_name_resolution$tz_canonical)) {
+
+      alt_names <-
+        tz_name_resolution[tz_name_resolution$tz_canonical == long_tzid, ][["tz_alt"]]
+
+      if (any(alt_names %in% tz_metazone_users$canonical_tz_name)) {
+
+        long_tzid <- alt_names[1]
+
+      } else {
+        return(NA_character_)
+      }
+
+    } else {
+      return(NA_character_)
+    }
+  }
 
   tz_metazone_users_rows <-
     tz_metazone_users[tz_metazone_users$canonical_tz_name == long_tzid, ]
@@ -515,4 +570,8 @@ get_iana_tz <- function(input) {
   }
 
   tz_name
+}
+
+strip_surrounding_whitespace <- function(input) {
+  gsub("(^[[:space:]]*)|([[:space:]]*$)", "", input)
 }
