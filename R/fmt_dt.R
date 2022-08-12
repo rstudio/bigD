@@ -62,17 +62,11 @@ fmt_dt <- function(
     }
 
     # Obtain the date and time
-    if (date_present && time_present) {
-      if (grepl("(T| )[0-2][0-9]:[0-5][0-9]:[0-5][0-9]", input_str)) {
-        input_dt <- lubridate::ymd_hms(input_str, tz = "UTC", quiet = TRUE)
-      } else {
-        input_dt <- lubridate::ymd_hm(input_str, tz = "UTC", quiet = TRUE)
-      }
-    } else if (date_present && !time_present) {
-      input_dt <- lubridate::ymd(input_str, tz = "UTC", quiet = TRUE)
+    if (date_present) {
+      input_dt <- as.POSIXct(gsub("T", " ", input_str), tz = "UTC")
     } else if (!date_present && time_present) {
       input_str <- paste0("2015-01-01T", input_str)
-      input_dt <- lubridate::ymd_hms(input_str, tz = "UTC",  quiet = TRUE)
+      input_dt <- as.POSIXct(gsub("T", " ", input_str), tz = "UTC")
     }
 
     # Derive more detailed time zone information from the `long_tzid` value
@@ -88,6 +82,13 @@ fmt_dt <- function(
 
       tz_info$tz_str <- get_tz_str(input = input)
       tz_info$tz_offset <- get_tz_offset_val(input = input)
+
+    } else {
+
+      tz_info$long_tzid <- "UTC"
+      tz_info$tz_str <- "GMT"
+      tz_info$tz_offset <- 0L
+      tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
     }
   }
 
@@ -99,152 +100,244 @@ fmt_dt <- function(
     tz_info$tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
   }
 
-  output_dt <-
-    glue_dt(
-      list(
-        G = dt_G(input_dt, locale),
-        GG  = dt_G(input_dt, locale),
-        GGG = dt_G(input_dt, locale),
-        GGGG = dt_GGGG(input_dt, locale),
-        GGGGG = dt_GGGGG(input_dt, locale),
-        y = dt_y(input_dt),
-        yy = dt_yy(input_dt),
-        yyy = dt_yyy(input_dt),
-        yyyy = dt_yyyy(input_dt),
-        yyyyy = dt_yyyyy(input_dt),
-        yyyyyy = dt_yyyyyy(input_dt),
-        yyyyyyy = dt_yyyyyyy(input_dt),
-        yyyyyyyy = dt_yyyyyyyy(input_dt),
-        yyyyyyyyy = dt_yyyyyyyyy(input_dt),
-        Y = dt_Y(input_dt),
-        YY = dt_YY(input_dt),
-        u = dt_u(input_dt),
-        U = dt_U(input_dt),
-        UU = dt_U(input_dt),
-        UUU = dt_U(input_dt),
-        UUUU = dt_UUUU(input_dt, locale),
-        UUUUU = dt_UUUUU(input_dt, locale),
-        Q = dt_Q(input_dt),
-        QQ = dt_QQ(input_dt),
-        QQQ = dt_QQQ(input_dt, locale),
-        QQQQ = dt_QQQQ(input_dt, locale),
-        QQQQQ = dt_QQQQQ(input_dt, locale),
-        q = dt_q(input_dt),
-        qq = dt_qq(input_dt),
-        qqq = dt_qqq(input_dt, locale),
-        qqqq = dt_qqqq(input_dt, locale),
-        qqqqq = dt_qqqqq(input_dt, locale),
-        M = dt_M(input_dt),
-        MM = dt_MM(input_dt),
-        MMM = dt_MMM(input_dt, locale),
-        MMMM = dt_MMMM(input_dt, locale),
-        MMMMM = dt_MMMMM(input_dt, locale),
-        L = dt_L(input_dt),
-        LL = dt_LL(input_dt),
-        LLL = dt_LLL(input_dt, locale),
-        LLLL = dt_LLLL(input_dt, locale),
-        LLLLL = dt_LLLLL(input_dt, locale),
-        w = dt_w(input_dt),
-        ww = dt_ww(input_dt),
-        W = dt_W(input_dt),
-        d = dt_d(input_dt),
-        dd = dt_dd(input_dt),
-        D = dt_D(input_dt),
-        DD = dt_DD(input_dt),
-        DDD = dt_DDD(input_dt),
-        F = dt_F(input_dt),
-        E = dt_E(input_dt, locale),
-        EE = dt_E(input_dt, locale),
-        EEE = dt_E(input_dt, locale),
-        EEEE = dt_EEEE(input_dt, locale),
-        EEEEE = dt_EEEEE(input_dt, locale),
-        EEEEEE = dt_EEEEEE(input_dt, locale),
-        e = dt_e(input_dt, locale),
-        ee = dt_ee(input_dt, locale),
-        eee = dt_eee(input_dt, locale),
-        eeee = dt_eeee(input_dt, locale),
-        eeeee = dt_eeeee(input_dt, locale),
-        eeeeee = dt_eeeeee(input_dt, locale),
-        c = dt_c(input_dt, locale),
-        cc = dt_cc(input_dt, locale),
-        ccc = dt_ccc(input_dt, locale),
-        cccc = dt_cccc(input_dt, locale),
-        ccccc = dt_ccccc(input_dt, locale),
-        cccccc = dt_cccccc(input_dt, locale),
-        a = dt_a(input_dt, locale),
-        aa = dt_a(input_dt, locale),
-        aaa = dt_a(input_dt, locale),
-        aaaa = dt_aaaa(input_dt, locale),
-        aaaaa = dt_aaaaa(input_dt, locale),
-        b = dt_b(input_dt, locale),
-        bb = dt_b(input_dt, locale),
-        bbb = dt_b(input_dt, locale),
-        bbbb = dt_bbbb(input_dt, locale),
-        bbbbb = dt_bbbbb(input_dt, locale),
-        B = dt_B(input_dt, locale),
-        BB = dt_B(input_dt, locale),
-        BBB = dt_B(input_dt, locale),
-        BBBB = dt_BBBB(input_dt, locale),
-        BBBBB = dt_BBBBB(input_dt, locale),
-        h = dt_h(input_dt),
-        hh = dt_hh(input_dt),
-        H = dt_H(input_dt),
-        HH = dt_HH(input_dt),
-        K = dt_K(input_dt),
-        KK = dt_KK(input_dt),
-        k = dt_k(input_dt),
-        kk = dt_kk(input_dt),
-        m = dt_m(input_dt),
-        mm = dt_mm(input_dt),
-        s = dt_s(input_dt),
-        ss = dt_ss(input_dt),
-        z = dt_z(input_dt, tz_info, locale),
-        zz = dt_z(input_dt, tz_info, locale),
-        zzz = dt_z(input_dt, tz_info, locale),
-        zzzz = dt_zzzz(input_dt, tz_info, locale),
-        Z = dt_Z(input_dt, tz_info, locale),
-        ZZ = dt_Z(input_dt, tz_info, locale),
-        ZZZ = dt_Z(input_dt, tz_info, locale),
-        ZZZZ = dt_ZZZZ(input_dt, tz_info, locale),
-        ZZZZZ = dt_ZZZZZ(input_dt, tz_info, locale),
-        O = dt_O(input_dt, tz_info, locale),
-        OOOO = dt_OOOO(input_dt, tz_info, locale),
-        v = dt_v(input_dt, tz_info, locale),
-        vvvv = dt_vvvv(input_dt, tz_info, locale),
-        V = dt_V(input_dt, tz_info, locale),
-        VV = dt_VV(input_dt, tz_info, locale),
-        VVV = dt_VVV(input_dt, tz_info, locale),
-        VVVV = dt_VVVV(input_dt, tz_info, locale),
-        X = dt_X(input_dt, tz_info, locale),
-        XX = dt_XX(input_dt, tz_info, locale),
-        XXX = dt_XXX(input_dt, tz_info, locale),
-        XXXX = dt_XXXX(input_dt, tz_info, locale),
-        XXXXX = dt_XXXXX(input_dt, tz_info, locale),
-        x = dt_x(input_dt, tz_info, locale),
-        xx = dt_xx(input_dt, tz_info, locale),
-        xxx = dt_xxx(input_dt, tz_info, locale),
-        xxxx = dt_xxxx(input_dt, tz_info, locale),
-        xxxxx = dt_xxxxx(input_dt, tz_info, locale)
-      ),
-      pattern_list$format
-    )
+  dt_lett <- pattern_list$letters
+  dt <- pattern_list$format
+
+  if ("G" %in% dt_lett) {
+    dt <- gsub("{G}", dt_G(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{GG}", dt_G(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{GGG}", dt_G(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{GGGG}", dt_GGGG(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{GGGGG}", dt_GGGGG(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("y" %in% dt_lett) {
+    dt <- gsub("{y}", dt_y(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yy}", dt_yy(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yyy}", dt_yyy(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yyyy}", dt_yyyy(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yyyyy}", dt_yyyyy(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yyyyyy}", dt_yyyyyy(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yyyyyyy}", dt_yyyyyyy(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yyyyyyyy}", dt_yyyyyyyy(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{yyyyyyyyy}", dt_yyyyyyyyy(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("Y" %in% dt_lett) {
+    dt <- gsub("{Y}", dt_Y(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{YY}", dt_YY(input_dt), dt, fixed = TRUE)
+  }
+
+  dt <- gsub("{u}", dt_u(input_dt), dt, fixed = TRUE)
+
+  if ("U" %in% dt_lett) {
+    dt <- gsub("{U}", dt_U(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{UU}", dt_U(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{UUU}", dt_U(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{UUUU}", dt_UUUU(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{UUUUU}", dt_UUUUU(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("Q" %in% dt_lett) {
+    dt <- gsub("{Q}", dt_Q(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{QQ}", dt_QQ(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{QQQ}", dt_QQQ(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{QQQQ}", dt_QQQQ(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{QQQQQ}", dt_QQQQQ(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("q" %in% dt_lett) {
+    dt <- gsub("{q}", dt_q(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{qq}", dt_qq(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{qqq}", dt_qqq(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{qqqq}", dt_qqqq(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{qqqqq}", dt_qqqqq(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("M" %in% dt_lett) {
+    dt <- gsub("{M}", dt_M(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{MM}", dt_MM(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{MMM}", dt_MMM(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{MMMM}", dt_MMMM(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{MMMMM}", dt_MMMMM(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("L" %in% dt_lett) {
+    dt <- gsub("{L}", dt_L(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{LL}", dt_LL(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{LLL}", dt_LLL(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{LLLL}", dt_LLLL(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{LLLLL}", dt_LLLLL(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("w" %in% dt_lett) {
+    dt <- gsub("{w}", dt_w(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{ww}", dt_ww(input_dt), dt, fixed = TRUE)
+  }
+
+  dt <- gsub("{W}", dt_W(input_dt), dt, fixed = TRUE)
+
+  if ("d" %in% dt_lett) {
+    dt <- gsub("{d}", dt_d(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{dd}", dt_dd(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("D" %in% dt_lett) {
+    dt <- gsub("{D}", dt_D(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{DD}", dt_DD(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{DDD}", dt_DDD(input_dt), dt, fixed = TRUE)
+  }
+
+  dt <- gsub("{F}", dt_F(input_dt), dt, fixed = TRUE)
+
+  if ("E" %in% dt_lett) {
+    dt <- gsub("{E}", dt_E(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{EE}", dt_E(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{EEE}", dt_E(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{EEEE}", dt_EEEE(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{EEEEE}", dt_EEEEE(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{EEEEEE}", dt_EEEEEE(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("e" %in% dt_lett) {
+    dt <- gsub("{e}", dt_e(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{ee}", dt_ee(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{eee}", dt_eee(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{eeee}", dt_eeee(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{eeeee}", dt_eeeee(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{eeeeee}", dt_eeeeee(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("c" %in% dt_lett) {
+    dt <- gsub("{c}", dt_c(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{cc}", dt_cc(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{ccc}", dt_ccc(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{cccc}", dt_cccc(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{ccccc}", dt_ccccc(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{cccccc}", dt_cccccc(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("a" %in% dt_lett) {
+    dt <- gsub("{a}", dt_a(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{aa}", dt_a(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{aaa}", dt_a(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{aaaa}", dt_aaaa(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{aaaaa}", dt_aaaaa(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("b" %in% dt_lett) {
+    dt <- gsub("{b}", dt_b(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{bb}", dt_b(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{bbb}", dt_b(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{bbbb}", dt_bbbb(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{bbbbb}", dt_bbbbb(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("B" %in% dt_lett) {
+    dt <- gsub("{B}", dt_B(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{BB}", dt_B(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{BBB}", dt_B(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{BBBB}", dt_BBBB(input_dt, locale), dt, fixed = TRUE)
+    dt <- gsub("{BBBBB}", dt_BBBBB(input_dt, locale), dt, fixed = TRUE)
+  }
+
+  if ("h" %in% dt_lett) {
+    dt <- gsub("{h}", dt_h(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{hh}", dt_hh(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("H" %in% dt_lett) {
+    dt <- gsub("{H}", dt_H(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{HH}", dt_HH(input_dt), dt, fixed = TRUE)
+  }
+
+
+  if ("k" %in% dt_lett) {
+    dt <- gsub("{k}", dt_k(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{kk}", dt_kk(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("K" %in% dt_lett) {
+    dt <- gsub("{K}", dt_K(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{KK}", dt_KK(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("m" %in% dt_lett) {
+    dt <- gsub("{m}", dt_m(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{mm}", dt_mm(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("s" %in% dt_lett) {
+    dt <- gsub("{s}", dt_s(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{ss}", dt_ss(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("z" %in% dt_lett) {
+    dt <- gsub("{z}", dt_z(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{zz}", dt_z(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{zzz}", dt_z(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{zzzz}", dt_zzzz(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  if ("Z" %in% dt_lett) {
+    dt <- gsub("{Z}", dt_Z(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{ZZ}", dt_Z(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{ZZZ}", dt_Z(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{ZZZZ}", dt_ZZZZ(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{ZZZZZ}", dt_ZZZZZ(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  if ("O" %in% dt_lett) {
+    dt <- gsub("{O}", dt_O(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{OOOO}", dt_OOOO(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  if ("v" %in% dt_lett) {
+    dt <- gsub("{v}", dt_v(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{vvvv}", dt_vvvv(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  if ("V" %in% dt_lett) {
+    dt <- gsub("{V}", dt_V(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{VV}", dt_VV(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{VVV}", dt_VVV(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{VVVV}", dt_VVVV(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  if ("X" %in% dt_lett) {
+    dt <- gsub("{X}", dt_X(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{XX}", dt_XX(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{XXX}", dt_XXX(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{XXXX}", dt_XXXX(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{XXXXX}", dt_XXXXX(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  if ("x" %in% dt_lett) {
+    dt <- gsub("{x}", dt_x(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{xx}", dt_xx(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{xxx}", dt_xxx(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{xxxx}", dt_xxxx(input_dt, tz_info, locale), dt, fixed = TRUE)
+    dt <- gsub("{xxxxx}", dt_xxxxx(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  dt <- gsub("\\{(.*?)\\}", "\\1", dt)
 
   # Replace string literal markers `'<#>'` with captured literal values
   for (i in seq_along(pattern_list$literals)) {
 
-    output_dt <-
+    dt <-
       gsub(
         paste0("'", i, "'"),
         pattern_list$literals[i],
-        output_dt,
+        dt,
         fixed = TRUE
       )
   }
 
   # Replace each instance of `''` with `'`
-  output_dt <- gsub("''", "'", output_dt, fixed = TRUE)
+  dt <- gsub("''", "'", dt, fixed = TRUE)
 
-  output_dt
+  dt
 }
 
 sub_letters <- function() {
@@ -321,7 +414,8 @@ dt_format_to_glue_pattern <- function(format) {
 
   list(
     format = format,
-    literals = literals
+    literals = literals,
+    letters = dt_letters
   )
 }
 
