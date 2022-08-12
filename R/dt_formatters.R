@@ -616,8 +616,8 @@ dt_z <- function(input, tz_info, locale = NULL) {
     return(out)
   }
 
-  # If we don't have either, return `character(0)`
-  character(0)
+  # If we don't have either, return an empty string`
+  ""
 }
 
 # TZ // long specific non-location format ("Pacific Daylight Time") (Z..ZZZ)
