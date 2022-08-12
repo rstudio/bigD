@@ -190,13 +190,11 @@ get_tz_offset_val_from_tz_str <- function(tz_str) {
   offset_val
 }
 
-get_tz_offset_val <- function(input) {
+get_tz_offset_val <- function(input, tz_str = NULL) {
 
-  if (!is_tz_present(input = input)) {
-    return(NA_real_)
+  if (is.null(tz_str)) {
+    tz_str <- get_tz_str(input = input)
   }
-
-  tz_str <- get_tz_str(input = input)
 
   get_tz_offset_val_from_tz_str(tz_str = tz_str)
 }
