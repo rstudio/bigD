@@ -31,12 +31,6 @@ format_tz_offset_min_sec <- function(
   )
 }
 
-# TZ // ISO 8601 basic format ("-08"), optional minutes,
-# doesn't use "Z"
-dt_x <- function(input, tz_info, locale = NULL) {
-  "x"
-}
-
 # Era // abbreviated (G..GGG) (AD, variant: CE)
 dt_G <- function(input, locale = NULL) {
   "G"
