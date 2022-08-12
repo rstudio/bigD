@@ -37,8 +37,8 @@ fmt_dt <- function(
       tz_long_specific = NA_character_
     )
 
-  # Modify the `format` string so it is `glue_dt()` formattable
-  pattern_list <- dt_format_to_glue_pattern(format = format)
+  # Modify the `format` string so it can be more precisely formatted
+  pattern_list <- dt_format_pattern(format = format)
 
   if (is.character(input)) {
 
@@ -112,7 +112,7 @@ fmt_dt <- function(
     tz_info$tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
   }
 
-  dt_lett <- pattern_list$letters
+  dt_lett <- pattern_list$dt_letters
   dt <- pattern_list$format
 
   if ("G" %in% dt_lett) {
@@ -402,7 +402,7 @@ extract_literals_from_pattern <- function(string) {
   )
 }
 
-dt_format_to_glue_pattern <- function(format) {
+dt_format_pattern <- function(format) {
 
   literals <- extract_literals_from_pattern(string = format)
 
@@ -427,12 +427,6 @@ dt_format_to_glue_pattern <- function(format) {
   list(
     format = format,
     literals = literals,
-    letters = dt_letters
-  )
-}
-
-glue_dt <- function (.x, ...) {
-  as.character(
-    glue::glue_data(.x, ..., .transformer = get, .envir = emptyenv())
+    dt_letters = dt_letters
   )
 }
