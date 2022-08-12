@@ -70,7 +70,19 @@ fmt_dt <- function(
     }
 
     # Derive more detailed time zone information from the `long_tzid` value
-    if (long_tzid_present) {
+    if (!is.null(use_tz)) {
+
+      # Validate and then normalize the provided time zone
+      validate_long_tzid(long_tzid = use_tz)
+      long_tzid <- normalize_long_tzid(long_tzid = use_tz)
+
+      tz_info$long_tzid <- long_tzid
+      tz_info$tz_str <- long_tzid_to_tz_str(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+      tz_info$tz_offset <- get_tz_offset_val_from_tz_str(tz_str = tz_info$tz_str)
+      tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+      tz_info$tz_long_specific <- get_tz_long_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt, locale = locale)
+
+    } else if (long_tzid_present) {
 
       tz_info$long_tzid <- get_long_tzid_str(input = input)
       tz_info$tz_str <- long_tzid_to_tz_str(long_tzid = tz_info$long_tzid, input_dt = input_dt)
