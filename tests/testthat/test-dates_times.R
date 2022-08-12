@@ -1417,4 +1417,65 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
     expect_equal("2015-09-19 08:00:00 +00:00")
   fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 +00:00")
+
+  #
+  # Test that the time zone can be overridden with the `use_tz` argument
+  #
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_20,
+    format = "y-MM-dd HH:mm:ss xx",
+    use_tz = "America/Toronto"
+  ) %>%
+    expect_equal("2018-07-04 22:05:00 -0400")
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_14,
+    format = "y-MM-dd HH:mm:ss xx",
+    use_tz = "America/Toronto"
+  ) %>%
+    expect_equal("2013-01-01 08:00:00 -0500")
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_14,
+    format = "y-MM-dd HH:mm:ss VVVV",
+    use_tz = "America/Toronto"
+  ) %>%
+    expect_equal("2013-01-01 08:00:00 Toronto Time")
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_14,
+    format = "y-MM-dd HH:mm:ss V",
+    use_tz = "America/Toronto"
+  ) %>%
+    expect_equal("2013-01-01 08:00:00 cator")
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_20,
+    format = "y-MM-dd HH:mm:ss xx",
+    use_tz = "Australia/NSW"
+  ) %>%
+    expect_equal("2018-07-04 22:05:00 +1000")
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_14,
+    format = "y-MM-dd HH:mm:ss xx",
+    use_tz = "Australia/NSW"
+  ) %>%
+    expect_equal("2013-01-01 08:00:00 +1100")
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_14,
+    format = "y-MM-dd HH:mm:ss VVVV",
+    use_tz = "Australia/NSW"
+  ) %>%
+    expect_equal("2013-01-01 08:00:00 Sydney Time")
+
+  fmt_dt(
+    input = dt_list$iso_datetime_tz_14,
+    format = "y-MM-dd HH:mm:ss V",
+    use_tz = "Australia/NSW"
+  ) %>%
+    expect_equal("2013-01-01 08:00:00 ausyd")
 })
+
