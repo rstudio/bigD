@@ -76,19 +76,18 @@ dt_GGGGG <- function(input, locale = NULL) {
 
 # Calendar year
 dt_y <- function(input) {
-  as.character(lubridate::year(input))
+  format(input, format = "%Y")
 }
 
 # Abbreviated year (final 2 digits)
 dt_yy <- function(input) {
-  year_str <- as.character(lubridate::year(input))
-  substr(year_str, nchar(year_str) - 1, nchar(year_str))
+  format(input, format = "%y")
 }
 
 # Full year with minimum zero padding (yyy -> 2, yyyy -> 3, etc.)
 dt_yyy_plus <- function(input, length) {
   zero_pad_to_width(
-    value = lubridate::year(input),
+    value = format(input, format = "%y"),
     width = length
   )
 }
@@ -104,7 +103,8 @@ dt_yyyyyyyyy <- function(input) dt_yyy_plus(input = input, length = 9)
 
 # Full year (week in year calendar)
 dt_Y <- function(input) {
-  as.character(lubridate::isoyear(input))
+  yearweek <- format_yearweek(input = input)
+  unlist(strsplit(yearweek, "-W"))[[1]]
 }
 
 # Abbreviated year (2 digit) (week in year calendar)
