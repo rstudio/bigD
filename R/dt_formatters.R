@@ -31,6 +31,34 @@ format_tz_offset_min_sec <- function(
   )
 }
 
+format_yearweek <- function(input) {
+
+  date_input <- as.Date(input, format = "%Y-%m-%d")
+  day_input <- as.integer(format(date_input, format = "%d"))
+  month_input <- as.integer(format(date_input, format = "%m"))
+
+  yearweek_int <- as.integer(strftime(date_input, format = "%Y%V"))
+  week_int <- as.integer(strftime(date_input, format = "%V"))
+
+  yearweek_int_res <-
+    ifelse(
+      day_input > 7 & week_int == 1,
+      yearweek_int + 100,
+      ifelse(
+        as.integer(format(date_input, format = "%m")) == 1 & week_int > 51,
+        yearweek_int - 100,
+        yearweek_int
+      )
+    )
+
+  yearweek_int_res_char <- as.character(yearweek_int_res)
+
+  week_part <- substr(yearweek_int_res_char, nchar(yearweek_int_res_char) - 1, nchar(yearweek_int_res_char))
+  year_part <- substr(yearweek_int_res_char, 1, nchar(yearweek_int_res_char) - 2)
+
+  paste0(year_part, "-W", week_part)
+}
+
 # Era // abbreviated (G..GGG) (AD, variant: CE)
 dt_G <- function(input, locale = NULL) {
   "G"
