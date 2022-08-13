@@ -63,9 +63,13 @@ fmt_dt <- function(
 
     # Obtain the date and time
     if (date_present) {
+
       input_dt <- as.POSIXct(gsub("T", " ", input_str), tz = "UTC")
+
     } else if (!date_present && time_present) {
-      input_str <- paste0("2015-01-01T", input_str)
+
+      date_now <- as.character(Sys.Date())
+      input_str <- paste0(date_now, "T", input_str)
       input_dt <- as.POSIXct(gsub("T", " ", input_str), tz = "UTC")
     }
 
