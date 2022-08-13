@@ -61,17 +61,35 @@ format_yearweek <- function(input) {
 
 # Era // abbreviated (G..GGG) (AD, variant: CE)
 dt_G <- function(input, locale = NULL) {
-  "G"
+
+  year <- as.integer(dt_Y(input = input))
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$eras_abbrev
+  )[[if (year < 0) "0" else "1"]]
 }
 
 # Era // wide (Anno Domini, variant: Common Era)
 dt_GGGG <- function(input, locale = NULL) {
-  "GGGG"
+
+  year <- as.integer(dt_Y(input = input))
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$eras_names
+  )[[if (year < 0) "0" else "1"]]
 }
 
 # Era // narrow (A)
 dt_GGGGG <- function(input, locale = NULL) {
-  "GGGGG"
+
+  year <- as.integer(dt_Y(input = input))
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$eras_narrow
+  )[[if (year < 0) "0" else "1"]]
 }
 
 # Calendar year
