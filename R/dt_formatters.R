@@ -136,7 +136,7 @@ dt_yy <- function(input) {
 # Full year with minimum zero padding (yyy -> 2, yyyy -> 3, etc.)
 dt_yyy_plus <- function(input, length) {
   zero_pad_to_width(
-    value = format(input, format = "%y"),
+    value = format(input, format = "%Y"),
     width = length
   )
 }
@@ -207,63 +207,111 @@ dt_r_plus <- function(input, length) {
 
 # Quarter (formatting), numeric (1 digit-wide)
 dt_Q <- function(input) {
-  "Q"
+  yearquarter <- format_quarter(input = input)
+  unlist(strsplit(yearquarter, "-Q"))[[2]]
 }
 
 # Quarter (formatting), numeric (2 digit-wide, zero padded)
 dt_QQ <- function(input) {
-  "QQ"
+
+  yearquarter <- format_quarter(input = input)
+
+  zero_pad_to_width(
+    value = as.integer(unlist(strsplit(yearquarter, "-Q"))[[2]]),
+    width = 2
+  )
 }
 
 # Quarter (formatting), abbreviated
 dt_QQQ <- function(input, locale = NULL) {
-  "QQQ"
+
+  yearquarter <- format_quarter(input = input)
+  quarter <- as.integer(unlist(strsplit(yearquarter, "-Q"))[[2]])
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$quarters_format_abbrev
+  )[[quarter]]
 }
 
 # Quarter (formatting), wide
 dt_QQQQ <- function(input, locale = NULL) {
-  "QQQQ"
+
+  yearquarter <- format_quarter(input = input)
+  quarter <- as.integer(unlist(strsplit(yearquarter, "-Q"))[[2]])
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$quarters_format_wide
+  )[[quarter]]
 }
 
 # Quarter (formatting), narrow
 dt_QQQQQ <- function(input, locale = NULL) {
-  "QQQQQ"
+
+  yearquarter <- format_quarter(input = input)
+  quarter <- as.integer(unlist(strsplit(yearquarter, "-Q"))[[2]])
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$quarters_format_narrow
+  )[[quarter]]
 }
 
 # Quarter (standalone), numeric (1 digit)
 dt_q <- function(input) {
-  "q"
+  dt_Q(input = input)
 }
 
 # Quarter (standalone), numeric (2 digit, zero padded)
 dt_qq <- function(input) {
-  "qq"
+  dt_QQ(input = input)
 }
 
 # Quarter (standalone), abbreviated
 dt_qqq <- function(input, locale = NULL) {
-  "qqq"
+
+  yearquarter <- format_quarter(input = input)
+  quarter <- as.integer(unlist(strsplit(yearquarter, "-Q"))[[2]])
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$quarters_standalone_abbrev
+  )[[quarter]]
 }
 
 # Quarter (standalone), wide
 dt_qqqq <- function(input, locale = NULL) {
-  "qqqq"
+
+  yearquarter <- format_quarter(input = input)
+  quarter <- as.integer(unlist(strsplit(yearquarter, "-Q"))[[2]])
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$quarters_standalone_wide
+  )[[quarter]]
 }
 
 # Quarter (standalone), narrow
 dt_qqqqq <- function(input, locale = NULL) {
-  "qqqqq"
+
+  yearquarter <- format_quarter(input = input)
+  quarter <- as.integer(unlist(strsplit(yearquarter, "-Q"))[[2]])
+
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$quarters_standalone_narrow
+  )[[quarter]]
 }
 
 # Month (format), numeric form (1 digit) ("9")
 dt_M <- function(input) {
-  as.character(lubridate::month(input))
+  as.character(as.integer(format(input, format = "%m")))
 }
 
 # Month (format), numeric form (2 digit, zero padded) ("09")
 dt_MM <- function(input) {
-  month_val <- lubridate::month(input)
-  zero_pad_to_width(value = month_val, width = 2)
+  format(input, format = "%m")
 }
 
 # Month (format), abbreviated ("Sep")
@@ -271,7 +319,7 @@ dt_MMM <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$months_format_abbrev
-  )[[lubridate::month(input)]]
+  )[[as.integer(format(input, format = "%m"))]]
 }
 
 # Month (format), full ("September")
@@ -279,18 +327,15 @@ dt_MMMM <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$months_format_wide
-  )[[lubridate::month(input)]]
+  )[[as.integer(format(input, format = "%m"))]]
 }
 
 # Month (format), narrow ("S")
 dt_MMMMM <- function(input, locale = NULL) {
-  substr(
-    cldr_dates_bigd(
-      locale = locale,
-      element = dates_elements_bigd$months_format_abbrev
-    )[[lubridate::month(input)]],
-    1, 1
-  )
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$months_format_narrow
+  )[[as.integer(format(input, format = "%m"))]]
 }
 
 # Month (standalone), numeric form (1 digit) ("9")
@@ -305,65 +350,84 @@ dt_LL <- function(input) {
 
 # Month (standalone), abbreviated ("Sep")
 dt_LLL <- function(input, locale = NULL) {
-  "LLL"
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$months_standalone_abbrev
+  )[[as.integer(format(input, format = "%m"))]]
 }
 
 # Month (standalone), full ("September")
 dt_LLLL <- function(input, locale = NULL) {
-  "LLLL"
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$months_standalone_wide
+  )[[as.integer(format(input, format = "%m"))]]
 }
 
 # Month (standalone), narrow ("S")
 dt_LLLLL <- function(input, locale = NULL) {
-  "LLLLL"
+  cldr_dates_bigd(
+    locale = locale,
+    element = dates_elements_bigd$months_standalone_narrow
+  )[[as.integer(format(input, format = "%m"))]]
 }
 
 # Week of year, numeric, 1-2 digits
 dt_w <- function(input) {
-  "w"
+  yearweek <- format_yearweek(input = input)
+  as.character(as.integer(unlist(strsplit(yearweek, "-W"))[[2]]))
 }
 
 # Week of year, numeric, 2 digits zero-padded
 dt_ww <- function(input) {
-  "ww"
+
+  yearweek <- format_yearweek(input = input)
+
+  zero_pad_to_width(
+    value = as.integer(unlist(strsplit(yearweek, "-W"))[[2]]),
+    width = 2
+  )
 }
 
 # Week of month, numeric, 1 digit
 dt_W <- function(input) {
-  "W"
+  as.character(get_week_in_month(input))
 }
 
 # Day of month, numeric, 1-2 digits
 dt_d <- function(input) {
-  zero_pad_to_width(lubridate::day(input), 1)
+  as.character(as.integer(format(input, format = "%d")))
 }
 
 # Day of month, numeric, 2 digits zero padded
 dt_dd <- function(input) {
-  zero_pad_to_width(lubridate::day(input), 2)
+  zero_pad_to_width(value = as.integer(format(input, format = "%d")), width = 2)
 }
 
 # Day of year, numeric, 1-3 digits
 dt_D <- function(input) {
-  zero_pad_to_width(lubridate::yday(input), 1)
+  j_day <- as.integer(format(input, format = "%j"))
+  zero_pad_to_width(value = j_day, width = 1)
 }
 
 # Day of year, numeric, 2-3 digits zero-padded
 dt_DD <- function(input) {
-  zero_pad_to_width(lubridate::yday(input), 2)
+  j_day <- as.integer(format(input, format = "%j"))
+  zero_pad_to_width(value = j_day, width = 2)
 }
 
 # Day of year, numeric, 3 digits zero-padded
 dt_DDD <- function(input) {
-  zero_pad_to_width(lubridate::yday(input), 3)
+  j_day <- as.integer(format(input, format = "%j"))
+  zero_pad_to_width(value = j_day, width = 3)
 }
 
-# Day of week in month, numeric, 1 digit
+# Day of week in month, numeric, 1 digit ("2", as in the 2nd Wed in July")
 dt_F <- function(input) {
   "F"
 }
 
-# Modified Julian Day, numeric
+# Modified Julian Day, numeric ("2451334")
 dt_g_plus <- function(input, length) {
   "g_plus"
 }
@@ -371,94 +435,140 @@ dt_g_plus <- function(input, length) {
 # Day of Week Name // abbreviated (E..EEE) ("Tue")
 dt_E <- function(input, locale = NULL) {
 
-  # FIXME: should be abbreviated and not short (provides "Tu")
+  dow <- as.integer(format(input, format = "%w")) + 1L
+
   cldr_dates_bigd(
     locale = locale,
-    element = dates_elements_bigd$days_standalone_short
-  )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
+    element = dates_elements_bigd$days_standalone_abbrev
+  )[[cldr_wkdays()[dow]]]
 }
 
 # Day of Week Name // wide ("Tuesday")
 dt_EEEE <- function(input, locale = NULL) {
+
+  dow <- as.integer(format(input, format = "%w")) + 1L
+
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$days_standalone_wide
-  )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
+  )[[cldr_wkdays()[dow]]]
 }
 
 # Day of Week Name // narrow ("T")
 dt_EEEEE <- function(input, locale = NULL) {
+
+  dow <- as.integer(format(input, format = "%w")) + 1L
+
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$days_standalone_narrow
-  )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
+  )[[cldr_wkdays()[dow]]]
 }
 
 # Day of Week Name // short ("Tu")
 dt_EEEEEE <- function(input, locale = NULL) {
+
+  dow <- as.integer(format(input, format = "%w")) + 1L
+
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$days_standalone_short
-  )[[cldr_wkdays()[lubridate::wday(input, abbr = TRUE)]]]
+  )[[cldr_wkdays()[dow]]]
 }
 
 # Local Day of Week Name/Number // 1 digit
 dt_e <- function(input, locale = NULL) {
+
+  # TODO: get starting day of the week for locale
+
   "e"
 }
 
 # Local Day of Week Name/Number // 2 digit, zero padded
 dt_ee <- function(input, locale = NULL) {
+
+  # TODO: get starting day of the week for locale
+
   "ee"
 }
 
 # Local Day of Week Name/Number // abbreviated ("Tue")
 dt_eee <- function(input, locale = NULL) {
-  dt_E(input, locale)
+
+  # TODO: get starting day of the week for locale
+
+  "eee"
 }
 
 # Local Day of Week Name/Number // wide ("Tuesday")
 dt_eeee <- function(input, locale = NULL) {
-  dt_EEEE(input, locale)
+
+  # TODO: get starting day of the week for locale
+
+  "eeee"
 }
 
 # Local Day of Week Name/Number // narrow ("T")
 dt_eeeee <- function(input, locale = NULL) {
-  dt_EEEEE(input, locale)
+
+  # TODO: get starting day of the week for locale
+
+  "eeeee"
 }
 
 # Local Day of Week Name/Number // short ("Tu")
 dt_eeeeee <- function(input, locale = NULL) {
-  dt_EEEEEE(input, locale)
+
+  # TODO: get starting day of the week for locale
+
+  "eeeeee"
 }
 
 # Standalone Local Day of Week Name/Number // 1 digit
 dt_c <- function(input, locale = NULL) {
-  dt_e(input, locale)
+
+  # TODO: get starting day of the week for locale
+
+  "c"
 }
 
 # Standalone Local Day of Week Name/Number // 2 digit, zero padded
 dt_cc <- function(input, locale = NULL) {
-  dt_ee(input_locale)
+
+  # TODO: get starting day of the week for locale
+
+  "cc"
 }
 
 # Standalone Local Day of Week Name/Number // abbreviated ("Tue")
 dt_ccc <- function(input, locale = NULL) {
+
+  # TODO: get starting day of the week for locale
+
   "ccc"
 }
 
 # Standalone Local Day of Week Name/Number // wide ("Tuesday")
 dt_cccc <- function(input, locale = NULL) {
+
+  # TODO: get starting day of the week for locale
+
   "cccc"
 }
 
 # Standalone Local Day of Week Name/Number // narrow ("T")
 dt_ccccc <- function(input, locale = NULL) {
+
+  # TODO: get starting day of the week for locale
+
   "ccccc"
 }
 
 # Standalone Local Day of Week Name/Number // short ("Tu")
 dt_cccccc <- function(input, locale = NULL) {
+
+  # TODO: get starting day of the week for locale
+
   "cccccc"
 }
 
@@ -467,7 +577,7 @@ dt_a <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_abbrev
-  )[[ifelse(lubridate::am(input), "am", "pm")]]
+  )[[format(input, format = "%p")]]
 }
 
 # Period: am, pm // wide
@@ -475,7 +585,7 @@ dt_aaaa <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_wide
-  )[[ifelse(lubridate::am(input), "am", "pm")]]
+  )[[format(input, format = "%p")]]
 }
 
 # Period: am, pm // narrow
@@ -483,7 +593,7 @@ dt_aaaaa <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_narrow
-  )[[ifelse(lubridate::am(input), "am", "pm")]]
+  )[[format(input, format = "%p")]]
 }
 
 # Period: am, pm, noon, midnight // abbreviated (b..bbb)
@@ -518,49 +628,42 @@ dt_BBBBB <- function(input, locale = NULL) {
 
 # Hour [1-12] // numeric, 1-2 digits
 dt_h <- function(input) {
-  zero_pad_to_width(lubridate::hour(input), 1)
+  zero_pad_to_width(value = as.integer(format(input, format = "%I")), width = 1)
 }
 
 # Hour [1-12] // numeric, 2 digits, zero padded
 dt_hh <- function(input) {
-  zero_pad_to_width(lubridate::hour(input), 2)
+  zero_pad_to_width(value = as.integer(format(input, format = "%I")), width = 2)
 }
 
 # Hour [0-23] // numeric, 1-2 digits
 dt_H <- function(input) {
-  zero_pad_to_width(lubridate::hour(input), 1)
+  zero_pad_to_width(value = as.integer(format(input, format = "%H")), width = 1)
 }
 
 # Hour [0-23] // numeric, 2 digits, zero padded
 dt_HH <- function(input) {
-  zero_pad_to_width(lubridate::hour(input), 2)
+  zero_pad_to_width(value = as.integer(format(input, format = "%H")), width = 2)
 }
 
 # Hour [0-11] // numeric, 1-2 digits
 dt_K <- function(input) {
-  out <- lubridate::hour(input)
-  if (out > 12) out <- out - 12
-  as.character(out)
+  zero_pad_to_width(value = as.integer(format(input, format = "%I")) - 1, width = 1)
 }
 
 # Hour [0-11] // numeric, 2 digits, zero padded
 dt_KK <- function(input) {
-  out <- lubridate::hour(input)
-  if (out > 12) out <- out - 12
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(value = as.integer(format(input, format = "%I")) - 1, width = 2)
 }
 
 # Hour [1-24] // numeric, 1-2 digits
 dt_k <- function(input) {
-  as.character(lubridate::hour(input) + 1L)
+  zero_pad_to_width(value = as.integer(format(input, format = "%H")) + 1, width = 1)
 }
 
 # Hour [1-24] // numeric, 2 digits, zero padded
 dt_kk <- function(input) {
-  out <- lubridate::hour(input) + 1L
-  if (out < 10) out <- paste0("0", out)
-  as.character(out)
+  zero_pad_to_width(value = as.integer(format(input, format = "%H")) + 1, width = 2)
 }
 
 # Hour (Input Skeleton Symbol) // numeric, 1-2 digits + abbrev day period
@@ -635,22 +738,22 @@ dt_CCCCCC <- function(input) {
 
 # Minute // numeric, 1-2 digits
 dt_m <- function(input) {
-  zero_pad_to_width(lubridate::minute(input), 1)
+  zero_pad_to_width(value = as.integer(format(input, format = "%M")), width = 1)
 }
 
 # Minute // numeric, 2 digits, zero padded
 dt_mm <- function(input) {
-  zero_pad_to_width(lubridate::minute(input), 2)
+  zero_pad_to_width(value = as.integer(format(input, format = "%M")), width = 2)
 }
 
 # Second // numeric, 1-2 digits
 dt_s <- function(input) {
-  zero_pad_to_width(trunc(lubridate::second(input)), 1)
+  zero_pad_to_width(value = as.integer(format(input, format = "%S")), width = 1)
 }
 
 # Second // numeric, 2 digits, zero padded
 dt_ss <- function(input) {
-  zero_pad_to_width(trunc(lubridate::second(input)), 2)
+  zero_pad_to_width(value = as.integer(format(input, format = "%S")), width = 2)
 }
 
 # Fractional Second
