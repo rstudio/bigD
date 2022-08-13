@@ -59,6 +59,37 @@ format_yearweek <- function(input) {
   paste0(year_part, "-W", week_part)
 }
 
+get_week_in_month <- function(input) {
+
+  date_input <- as.Date(input, format = "%Y-%m-%d")
+
+  week_number <- as.integer(format(date_input, format = "%U"))
+  min_date_in_month <- as.Date(paste0(format(date_input, "%Y-%m"), "-01"))
+  week_num_mininmum <- as.integer(format(min_date_in_month, format = "%U"))
+
+  week_number - (week_num_mininmum - 1)
+}
+
+format_quarter <- function(input) {
+
+  date_input <- as.Date(input, format = "%Y-%m-%d")
+
+  month_input <- as.integer(format(date_input, format = "%m"))
+  year_input <- as.integer(format(date_input, format = "%Y"))
+
+  if (month_input < 4) {
+    quarter <- 1
+  } else if (month_input > 3 & month_input < 7) {
+    quarter <- 2
+  } else if (month_input > 6 & month_input < 10) {
+    quarter <- 3
+  } else if (month_input > 9) {
+    quarter <- 4
+  }
+
+  paste0(year_input, "-Q", quarter)
+}
+
 # Era // abbreviated (G..GGG) (AD, variant: CE)
 dt_G <- function(input, locale = NULL) {
 
