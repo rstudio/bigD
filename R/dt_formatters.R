@@ -109,7 +109,7 @@ dt_Y <- function(input) {
 
 # Abbreviated year (2 digit) (week in year calendar)
 dt_YY <- function(input) {
-  year_str <- as.character(lubridate::isoyear(input))
+  year_str <- dt_Y(input = input)
   substr(year_str, nchar(year_str) - 1, nchar(year_str))
 }
 
@@ -117,7 +117,7 @@ dt_YY <- function(input) {
 # (week in year calendar)
 dt_YYY_plus <- function(input, length) {
   zero_pad_to_width(
-    value = lubridate::isoyear(input),
+    value = as.integer(dt_Y(input = input)),
     width = length
   )
 }
