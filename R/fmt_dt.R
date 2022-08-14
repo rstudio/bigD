@@ -267,7 +267,6 @@ fmt_dt <- function(
     dt <- gsub("{HH}", dt_HH(input_dt), dt, fixed = TRUE)
   }
 
-
   if ("k" %in% dt_lett) {
     dt <- gsub("{k}", dt_k(input_dt), dt, fixed = TRUE)
     dt <- gsub("{kk}", dt_kk(input_dt), dt, fixed = TRUE)
@@ -334,6 +333,18 @@ fmt_dt <- function(
     dt <- gsub("{xxx}", dt_xxx(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- gsub("{xxxx}", dt_xxxx(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- gsub("{xxxxx}", dt_xxxxx(input_dt, tz_info, locale), dt, fixed = TRUE)
+  }
+
+  if ("g" %in% dt_lett) {
+    dt <- gsub("{g}", dt_g(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{gg}", dt_gg(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{ggg}", dt_ggg(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{gggg}", dt_gggg(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{ggggg}", dt_ggggg(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{gggggg}", dt_gggggg(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{ggggggg}", dt_ggggggg(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{gggggggg}", dt_gggggggg(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{ggggggggg}", dt_ggggggggg(input_dt), dt, fixed = TRUE)
   }
 
   dt <- gsub("\\{(.*?)\\}", "\\1", dt)

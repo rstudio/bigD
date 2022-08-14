@@ -70,6 +70,31 @@ get_week_in_month <- function(input) {
   week_number - (week_num_mininmum - 1)
 }
 
+get_modified_julian_day <- function(input) {
+
+  date_input <- as.Date(input, format = "%Y-%m-%d")
+  day_input <- as.integer(format(date_input, format = "%d"))
+  month_input <- as.integer(format(date_input, format = "%m"))
+  year_input <- as.integer(format(date_input, format = "%Y"))
+
+  if (month_input <= 2) {
+    m_x <- 1
+  } else {
+    m_x <- 0
+  }
+
+  m_m <- (12 * m_x) + month_input
+  y_x <- year_input - m_x
+  y_y <- floor(0.01 * y_x)
+
+  floor(365.25 * y_x) +
+    floor(30.6001 * (1 + m_m)) +
+    day_input +
+    1720995 +
+    (2 - (y_y - floor(0.25 * y_y))) -
+    2400001
+}
+
 format_quarter <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
@@ -429,8 +454,22 @@ dt_F <- function(input) {
 
 # Modified Julian Day, numeric ("2451334")
 dt_g_plus <- function(input, length) {
-  "g_plus"
+  zero_pad_to_width(
+    value = get_modified_julian_day(input = input),
+    width = length
+  )
 }
+
+# Calendar year (week in year calendar, min 3-9 digits wide)
+dt_g <- function(input) dt_g_plus(input = input, length = 1)
+dt_gg <- function(input) dt_g_plus(input = input, length = 2)
+dt_ggg <- function(input) dt_g_plus(input = input, length = 3)
+dt_gggg <- function(input) dt_g_plus(input = input, length = 4)
+dt_ggggg <- function(input) dt_g_plus(input = input, length = 5)
+dt_gggggg <- function(input) dt_g_plus(input = input, length = 6)
+dt_ggggggg <- function(input) dt_g_plus(input = input, length = 7)
+dt_gggggggg <- function(input) dt_g_plus(input = input, length = 8)
+dt_ggggggggg <- function(input) dt_g_plus(input = input, length = 9)
 
 # Day of Week Name // abbreviated (E..EEE) ("Tue")
 dt_E <- function(input, locale = NULL) {
