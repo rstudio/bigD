@@ -29,45 +29,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # back to the short localized GMT format `O`
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:38 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:38 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 PDT")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 PDT")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 PDT")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 PDT")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 PDT")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 PDT")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-09-06 08:00:00 GMT")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2012-11-26 08:00:00 SAST")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2013-01-01 08:00:00 IST")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2013-01-01 08:00:00 IST")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2014-05-15 08:00:00 CST")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2014-06-16 08:00:00 CDT")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2014-07-17 08:00:00 BST")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2015-08-18 08:00:00 GMT+0")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2015-09-19 08:00:00 GMT+0")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss zzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2018-07-04 22:05:00 GMT+0")
 
   #
@@ -78,8 +78,8 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
     dt_list[1:13],
     FUN = function(x) {
       expect_equal(
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss z"),
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss zzz")
+        fdt(input = x, format = "y-MM-dd HH:mm:ss z"),
+        fdt(input = x, format = "y-MM-dd HH:mm:ss zzz")
       )
     }
   )
@@ -87,8 +87,8 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
     dt_list[1:13],
     FUN = function(x) {
       expect_equal(
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss zz"),
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss zzz")
+        fdt(input = x, format = "y-MM-dd HH:mm:ss zz"),
+        fdt(input = x, format = "y-MM-dd HH:mm:ss zzz")
       )
     }
   )
@@ -99,45 +99,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # format `OOOO`
   #
   # Not yet implemented
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-09-06 08:00:00 Abidjan Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2012-11-26 08:00:00 Johannesburg Time")
-  # fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  # fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss zzzz") %>%
   #   expect_equal("2013-01-01 08:00:00 Unknown City Time") # FIXME: this is incorrect
-  # fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  # fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss zzzz") %>%
   #   expect_equal("2013-01-01 08:00:00 Unknown City Time") # FIXME: this is incorrect
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2014-05-15 08:00:00 Taipei Time")
-  # fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  # fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss zzzz") %>%
   #   expect_equal("2014-06-16 08:00:00 Unknown City Daylight Time") # FIXME: this is incorrect
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2014-07-17 08:00:00 London Daylight Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2015-08-18 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2015-09-19 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss zzzz") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:00 GMT+00:00")
 
 
@@ -145,45 +145,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # Checks with `ZZZ`: ISO8601 basic format
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-09-06 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2012-11-26 08:00:00 +0200")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2014-05-15 08:00:00 +0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2014-06-16 08:00:00 -0500")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2014-07-17 08:00:00 +0100")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2015-08-18 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2015-09-19 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss ZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss ZZZ") %>%
     expect_equal("2018-07-04 22:05:00 +0000")
 
   #
@@ -194,8 +194,8 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
     dt_list[1:13],
     FUN = function(x) {
       expect_equal(
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss Z"),
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss ZZZ")
+        fdt(input = x, format = "y-MM-dd HH:mm:ss Z"),
+        fdt(input = x, format = "y-MM-dd HH:mm:ss ZZZ")
       )
     }
   )
@@ -203,8 +203,8 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
     dt_list[1:13],
     FUN = function(x) {
       expect_equal(
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss ZZ"),
-        fmt_dt(input = x, format = "y-MM-dd HH:mm:ss ZZZ")
+        fdt(input = x, format = "y-MM-dd HH:mm:ss ZZ"),
+        fdt(input = x, format = "y-MM-dd HH:mm:ss ZZZ")
       )
     }
   )
@@ -213,180 +213,180 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # Checks with `ZZZZ`: long localized GMT format (e.g., 'GMT-8:00')
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-8:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-8:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:38 GMT-8:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:38 GMT-8:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-09-06 08:00:00 GMT+0:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2012-11-26 08:00:00 GMT+2:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2013-01-01 08:00:00 GMT+5:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2013-01-01 08:00:00 GMT+5:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2014-05-15 08:00:00 GMT+8:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2014-06-16 08:00:00 GMT-5:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2014-07-17 08:00:00 GMT+1:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2015-08-18 08:00:00 GMT+0:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2015-09-19 08:00:00 GMT+0:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss ZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 GMT+0:00")
 
   #
   # Checks with `ZZZZZ`: ISO8601 extended format (e.g., '-08:00')
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-09-06 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2012-11-26 08:00:00 +02:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2014-05-15 08:00:00 +08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2014-06-16 08:00:00 -05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2014-07-17 08:00:00 +01:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2015-08-18 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2015-09-19 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss ZZZZZ") %>%
     expect_equal("2018-07-04 22:05:00 Z")
 
   #
   # Checks with `O`: the short localized GMT format (e.g., 'GMT-8')
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:38 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:38 GMT-8")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-09-06 08:00:00 GMT+0")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2012-11-26 08:00:00 GMT+2")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2013-01-01 08:00:00 GMT+5:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2013-01-01 08:00:00 GMT+5:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2014-05-15 08:00:00 GMT+8")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2014-06-16 08:00:00 GMT-5")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2014-07-17 08:00:00 GMT+1")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2015-08-18 08:00:00 GMT+0")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2015-09-19 08:00:00 GMT+0")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss O") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT+0")
 
   #
   # Checks with `OOOO`: the long localized GMT format (e.g., 'GMT-08:00')
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-09-06 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2012-11-26 08:00:00 GMT+02:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2013-01-01 08:00:00 GMT+05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2013-01-01 08:00:00 GMT+05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2014-05-15 08:00:00 GMT+08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2014-06-16 08:00:00 GMT-05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2014-07-17 08:00:00 GMT+01:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2015-08-18 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2015-09-19 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss OOOO") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT+00:00")
 
   #
@@ -394,45 +394,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # back to `VVVV` and then to `OOOO`
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 PT")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 PT")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 PT")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 PT")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 PT")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 PT")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-09-06 08:00:00 Greenwich Mean Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2012-11-26 08:00:00 South Africa Standard Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2013-01-01 08:00:00 India Standard Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2013-01-01 08:00:00 India Standard Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2014-05-15 08:00:00 Taipei Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2014-06-16 08:00:00 GMT-05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2014-07-17 08:00:00 Greenwich Mean Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2015-08-18 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2015-09-19 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss v") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2018-07-04 22:05:00 GMT+00:00")
 
   #
@@ -440,45 +440,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # 'Pacific Time'); falls back to `VVVV` and then to `OOOO`
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 Pacific Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 Pacific Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 Pacific Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 Pacific Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 Pacific Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 Pacific Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-09-06 08:00:00 Greenwich Mean Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2012-11-26 08:00:00 South Africa Standard Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2013-01-01 08:00:00 India Standard Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2013-01-01 08:00:00 India Standard Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2014-05-15 08:00:00 Taipei Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2014-06-16 08:00:00 GMT-05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2014-07-17 08:00:00 Greenwich Mean Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2015-08-18 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2015-09-19 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss vvvv") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2018-07-04 22:05:00 GMT+00:00")
 
   #
@@ -486,90 +486,90 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # is unavailable, the special short time zone ID unk (Unknown Zone) is used.
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 unk")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 unk")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:38 unk")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:38 unk")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 cavan")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 cavan")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 cavan")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 cavan")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 cavan")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 cavan")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-09-06 08:00:00 ciabj")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2012-11-26 08:00:00 zajnb")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2013-01-01 08:00:00 inccu")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2013-01-01 08:00:00 inccu")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2014-05-15 08:00:00 twtpe")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2014-06-16 08:00:00 usknx")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2014-07-17 08:00:00 gblon")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2015-08-18 08:00:00 gmt")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2015-09-19 08:00:00 gmt")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss V") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss V") %>%
     expect_equal("2018-07-04 22:05:00 utc")
 
   #
   # Checks with `VV`: the long time zone ID (e.g., America/Los_Angeles)
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 ")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 ")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:38 ")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:38 ")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 America/Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 America/Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 America/Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 America/Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 America/Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 America/Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-09-06 08:00:00 Africa/Abidjan")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2012-11-26 08:00:00 Africa/Johannesburg")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2013-01-01 08:00:00 Asia/Kolkata")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2013-01-01 08:00:00 Asia/Kolkata")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2014-05-15 08:00:00 Asia/Taipei")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2014-06-16 08:00:00 America/Indiana/Knox")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2014-07-17 08:00:00 Europe/London")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2015-08-18 08:00:00 Etc/GMT")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2015-09-19 08:00:00 Etc/GMT")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss VV") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss VV") %>%
     expect_equal("2018-07-04 22:05:00 UTC")
 
   #
@@ -577,42 +577,42 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # use the Etc/Unknown fallback ('Unknown City')
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Unknown City")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Unknown City")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:38 Unknown City")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:38 Unknown City")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-09-06 08:00:00 Abidjan")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2012-11-26 08:00:00 Johannesburg")
-  # fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss VVV")
-  # fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss VVV")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss VVV") %>%
+  # fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss VVV")
+  # fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss VVV")
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2014-05-15 08:00:00 Taipei")
-  # fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss VVV")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss VVV") %>%
+  # fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss VVV")
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2014-07-17 08:00:00 London")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2015-08-18 08:00:00 Unknown City")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2015-09-19 08:00:00 Unknown City")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss VVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss VVV") %>%
     expect_equal("2018-07-04 22:05:00 Unknown City")
 
   #
@@ -620,45 +620,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # if not available then long localized GMT format (`OOOO`)
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 Vancouver Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-09-06 08:00:00 Abidjan Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2012-11-26 08:00:00 Johannesburg Time")
-  # fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  # fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss VVVV") %>%
   #   expect_equal("2013-01-01 08:00:00 Calcutta Time")
-  # fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  # fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss VVVV") %>%
   #   expect_equal("2013-01-01 08:00:00 GMT+05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2014-05-15 08:00:00 Taipei Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2014-06-16 08:00:00 GMT-05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2014-07-17 08:00:00 London Time")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2015-08-18 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2015-09-19 08:00:00 GMT+00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss VVVV") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2018-07-04 22:05:00 GMT+00:00")
 
   #
@@ -666,45 +666,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # 'Z' used when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:38 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:38 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-09-06 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2012-11-26 08:00:00 +02")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2014-05-15 08:00:00 +08")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2014-06-16 08:00:00 -05")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2014-07-17 08:00:00 +01")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2015-08-18 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2015-09-19 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss X") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss X") %>%
     expect_equal("2018-07-04 22:05:00 Z")
 
   #
@@ -712,45 +712,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-09-06 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2012-11-26 08:00:00 +0200")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2014-05-15 08:00:00 +0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2014-06-16 08:00:00 -0500")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2014-07-17 08:00:00 +0100")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2015-08-18 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2015-09-19 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XX") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XX") %>%
     expect_equal("2018-07-04 22:05:00 Z")
 
   #
@@ -758,45 +758,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # 'Z' used  when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-09-06 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2012-11-26 08:00:00 +02:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2014-05-15 08:00:00 +08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2014-06-16 08:00:00 -05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2014-07-17 08:00:00 +01:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2015-08-18 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2015-09-19 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XXX") %>%
     expect_equal("2018-07-04 22:05:00 Z")
 
   #
@@ -804,45 +804,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # optional seconds fields; 'Z' used  when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-09-06 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2012-11-26 08:00:00 +0200")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2014-05-15 08:00:00 +0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2014-06-16 08:00:00 -0500")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2014-07-17 08:00:00 +0100")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2015-08-18 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2015-09-19 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XXXX") %>%
     expect_equal("2018-07-04 22:05:00 Z")
 
   #
@@ -850,45 +850,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # optional seconds fields; 'Z' used when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-09-06 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2012-11-26 08:00:00 +02:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2014-05-15 08:00:00 +08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2014-06-16 08:00:00 -05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2014-07-17 08:00:00 +01:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2015-08-18 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2015-09-19 08:00:00 Z")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XXXXX") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss XXXXX") %>%
     expect_equal("2018-07-04 22:05:00 Z")
 
   #
@@ -896,45 +896,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # 'Z' *is not* used when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:38 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:38 -08")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 -07")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-09-06 08:00:00 +00")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2012-11-26 08:00:00 +02")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2014-05-15 08:00:00 +08")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2014-06-16 08:00:00 -05")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2014-07-17 08:00:00 +01")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2015-08-18 08:00:00 +00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2015-09-19 08:00:00 +00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss x") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss x") %>%
     expect_equal("2018-07-04 22:05:00 +00")
 
   #
@@ -942,45 +942,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # *is not* used when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-09-06 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2012-11-26 08:00:00 +0200")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2014-05-15 08:00:00 +0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2014-06-16 08:00:00 -0500")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2014-07-17 08:00:00 +0100")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2015-08-18 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2015-09-19 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xx") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xx") %>%
     expect_equal("2018-07-04 22:05:00 +0000")
 
   #
@@ -988,45 +988,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # 'Z' *is not* used when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-09-06 08:00:00 +00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2012-11-26 08:00:00 +02:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2014-05-15 08:00:00 +08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2014-06-16 08:00:00 -05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2014-07-17 08:00:00 +01:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2015-08-18 08:00:00 +00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2015-09-19 08:00:00 +00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xxx") %>%
     expect_equal("2018-07-04 22:05:00 +00:00")
 
   #
@@ -1034,45 +1034,45 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # optional seconds fields; 'Z' *is not* used when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:38 -0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 -0700")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-09-06 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2012-11-26 08:00:00 +0200")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2013-01-01 08:00:00 +0530")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2014-05-15 08:00:00 +0800")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2014-06-16 08:00:00 -0500")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2014-07-17 08:00:00 +0100")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2015-08-18 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2015-09-19 08:00:00 +0000")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xxxx") %>%
     expect_equal("2018-07-04 22:05:00 +0000")
 
   #
@@ -1080,101 +1080,101 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   # optional seconds fields; 'Z' *is not* used when local time offset is 0
   #
 
-  fmt_dt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_01, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_02, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_03, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:38 -08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 -07:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-09-06 08:00:00 +00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2012-11-26 08:00:00 +02:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2013-01-01 08:00:00 +05:30")
-  fmt_dt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2014-05-15 08:00:00 +08:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2014-06-16 08:00:00 -05:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2014-07-17 08:00:00 +01:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2015-08-18 08:00:00 +00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2015-09-19 08:00:00 +00:00")
-  fmt_dt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xxxxx") %>%
+  fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss xxxxx") %>%
     expect_equal("2018-07-04 22:05:00 +00:00")
 
   #
   # Test that the time zone can be overridden with the `use_tz` argument
   #
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_20,
     format = "y-MM-dd HH:mm:ss xx",
     use_tz = "America/Toronto"
   ) %>%
     expect_equal("2018-07-04 22:05:00 -0400")
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_14,
     format = "y-MM-dd HH:mm:ss xx",
     use_tz = "America/Toronto"
   ) %>%
     expect_equal("2013-01-01 08:00:00 -0500")
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_14,
     format = "y-MM-dd HH:mm:ss VVVV",
     use_tz = "America/Toronto"
   ) %>%
     expect_equal("2013-01-01 08:00:00 Toronto Time")
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_14,
     format = "y-MM-dd HH:mm:ss V",
     use_tz = "America/Toronto"
   ) %>%
     expect_equal("2013-01-01 08:00:00 cator")
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_20,
     format = "y-MM-dd HH:mm:ss xx",
     use_tz = "Australia/NSW"
   ) %>%
     expect_equal("2018-07-04 22:05:00 +1000")
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_14,
     format = "y-MM-dd HH:mm:ss xx",
     use_tz = "Australia/NSW"
   ) %>%
     expect_equal("2013-01-01 08:00:00 +1100")
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_14,
     format = "y-MM-dd HH:mm:ss VVVV",
     use_tz = "Australia/NSW"
   ) %>%
     expect_equal("2013-01-01 08:00:00 Sydney Time")
 
-  fmt_dt(
+  fdt(
     input = dt_list$iso_datetime_tz_14,
     format = "y-MM-dd HH:mm:ss V",
     use_tz = "Australia/NSW"

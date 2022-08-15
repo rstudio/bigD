@@ -1,6 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # bigD
 
 The goal of **bigD** is to flexibly format dates and times to a given
@@ -10,13 +7,13 @@ Given the ISO-8601 date string `"2018-07-04"` we can use formatting
 strings to precisely get the date in the form we need.
 
 ``` r
-fmt_dt(input = "2018-07-04", dt_format = "y/M/d")
+fdt(input = "2018-07-04", dt_format = "y/M/d")
 ```
 
     2018/7/4
 
 ``` r
-fmt_dt(input = "2018-07-04", dt_format = "MMMM d, y.")
+fdt(input = "2018-07-04", dt_format = "MMMM d, y.")
 ```
 
     July 4, 2018.
@@ -24,7 +21,7 @@ fmt_dt(input = "2018-07-04", dt_format = "MMMM d, y.")
 With the `locale` option, we can localize the date.
 
 ``` r
-fmt_dt(input = "2018-07-04", dt_format = "d. MMMM y (EEEE).", locale = "de")
+fdt(input = "2018-07-04", dt_format = "d. MMMM y (EEEE).", locale = "de")
 ```
 
     4. Juli 2018 (Mittwoch).
@@ -32,7 +29,7 @@ fmt_dt(input = "2018-07-04", dt_format = "d. MMMM y (EEEE).", locale = "de")
 With a datetime string, we have more possibilities.
 
 ``` r
-fmt_dt(
+fdt(
   input = "2018-07-24T14:44:22.234343-0800",
   dt_format = "MMM dd HH:mm:ss ZZZZ yyyy",
   locale = "fr"
@@ -42,7 +39,7 @@ fmt_dt(
     juil. 24 14:44:22 GMT-8:00 2018
 
 ``` r
-fmt_dt(
+fdt(
   input = "2018-07-24T14:44:22.234343-0800",
   dt_format = "MMMM dd HH:mm:ss 'yy XX",
   locale = "fi"

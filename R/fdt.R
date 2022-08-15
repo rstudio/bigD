@@ -1,5 +1,8 @@
 #' Format a datetime with a formatting string
 #'
+#' With `fdt()`, we can format datetime values with the greatest of ease, and,
+#' with great power.
+#'
 #' @param input The input datetime value. The appropriate representation should
 #'   use the following construction outlined in the ISO 8601:2004 standard:
 #'   `YYYY-MM-DDThh:mm:ss.s<TZD>` although some allowances made here to ease
@@ -16,7 +19,7 @@
 #'   then the `"en_US"` locale will be used.
 #'
 #' @export
-fmt_dt <- function(
+fdt <- function(
     input,
     format = NULL,
     use_tz = NULL,
