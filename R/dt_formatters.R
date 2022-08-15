@@ -144,6 +144,90 @@ get_modified_julian_day <- function(input) {
     2400001
 }
 
+get_flexible_day_period <- function(input, locale) {
+
+  locale_in_day_periods_tbl <- locale %in% day_periods[["locale"]]
+
+  # Verify that the supplied locale is defined within the `day_periods`
+  # table (use the base locale if necessary); return NA if not found
+  if (!locale_in_day_periods_tbl) {
+
+    base_locale <- gsub("^([a-z]*).*", "\\1", locale)
+
+    if (base_locale %in% day_periods[["locale"]]) {
+      locale <- base_locale
+    } else {
+      return(NA_character_)
+    }
+  }
+
+  input_lt <- as.POSIXlt(input, tz = "UTC")
+
+  time_str <-
+    paste0(
+      zero_pad_to_width(
+        value = input_lt$hour,
+        width = 2
+      ),
+      ":",
+      zero_pad_to_width(
+        value = input_lt$min,
+        width = 2
+      )
+    )
+
+  day_periods_locale <- day_periods[day_periods$locale == locale, ]
+
+  if (time_str == "00:00" && "00:00" %in% day_periods_locale$at) {
+
+    period <-
+      day_periods_locale[
+        !is.na(day_periods_locale$at) &
+          day_periods_locale$at == "00:00", , drop = FALSE
+      ][["period"]]
+
+  } else if (time_str == "12:00" && "12:00" %in% day_periods_locale$at) {
+
+    period <-
+      day_periods_locale[
+        !is.na(day_periods_locale$at) &
+          day_periods_locale$at == "12:00", , drop = FALSE
+      ][["period"]]
+
+  } else {
+
+    day_periods_locale_from_to <-
+      day_periods_locale[
+        !is.na(day_periods_locale$from), c("period", "from", "to")
+      ]
+
+    to_next_day_idx <-
+      which(day_periods_locale_from_to$to < day_periods_locale_from_to$from)
+
+    if (length(to_next_day_idx) == 1) {
+
+      row_1 <- row_2 <- day_periods_locale_from_to[to_next_day_idx, ]
+
+      row_1$to <- "24:00"
+      row_2$from <- "00:00"
+
+      day_periods_locale_from_to <-
+        rbind(
+          day_periods_locale_from_to[-to_next_day_idx, ],
+          row_1,
+          row_2
+        )
+    }
+
+    period <-
+      day_periods_locale_from_to[
+        day_periods_locale_from_to$from <= time_str &
+          time_str < day_periods_locale_from_to$to, ][["period"]]
+  }
+
+  period
+}
+
 format_quarter <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
@@ -701,17 +785,68 @@ dt_bbbbb <- function(input, locale = NULL) {
 
 # Flexible day periods // abbreviated (B..BBB)
 dt_B <- function(input, locale = NULL) {
-  "B"
+
+  period <- get_flexible_day_period(input = input, locale = locale)
+
+  if (is.na(period)) {
+    return(dt_a(input = input, locale = locale))
+  }
+
+  day_periods_locale <-
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$dayperiods_format_abbrev
+    )
+
+  if (!(period %in% names(day_periods_locale))) {
+    return(dt_a(input = input, locale = locale))
+  }
+
+  day_periods_locale[[period]]
 }
 
 # Flexible day periods // wide
 dt_BBBB <- function(input, locale = NULL) {
-  "BBBB"
+
+  period <- get_flexible_day_period(input = input, locale = locale)
+
+  if (is.na(period)) {
+    return(dt_aaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale <-
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$dayperiods_format_wide
+    )
+
+  if (!(period %in% names(day_periods_locale))) {
+    return(dt_aaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale[[period]]
 }
 
 # Flexible day periods // narrow
 dt_BBBBB <- function(input, locale = NULL) {
-  "BBBBB"
+
+  period <- get_flexible_day_period(input = input, locale = locale)
+
+  if (is.na(period)) {
+    return(dt_aaaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale <-
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$dayperiods_format_narrow
+    )
+
+  if (!(period %in% names(day_periods_locale))) {
+    return(dt_aaaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale[[period]]
 }
 
 # Hour [1-12] // numeric, 1-2 digits
