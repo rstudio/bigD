@@ -269,14 +269,14 @@ fmt_dt <- function(
     dt <- gsub("{HH}", dt_HH(input_dt), dt, fixed = TRUE)
   }
 
-  if ("k" %in% dt_lett) {
-    dt <- gsub("{k}", dt_k(input_dt), dt, fixed = TRUE)
-    dt <- gsub("{kk}", dt_kk(input_dt), dt, fixed = TRUE)
-  }
-
   if ("K" %in% dt_lett) {
     dt <- gsub("{K}", dt_K(input_dt), dt, fixed = TRUE)
     dt <- gsub("{KK}", dt_KK(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("k" %in% dt_lett) {
+    dt <- gsub("{k}", dt_k(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{kk}", dt_kk(input_dt), dt, fixed = TRUE)
   }
 
   if ("m" %in% dt_lett) {
