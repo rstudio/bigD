@@ -228,6 +228,64 @@ get_flexible_day_period <- function(input, locale) {
   period
 }
 
+get_noon_midnight_period <- function(input, locale) {
+
+  locale_in_day_periods_tbl <- locale %in% day_periods[["locale"]]
+
+  # Verify that the supplied locale is defined within the `day_periods`
+  # table (use the base locale if necessary); return NA if not found
+  if (!locale_in_day_periods_tbl) {
+
+    base_locale <- gsub("^([a-z]*).*", "\\1", locale)
+
+    if (base_locale %in% day_periods[["locale"]]) {
+      locale <- base_locale
+    } else {
+      return(NA_character_)
+    }
+  }
+
+  input_lt <- as.POSIXlt(input, tz = "UTC")
+
+  time_str <-
+    paste0(
+      zero_pad_to_width(
+        value = input_lt$hour,
+        width = 2
+      ),
+      ":",
+      zero_pad_to_width(
+        value = input_lt$min,
+        width = 2
+      )
+    )
+
+  day_periods_locale <- day_periods[day_periods$locale == locale, ]
+
+  if (time_str == "00:00" && "00:00" %in% day_periods_locale$at) {
+
+    period <-
+      day_periods_locale[
+        !is.na(day_periods_locale$at) &
+          day_periods_locale$at == "00:00", , drop = FALSE
+      ][["period"]]
+
+  } else if (time_str == "12:00" && "12:00" %in% day_periods_locale$at) {
+
+    period <-
+      day_periods_locale[
+        !is.na(day_periods_locale$at) &
+          day_periods_locale$at == "12:00", , drop = FALSE
+      ][["period"]]
+
+  } else {
+
+    period <- NA_character_
+  }
+
+  period
+}
+
 format_quarter <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
@@ -770,17 +828,68 @@ dt_aaaaa <- function(input, locale = NULL) {
 
 # Period: am, pm, noon, midnight // abbreviated (b..bbb)
 dt_b <- function(input, locale = NULL) {
-  "b"
+
+  period <- get_noon_midnight_period(input = input, locale = locale)
+
+  if (is.na(period)) {
+    return(dt_a(input = input, locale = locale))
+  }
+
+  day_periods_locale <-
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$dayperiods_format_abbrev
+    )
+
+  if (!(period %in% names(day_periods_locale))) {
+    return(dt_a(input = input, locale = locale))
+  }
+
+  day_periods_locale[[period]]
 }
 
 # Period: am, pm, noon, midnight // wide
 dt_bbbb <- function(input, locale = NULL) {
-  "bbbb"
+
+  period <- get_noon_midnight_period(input = input, locale = locale)
+
+  if (is.na(period)) {
+    return(dt_aaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale <-
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$dayperiods_format_wide
+    )
+
+  if (!(period %in% names(day_periods_locale))) {
+    return(dt_aaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale[[period]]
 }
 
 # Period: am, pm, noon, midnight // narrow
 dt_bbbbb <- function(input, locale = NULL) {
-  "bbbbb"
+
+  period <- get_noon_midnight_period(input = input, locale = locale)
+
+  if (is.na(period)) {
+    return(dt_aaaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale <-
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$dayperiods_format_narrow
+    )
+
+  if (!(period %in% names(day_periods_locale))) {
+    return(dt_aaaaa(input = input, locale = locale))
+  }
+
+  day_periods_locale[[period]]
 }
 
 # Flexible day periods // abbreviated (B..BBB)
