@@ -59,6 +59,47 @@ format_yearweek <- function(input) {
   paste0(year_part, "-W", week_part)
 }
 
+format_fractional_seconds <- function(input, digits) {
+
+  frac_s <- gsub("0.", "", as.character(as.POSIXlt(input)$sec %% 1), fixed = TRUE)
+
+  if (frac_s == "0") {
+    return(paste(rep("0", digits), collapse = ""))
+  }
+
+  n_char <- nchar(frac_s)
+
+  if (n_char > 3) {
+    frac_s <- substr(frac_s, 1, 3)
+  }
+
+  if (digits < 3) {
+    frac_s <- substr(frac_s, 1, digits)
+  }
+
+  if (digits > 3) {
+    frac_s <- paste0(frac_s, paste(rep("0", digits - 3), collapse = ""))
+  }
+
+  frac_s
+}
+
+get_milliseconds_in_day <- function(input) {
+
+  input_lt <- as.POSIXlt(input)
+
+  # Get the number of milliseconds elapsed in day
+  as.integer(
+    (
+      (
+        (input_lt$hour * 3600) +
+          (input_lt$min * 60)
+      ) * 1000
+    ) +
+      trunc(input_lt$sec * 1000, digits = 0)
+  )
+}
+
 get_week_in_month <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
@@ -68,6 +109,14 @@ get_week_in_month <- function(input) {
   week_num_mininmum <- as.integer(format(min_date_in_month, format = "%U"))
 
   week_number - (week_num_mininmum - 1)
+}
+
+get_dow_n_in_month <- function(input) {
+
+  date_input <- as.Date(input, format = "%Y-%m-%d")
+  day_input <- as.integer(format(date_input, format = "%d"))
+
+  length(seq(from = day_input, to = 1, by = -7))
 }
 
 get_modified_julian_day <- function(input) {
@@ -449,10 +498,10 @@ dt_DDD <- function(input) {
 
 # Day of week in month, numeric, 1 digit ("2", as in the 2nd Wed in July")
 dt_F <- function(input) {
-  "F"
+  as.character(get_dow_n_in_month(input = input))
 }
 
-# Modified Julian Day, numeric ("2451334")
+# Modified Julian day, numeric ("2451334")
 dt_g_plus <- function(input, length) {
   zero_pad_to_width(
     value = get_modified_julian_day(input = input),
@@ -460,7 +509,7 @@ dt_g_plus <- function(input, length) {
   )
 }
 
-# Calendar year (week in year calendar, min 3-9 digits wide)
+# Modified Julian day (min 1-9 digits wide)
 dt_g <- function(input) dt_g_plus(input = input, length = 1)
 dt_gg <- function(input) dt_g_plus(input = input, length = 2)
 dt_ggg <- function(input) dt_g_plus(input = input, length = 3)
@@ -795,15 +844,40 @@ dt_ss <- function(input) {
   zero_pad_to_width(value = as.integer(format(input, format = "%S")), width = 2)
 }
 
-# Fractional Second
+# Fractional second
 dt_S_plus <- function(input, length) {
-  "S_plus"
+  format_fractional_seconds(input = input, digits = length)
 }
 
-# Milliseconds in Day
+# Fractional second (min 1-9 digits wide)
+dt_S <- function(input) dt_S_plus(input = input, length = 1)
+dt_SS <- function(input) dt_S_plus(input = input, length = 2)
+dt_SSS <- function(input) dt_S_plus(input = input, length = 3)
+dt_SSSS <- function(input) dt_S_plus(input = input, length = 4)
+dt_SSSSS <- function(input) dt_S_plus(input = input, length = 5)
+dt_SSSSSS <- function(input) dt_S_plus(input = input, length = 6)
+dt_SSSSSSS <- function(input) dt_S_plus(input = input, length = 7)
+dt_SSSSSSSS <- function(input) dt_S_plus(input = input, length = 8)
+dt_SSSSSSSSS <- function(input) dt_S_plus(input = input, length = 9)
+
+# Milliseconds in day
 dt_A_plus <- function(input, length) {
-  "A_plus"
+  zero_pad_to_width(
+    value = get_milliseconds_in_day(input = input),
+    width = length
+  )
 }
+
+# Milliseconds in day (min 1-9 digits wide)
+dt_A <- function(input) dt_A_plus(input = input, length = 1)
+dt_AA <- function(input) dt_A_plus(input = input, length = 2)
+dt_AAA <- function(input) dt_A_plus(input = input, length = 3)
+dt_AAAA <- function(input) dt_A_plus(input = input, length = 4)
+dt_AAAAA <- function(input) dt_A_plus(input = input, length = 5)
+dt_AAAAAA <- function(input) dt_A_plus(input = input, length = 6)
+dt_AAAAAAA <- function(input) dt_A_plus(input = input, length = 7)
+dt_AAAAAAAA <- function(input) dt_A_plus(input = input, length = 8)
+dt_AAAAAAAAA <- function(input) dt_A_plus(input = input, length = 9)
 
 # TZ // short specific non-location format ("PDT") (z..zzz)
 # Fallback to "O"

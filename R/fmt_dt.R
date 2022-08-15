@@ -204,7 +204,9 @@ fmt_dt <- function(
     dt <- gsub("{DDD}", dt_DDD(input_dt), dt, fixed = TRUE)
   }
 
-  dt <- gsub("{F}", dt_F(input_dt), dt, fixed = TRUE)
+  if ("F" %in% dt_lett) {
+    dt <- gsub("{F}", dt_F(input_dt), dt, fixed = TRUE)
+  }
 
   if ("E" %in% dt_lett) {
     dt <- gsub("{E}", dt_E(input_dt, locale), dt, fixed = TRUE)
@@ -285,6 +287,30 @@ fmt_dt <- function(
   if ("s" %in% dt_lett) {
     dt <- gsub("{s}", dt_s(input_dt), dt, fixed = TRUE)
     dt <- gsub("{ss}", dt_ss(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("S" %in% dt_lett) {
+    dt <- gsub("{S}", dt_S(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SS}", dt_SS(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SSS}", dt_SSS(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SSSS}", dt_SSSS(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SSSSS}", dt_SSSSS(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SSSSSS}", dt_SSSSSS(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SSSSSSS}", dt_SSSSSSS(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SSSSSSSS}", dt_SSSSSSSS(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{SSSSSSSSS}", dt_SSSSSSSSS(input_dt), dt, fixed = TRUE)
+  }
+
+  if ("A" %in% dt_lett) {
+    dt <- gsub("{A}", dt_A(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AA}", dt_AA(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AAA}", dt_AAA(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AAAA}", dt_AAAA(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AAAAA}", dt_AAAAA(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AAAAAA}", dt_AAAAAA(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AAAAAAA}", dt_AAAAAAA(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AAAAAAAA}", dt_AAAAAAAA(input_dt), dt, fixed = TRUE)
+    dt <- gsub("{AAAAAAAAA}", dt_AAAAAAAAA(input_dt), dt, fixed = TRUE)
   }
 
   if ("z" %in% dt_lett) {

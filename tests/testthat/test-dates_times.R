@@ -95,6 +95,9 @@ test_that("ISO datetimes can be parsed from a string and formatted", {
   iso_datetime_14 <- "2018-01-13 22:05"
   iso_datetime_15 <- "2018-01-13 22:05:23"
   iso_datetime_16 <- "2018-01-13 22:05:00"
+  iso_datetime_17 <- "2019-01-15 20:15:24.45678"
+  iso_datetime_18 <- "2019-01-15 20:15:24.00160"
+  iso_datetime_19 <- "2019-01-15 00:00:00"
 
   #
   # Checks with `y`/`yy`, `M`/`MM`/`MMM`/`MMMM`/`MMMMM`, `d`/`dd`
@@ -293,4 +296,95 @@ test_that("ISO datetimes can be parsed from a string and formatted", {
     expect_equal("2018/1/013")
   fmt_dt(input = iso_datetime_16, format = "y/M/DDD") %>%
     expect_equal("2018/1/013")
+
+  #
+  # Checks with 'S+'
+  #
+
+  fmt_dt(input = iso_datetime_16, format = "y/MM/DD HH:mm:ss.S") %>%
+    expect_equal("2018/01/13 22:05:00.0")
+  fmt_dt(input = iso_datetime_16, format = "y/MM/DD HH:mm:ss.SS") %>%
+    expect_equal("2018/01/13 22:05:00.00")
+  fmt_dt(input = iso_datetime_16, format = "y/MM/DD HH:mm:ss.SSS") %>%
+    expect_equal("2018/01/13 22:05:00.000")
+
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.S") %>%
+    expect_equal("2019/01/15 20:15:24.4")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SS") %>%
+    expect_equal("2019/01/15 20:15:24.45")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SSS") %>%
+    expect_equal("2019/01/15 20:15:24.456")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SSSS") %>%
+    expect_equal("2019/01/15 20:15:24.4560")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.45600")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.456000")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SSSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.4560000")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SSSSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.45600000")
+  fmt_dt(input = iso_datetime_17, format = "y/MM/DD HH:mm:ss.SSSSSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.456000000")
+
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.S") %>%
+    expect_equal("2019/01/15 20:15:24.0")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SS") %>%
+    expect_equal("2019/01/15 20:15:24.00")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SSS") %>%
+    expect_equal("2019/01/15 20:15:24.001")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SSSS") %>%
+    expect_equal("2019/01/15 20:15:24.0010")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.00100")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.001000")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SSSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.0010000")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SSSSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.00100000")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss.SSSSSSSSS") %>%
+    expect_equal("2019/01/15 20:15:24.001000000")
+
+  #
+  # Checks with 'A+'
+  #
+
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (A)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AA)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AAA)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AAAA)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AAAAA)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AAAAAA)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AAAAAAA)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AAAAAAAA)") %>%
+    expect_equal("2019/01/15 20:15:24 (72924001)")
+  fmt_dt(input = iso_datetime_18, format = "y/MM/DD HH:mm:ss (AAAAAAAAA)") %>%
+    expect_equal("2019/01/15 20:15:24 (072924001)")
+
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (A)") %>%
+    expect_equal("2019/01/15 00:00:00 (0)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AA)") %>%
+    expect_equal("2019/01/15 00:00:00 (00)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AAA)") %>%
+    expect_equal("2019/01/15 00:00:00 (000)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AAAA)") %>%
+    expect_equal("2019/01/15 00:00:00 (0000)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AAAAA)") %>%
+    expect_equal("2019/01/15 00:00:00 (00000)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AAAAAA)") %>%
+    expect_equal("2019/01/15 00:00:00 (000000)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AAAAAAA)") %>%
+    expect_equal("2019/01/15 00:00:00 (0000000)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AAAAAAAA)") %>%
+    expect_equal("2019/01/15 00:00:00 (00000000)")
+  fmt_dt(input = iso_datetime_19, format = "y/MM/DD HH:mm:ss (AAAAAAAAA)") %>%
+    expect_equal("2019/01/15 00:00:00 (000000000)")
 })
