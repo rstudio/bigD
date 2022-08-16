@@ -161,7 +161,7 @@ get_flexible_day_period <- function(input, locale) {
     }
   }
 
-  input_lt <- as.POSIXlt(input, tz = "UTC")
+  input_lt <- as.POSIXlt(input)
 
   time_str <-
     paste0(
