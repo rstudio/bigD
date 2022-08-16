@@ -8,19 +8,23 @@ fdt(input, format = NULL, use_tz = NULL, locale = NULL)
 }
 \arguments{
 \item{input}{A vector of date, time, or datetime values. Several
-representations are acceptable here including strings, \code{Date} objects,
-or \code{POSIXct} objects.}
+representations are acceptable here including strings, \code{Date} objects, or
+\code{POSIXct} objects. Refer to the \emph{Valid Input Values} section for more
+information.}
 
-\item{format}{The datetime formatting string to apply to all \code{input} values.}
+\item{format}{The datetime formatting string to apply to all \code{input} values.
+If not provided, the inputs will be formatted to ISO 8601 datetime
+strings.}
 
-\item{use_tz}{A time-zone designation for precise formatting of tz-related
-output. This overrides any time zone information in datetime input.}
+\item{use_tz}{A tzid (e.g., \code{"America/New_York"}) time-zone designation for
+precise formatting of related outputs. This overrides any time zone
+information available in the input values and is applied to all input
+values.}
 
 \item{locale}{The output locale to use for formatting the input value
 according to the specified locale's rules. Example locale names include
 \code{"en"} for English (United States) and \code{"es-EC"} for Spanish (Ecuador). If
-a locale isn't provided and certain locale-based formatting is to be done
-then the \code{"en_US"} locale will be used.}
+a locale isn't provided the \code{"en"} locale will be used.}
 }
 \description{
 With \code{fdt()}, we can format datetime values with the greatest of ease, and,
@@ -39,16 +43,154 @@ formatting.
 
 The \code{input} argument of the \code{fdt()} function allows for some flexibility on
 what can be passed in. This section describes the kinds of inputs that are
-understandable by \code{fdt()}.
+understandable by \code{fdt()}. A vector of strings is allowed, as are vectors of
+\code{Date} or \code{POSIXct} values.
 
-A vector of strings is allowed, as are vectors of \code{Date} or \code{POSIXct} values.
-If using strings, they are parsed according to the ISO 8601:2004 standard, as
-\verb{YYYY-MM-DDThh:mm:ss.s<TZD>}. Some allowances made here to ease this
-restrictiveness of such an input. For example, the literal \code{T} separating the
-date and time components is optional. The ISO standard itself allows for its
-own flexibility and seconds, fractional seconds, and the time-zone
-designation are all optional. ISO dates are acceptable as string input
-(\code{YYYY-MM-DD}). Times are also allowed so long as they are structured as
-\code{hh:mm:ss.s} (where fractional seconds are optional).
+If using strings, a good option is to use those that adhere to the ISO
+8601:2004 standard. For a datetime this can be of the form
+\verb{YYYY-MM-DDThh:mm:ss.s<TZD>}. With this, \code{YYYY-MM-DD} corresponds to the
+date, the literal \code{"T"} is optional, \code{hh:mm:ss} is the time (where seconds,
+\code{ss}, is optional as are \code{.s} for fractional seconds), and \verb{<TZD>} refers to
+an optional time-zone designation (more on time zones in the next paragraph).
+You can provide just the date part, and this assumes midnight as an implicit
+time. It's also possible to provide just the time part, and this internally
+assembles a datetime that uses the current date. When formatting standalone
+dates or times, you'll probably just format the explicit parts but \code{fdt()}
+won't error if you format the complementary parts.
+
+The time zone designation on string-based datetimes is completely optional.
+If not provided then \code{"UTC"} is assumed. If you do want to supply time zone
+information, it can be given as an offset value with the following
+constructions:
+\itemize{
+\item \verb{<time>Z}
+\item \verb{<time>(+/-)hh:mm}
+\item \verb{<time>(+/-)hhmm}
+\item \verb{<time>(+/-)hh}
+}
+
+The first, \verb{<time>Z}, is zone designator for the zero UTC offset; it's
+equivalent to \code{"+00:00"}. The next two are formats for providing the time
+offsets from UTC with hours and minutes fields. Examples are \code{"-05:00"} (New
+York, standard time), \code{"+0200"} (Cairo), and \code{"+05:30"} (Mumbai). Note that
+the colon is optional but leading zeros to maintain two-digit widths are
+essential. The final format, \verb{<time>(+/-)hh}, omits the minutes field and as
+so many offsets have \code{"00"} minutes values, this can be convenient.
+
+We can also supply an Olson/IANA-style time zone identifier (tzid) in
+parentheses within the string, or, as a value supplied to \code{use_tz} (should a
+tzid apply to all date/time/datetime values in the \code{input} vector). By
+extension, this would use the form: \verb{YYYY-MM-DDThh:mm:ss.s<TZD>(<tzid>)}.
+Both a \verb{<TZD>} (UTC offset value) and a \verb{<tzid>} shouldn't really be used
+together but if that occurs the \verb{<tzid>} overrides the UTC offset. Here are
+some examples:
+\itemize{
+\item \code{"2018-07-04T22:05 (America/Vancouver)"} (preferable)
+\item \code{"2018-07-04T22:05-0800(America/Vancouver)"} (redundant, but still okay)
+}
+
+A tzid contains much more information about the time zone than a UTC offset
+value since it is tied to some geographical location and the timing of
+Standard Time (STD) and Daylight Saving Time (DST) is known. In essence we
+can derive UTC offset values from a tzid and also a host of other identifiers
+(time zone names, their abbreviations, etc.). Here are some examples of valid
+tzid values that can be used:
+\itemize{
+\item \code{"America/Jamaica"} (the official time in Jamaica, or, \code{"Jamaica Time"})
+\item \code{"Australia/Perth"} (\code{"+08:00"} year round in Western Australia)
+\item \code{"Europe/Dublin"} (IST/GMT time: \code{"+01:00"}/\code{"+00:00"})
+}
+
+The tz database (a compilation of information about the world's time zones)
+consists of canonical zone names (those that are primary and preferred) and
+alternative names (less preferred in modern usage, and was either discarded
+or more commonly replaced by a canonical zone name). The \code{fdt()} function can
+handle both types and what occurs is that non-canonical tzid values are
+internally mapped onto canonical zone names. Here's a few examples:
+\itemize{
+\item \code{"Africa/Luanda"} (in Angola) maps to \code{"Africa/Lagos"}
+\item \code{"America/Indianapolis"} maps to \code{"America/Indiana/Indianapolis"}
+\item \code{"Asia/Calcutta"} maps to \code{"Asia/Kolkata"}
+\item \code{"Pacific/Midway"} maps to \code{"Pacific/Pago_Pago"}
+\item \code{"Egypt"} maps to \code{"Africa/Cairo"}
+}
+
+For the most part, the Olson-format tzid follows the form \code{"{region}/{city}"}
+where the region is usually a continent, the city is considered an 'exemplar
+city', and the exemplar city itself belongs in a country.
+}
+
+\section{Examples}{
+
+
+With an input datetime of \code{"2018-07-04 22:05"} supplied as a string, we can
+format to get just a date with the full year first, the month abbreviation
+second, and the day of the month last (separated by hyphens):
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05",
+  format = "y-MMM-dd"
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2018-Jul-04"
+}\if{html}{\out{</div>}}
+
+There are sometimes many options for each time part. Instead of using
+\code{"y-MMM-dd"}, let's try a variation on that with \code{"yy-MMMM-d"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05",
+  format = "yy-MMMM-d"
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "18-July-4"
+}\if{html}{\out{</div>}}
+
+The output is localizable and so elements will be translated when supplying
+the appropriate locale code. Let's use \code{locale = es} to get the month written
+in Spanish:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05",
+  format = "yy-MMMM-d",
+  locale = "es"
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "18-julio-4"
+}\if{html}{\out{</div>}}
+
+If you're going minimal, it's possible to supply an input datetime string
+without a \code{format} directive. What this gives us is formatted datetime
+output that conforms to ISO 8601. Note that the implied time zone is UTC.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(input = "2018-07-04 22:05")
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2018-07-04T22:05:00Z"
+}\if{html}{\out{</div>}}
+
+Going further, you can omit the time and just supply the date portion. This
+implies midnight (and is just fine if you're only going to present the date
+anyway).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(input = "2018-07-04")
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2018-07-04T00:00:00Z"
+}\if{html}{\out{</div>}}
+
+If you omit the date and just supply a time, \code{fdt()} will correctly parse
+this. The current date on the user system will be used because we need to
+create some sort of datetime value internally. Again, this is alright if
+you just intend to present a formatted time value.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(input = "22:05")
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2022-08-16T22:05:00Z"
+}\if{html}{\out{</div>}}
 }
 
