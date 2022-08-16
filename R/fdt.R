@@ -53,6 +53,9 @@ fdt <- function(
     locale <- "en"
   }
 
+  if (is.null(format)) {
+    format <- "y-MM-dd'T'HH:mm:ssXXX"
+  }
   dt_out <- rep(NA_character_, length(input))
 
   for (i in seq_along(input)) {
