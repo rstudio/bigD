@@ -181,7 +181,7 @@
 #' [1] "2022-08-16T22:05:00Z"
 #' ````
 #'
-#' POSIXct or POSIXct datetimes can serve as an `input` to `fdt()`. Let's create
+#' POSIXct or POSIXlt datetimes can serve as an `input` to `fdt()`. Let's create
 #' a single datetime value where the timezone is set as `"Asia/Tokyo"`.
 #'
 #' ```r

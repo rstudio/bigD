@@ -193,7 +193,7 @@ you just intend to present a formatted time value.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2022-08-16T22:05:00Z"
 }\if{html}{\out{</div>}}
 
-POSIXct or POSIXct datetimes can serve as an \code{input} to \code{fdt()}. Let's create
+POSIXct or POSIXlt datetimes can serve as an \code{input} to \code{fdt()}. Let's create
 a single datetime value where the timezone is set as \code{"Asia/Tokyo"}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
