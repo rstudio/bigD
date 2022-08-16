@@ -192,5 +192,17 @@ you just intend to present a formatted time value.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2022-08-16T22:05:00Z"
 }\if{html}{\out{</div>}}
+
+POSIXct or POSIXct datetimes can serve as an \code{input} to \code{fdt()}. Let's create
+a single datetime value where the timezone is set as \code{"Asia/Tokyo"}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = lubridate::ymd_hms("2020-03-15 19:09:12", tz = "Asia/Tokyo"),
+  format = "EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+}\if{html}{\out{</div>}}
 }
 
