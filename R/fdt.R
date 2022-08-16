@@ -56,6 +56,11 @@ fdt <- function(
   if (is.null(format)) {
     format <- "y-MM-dd'T'HH:mm:ssXXX"
   }
+
+  if (inherits(input, "POSIXlt")) {
+    input <- as.POSIXct(input)
+  }
+
   dt_out <- rep(NA_character_, length(input))
 
   for (i in seq_along(input)) {
