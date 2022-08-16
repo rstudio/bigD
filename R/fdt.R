@@ -15,29 +15,184 @@
 #'
 #' The `input` argument of the `fdt()` function allows for some flexibility on
 #' what can be passed in. This section describes the kinds of inputs that are
-#' understandable by `fdt()`.
+#' understandable by `fdt()`. A vector of strings is allowed, as are vectors of
+#' `Date` or `POSIXct` values.
 #'
-#' A vector of strings is allowed, as are vectors of `Date` or `POSIXct` values.
-#' If using strings, they are parsed according to the ISO 8601:2004 standard, as
-#' `YYYY-MM-DDThh:mm:ss.s<TZD>`. Some allowances made here to ease this
-#' restrictiveness of such an input. For example, the literal `T` separating the
-#' date and time components is optional. The ISO standard itself allows for its
-#' own flexibility and seconds, fractional seconds, and the time-zone
-#' designation are all optional. ISO dates are acceptable as string input
-#' (`YYYY-MM-DD`). Times are also allowed so long as they are structured as
-#' `hh:mm:ss.s` (where fractional seconds are optional).
+#' If using strings, a good option is to use those that adhere to the ISO
+#' 8601:2004 standard. For a datetime this can be of the form
+#' `YYYY-MM-DDThh:mm:ss.s<TZD>`. With this, `YYYY-MM-DD` corresponds to the
+#' date, the literal `"T"` is optional, `hh:mm:ss` is the time (where seconds,
+#' `ss`, is optional as are `.s` for fractional seconds), and `<TZD>` refers to
+#' an optional time-zone designation (more on time zones in the next paragraph).
+#' You can provide just the date part, and this assumes midnight as an implicit
+#' time. It's also possible to provide just the time part, and this internally
+#' assembles a datetime that uses the current date. When formatting standalone
+#' dates or times, you'll probably just format the explicit parts but `fdt()`
+#' won't error if you format the complementary parts.
+#'
+#' The time zone designation on string-based datetimes is completely optional.
+#' If not provided then `"UTC"` is assumed. If you do want to supply time zone
+#' information, it can be given as an offset value with the following
+#' constructions:
+#'
+#' - `<time>Z`
+#' - `<time>(+/-)hh:mm`
+#' - `<time>(+/-)hhmm`
+#' - `<time>(+/-)hh`
+#'
+#' The first, `<time>Z`, is zone designator for the zero UTC offset; it's
+#' equivalent to `"+00:00"`. The next two are formats for providing the time
+#' offsets from UTC with hours and minutes fields. Examples are `"-05:00"` (New
+#' York, standard time), `"+0200"` (Cairo), and `"+05:30"` (Mumbai). Note that
+#' the colon is optional but leading zeros to maintain two-digit widths are
+#' essential. The final format, `<time>(+/-)hh`, omits the minutes field and as
+#' so many offsets have `"00"` minutes values, this can be convenient.
+#'
+#' We can also supply an Olson/IANA-style time zone identifier (tzid) in
+#' parentheses within the string, or, as a value supplied to `use_tz` (should a
+#' tzid apply to all date/time/datetime values in the `input` vector). By
+#' extension, this would use the form: `YYYY-MM-DDThh:mm:ss.s<TZD>(<tzid>)`.
+#' Both a `<TZD>` (UTC offset value) and a `<tzid>` shouldn't really be used
+#' together but if that occurs the `<tzid>` overrides the UTC offset. Here are
+#' some examples:
+#'
+#' - `"2018-07-04T22:05 (America/Vancouver)"` (preferable)
+#' - `"2018-07-04T22:05-0800(America/Vancouver)"` (redundant, but still okay)
+#'
+#' A tzid contains much more information about the time zone than a UTC offset
+#' value since it is tied to some geographical location and the timing of
+#' Standard Time (STD) and Daylight Saving Time (DST) is known. In essence we
+#' can derive UTC offset values from a tzid and also a host of other identifiers
+#' (time zone names, their abbreviations, etc.). Here are some examples of valid
+#' tzid values that can be used:
+#'
+#' - `"America/Jamaica"` (the official time in Jamaica, or, `"Jamaica Time"`)
+#' - `"Australia/Perth"` (`"+08:00"` year round in Western Australia)
+#' - `"Europe/Dublin"` (IST/GMT time: `"+01:00"`/`"+00:00"`)
+#'
+#' The tz database (a compilation of information about the world's time zones)
+#' consists of canonical zone names (those that are primary and preferred) and
+#' alternative names (less preferred in modern usage, and was either discarded
+#' or more commonly replaced by a canonical zone name). The `fdt()` function can
+#' handle both types and what occurs is that non-canonical tzid values are
+#' internally mapped onto canonical zone names. Here's a few examples:
+#'
+#' - `"Africa/Luanda"` (in Angola) maps to `"Africa/Lagos"`
+#' - `"America/Indianapolis"` maps to `"America/Indiana/Indianapolis"`
+#' - `"Asia/Calcutta"` maps to `"Asia/Kolkata"`
+#' - `"Pacific/Midway"` maps to `"Pacific/Pago_Pago"`
+#' - `"Egypt"` maps to `"Africa/Cairo"`
+#'
+#' For the most part, the Olson-format tzid follows the form `"{region}/{city}"`
+#' where the region is usually a continent, the city is considered an 'exemplar
+#' city', and the exemplar city itself belongs in a country.
 #'
 #' @param input A vector of date, time, or datetime values. Several
-#'   representations are acceptable here including strings, `Date` objects,
-#'   or `POSIXct` objects.
+#'   representations are acceptable here including strings, `Date` objects, or
+#'   `POSIXct` objects. Refer to the *Valid Input Values* section for more
+#'   information.
 #' @param format The datetime formatting string to apply to all `input` values.
-#' @param use_tz A time-zone designation for precise formatting of tz-related
-#'   output. This overrides any time zone information in datetime input.
+#'   If not provided, the inputs will be formatted to ISO 8601 datetime
+#'   strings.
+#' @param use_tz A tzid (e.g., `"America/New_York"`) time-zone designation for
+#'   precise formatting of related outputs. This overrides any time zone
+#'   information available in the input values and is applied to all input
+#'   values.
 #' @param locale The output locale to use for formatting the input value
 #'   according to the specified locale's rules. Example locale names include
 #'   `"en"` for English (United States) and `"es-EC"` for Spanish (Ecuador). If
-#'   a locale isn't provided and certain locale-based formatting is to be done
-#'   then the `"en_US"` locale will be used.
+#'   a locale isn't provided the `"en"` locale will be used.
+#'
+#' @section Examples:
+#'
+#' With an input datetime of `"2018-07-04 22:05"` supplied as a string, we can
+#' format to get just a date with the full year first, the month abbreviation
+#' second, and the day of the month last (separated by hyphens):
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05",
+#'   format = "y-MMM-dd"
+#' )
+#' ```
+#' ```
+#' [1] "2018-Jul-04"
+#' ```
+#'
+#' There are sometimes many options for each time part. Instead of using
+#' `"y-MMM-dd"`, let's try a variation on that with `"yy-MMMM-d"`:
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05",
+#'   format = "yy-MMMM-d"
+#' )
+#' ```
+#' ```
+#' [1] "18-July-4"
+#' ```
+#'
+#' The output is localizable and so elements will be translated when supplying
+#' the appropriate locale code. Let's use `locale = es` to get the month written
+#' in Spanish:
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05",
+#'   format = "yy-MMMM-d",
+#'   locale = "es"
+#' )
+#' ```
+#' ```
+#' [1] "18-julio-4"
+#' ```
+#'
+#' If you're going minimal, it's possible to supply an input datetime string
+#' without a `format` directive. What this gives us is formatted datetime
+#' output that conforms to ISO 8601. Note that the implied time zone is UTC.
+#'
+#' ```r
+#' fdt(input = "2018-07-04 22:05")
+#' ```
+#' ```
+#' [1] "2018-07-04T22:05:00Z"
+#' ````
+#'
+#' Going further, you can omit the time and just supply the date portion. This
+#' implies midnight (and is just fine if you're only going to present the date
+#' anyway).
+#'
+#' ```r
+#' fdt(input = "2018-07-04")
+#' ```
+#' ```
+#' [1] "2018-07-04T00:00:00Z"
+#' ````
+#'
+#' If you omit the date and just supply a time, `fdt()` will correctly parse
+#' this. The current date on the user system will be used because we need to
+#' create some sort of datetime value internally. Again, this is alright if
+#' you just intend to present a formatted time value.
+#'
+#' ```r
+#' fdt(input = "22:05")
+#' ```
+#' ```
+#' [1] "2022-08-16T22:05:00Z"
+#' ````
+#'
+#' POSIXct or POSIXct datetimes can serve as an `input` to `fdt()`. Let's create
+#' a single datetime value where the timezone is set as `"Asia/Tokyo"`.
+#'
+#' ```r
+#' fdt(
+#'   input = lubridate::ymd_hms("2020-03-15 19:09:12", tz = "Asia/Tokyo"),
+#'   format = "EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"
+#' )
+#' ```
+#' ```
+#' [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+#' ```
 #'
 #' @export
 fdt <- function(
