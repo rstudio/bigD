@@ -7,25 +7,48 @@
 fdt(input, format = NULL, use_tz = NULL, locale = NULL)
 }
 \arguments{
-\item{input}{The input datetime value. The appropriate representation should
-use the following construction outlined in the ISO 8601:2004 standard:
-\verb{YYYY-MM-DDThh:mm:ss.s<TZD>} although some allowances made here to ease
-this restrictiveness (for example, the literal \code{T} separating the date and
-time components is optional). Seconds, fractional seconds, and the
-time-zone designation are all optional.}
+\item{input}{A vector of date, time, or datetime values. Several
+representations are acceptable here including strings, \code{Date} objects,
+or \code{POSIXct} objects.}
 
-\item{format}{The datetime formatting string.}
+\item{format}{The datetime formatting string to apply to all \code{input} values.}
 
-\item{use_tz}{We can optionally override any time zone information in the
-datetime input with a time-zone designation provided here.}
+\item{use_tz}{A time-zone designation for precise formatting of tz-related
+output. This overrides any time zone information in datetime input.}
 
 \item{locale}{The output locale to use for formatting the input value
 according to the specified locale's rules. Example locale names include
-\code{"en_US"} for English (United States) and \code{"fr_FR"} for French (France). If
+\code{"en"} for English (United States) and \code{"es-EC"} for Spanish (Ecuador). If
 a locale isn't provided and certain locale-based formatting is to be done
 then the \code{"en_US"} locale will be used.}
 }
 \description{
 With \code{fdt()}, we can format datetime values with the greatest of ease, and,
-with great power.
+with great power. There is a lot of leniency in what types of input
+date/time/datetime values can be passed in. The formatting string allows for
+a huge array of possibilities when formatting. Not only that, we can set a
+\code{locale} value and get the formatted values localized in the language/region
+of choice. There's plenty of ways to represent time zone information, and
+this goes along with the option to enrich the input values with a precise
+time zone identifier (like \code{"America/Los_Angeles"}). The choices are ample
+here, with the goal being a comprehensiveness and ease-of-use in date/time
+formatting.
 }
+\section{Valid Input Values}{
+
+
+The \code{input} argument of the \code{fdt()} function allows for some flexibility on
+what can be passed in. This section describes the kinds of inputs that are
+understandable by \code{fdt()}.
+
+A vector of strings is allowed, as are vectors of \code{Date} or \code{POSIXct} values.
+If using strings, they are parsed according to the ISO 8601:2004 standard, as
+\verb{YYYY-MM-DDThh:mm:ss.s<TZD>}. Some allowances made here to ease this
+restrictiveness of such an input. For example, the literal \code{T} separating the
+date and time components is optional. The ISO standard itself allows for its
+own flexibility and seconds, fractional seconds, and the time-zone
+designation are all optional. ISO dates are acceptable as string input
+(\code{YYYY-MM-DD}). Times are also allowed so long as they are structured as
+\code{hh:mm:ss.s} (where fractional seconds are optional).
+}
+
