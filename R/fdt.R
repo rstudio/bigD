@@ -1,20 +1,41 @@
 #' Format a datetime with a formatting string
 #'
 #' With `fdt()`, we can format datetime values with the greatest of ease, and,
-#' with great power.
+#' with great power. There is a lot of leniency in what types of input
+#' date/time/datetime values can be passed in. The formatting string allows for
+#' a huge array of possibilities when formatting. Not only that, we can set a
+#' `locale` value and get the formatted values localized in the language/region
+#' of choice. There's plenty of ways to represent time zone information, and
+#' this goes along with the option to enrich the input values with a precise
+#' time zone identifier (like `"America/Los_Angeles"`). The choices are ample
+#' here, with the goal being a comprehensiveness and ease-of-use in date/time
+#' formatting.
 #'
-#' @param input The input datetime value. The appropriate representation should
-#'   use the following construction outlined in the ISO 8601:2004 standard:
-#'   `YYYY-MM-DDThh:mm:ss.s<TZD>` although some allowances made here to ease
-#'   this restrictiveness (for example, the literal `T` separating the date and
-#'   time components is optional). Seconds, fractional seconds, and the
-#'   time-zone designation are all optional.
-#' @param format The datetime formatting string.
-#' @param use_tz We can optionally override any time zone information in the
-#'   datetime input with a time-zone designation provided here.
+#' @section Valid Input Values:
+#'
+#' The `input` argument of the `fdt()` function allows for some flexibility on
+#' what can be passed in. This section describes the kinds of inputs that are
+#' understandable by `fdt()`.
+#'
+#' A vector of strings is allowed, as are vectors of `Date` or `POSIXct` values.
+#' If using strings, they are parsed according to the ISO 8601:2004 standard, as
+#' `YYYY-MM-DDThh:mm:ss.s<TZD>`. Some allowances made here to ease this
+#' restrictiveness of such an input. For example, the literal `T` separating the
+#' date and time components is optional. The ISO standard itself allows for its
+#' own flexibility and seconds, fractional seconds, and the time-zone
+#' designation are all optional. ISO dates are acceptable as string input
+#' (`YYYY-MM-DD`). Times are also allowed so long as they are structured as
+#' `hh:mm:ss.s` (where fractional seconds are optional).
+#'
+#' @param input A vector of date, time, or datetime values. Several
+#'   representations are acceptable here including strings, `Date` objects,
+#'   or `POSIXct` objects.
+#' @param format The datetime formatting string to apply to all `input` values.
+#' @param use_tz A time-zone designation for precise formatting of tz-related
+#'   output. This overrides any time zone information in datetime input.
 #' @param locale The output locale to use for formatting the input value
 #'   according to the specified locale's rules. Example locale names include
-#'   `"en_US"` for English (United States) and `"fr_FR"` for French (France). If
+#'   `"en"` for English (United States) and `"es-EC"` for Spanish (Ecuador). If
 #'   a locale isn't provided and certain locale-based formatting is to be done
 #'   then the `"en_US"` locale will be used.
 #'
@@ -25,6 +46,8 @@ fdt <- function(
     use_tz = NULL,
     locale = NULL
 ) {
+
+  # TODO: Validate locale
 
   if (is.null(locale)) {
     locale <- "en"
