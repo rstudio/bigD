@@ -153,7 +153,23 @@ fdt <- function(
       input_dt <- input_i
 
       # Extract the input time zone
-      tz_info$tz_str <- attr(input_dt, which = "tzone", exact = TRUE)
+      long_tzid <- attr(input_dt, which = "tzone", exact = TRUE)
+
+      if (long_tzid == "UTC") {
+
+        tz_info$long_tzid <- long_tzid
+        tz_info$tz_str <- "GMT"
+        tz_info$tz_offset <- 0L
+
+      } else {
+
+        tz_info$long_tzid <- long_tzid
+        tz_info$tz_str <- long_tzid_to_tz_str(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+        tz_info$tz_offset <- get_tz_offset_val_from_tz_str(tz_str = tz_info$tz_str)
+      }
+
+      tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+      tz_info$tz_long_specific <- get_tz_long_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt, locale = locale)
     }
 
     dt_lett <- pattern_list$dt_letters
