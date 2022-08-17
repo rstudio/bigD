@@ -12,14 +12,13 @@ representations are acceptable here including strings, \code{Date} objects, or
 \code{POSIXct} objects. Refer to the \emph{Valid Input Values} section for more
 information.}
 
-\item{format}{The datetime formatting string to apply to all \code{input} values.
-If not provided, the inputs will be formatted to ISO 8601 datetime
-strings.}
+\item{format}{The formatting string to apply to all \code{input} values. If not
+provided, the inputs will be formatted to ISO 8601 datetime strings.}
 
 \item{use_tz}{A tzid (e.g., \code{"America/New_York"}) time-zone designation for
 precise formatting of related outputs. This overrides any time zone
-information available in the input values and is applied to all input
-values.}
+information available in string-based input values and is applied to all
+vector components.}
 
 \item{locale}{The output locale to use for formatting the input value
 according to the specified locale's rules. Example locale names include
@@ -118,6 +117,68 @@ internally mapped onto canonical zone names. Here's a few examples:
 For the most part, the Olson-format tzid follows the form \code{"{region}/{city}"}
 where the region is usually a continent, the city is considered an 'exemplar
 city', and the exemplar city itself belongs in a country.
+}
+
+\section{Date/Time Format Syntax}{
+
+
+A formatting pattern as used in \strong{bigD} consists of a string of characters,
+where certain strings are replaced with date and time data that are derived
+from the parsed input.
+
+The characters used in patterns are tabulated below to show which specific
+strings produce which outputs (e.g., \code{"y"} for the year). A common pattern is
+characters that are used consecutively to produce variations on a date, time,
+or timezone output. Say that the year in the input is 2015. If using \code{"yy"}
+you'll get \code{"15"} but with \code{"yyyy"} the output becomes \code{"1999"}. There's a
+whole lot of this, so the following subsections try to illustrate as best as
+possible what each string will produce. All of the examples will use this
+string-based datetime input:
+
+\code{"2018-07-04T22:05:09.2358(America/Vancouver)"}
+\subsection{The Era Designator (big G)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"G"}, \code{"GG"}, or \code{"GGG"} \tab \code{"AD"} \cr
+   \code{"GGGG"} \tab \code{"Anno Domini"} \cr
+   \code{"GGGGG"} \tab \code{"A"} \cr
+}
+
+}
+
+\subsection{Year (little y)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"y"} \tab \code{"2018"} \cr
+   \code{"yy"} \tab \code{"18"} \cr
+   \code{"yyy"} \tab \code{"2018"} \cr
+   \code{"yyyy"} \tab \code{"2018"} \cr
+   \code{"yyyyy"} \tab \code{"02018"} \cr
+   \code{"yyyyyy"} \tab \code{"002018"} \cr
+   \code{"yyyyyyy"} \tab \code{"0002018"} \cr
+   \code{"yyyyyyyy"} \tab \code{"00002018"} \cr
+   \code{"yyyyyyyyy"} \tab \code{"000002018"} \cr
+}
+
+}
+
+\subsection{Year in the Week in Year Calendar (big Y)}{
+
+This is the year in 'Week of Year' based calendars in which the year
+transition occurs on a week boundary. This may differ from calendar year 'y'
+near a year transition. This numeric year designation is used in conjunction with
+pattern character 'w' in the ISO year-week calendar as defined by ISO 8601.\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"Y"} \tab \code{"2018"} \cr
+   \code{"YY"} \tab \code{"18"} \cr
+   \code{"YYY"} \tab \code{"2018"} \cr
+   \code{"YYYY"} \tab \code{"2018"} \cr
+   \code{"YYYYY"} \tab \code{"02018"} \cr
+   \code{"YYYYYY"} \tab \code{"002018"} \cr
+   \code{"YYYYYYY"} \tab \code{"0002018"} \cr
+   \code{"YYYYYYYY"} \tab \code{"00002018"} \cr
+   \code{"YYYYYYYYY"} \tab \code{"000002018"} \cr
+}
+
+}
 }
 
 \section{Examples}{
