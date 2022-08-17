@@ -91,16 +91,15 @@ information.</p></dd>
 
 
 <dt>format</dt>
-<dd><p>The datetime formatting string to apply to all <code>input</code> values.
-If not provided, the inputs will be formatted to ISO 8601 datetime
-strings.</p></dd>
+<dd><p>The formatting string to apply to all <code>input</code> values. If not
+provided, the inputs will be formatted to ISO 8601 datetime strings.</p></dd>
 
 
 <dt>use_tz</dt>
 <dd><p>A tzid (e.g., <code>"America/New_York"</code>) time-zone designation for
 precise formatting of related outputs. This overrides any time zone
-information available in the input values and is applied to all input
-values.</p></dd>
+information available in string-based input values and is applied to all
+vector components.</p></dd>
 
 
 <dt>locale</dt>
@@ -173,6 +172,40 @@ internally mapped onto canonical zone names. Here's a few examples:</p><ul><li><
 </ul><p>For the most part, the Olson-format tzid follows the form <code>"{region}/{city}"</code>
 where the region is usually a continent, the city is considered an 'exemplar
 city', and the exemplar city itself belongs in a country.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="date-time-format-syntax">Date/Time Format Syntax<a class="anchor" aria-label="anchor" href="#date-time-format-syntax"></a></h2>
+    
+
+
+<p>A formatting pattern as used in <strong>bigD</strong> consists of a string of characters,
+where certain strings are replaced with date and time data that are derived
+from the parsed input.</p>
+<p>The characters used in patterns are tabulated below to show which specific
+strings produce which outputs (e.g., <code>"y"</code> for the year). A common pattern is
+characters that are used consecutively to produce variations on a date, time,
+or timezone output. Say that the year in the input is 2015. If using <code>"yy"</code>
+you'll get <code>"15"</code> but with <code>"yyyy"</code> the output becomes <code>"1999"</code>. There's a
+whole lot of this, so the following subsections try to illustrate as best as
+possible what each string will produce. All of the examples will use this
+string-based datetime input:</p>
+<p><code>"2018-07-04T22:05:09.2358(America/Vancouver)"</code></p><div class="section">
+<h3 id="the-era-designator-big-g-">The Era Designator (big G)<a class="anchor" aria-label="anchor" href="#the-era-designator-big-g-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"G"</code>, <code>"GG"</code>, or <code>"GGG"</code></td><td><code>"AD"</code></td></tr><tr><td><code>"GGGG"</code></td><td><code>"Anno Domini"</code></td></tr><tr><td><code>"GGGGG"</code></td><td><code>"A"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="year-little-y-">Year (little y)<a class="anchor" aria-label="anchor" href="#year-little-y-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"y"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"yy"</code></td><td><code>"18"</code></td></tr><tr><td><code>"yyy"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"yyyy"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"yyyyy"</code></td><td><code>"02018"</code></td></tr><tr><td><code>"yyyyyy"</code></td><td><code>"002018"</code></td></tr><tr><td><code>"yyyyyyy"</code></td><td><code>"0002018"</code></td></tr><tr><td><code>"yyyyyyyy"</code></td><td><code>"00002018"</code></td></tr><tr><td><code>"yyyyyyyyy"</code></td><td><code>"000002018"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="year-in-the-week-in-year-calendar-big-y-">Year in the Week in Year Calendar (big Y)<a class="anchor" aria-label="anchor" href="#year-in-the-week-in-year-calendar-big-y-"></a></h3>
+
+
+<p>This is the year in 'Week of Year' based calendars in which the year
+transition occurs on a week boundary. This may differ from calendar year 'y'
+near a year transition. This numeric year designation is used in conjunction with
+pattern character 'w' in the ISO year-week calendar as defined by ISO 8601.</p><table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"Y"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YY"</code></td><td><code>"18"</code></td></tr><tr><td><code>"YYY"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YYYY"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YYYYY"</code></td><td><code>"02018"</code></td></tr><tr><td><code>"YYYYYY"</code></td><td><code>"002018"</code></td></tr><tr><td><code>"YYYYYYY"</code></td><td><code>"0002018"</code></td></tr><tr><td><code>"YYYYYYYY"</code></td><td><code>"00002018"</code></td></tr><tr><td><code>"YYYYYYYYY"</code></td><td><code>"000002018"</code></td></tr></table></div>
+
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
