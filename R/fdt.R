@@ -87,17 +87,76 @@
 #' where the region is usually a continent, the city is considered an 'exemplar
 #' city', and the exemplar city itself belongs in a country.
 #'
+#' @section Date/Time Format Syntax:
+#'
+#' A formatting pattern as used in **bigD** consists of a string of characters,
+#' where certain strings are replaced with date and time data that are derived
+#' from the parsed input.
+#'
+#' The characters used in patterns are tabulated below to show which specific
+#' strings produce which outputs (e.g., `"y"` for the year). A common pattern is
+#' characters that are used consecutively to produce variations on a date, time,
+#' or timezone output. Say that the year in the input is 2015. If using `"yy"`
+#' you'll get `"15"` but with `"yyyy"` the output becomes `"1999"`. There's a
+#' whole lot of this, so the following subsections try to illustrate as best as
+#' possible what each string will produce. All of the examples will use this
+#' string-based datetime input:
+#'
+#' `"2018-07-04T22:05:09.2358(America/Vancouver)"`
+#'
+#' ## The Era Designator (big G)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"G"`, `"GG"`, or `"GGG"`      | `"AD"`                                 |
+#' | `"GGGG"`                       | `"Anno Domini"`                        |
+#' | `"GGGGG"`                      | `"A"`                                  |
+#'
+#' ## Year (little y)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"y"`                          | `"2018"`                               |
+#' | `"yy"`                         | `"18"`                                 |
+#' | `"yyy"`                        | `"2018"`                               |
+#' | `"yyyy"`                       | `"2018"`                               |
+#' | `"yyyyy"`                      | `"02018"`                              |
+#' | `"yyyyyy"`                     | `"002018"`                             |
+#' | `"yyyyyyy"`                    | `"0002018"`                            |
+#' | `"yyyyyyyy"`                   | `"00002018"`                           |
+#' | `"yyyyyyyyy"`                  | `"000002018"`                          |
+#'
+#'
+#' ## Year in the Week in Year Calendar (big Y)
+#'
+#' This is the year in 'Week of Year' based calendars in which the year
+#' transition occurs on a week boundary. This may differ from calendar year 'y'
+#' near a year transition. This numeric year designation is used in conjunction with
+#' pattern character 'w' in the ISO year-week calendar as defined by ISO 8601.
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"Y"`                          | `"2018"`                               |
+#' | `"YY"`                         | `"18"`                                 |
+#' | `"YYY"`                        | `"2018"`                               |
+#' | `"YYYY"`                       | `"2018"`                               |
+#' | `"YYYYY"`                      | `"02018"`                              |
+#' | `"YYYYYY"`                     | `"002018"`                             |
+#' | `"YYYYYYY"`                    | `"0002018"`                            |
+#' | `"YYYYYYYY"`                   | `"00002018"`                           |
+#' | `"YYYYYYYYY"`                  | `"000002018"`                          |
+#'
+#'
 #' @param input A vector of date, time, or datetime values. Several
 #'   representations are acceptable here including strings, `Date` objects, or
 #'   `POSIXct` objects. Refer to the *Valid Input Values* section for more
 #'   information.
-#' @param format The datetime formatting string to apply to all `input` values.
-#'   If not provided, the inputs will be formatted to ISO 8601 datetime
-#'   strings.
+#' @param format The formatting string to apply to all `input` values. If not
+#'   provided, the inputs will be formatted to ISO 8601 datetime strings.
 #' @param use_tz A tzid (e.g., `"America/New_York"`) time-zone designation for
 #'   precise formatting of related outputs. This overrides any time zone
-#'   information available in the input values and is applied to all input
-#'   values.
+#'   information available in string-based input values and is applied to all
+#'   vector components.
 #' @param locale The output locale to use for formatting the input value
 #'   according to the specified locale's rules. Example locale names include
 #'   `"en"` for English (United States) and `"es-EC"` for Spanish (Ecuador). If
@@ -216,6 +275,10 @@ fdt <- function(
     input <- as.POSIXct(input)
   }
 
+  if (inherits(input, "Date")) {
+    input <- as.POSIXct(as.POSIXlt(input))
+  }
+
   dt_out <- rep(NA_character_, length(input))
 
   for (i in seq_along(input)) {
@@ -310,21 +373,30 @@ fdt <- function(
       # Extract the input time zone
       long_tzid <- attr(input_dt, which = "tzone", exact = TRUE)
 
-      if (long_tzid == "UTC") {
+      offset_val <- as.POSIXlt(input_dt)$gmtoff / 3600
+
+      if (!is.null(long_tzid) && long_tzid == "UTC") {
 
         tz_info$long_tzid <- long_tzid
         tz_info$tz_str <- "GMT"
         tz_info$tz_offset <- 0L
+        tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+        tz_info$tz_long_specific <- get_tz_long_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt, locale = locale)
+
+      } else if (is.null(long_tzid)) {
+
+        tz_info$long_tzid <- NA_character_
+        tz_info$tz_str <- "GMT"
+        tz_info$tz_offset <- offset_val
 
       } else {
 
         tz_info$long_tzid <- long_tzid
         tz_info$tz_str <- long_tzid_to_tz_str(long_tzid = tz_info$long_tzid, input_dt = input_dt)
         tz_info$tz_offset <- get_tz_offset_val_from_tz_str(tz_str = tz_info$tz_str)
+        tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
+        tz_info$tz_long_specific <- get_tz_long_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt, locale = locale)
       }
-
-      tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
-      tz_info$tz_long_specific <- get_tz_long_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt, locale = locale)
     }
 
     dt_lett <- pattern_list$dt_letters
