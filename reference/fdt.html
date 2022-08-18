@@ -253,28 +253,21 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 
 <div class="section">
 <h3 id="am-pm-period-of-day-little-a-">AM/PM Period of Day (little a)<a class="anchor" aria-label="anchor" href="#am-pm-period-of-day-little-a-"></a></h3>
-
-
-<p>| Formatting String              | Output   | Note                        |
-| -------------------------------|----------------------------------------|
-| <code>"a"</code>, <code>"aa"</code>, or <code>"aaa"</code>      | <code>"PM"</code>   | Abbreviated                 |
-| <code>"aaaa"</code>                       | <code>"PM"</code>   | Wide                        |
-| <code>"aaaaa"</code>                      | <code>"p"</code>    | Narrow                      |</p>
-</div>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"a"</code>, <code>"aa"</code>, or <code>"aaa"</code></td><td><code>"PM"</code></td><td>Abbreviated</td></tr><tr><td><code>"aaaa"</code></td><td><code>"PM"</code></td><td>Wide</td></tr><tr><td><code>"aaaaa"</code></td><td><code>"p"</code></td><td>Narrow</td></tr></table></div>
 
 <div class="section">
 <h3 id="am-pm-period-of-day-plus-noon-and-midnight-little-b-">AM/PM Period of Day Plus Noon and Midnight (little b)<a class="anchor" aria-label="anchor" href="#am-pm-period-of-day-plus-noon-and-midnight-little-b-"></a></h3>
 
 
-<p>(a) <code>input_midnight</code>: <code>"2020-05-05T00:00:00"</code>
-(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code></td><td>(a) <code>"midnight"</code></td><td>Abbreviated</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"noon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"bbbb"</code></td><td>(a) <code>"midnight"</code></td><td>Wide</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"noon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"bbbbb"</code></td><td>(a) <code>"mi"</code></td><td>Narrow</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"n"</code></td><td><code>"" "" ""</code></td></tr></table></div>
+<p>(a) <code>input_midnight</code>: <code>"2020-05-05T00:00:00"</code></p>
+<p>(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code></td><td>(a) <code>"midnight"</code></td><td>Abbreviated</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"noon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"bbbb"</code></td><td>(a) <code>"midnight"</code></td><td>Wide</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"noon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"bbbbb"</code></td><td>(a) <code>"mi"</code></td><td>Narrow</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"n"</code></td><td><code>"" "" ""</code></td></tr></table></div>
 
 <div class="section">
 <h3 id="flexible-day-periods-big-b-">Flexible Day Periods (big B)<a class="anchor" aria-label="anchor" href="#flexible-day-periods-big-b-"></a></h3>
 
 
-<p>(a) <code>input_morning</code>: <code>"2020-05-05T00:08:30"</code>
-(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Abbreviated</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"BBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Wide</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"BBBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Narrow</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr></table></div>
+<p>(a) <code>input_morning</code>: <code>"2020-05-05T00:08:30"</code></p>
+<p>(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Abbreviated</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"BBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Wide</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"BBBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Narrow</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr></table></div>
 
 <div class="section">
 <h3 id="hour-little-h-">Hour 1-12 (little h)<a class="anchor" aria-label="anchor" href="#hour-little-h-"></a></h3>
@@ -317,6 +310,34 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 
 
 <p>Using: <code>"2011-07-27T00:07:19.7223"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"A"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAAAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAAAAA"</code></td><td><code>"0439722"</code></td></tr><tr><td><code>"AAAAAAAA"</code></td><td><code>"00439722"</code></td></tr><tr><td><code>"AAAAAAAAA"</code></td><td><code>"000439722"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="tz-short-and-long-specific-non-location-format-little-z-">TZ // Short and Long Specific non-Location Format (little z)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-specific-non-location-format-little-z-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"z"</code>, <code>"zz"</code>, or <code>"zzz"</code></td><td><code>"PDT"</code></td><td>Short Specific</td></tr><tr><td><code>"zzzz"</code></td><td><code>"Pacific Daylight Time"</code></td><td>Long Specific</td></tr></table></div>
+
+<div class="section">
+<h3 id="tz-short-and-long-specific-non-location-formats-big-z-">TZ // Short and Long Specific non-Location Formats (big Z)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-specific-non-location-formats-big-z-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"Z"</code>, <code>"ZZ"</code>, or <code>"ZZZ"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format</td></tr><tr><td><code>"ZZZZ"</code></td><td><code>"GMT-7:00"</code></td><td>Long localized GMT format</td></tr><tr><td><code>"ZZZZZ"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format</td></tr></table></div>
+
+<div class="section">
+<h3 id="tz-short-and-long-localized-gmt-formats-big-o-">TZ // Short and Long Localized GMT Formats (big O)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-localized-gmt-formats-big-o-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"O"</code></td><td><code>"GMT-7"</code></td><td>Short localized GMT format</td></tr><tr><td><code>"OOOO"</code></td><td><code>"GMT-07:00"</code></td><td>Long localized GMT format</td></tr></table></div>
+
+<div class="section">
+<h3 id="tz-short-and-long-localized-gmt-formats-little-v-">TZ // Short and Long Localized GMT Formats (little v)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-localized-gmt-formats-little-v-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"v"</code></td><td><code>"PT"</code></td><td>Short generic non-location format</td></tr><tr><td><code>"vvvv"</code></td><td><code>"Pacific Time"</code></td><td>Long generic non-location format</td></tr></table></div>
+
+<div class="section">
+<h3 id="tz-short-time-zone-ids-and-exemplar-city-formats-big-v-">TZ // Short Time Zone IDs and Exemplar City Formats (big V)<a class="anchor" aria-label="anchor" href="#tz-short-time-zone-ids-and-exemplar-city-formats-big-v-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"V"</code></td><td><code>"cavan"</code></td><td>Short time zone ID</td></tr><tr><td><code>"VV"</code></td><td><code>"America/Vancouver"</code></td><td>Long time zone ID</td></tr><tr><td><code>"VVV"</code></td><td><code>"Vancouver"</code></td><td>The tz exemplar city</td></tr><tr><td><code>"VVVV"</code></td><td><code>"Vancouver Time"</code></td><td>Generic location format</td></tr></table></div>
+
+<div class="section">
+<h3 id="tz-iso-formats-with-z-for-big-x-">TZ // ISO 8601 Formats with Z for +0000 (big X)<a class="anchor" aria-label="anchor" href="#tz-iso-formats-with-z-for-big-x-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"X"</code></td><td><code>"-07"</code></td><td>ISO 8601 basic format (h; optional m)</td></tr><tr><td><code>"XX"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m)</td></tr><tr><td><code>"XXX"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m)</td></tr><tr><td><code>"XXXX"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m, optional s)</td></tr><tr><td><code>"XXXXX"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m, optional s)</td></tr></table></div>
+
+<div class="section">
+<h3 id="tz-iso-formats-no-use-of-z-for-little-x-">TZ // ISO 8601 Formats (no use of Z for +0000) (little x)<a class="anchor" aria-label="anchor" href="#tz-iso-formats-no-use-of-z-for-little-x-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"x"</code></td><td><code>"-07"</code></td><td>ISO 8601 basic format (h; optional m)</td></tr><tr><td><code>"xx"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m)</td></tr><tr><td><code>"xxx"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m)</td></tr><tr><td><code>"xxxx"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m, optional s)</td></tr><tr><td><code>"xxxxx"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m, optional s)</td></tr></table></div>
 
     </div>
     <div class="section level2">
