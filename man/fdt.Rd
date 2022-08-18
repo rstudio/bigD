@@ -291,18 +291,19 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 
 }
 
-\subsection{AM/PM Period of Day (little a)}{
+\subsection{AM/PM Period of Day (little a)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"a"}, \code{"aa"}, or \code{"aaa"} \tab \code{"PM"} \tab Abbreviated \cr
+   \code{"aaaa"} \tab \code{"PM"} \tab Wide \cr
+   \code{"aaaaa"} \tab \code{"p"} \tab Narrow \cr
+}
 
-| Formatting String              | Output   | Note                        |
-| -------------------------------|----------------------------------------|
-| \code{"a"}, \code{"aa"}, or \code{"aaa"}      | \code{"PM"}   | Abbreviated                 |
-| \code{"aaaa"}                       | \code{"PM"}   | Wide                        |
-| \code{"aaaaa"}                      | \code{"p"}    | Narrow                      |
 }
 
 \subsection{AM/PM Period of Day Plus Noon and Midnight (little b)}{
 
 (a) \code{input_midnight}: \code{"2020-05-05T00:00:00"}
+
 (b) \code{input_noon}: \code{"2020-05-05T12:00:00"}\tabular{lll}{
    Formatting String \tab Output \tab Note \cr
    \code{"b"}, \code{"bb"}, or \code{"bbb"} \tab (a) \code{"midnight"} \tab Abbreviated \cr
@@ -318,6 +319,7 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 \subsection{Flexible Day Periods (big B)}{
 
 (a) \code{input_morning}: \code{"2020-05-05T00:08:30"}
+
 (b) \code{input_afternoon}: \code{"2020-05-05T14:00:00"}\tabular{lll}{
    Formatting String \tab Output \tab Note \cr
    \code{"B"}, \code{"BB"}, or \code{"BBB"} \tab (a) \code{"in the morning"} \tab Abbreviated \cr
@@ -414,6 +416,71 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
    \code{"AAAAAAA"} \tab \code{"0439722"} \cr
    \code{"AAAAAAAA"} \tab \code{"00439722"} \cr
    \code{"AAAAAAAAA"} \tab \code{"000439722"} \cr
+}
+
+}
+
+\subsection{TZ // Short and Long Specific non-Location Format (little z)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"z"}, \code{"zz"}, or \code{"zzz"} \tab \code{"PDT"} \tab Short Specific \cr
+   \code{"zzzz"} \tab \code{"Pacific Daylight Time"} \tab Long Specific \cr
+}
+
+}
+
+\subsection{TZ // Short and Long Specific non-Location Formats (big Z)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"Z"}, \code{"ZZ"}, or \code{"ZZZ"} \tab \code{"-0700"} \tab ISO 8601 basic format \cr
+   \code{"ZZZZ"} \tab \code{"GMT-7:00"} \tab Long localized GMT format \cr
+   \code{"ZZZZZ"} \tab \code{"-07:00"} \tab ISO 8601 extended format \cr
+}
+
+}
+
+\subsection{TZ // Short and Long Localized GMT Formats (big O)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"O"} \tab \code{"GMT-7"} \tab Short localized GMT format \cr
+   \code{"OOOO"} \tab \code{"GMT-07:00"} \tab Long localized GMT format \cr
+}
+
+}
+
+\subsection{TZ // Short and Long Localized GMT Formats (little v)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"v"} \tab \code{"PT"} \tab Short generic non-location format \cr
+   \code{"vvvv"} \tab \code{"Pacific Time"} \tab Long generic non-location format \cr
+}
+
+}
+
+\subsection{TZ // Short Time Zone IDs and Exemplar City Formats (big V)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"V"} \tab \code{"cavan"} \tab Short time zone ID \cr
+   \code{"VV"} \tab \code{"America/Vancouver"} \tab Long time zone ID \cr
+   \code{"VVV"} \tab \code{"Vancouver"} \tab The tz exemplar city \cr
+   \code{"VVVV"} \tab \code{"Vancouver Time"} \tab Generic location format \cr
+}
+
+}
+
+\subsection{TZ // ISO 8601 Formats with Z for +0000 (big X)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"X"} \tab \code{"-07"} \tab ISO 8601 basic format (h; optional m) \cr
+   \code{"XX"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m) \cr
+   \code{"XXX"} \tab \code{"-07:00"} \tab ISO 8601 extended format (h & m) \cr
+   \code{"XXXX"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m, optional s) \cr
+   \code{"XXXXX"} \tab \code{"-07:00"} \tab ISO 8601 extended format (h & m, optional s) \cr
+}
+
+}
+
+\subsection{TZ // ISO 8601 Formats (no use of Z for +0000) (little x)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"x"} \tab \code{"-07"} \tab ISO 8601 basic format (h; optional m) \cr
+   \code{"xx"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m) \cr
+   \code{"xxx"} \tab \code{"-07:00"} \tab ISO 8601 extended format (h & m) \cr
+   \code{"xxxx"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m, optional s) \cr
+   \code{"xxxxx"} \tab \code{"-07:00"} \tab ISO 8601 extended format (h & m, optional s) \cr
 }
 
 }
