@@ -256,7 +256,7 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 
 
 <p>| Formatting String              | Output   | Note                        |
-| ------------------------------ |----------------------------------------|
+| -------------------------------|----------------------------------------|
 | <code>"a"</code>, <code>"aa"</code>, or <code>"aaa"</code>      | <code>"PM"</code>   | Abbreviated                 |
 | <code>"aaaa"</code>                       | <code>"PM"</code>   | Wide                        |
 | <code>"aaaaa"</code>                      | <code>"p"</code>    | Narrow                      |</p>
@@ -267,96 +267,46 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 
 
 <p>(a) <code>input_midnight</code>: <code>"2020-05-05T00:00:00"</code>
-(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p>
-<p>| Formatting String              | Output             | Note              |
-| ------------------------------ |----------------------------------------|
-| <code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code>      | (a) <code>"midnight"</code>   | Abbreviated       |
-| <code>"" "" ""</code>                     | (b) <code>"noon"</code>       | <code>"" "" ""</code>        |
-| <code>"bbbb"</code>                       | (a) <code>"midnight"</code>   | Wide              |
-| <code>"" "" ""</code>                     | (b) <code>"noon"</code>       | <code>"" "" ""</code>        |
-| <code>"bbbbb"</code>                      | (a) <code>"mi"</code>         | Narrow            |
-| <code>"" "" ""</code>                     | (b) <code>"n"</code>          | <code>"" "" ""</code>        |</p>
-</div>
+(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code></td><td>(a) <code>"midnight"</code></td><td>Abbreviated</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"noon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"bbbb"</code></td><td>(a) <code>"midnight"</code></td><td>Wide</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"noon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"bbbbb"</code></td><td>(a) <code>"mi"</code></td><td>Narrow</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"n"</code></td><td><code>"" "" ""</code></td></tr></table></div>
 
 <div class="section">
 <h3 id="flexible-day-periods-big-b-">Flexible Day Periods (big B)<a class="anchor" aria-label="anchor" href="#flexible-day-periods-big-b-"></a></h3>
 
 
 <p>(a) <code>input_morning</code>: <code>"2020-05-05T00:08:30"</code>
-(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p>
-<p>| Formatting String          | Output                   | Note            |
-| ---------------------------|--------------------------------------------|
-| <code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code>  | (a) <code>"in the morning"</code>   | Abbreviated     |
-| <code>"" "" ""</code>                 | (b) <code>"in the afternoon"</code> | <code>"" "" ""</code>      |
-| <code>"BBBB"</code>                   | (a) <code>"in the morning"</code>   | Wide            |
-| <code>"" "" ""</code>                 | (b) <code>"in the afternoon"</code> | <code>"" "" ""</code>      |
-| <code>"BBBBB"</code>                  | (a) <code>"in the morning"</code>   | Narrow          |
-| <code>"" "" ""</code>                 | (b) <code>"in the afternoon"</code> | <code>"" "" ""</code>      |</p>
-</div>
+(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Abbreviated</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"BBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Wide</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr><tr><td><code>"BBBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Narrow</td></tr><tr><td><code>"" "" ""</code></td><td>(b) <code>"in the afternoon"</code></td><td><code>"" "" ""</code></td></tr></table></div>
 
 <div class="section">
 <h3 id="hour-little-h-">Hour 1-12 (little h)<a class="anchor" aria-label="anchor" href="#hour-little-h-"></a></h3>
 
 
-<p>Using: <code>"2015-08-01T08:35:09"</code></p>
-<p>| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| <code>"h"</code>                  | <code>"8"</code>   | Numeric, minimum digits          |
-| <code>"hh"</code>                 | <code>"08"</code>  | Numeric, 2 digits (zero padded)  |</p>
-</div>
+<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"h"</code></td><td><code>"8"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"hh"</code></td><td><code>"08"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h3 id="hour-big-h-">Hour 0-23 (big H)<a class="anchor" aria-label="anchor" href="#hour-big-h-"></a></h3>
 
 
-<p>Using: <code>"2015-08-01T08:35:09"</code></p>
-<p>| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| <code>"H"</code>                  | <code>"8"</code>   | Numeric, minimum digits          |
-| <code>"HH"</code>                 | <code>"08"</code>  | Numeric, 2 digits (zero padded)  |</p>
-</div>
+<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"H"</code></td><td><code>"8"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"HH"</code></td><td><code>"08"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h3 id="hour-big-k-">Hour 0-11 (big K)<a class="anchor" aria-label="anchor" href="#hour-big-k-"></a></h3>
 
 
-<p>Using: <code>"2015-08-01T08:35:09"</code></p>
-<p>| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| <code>"K"</code>                  | <code>"7"</code>   | Numeric, minimum digits          |
-| <code>"KK"</code>                 | <code>"07"</code>  | Numeric, 2 digits (zero padded)  |</p>
-</div>
+<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"K"</code></td><td><code>"7"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"KK"</code></td><td><code>"07"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h3 id="hour-little-k-">Hour 1-24 (little k)<a class="anchor" aria-label="anchor" href="#hour-little-k-"></a></h3>
 
 
-<p>Using: <code>"2015-08-01T08:35:09"</code></p>
-<p>| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| <code>"k"</code>                  | <code>"9"</code>   | Numeric, minimum digits          |
-| <code>"kk"</code>                 | <code>"09"</code>  | Numeric, 2 digits (zero padded)  |</p>
-</div>
+<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"k"</code></td><td><code>"9"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"kk"</code></td><td><code>"09"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h3 id="minute-little-m-">Minute (little m)<a class="anchor" aria-label="anchor" href="#minute-little-m-"></a></h3>
-
-
-<p>| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| <code>"m"</code>                  | <code>"5"</code>   | Numeric, minimum digits          |
-| <code>"mm"</code>                 | <code>"06"</code>  | Numeric, 2 digits (zero padded)  |</p>
-</div>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"m"</code></td><td><code>"5"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"mm"</code></td><td><code>"06"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h3 id="second-little-s-">Second (little s)<a class="anchor" aria-label="anchor" href="#second-little-s-"></a></h3>
-
-
-<p>| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| <code>"s"</code>                  | <code>"9"</code>   | Numeric, minimum digits          |
-| <code>"ss"</code>                 | <code>"09"</code>  | Numeric, 2 digits (zero padded)  |</p>
-</div>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td><td>Note</td></tr><tr><td><code>"s"</code></td><td><code>"9"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"ss"</code></td><td><code>"09"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h3 id="fractional-second-big-s-">Fractional Second (big S)<a class="anchor" aria-label="anchor" href="#fractional-second-big-s-"></a></h3>
