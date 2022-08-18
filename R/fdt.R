@@ -100,7 +100,7 @@
 #' you'll get `"15"` but with `"yyyy"` the output becomes `"1999"`. There's a
 #' whole lot of this, so the following subsections try to illustrate as best as
 #' possible what each string will produce. All of the examples will use this
-#' string-based datetime input:
+#' string-based datetime input unless otherwise indicated:
 #'
 #' `"2018-07-04T22:05:09.2358(America/Vancouver)"`
 #'
@@ -111,6 +111,7 @@
 #' | `"G"`, `"GG"`, or `"GGG"`      | `"AD"`                                 |
 #' | `"GGGG"`                       | `"Anno Domini"`                        |
 #' | `"GGGGG"`                      | `"A"`                                  |
+#'
 #'
 #' ## Year (little y)
 #'
@@ -131,8 +132,9 @@
 #'
 #' This is the year in 'Week of Year' based calendars in which the year
 #' transition occurs on a week boundary. This may differ from calendar year 'y'
-#' near a year transition. This numeric year designation is used in conjunction with
-#' pattern character 'w' in the ISO year-week calendar as defined by ISO 8601.
+#' near a year transition. This numeric year designation is used in conjunction
+#' with pattern character 'w' in the ISO year-week calendar as defined by ISO
+#' 8601.
 #'
 #' | Formatting String              | Output                                 |
 #' | ------------------------------ |----------------------------------------|
@@ -146,6 +148,242 @@
 #' | `"YYYYYYYY"`                   | `"00002018"`                           |
 #' | `"YYYYYYYYY"`                  | `"000002018"`                          |
 #'
+#'
+#' ## Quarter of the Year: formatting ver. (big Q)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"Q"`                          | `"3"`                                  |
+#' | `"QQ"`                         | `"03"`                                 |
+#' | `"QQQ"`                        | `"Q3"`                                 |
+#' | `"QQQQ"`                       | `"3rd quarter"`                        |
+#' | `"QQQQQ"`                      | `"3"`                                  |
+#'
+#'
+#' ## Quarter of the Year: standalone ver. (little q)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"q"`                          | `"3"`                                  |
+#' | `"qq"`                         | `"03"`                                 |
+#' | `"qqq"`                        | `"Q3"`                                 |
+#' | `"qqqq"`                       | `"3rd quarter"`                        |
+#' | `"qqqqq"`                      | `"3"`                                  |
+#'
+#'
+#' ## Month: formatting ver. (big M)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"M"`                          | `"7"`                                  |
+#' | `"MM"`                         | `"07"`                                 |
+#' | `"MMM"`                        | `"Jul"`                                |
+#' | `"MMMM"`                       | `"July"`                               |
+#' | `"MMMMM"`                      | `"J"`                                  |
+#'
+#'
+#' ## Month: standalone ver. (big L)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"L"`                          | `"7"`                                  |
+#' | `"LL"`                         | `"07"`                                 |
+#' | `"LLL"`                        | `"Jul"`                                |
+#' | `"LLLL"`                       | `"July"`                               |
+#' | `"LLLLL"`                      | `"J"`                                  |
+#'
+#'
+#' ## Week of Year (little w)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"w"`                          | `"27"` (minimal digits)                |
+#' | `"ww"`                         | `"27"` (two digits, zero padded)       |
+#'
+#'
+#' ## Week of Month (big W)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"W"`                          | `"1"`                                  |
+#'
+#'
+#' ## Day of Month (little d)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"d"`                          | `"4"` (minimal digits)                 |
+#' | `"dd"`                         | `"04"` (two digits, zero padded)       |
+#'
+#'
+#' ## Day of Year (big D)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"D"`                          | `"185"`                                |
+#' | `"DD"`                         | `"185"` (zero padded to min-width of 2)|
+#' | `"DDD"`                        | `"185"` (zero padded to min-width of 3)|
+#'
+#'
+#' ## Day of Week in Month (big F)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"F"`                          | `"1"`                                  |
+#'
+#'
+#' ## Modified Julian Day (little g)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"g"`                          | `"58303"`                              |
+#' | `"gg"`                         | `"58303"`                              |
+#' | `"ggg"`                        | `"58303"`                              |
+#' | `"gggg"`                       | `"58303"`                              |
+#' | `"ggggg"`                      | `"58303"`                              |
+#' | `"gggggg"`                     | `"058303"`                             |
+#' | `"ggggggg"`                    | `"0058303"`                            |
+#' | `"gggggggg"`                   | `"00058303"`                           |
+#' | `"ggggggggg"`                  | `"000058303"`                          |
+#'
+#'
+#' ## Day of Week Name (big E)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"E"`                          | `"Wed"`                                |
+#' | `"EE"`                         | `"Wed"`                                |
+#' | `"EEE"`                        | `"Wed"`                                |
+#' | `"EEEE"`                       | `"Wednesday"`                          |
+#' | `"EEEEE"`                      | `"W"`                                  |
+#' | `"EEEEEE"`                     | `"We"`                                 |
+#'
+#'
+#' ## AM/PM Period of Day (little a)
+#'
+#' | Formatting String              | Output   | Note                        |
+#' | ------------------------------ |----------------------------------------|
+#' | `"a"`, `"aa"`, or `"aaa"`      | `"PM"`   | Abbreviated                 |
+#' | `"aaaa"`                       | `"PM"`   | Wide                        |
+#' | `"aaaaa"`                      | `"p"`    | Narrow                      |
+#'
+#'
+#' ## AM/PM Period of Day Plus Noon and Midnight (little b)
+#'
+#' (a) `input_midnight`: `"2020-05-05T00:00:00"`
+#' (b) `input_noon`: `"2020-05-05T12:00:00"`
+#'
+#' | Formatting String              | Output             | Note              |
+#' | ------------------------------ |----------------------------------------|
+#' | `"b"`, `"bb"`, or `"bbb"`      | (a) `"midnight"`   | Abbreviated       |
+#' | `"" "" ""`                     | (b) `"noon"`       | `"" "" ""`        |
+#' | `"bbbb"`                       | (a) `"midnight"`   | Wide              |
+#' | `"" "" ""`                     | (b) `"noon"`       | `"" "" ""`        |
+#' | `"bbbbb"`                      | (a) `"mi"`         | Narrow            |
+#' | `"" "" ""`                     | (b) `"n"`          | `"" "" ""`        |
+#'
+#'
+#' ## Flexible Day Periods (big B)
+#'
+#' (a) `input_morning`: `"2020-05-05T00:08:30"`
+#' (b) `input_afternoon`: `"2020-05-05T14:00:00"`
+#'
+#' | Formatting String          | Output                   | Note            |
+#' | ---------------------------|--------------------------------------------|
+#' | `"B"`, `"BB"`, or `"BBB"`  | (a) `"in the morning"`   | Abbreviated     |
+#' | `"" "" ""`                 | (b) `"in the afternoon"` | `"" "" ""`      |
+#' | `"BBBB"`                   | (a) `"in the morning"`   | Wide            |
+#' | `"" "" ""`                 | (b) `"in the afternoon"` | `"" "" ""`      |
+#' | `"BBBBB"`                  | (a) `"in the morning"`   | Narrow          |
+#' | `"" "" ""`                 | (b) `"in the afternoon"` | `"" "" ""`      |
+#'
+#'
+#' ## Hour [1-12] (little h)
+#'
+#' Using: `"2015-08-01T08:35:09"`
+#'
+#' | Formatting String      | Output  | Note                             |
+#' | -----------------------|--------------------------------------------|
+#' | `"h"`                  | `"8"`   | Numeric, minimum digits          |
+#' | `"hh"`                 | `"08"`  | Numeric, 2 digits (zero padded)  |
+#'
+#'
+#' ## Hour [0-23] (big H)
+#'
+#' Using: `"2015-08-01T08:35:09"`
+#'
+#' | Formatting String      | Output  | Note                             |
+#' | -----------------------|--------------------------------------------|
+#' | `"H"`                  | `"8"`   | Numeric, minimum digits          |
+#' | `"HH"`                 | `"08"`  | Numeric, 2 digits (zero padded)  |
+#'
+#'
+#' ## Hour [0-11] (big K)
+#'
+#' Using: `"2015-08-01T08:35:09"`
+#'
+#' | Formatting String      | Output  | Note                             |
+#' | -----------------------|--------------------------------------------|
+#' | `"K"`                  | `"7"`   | Numeric, minimum digits          |
+#' | `"KK"`                 | `"07"`  | Numeric, 2 digits (zero padded)  |
+#'
+#'
+#' ## Hour [1-24] (little k)
+#'
+#' Using: `"2015-08-01T08:35:09"`
+#'
+#' | Formatting String      | Output  | Note                             |
+#' | -----------------------|--------------------------------------------|
+#' | `"k"`                  | `"9"`   | Numeric, minimum digits          |
+#' | `"kk"`                 | `"09"`  | Numeric, 2 digits (zero padded)  |
+#'
+#'
+#' ## Minute (little m)
+#'
+#' | Formatting String      | Output  | Note                             |
+#' | -----------------------|--------------------------------------------|
+#' | `"m"`                  | `"5"`   | Numeric, minimum digits          |
+#' | `"mm"`                 | `"06"`  | Numeric, 2 digits (zero padded)  |
+#'
+#'
+#' ## Second (little s)
+#'
+#' | Formatting String      | Output  | Note                             |
+#' | -----------------------|--------------------------------------------|
+#' | `"s"`                  | `"9"`   | Numeric, minimum digits          |
+#' | `"ss"`                 | `"09"`  | Numeric, 2 digits (zero padded)  |
+#'
+#'
+#' ## Fractional Second (big S)
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"S"`                          | `"2"`                                  |
+#' | `"SS"`                         | `"23"`                                 |
+#' | `"SSS"`                        | `"235"`                                |
+#' | `"SSSS"`                       | `"2350"`                               |
+#' | `"SSSSS"`                      | `"23500"`                              |
+#' | `"SSSSSS"`                     | `"235000"`                             |
+#' | `"SSSSSSS"`                    | `"2350000"`                            |
+#' | `"SSSSSSSS"`                   | `"23500000"`                           |
+#' | `"SSSSSSSSS"`                  | `"235000000"`                          |
+#'
+#'
+#' ## Milliseconds Elapsed in Day (big A)
+#'
+#' Using: `"2011-07-27T00:07:19.7223"`
+#'
+#' | Formatting String              | Output                                 |
+#' | ------------------------------ |----------------------------------------|
+#' | `"A"`                          | `"439722"`                             |
+#' | `"AA"`                         | `"439722"`                             |
+#' | `"AAA"`                        | `"439722"`                             |
+#' | `"AAAA"`                       | `"439722"`                             |
+#' | `"AAAAA"`                      | `"439722"`                             |
+#' | `"AAAAAA"`                     | `"439722"`                             |
+#' | `"AAAAAAA"`                    | `"0439722"`                            |
+#' | `"AAAAAAAA"`                   | `"00439722"`                           |
+#' | `"AAAAAAAAA"`                  | `"000439722"`                          |
 #'
 #' @param input A vector of date, time, or datetime values. Several
 #'   representations are acceptable here including strings, `Date` objects, or
