@@ -1157,7 +1157,7 @@ dt_zzzz <- function(input, tz_info, locale = NULL) {
 
   tz_long_specific <- tz_info$tz_long_specific
 
-  if (is.na(tz_long_specific)) {
+  if (is.na(tz_long_specific) || length(tz_long_specific) != 1) {
     return(dt_OOOO(input = input, tz_info = tz_info, locale = locale))
   }
 
