@@ -294,7 +294,7 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 \subsection{AM/PM Period of Day (little a)}{
 
 | Formatting String              | Output   | Note                        |
-| ------------------------------ |----------------------------------------|
+| -------------------------------|----------------------------------------|
 | \code{"a"}, \code{"aa"}, or \code{"aaa"}      | \code{"PM"}   | Abbreviated                 |
 | \code{"aaaa"}                       | \code{"PM"}   | Wide                        |
 | \code{"aaaaa"}                      | \code{"p"}    | Narrow                      |
@@ -303,87 +303,87 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 \subsection{AM/PM Period of Day Plus Noon and Midnight (little b)}{
 
 (a) \code{input_midnight}: \code{"2020-05-05T00:00:00"}
-(b) \code{input_noon}: \code{"2020-05-05T12:00:00"}
+(b) \code{input_noon}: \code{"2020-05-05T12:00:00"}\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"b"}, \code{"bb"}, or \code{"bbb"} \tab (a) \code{"midnight"} \tab Abbreviated \cr
+   \verb{"" "" ""} \tab (b) \code{"noon"} \tab \verb{"" "" ""} \cr
+   \code{"bbbb"} \tab (a) \code{"midnight"} \tab Wide \cr
+   \verb{"" "" ""} \tab (b) \code{"noon"} \tab \verb{"" "" ""} \cr
+   \code{"bbbbb"} \tab (a) \code{"mi"} \tab Narrow \cr
+   \verb{"" "" ""} \tab (b) \code{"n"} \tab \verb{"" "" ""} \cr
+}
 
-| Formatting String              | Output             | Note              |
-| ------------------------------ |----------------------------------------|
-| \code{"b"}, \code{"bb"}, or \code{"bbb"}      | (a) \code{"midnight"}   | Abbreviated       |
-| \verb{"" "" ""}                     | (b) \code{"noon"}       | \verb{"" "" ""}        |
-| \code{"bbbb"}                       | (a) \code{"midnight"}   | Wide              |
-| \verb{"" "" ""}                     | (b) \code{"noon"}       | \verb{"" "" ""}        |
-| \code{"bbbbb"}                      | (a) \code{"mi"}         | Narrow            |
-| \verb{"" "" ""}                     | (b) \code{"n"}          | \verb{"" "" ""}        |
 }
 
 \subsection{Flexible Day Periods (big B)}{
 
 (a) \code{input_morning}: \code{"2020-05-05T00:08:30"}
-(b) \code{input_afternoon}: \code{"2020-05-05T14:00:00"}
+(b) \code{input_afternoon}: \code{"2020-05-05T14:00:00"}\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"B"}, \code{"BB"}, or \code{"BBB"} \tab (a) \code{"in the morning"} \tab Abbreviated \cr
+   \verb{"" "" ""} \tab (b) \code{"in the afternoon"} \tab \verb{"" "" ""} \cr
+   \code{"BBBB"} \tab (a) \code{"in the morning"} \tab Wide \cr
+   \verb{"" "" ""} \tab (b) \code{"in the afternoon"} \tab \verb{"" "" ""} \cr
+   \code{"BBBBB"} \tab (a) \code{"in the morning"} \tab Narrow \cr
+   \verb{"" "" ""} \tab (b) \code{"in the afternoon"} \tab \verb{"" "" ""} \cr
+}
 
-| Formatting String          | Output                   | Note            |
-| ---------------------------|--------------------------------------------|
-| \code{"B"}, \code{"BB"}, or \code{"BBB"}  | (a) \code{"in the morning"}   | Abbreviated     |
-| \verb{"" "" ""}                 | (b) \code{"in the afternoon"} | \verb{"" "" ""}      |
-| \code{"BBBB"}                   | (a) \code{"in the morning"}   | Wide            |
-| \verb{"" "" ""}                 | (b) \code{"in the afternoon"} | \verb{"" "" ""}      |
-| \code{"BBBBB"}                  | (a) \code{"in the morning"}   | Narrow          |
-| \verb{"" "" ""}                 | (b) \code{"in the afternoon"} | \verb{"" "" ""}      |
 }
 
 \subsection{Hour \link{1-12} (little h)}{
 
-Using: \code{"2015-08-01T08:35:09"}
+Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"h"} \tab \code{"8"} \tab Numeric, minimum digits \cr
+   \code{"hh"} \tab \code{"08"} \tab Numeric, 2 digits (zero padded) \cr
+}
 
-| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| \code{"h"}                  | \code{"8"}   | Numeric, minimum digits          |
-| \code{"hh"}                 | \code{"08"}  | Numeric, 2 digits (zero padded)  |
 }
 
 \subsection{Hour \link{0-23} (big H)}{
 
-Using: \code{"2015-08-01T08:35:09"}
+Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"H"} \tab \code{"8"} \tab Numeric, minimum digits \cr
+   \code{"HH"} \tab \code{"08"} \tab Numeric, 2 digits (zero padded) \cr
+}
 
-| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| \code{"H"}                  | \code{"8"}   | Numeric, minimum digits          |
-| \code{"HH"}                 | \code{"08"}  | Numeric, 2 digits (zero padded)  |
 }
 
 \subsection{Hour \link{0-11} (big K)}{
 
-Using: \code{"2015-08-01T08:35:09"}
+Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"K"} \tab \code{"7"} \tab Numeric, minimum digits \cr
+   \code{"KK"} \tab \code{"07"} \tab Numeric, 2 digits (zero padded) \cr
+}
 
-| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| \code{"K"}                  | \code{"7"}   | Numeric, minimum digits          |
-| \code{"KK"}                 | \code{"07"}  | Numeric, 2 digits (zero padded)  |
 }
 
 \subsection{Hour \link{1-24} (little k)}{
 
-Using: \code{"2015-08-01T08:35:09"}
-
-| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| \code{"k"}                  | \code{"9"}   | Numeric, minimum digits          |
-| \code{"kk"}                 | \code{"09"}  | Numeric, 2 digits (zero padded)  |
+Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"k"} \tab \code{"9"} \tab Numeric, minimum digits \cr
+   \code{"kk"} \tab \code{"09"} \tab Numeric, 2 digits (zero padded) \cr
 }
 
-\subsection{Minute (little m)}{
-
-| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| \code{"m"}                  | \code{"5"}   | Numeric, minimum digits          |
-| \code{"mm"}                 | \code{"06"}  | Numeric, 2 digits (zero padded)  |
 }
 
-\subsection{Second (little s)}{
+\subsection{Minute (little m)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"m"} \tab \code{"5"} \tab Numeric, minimum digits \cr
+   \code{"mm"} \tab \code{"06"} \tab Numeric, 2 digits (zero padded) \cr
+}
 
-| Formatting String      | Output  | Note                             |
-| -----------------------|--------------------------------------------|
-| \code{"s"}                  | \code{"9"}   | Numeric, minimum digits          |
-| \code{"ss"}                 | \code{"09"}  | Numeric, 2 digits (zero padded)  |
+}
+
+\subsection{Second (little s)}{\tabular{lll}{
+   Formatting String \tab Output \tab Note \cr
+   \code{"s"} \tab \code{"9"} \tab Numeric, minimum digits \cr
+   \code{"ss"} \tab \code{"09"} \tab Numeric, 2 digits (zero padded) \cr
+}
+
 }
 
 \subsection{Fractional Second (big S)}{\tabular{ll}{
