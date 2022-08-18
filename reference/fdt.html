@@ -188,7 +188,7 @@ or timezone output. Say that the year in the input is 2015. If using <code>"yy"<
 you'll get <code>"15"</code> but with <code>"yyyy"</code> the output becomes <code>"1999"</code>. There's a
 whole lot of this, so the following subsections try to illustrate as best as
 possible what each string will produce. All of the examples will use this
-string-based datetime input:</p>
+string-based datetime input unless otherwise indicated:</p>
 <p><code>"2018-07-04T22:05:09.2358(America/Vancouver)"</code></p><div class="section">
 <h3 id="the-era-designator-big-g-">The Era Designator (big G)<a class="anchor" aria-label="anchor" href="#the-era-designator-big-g-"></a></h3>
 <table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"G"</code>, <code>"GG"</code>, or <code>"GGG"</code></td><td><code>"AD"</code></td></tr><tr><td><code>"GGGG"</code></td><td><code>"Anno Domini"</code></td></tr><tr><td><code>"GGGGG"</code></td><td><code>"A"</code></td></tr></table></div>
@@ -203,8 +203,170 @@ string-based datetime input:</p>
 
 <p>This is the year in 'Week of Year' based calendars in which the year
 transition occurs on a week boundary. This may differ from calendar year 'y'
-near a year transition. This numeric year designation is used in conjunction with
-pattern character 'w' in the ISO year-week calendar as defined by ISO 8601.</p><table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"Y"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YY"</code></td><td><code>"18"</code></td></tr><tr><td><code>"YYY"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YYYY"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YYYYY"</code></td><td><code>"02018"</code></td></tr><tr><td><code>"YYYYYY"</code></td><td><code>"002018"</code></td></tr><tr><td><code>"YYYYYYY"</code></td><td><code>"0002018"</code></td></tr><tr><td><code>"YYYYYYYY"</code></td><td><code>"00002018"</code></td></tr><tr><td><code>"YYYYYYYYY"</code></td><td><code>"000002018"</code></td></tr></table></div>
+near a year transition. This numeric year designation is used in conjunction
+with pattern character 'w' in the ISO year-week calendar as defined by ISO
+8601.</p><table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"Y"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YY"</code></td><td><code>"18"</code></td></tr><tr><td><code>"YYY"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YYYY"</code></td><td><code>"2018"</code></td></tr><tr><td><code>"YYYYY"</code></td><td><code>"02018"</code></td></tr><tr><td><code>"YYYYYY"</code></td><td><code>"002018"</code></td></tr><tr><td><code>"YYYYYYY"</code></td><td><code>"0002018"</code></td></tr><tr><td><code>"YYYYYYYY"</code></td><td><code>"00002018"</code></td></tr><tr><td><code>"YYYYYYYYY"</code></td><td><code>"000002018"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="quarter-of-the-year-formatting-ver-big-q-">Quarter of the Year: formatting ver. (big Q)<a class="anchor" aria-label="anchor" href="#quarter-of-the-year-formatting-ver-big-q-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"Q"</code></td><td><code>"3"</code></td></tr><tr><td><code>"QQ"</code></td><td><code>"03"</code></td></tr><tr><td><code>"QQQ"</code></td><td><code>"Q3"</code></td></tr><tr><td><code>"QQQQ"</code></td><td><code>"3rd quarter"</code></td></tr><tr><td><code>"QQQQQ"</code></td><td><code>"3"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="quarter-of-the-year-standalone-ver-little-q-">Quarter of the Year: standalone ver. (little q)<a class="anchor" aria-label="anchor" href="#quarter-of-the-year-standalone-ver-little-q-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"q"</code></td><td><code>"3"</code></td></tr><tr><td><code>"qq"</code></td><td><code>"03"</code></td></tr><tr><td><code>"qqq"</code></td><td><code>"Q3"</code></td></tr><tr><td><code>"qqqq"</code></td><td><code>"3rd quarter"</code></td></tr><tr><td><code>"qqqqq"</code></td><td><code>"3"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="month-formatting-ver-big-m-">Month: formatting ver. (big M)<a class="anchor" aria-label="anchor" href="#month-formatting-ver-big-m-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"M"</code></td><td><code>"7"</code></td></tr><tr><td><code>"MM"</code></td><td><code>"07"</code></td></tr><tr><td><code>"MMM"</code></td><td><code>"Jul"</code></td></tr><tr><td><code>"MMMM"</code></td><td><code>"July"</code></td></tr><tr><td><code>"MMMMM"</code></td><td><code>"J"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="month-standalone-ver-big-l-">Month: standalone ver. (big L)<a class="anchor" aria-label="anchor" href="#month-standalone-ver-big-l-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"L"</code></td><td><code>"7"</code></td></tr><tr><td><code>"LL"</code></td><td><code>"07"</code></td></tr><tr><td><code>"LLL"</code></td><td><code>"Jul"</code></td></tr><tr><td><code>"LLLL"</code></td><td><code>"July"</code></td></tr><tr><td><code>"LLLLL"</code></td><td><code>"J"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="week-of-year-little-w-">Week of Year (little w)<a class="anchor" aria-label="anchor" href="#week-of-year-little-w-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"w"</code></td><td><code>"27"</code> (minimal digits)</td></tr><tr><td><code>"ww"</code></td><td><code>"27"</code> (two digits, zero padded)</td></tr></table></div>
+
+<div class="section">
+<h3 id="week-of-month-big-w-">Week of Month (big W)<a class="anchor" aria-label="anchor" href="#week-of-month-big-w-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"W"</code></td><td><code>"1"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="day-of-month-little-d-">Day of Month (little d)<a class="anchor" aria-label="anchor" href="#day-of-month-little-d-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"d"</code></td><td><code>"4"</code> (minimal digits)</td></tr><tr><td><code>"dd"</code></td><td><code>"04"</code> (two digits, zero padded)</td></tr></table></div>
+
+<div class="section">
+<h3 id="day-of-year-big-d-">Day of Year (big D)<a class="anchor" aria-label="anchor" href="#day-of-year-big-d-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"D"</code></td><td><code>"185"</code></td></tr><tr><td><code>"DD"</code></td><td><code>"185"</code> (zero padded to min-width of 2)</td></tr><tr><td><code>"DDD"</code></td><td><code>"185"</code> (zero padded to min-width of 3)</td></tr></table></div>
+
+<div class="section">
+<h3 id="day-of-week-in-month-big-f-">Day of Week in Month (big F)<a class="anchor" aria-label="anchor" href="#day-of-week-in-month-big-f-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"F"</code></td><td><code>"1"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="modified-julian-day-little-g-">Modified Julian Day (little g)<a class="anchor" aria-label="anchor" href="#modified-julian-day-little-g-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"g"</code></td><td><code>"58303"</code></td></tr><tr><td><code>"gg"</code></td><td><code>"58303"</code></td></tr><tr><td><code>"ggg"</code></td><td><code>"58303"</code></td></tr><tr><td><code>"gggg"</code></td><td><code>"58303"</code></td></tr><tr><td><code>"ggggg"</code></td><td><code>"58303"</code></td></tr><tr><td><code>"gggggg"</code></td><td><code>"058303"</code></td></tr><tr><td><code>"ggggggg"</code></td><td><code>"0058303"</code></td></tr><tr><td><code>"gggggggg"</code></td><td><code>"00058303"</code></td></tr><tr><td><code>"ggggggggg"</code></td><td><code>"000058303"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="day-of-week-name-big-e-">Day of Week Name (big E)<a class="anchor" aria-label="anchor" href="#day-of-week-name-big-e-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"E"</code></td><td><code>"Wed"</code></td></tr><tr><td><code>"EE"</code></td><td><code>"Wed"</code></td></tr><tr><td><code>"EEE"</code></td><td><code>"Wed"</code></td></tr><tr><td><code>"EEEE"</code></td><td><code>"Wednesday"</code></td></tr><tr><td><code>"EEEEE"</code></td><td><code>"W"</code></td></tr><tr><td><code>"EEEEEE"</code></td><td><code>"We"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="am-pm-period-of-day-little-a-">AM/PM Period of Day (little a)<a class="anchor" aria-label="anchor" href="#am-pm-period-of-day-little-a-"></a></h3>
+
+
+<p>| Formatting String              | Output   | Note                        |
+| ------------------------------ |----------------------------------------|
+| <code>"a"</code>, <code>"aa"</code>, or <code>"aaa"</code>      | <code>"PM"</code>   | Abbreviated                 |
+| <code>"aaaa"</code>                       | <code>"PM"</code>   | Wide                        |
+| <code>"aaaaa"</code>                      | <code>"p"</code>    | Narrow                      |</p>
+</div>
+
+<div class="section">
+<h3 id="am-pm-period-of-day-plus-noon-and-midnight-little-b-">AM/PM Period of Day Plus Noon and Midnight (little b)<a class="anchor" aria-label="anchor" href="#am-pm-period-of-day-plus-noon-and-midnight-little-b-"></a></h3>
+
+
+<p>(a) <code>input_midnight</code>: <code>"2020-05-05T00:00:00"</code>
+(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p>
+<p>| Formatting String              | Output             | Note              |
+| ------------------------------ |----------------------------------------|
+| <code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code>      | (a) <code>"midnight"</code>   | Abbreviated       |
+| <code>"" "" ""</code>                     | (b) <code>"noon"</code>       | <code>"" "" ""</code>        |
+| <code>"bbbb"</code>                       | (a) <code>"midnight"</code>   | Wide              |
+| <code>"" "" ""</code>                     | (b) <code>"noon"</code>       | <code>"" "" ""</code>        |
+| <code>"bbbbb"</code>                      | (a) <code>"mi"</code>         | Narrow            |
+| <code>"" "" ""</code>                     | (b) <code>"n"</code>          | <code>"" "" ""</code>        |</p>
+</div>
+
+<div class="section">
+<h3 id="flexible-day-periods-big-b-">Flexible Day Periods (big B)<a class="anchor" aria-label="anchor" href="#flexible-day-periods-big-b-"></a></h3>
+
+
+<p>(a) <code>input_morning</code>: <code>"2020-05-05T00:08:30"</code>
+(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p>
+<p>| Formatting String          | Output                   | Note            |
+| ---------------------------|--------------------------------------------|
+| <code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code>  | (a) <code>"in the morning"</code>   | Abbreviated     |
+| <code>"" "" ""</code>                 | (b) <code>"in the afternoon"</code> | <code>"" "" ""</code>      |
+| <code>"BBBB"</code>                   | (a) <code>"in the morning"</code>   | Wide            |
+| <code>"" "" ""</code>                 | (b) <code>"in the afternoon"</code> | <code>"" "" ""</code>      |
+| <code>"BBBBB"</code>                  | (a) <code>"in the morning"</code>   | Narrow          |
+| <code>"" "" ""</code>                 | (b) <code>"in the afternoon"</code> | <code>"" "" ""</code>      |</p>
+</div>
+
+<div class="section">
+<h3 id="hour-little-h-">Hour 1-12 (little h)<a class="anchor" aria-label="anchor" href="#hour-little-h-"></a></h3>
+
+
+<p>Using: <code>"2015-08-01T08:35:09"</code></p>
+<p>| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| <code>"h"</code>                  | <code>"8"</code>   | Numeric, minimum digits          |
+| <code>"hh"</code>                 | <code>"08"</code>  | Numeric, 2 digits (zero padded)  |</p>
+</div>
+
+<div class="section">
+<h3 id="hour-big-h-">Hour 0-23 (big H)<a class="anchor" aria-label="anchor" href="#hour-big-h-"></a></h3>
+
+
+<p>Using: <code>"2015-08-01T08:35:09"</code></p>
+<p>| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| <code>"H"</code>                  | <code>"8"</code>   | Numeric, minimum digits          |
+| <code>"HH"</code>                 | <code>"08"</code>  | Numeric, 2 digits (zero padded)  |</p>
+</div>
+
+<div class="section">
+<h3 id="hour-big-k-">Hour 0-11 (big K)<a class="anchor" aria-label="anchor" href="#hour-big-k-"></a></h3>
+
+
+<p>Using: <code>"2015-08-01T08:35:09"</code></p>
+<p>| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| <code>"K"</code>                  | <code>"7"</code>   | Numeric, minimum digits          |
+| <code>"KK"</code>                 | <code>"07"</code>  | Numeric, 2 digits (zero padded)  |</p>
+</div>
+
+<div class="section">
+<h3 id="hour-little-k-">Hour 1-24 (little k)<a class="anchor" aria-label="anchor" href="#hour-little-k-"></a></h3>
+
+
+<p>Using: <code>"2015-08-01T08:35:09"</code></p>
+<p>| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| <code>"k"</code>                  | <code>"9"</code>   | Numeric, minimum digits          |
+| <code>"kk"</code>                 | <code>"09"</code>  | Numeric, 2 digits (zero padded)  |</p>
+</div>
+
+<div class="section">
+<h3 id="minute-little-m-">Minute (little m)<a class="anchor" aria-label="anchor" href="#minute-little-m-"></a></h3>
+
+
+<p>| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| <code>"m"</code>                  | <code>"5"</code>   | Numeric, minimum digits          |
+| <code>"mm"</code>                 | <code>"06"</code>  | Numeric, 2 digits (zero padded)  |</p>
+</div>
+
+<div class="section">
+<h3 id="second-little-s-">Second (little s)<a class="anchor" aria-label="anchor" href="#second-little-s-"></a></h3>
+
+
+<p>| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| <code>"s"</code>                  | <code>"9"</code>   | Numeric, minimum digits          |
+| <code>"ss"</code>                 | <code>"09"</code>  | Numeric, 2 digits (zero padded)  |</p>
+</div>
+
+<div class="section">
+<h3 id="fractional-second-big-s-">Fractional Second (big S)<a class="anchor" aria-label="anchor" href="#fractional-second-big-s-"></a></h3>
+<table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"S"</code></td><td><code>"2"</code></td></tr><tr><td><code>"SS"</code></td><td><code>"23"</code></td></tr><tr><td><code>"SSS"</code></td><td><code>"235"</code></td></tr><tr><td><code>"SSSS"</code></td><td><code>"2350"</code></td></tr><tr><td><code>"SSSSS"</code></td><td><code>"23500"</code></td></tr><tr><td><code>"SSSSSS"</code></td><td><code>"235000"</code></td></tr><tr><td><code>"SSSSSSS"</code></td><td><code>"2350000"</code></td></tr><tr><td><code>"SSSSSSSS"</code></td><td><code>"23500000"</code></td></tr><tr><td><code>"SSSSSSSSS"</code></td><td><code>"235000000"</code></td></tr></table></div>
+
+<div class="section">
+<h3 id="milliseconds-elapsed-in-day-big-a-">Milliseconds Elapsed in Day (big A)<a class="anchor" aria-label="anchor" href="#milliseconds-elapsed-in-day-big-a-"></a></h3>
+
+
+<p>Using: <code>"2011-07-27T00:07:19.7223"</code></p><table class="table table"><tr><td>Formatting String</td><td>Output</td></tr><tr><td><code>"A"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAAAA"</code></td><td><code>"439722"</code></td></tr><tr><td><code>"AAAAAAA"</code></td><td><code>"0439722"</code></td></tr><tr><td><code>"AAAAAAAA"</code></td><td><code>"00439722"</code></td></tr><tr><td><code>"AAAAAAAAA"</code></td><td><code>"000439722"</code></td></tr></table></div>
 
     </div>
     <div class="section level2">
