@@ -5,7 +5,7 @@ The goal of **bigD** is to flexibly format dates and times to a given locale.
 Given the ISO-8601 date string `"2018-07-04"` we can use formatting strings to precisely get the date in the form we need.
 
 ``` r
-fdt(input = "2018-07-04", dt_format = "y/M/d")
+fdt(input = "2018-07-04", format = "y/M/d")
 ```
 ```
 2018/7/4
@@ -13,7 +13,7 @@ fdt(input = "2018-07-04", dt_format = "y/M/d")
 
 
 ``` r
-fdt(input = "2018-07-04", dt_format = "MMMM d, y.")
+fdt(input = "2018-07-04", format = "MMMM d, y.")
 ```
 ```
 July 4, 2018.
@@ -56,7 +56,7 @@ fdt(
 heinäkuuta 24 14:44:22 '18 -0800
 ```
 
-Time zone support is super comprehensive. We can attach a time zone ID to a datetime string.
+Time zone support is super comprehensive. We can attach a time zone ID to a datetime string or provide it with the `use_tz` argument.
 
 ``` r
 fdt(
