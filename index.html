@@ -68,10 +68,10 @@
 <p>The goal of <strong>bigD</strong> is to flexibly format dates and times to a given locale.</p>
 <p>Given the ISO-8601 date string <code>"2018-07-04"</code> we can use formatting strings to precisely get the date in the form we need.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span>, dt_format <span class="op">=</span> <span class="st">"y/M/d"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span>, format <span class="op">=</span> <span class="st">"y/M/d"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="fl">2018</span><span class="op">/</span><span class="fl">7</span><span class="op">/</span><span class="fl">4</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span>, dt_format <span class="op">=</span> <span class="st">"MMMM d, y."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span>, format <span class="op">=</span> <span class="st">"MMMM d, y."</span><span class="op">)</span></span></code></pre></div>
 <pre><code>July 4, 2018.</code></pre>
 <p>With the <code>locale</code> option, we can localize the date.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -96,7 +96,7 @@
 <span>  locale <span class="op">=</span> <span class="st">"fi"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>heinäkuuta 24 14:44:22 '18 -0800</code></pre>
-<p>Time zone support is super comprehensive. We can attach a time zone ID to a datetime string.</p>
+<p>Time zone support is super comprehensive. We can attach a time zone ID to a datetime string or provide it with the <code>use_tz</code> argument.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2014-06-23T13:24:09.84(America/Vancouver)"</span>,</span>
