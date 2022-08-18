@@ -108,31 +108,31 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_04, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2018-07-04 22:05:38 GMT-08:00")
   fdt(input = dt_list$iso_datetime_tz_05, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
+    expect_equal("2018-07-04 22:05:00 Pacific Daylight Time")
   fdt(input = dt_list$iso_datetime_tz_06, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
+    expect_equal("2018-07-04 22:05:00 Pacific Daylight Time")
   fdt(input = dt_list$iso_datetime_tz_07, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
+    expect_equal("2018-07-04 22:05:00 Pacific Daylight Time")
   fdt(input = dt_list$iso_datetime_tz_08, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
+    expect_equal("2018-07-04 22:05:00 Pacific Daylight Time")
   fdt(input = dt_list$iso_datetime_tz_09, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
+    expect_equal("2018-07-04 22:05:00 Pacific Daylight Time")
   fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-07-04 22:05:00 Vancouver Daylight Time")
+    expect_equal("2018-07-04 22:05:00 Pacific Daylight Time")
   fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-09-06 08:00:00 Abidjan Time")
+    expect_equal("2018-09-06 08:00:00 Greenwich Mean Time")
   fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2012-11-26 08:00:00 Johannesburg Time")
-  # fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss zzzz") %>%
-  #   expect_equal("2013-01-01 08:00:00 Unknown City Time") # FIXME: this is incorrect
-  # fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss zzzz") %>%
-  #   expect_equal("2013-01-01 08:00:00 Unknown City Time") # FIXME: this is incorrect
+    expect_equal("2012-11-26 08:00:00 South Africa Standard Time")
+  fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss zzzz") %>%
+    expect_equal("2013-01-01 08:00:00 India Standard Time")
+  fdt(input = dt_list$iso_datetime_tz_14, format = "y-MM-dd HH:mm:ss zzzz") %>%
+    expect_equal("2013-01-01 08:00:00 India Standard Time")
   fdt(input = dt_list$iso_datetime_tz_15, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2014-05-15 08:00:00 Taipei Time")
-  # fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss zzzz") %>%
-  #   expect_equal("2014-06-16 08:00:00 Unknown City Daylight Time") # FIXME: this is incorrect
+    expect_equal("2014-05-15 08:00:00 Taipei Standard Time")
+  fdt(input = dt_list$iso_datetime_tz_16, format = "y-MM-dd HH:mm:ss zzzz") %>%
+    expect_equal("2014-06-16 08:00:00 GMT-05:00")
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2014-07-17 08:00:00 London Daylight Time")
+    expect_equal("2014-07-17 08:00:00 GMT+01:00")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2015-08-18 08:00:00 GMT+00:00")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss zzzz") %>%
