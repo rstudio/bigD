@@ -133,7 +133,7 @@ or timezone output. Say that the year in the input is 2015. If using \code{"yy"}
 you'll get \code{"15"} but with \code{"yyyy"} the output becomes \code{"1999"}. There's a
 whole lot of this, so the following subsections try to illustrate as best as
 possible what each string will produce. All of the examples will use this
-string-based datetime input:
+string-based datetime input unless otherwise indicated:
 
 \code{"2018-07-04T22:05:09.2358(America/Vancouver)"}
 \subsection{The Era Designator (big G)}{\tabular{ll}{
@@ -164,8 +164,9 @@ string-based datetime input:
 
 This is the year in 'Week of Year' based calendars in which the year
 transition occurs on a week boundary. This may differ from calendar year 'y'
-near a year transition. This numeric year designation is used in conjunction with
-pattern character 'w' in the ISO year-week calendar as defined by ISO 8601.\tabular{ll}{
+near a year transition. This numeric year designation is used in conjunction
+with pattern character 'w' in the ISO year-week calendar as defined by ISO
+8601.\tabular{ll}{
    Formatting String \tab Output \cr
    \code{"Y"} \tab \code{"2018"} \cr
    \code{"YY"} \tab \code{"18"} \cr
@@ -176,6 +177,243 @@ pattern character 'w' in the ISO year-week calendar as defined by ISO 8601.\tabu
    \code{"YYYYYYY"} \tab \code{"0002018"} \cr
    \code{"YYYYYYYY"} \tab \code{"00002018"} \cr
    \code{"YYYYYYYYY"} \tab \code{"000002018"} \cr
+}
+
+}
+
+\subsection{Quarter of the Year: formatting ver. (big Q)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"Q"} \tab \code{"3"} \cr
+   \code{"QQ"} \tab \code{"03"} \cr
+   \code{"QQQ"} \tab \code{"Q3"} \cr
+   \code{"QQQQ"} \tab \code{"3rd quarter"} \cr
+   \code{"QQQQQ"} \tab \code{"3"} \cr
+}
+
+}
+
+\subsection{Quarter of the Year: standalone ver. (little q)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"q"} \tab \code{"3"} \cr
+   \code{"qq"} \tab \code{"03"} \cr
+   \code{"qqq"} \tab \code{"Q3"} \cr
+   \code{"qqqq"} \tab \code{"3rd quarter"} \cr
+   \code{"qqqqq"} \tab \code{"3"} \cr
+}
+
+}
+
+\subsection{Month: formatting ver. (big M)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"M"} \tab \code{"7"} \cr
+   \code{"MM"} \tab \code{"07"} \cr
+   \code{"MMM"} \tab \code{"Jul"} \cr
+   \code{"MMMM"} \tab \code{"July"} \cr
+   \code{"MMMMM"} \tab \code{"J"} \cr
+}
+
+}
+
+\subsection{Month: standalone ver. (big L)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"L"} \tab \code{"7"} \cr
+   \code{"LL"} \tab \code{"07"} \cr
+   \code{"LLL"} \tab \code{"Jul"} \cr
+   \code{"LLLL"} \tab \code{"July"} \cr
+   \code{"LLLLL"} \tab \code{"J"} \cr
+}
+
+}
+
+\subsection{Week of Year (little w)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"w"} \tab \code{"27"} (minimal digits) \cr
+   \code{"ww"} \tab \code{"27"} (two digits, zero padded) \cr
+}
+
+}
+
+\subsection{Week of Month (big W)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"W"} \tab \code{"1"} \cr
+}
+
+}
+
+\subsection{Day of Month (little d)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"d"} \tab \code{"4"} (minimal digits) \cr
+   \code{"dd"} \tab \code{"04"} (two digits, zero padded) \cr
+}
+
+}
+
+\subsection{Day of Year (big D)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"D"} \tab \code{"185"} \cr
+   \code{"DD"} \tab \code{"185"} (zero padded to min-width of 2) \cr
+   \code{"DDD"} \tab \code{"185"} (zero padded to min-width of 3) \cr
+}
+
+}
+
+\subsection{Day of Week in Month (big F)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"F"} \tab \code{"1"} \cr
+}
+
+}
+
+\subsection{Modified Julian Day (little g)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"g"} \tab \code{"58303"} \cr
+   \code{"gg"} \tab \code{"58303"} \cr
+   \code{"ggg"} \tab \code{"58303"} \cr
+   \code{"gggg"} \tab \code{"58303"} \cr
+   \code{"ggggg"} \tab \code{"58303"} \cr
+   \code{"gggggg"} \tab \code{"058303"} \cr
+   \code{"ggggggg"} \tab \code{"0058303"} \cr
+   \code{"gggggggg"} \tab \code{"00058303"} \cr
+   \code{"ggggggggg"} \tab \code{"000058303"} \cr
+}
+
+}
+
+\subsection{Day of Week Name (big E)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"E"} \tab \code{"Wed"} \cr
+   \code{"EE"} \tab \code{"Wed"} \cr
+   \code{"EEE"} \tab \code{"Wed"} \cr
+   \code{"EEEE"} \tab \code{"Wednesday"} \cr
+   \code{"EEEEE"} \tab \code{"W"} \cr
+   \code{"EEEEEE"} \tab \code{"We"} \cr
+}
+
+}
+
+\subsection{AM/PM Period of Day (little a)}{
+
+| Formatting String              | Output   | Note                        |
+| ------------------------------ |----------------------------------------|
+| \code{"a"}, \code{"aa"}, or \code{"aaa"}      | \code{"PM"}   | Abbreviated                 |
+| \code{"aaaa"}                       | \code{"PM"}   | Wide                        |
+| \code{"aaaaa"}                      | \code{"p"}    | Narrow                      |
+}
+
+\subsection{AM/PM Period of Day Plus Noon and Midnight (little b)}{
+
+(a) \code{input_midnight}: \code{"2020-05-05T00:00:00"}
+(b) \code{input_noon}: \code{"2020-05-05T12:00:00"}
+
+| Formatting String              | Output             | Note              |
+| ------------------------------ |----------------------------------------|
+| \code{"b"}, \code{"bb"}, or \code{"bbb"}      | (a) \code{"midnight"}   | Abbreviated       |
+| \verb{"" "" ""}                     | (b) \code{"noon"}       | \verb{"" "" ""}        |
+| \code{"bbbb"}                       | (a) \code{"midnight"}   | Wide              |
+| \verb{"" "" ""}                     | (b) \code{"noon"}       | \verb{"" "" ""}        |
+| \code{"bbbbb"}                      | (a) \code{"mi"}         | Narrow            |
+| \verb{"" "" ""}                     | (b) \code{"n"}          | \verb{"" "" ""}        |
+}
+
+\subsection{Flexible Day Periods (big B)}{
+
+(a) \code{input_morning}: \code{"2020-05-05T00:08:30"}
+(b) \code{input_afternoon}: \code{"2020-05-05T14:00:00"}
+
+| Formatting String          | Output                   | Note            |
+| ---------------------------|--------------------------------------------|
+| \code{"B"}, \code{"BB"}, or \code{"BBB"}  | (a) \code{"in the morning"}   | Abbreviated     |
+| \verb{"" "" ""}                 | (b) \code{"in the afternoon"} | \verb{"" "" ""}      |
+| \code{"BBBB"}                   | (a) \code{"in the morning"}   | Wide            |
+| \verb{"" "" ""}                 | (b) \code{"in the afternoon"} | \verb{"" "" ""}      |
+| \code{"BBBBB"}                  | (a) \code{"in the morning"}   | Narrow          |
+| \verb{"" "" ""}                 | (b) \code{"in the afternoon"} | \verb{"" "" ""}      |
+}
+
+\subsection{Hour \link{1-12} (little h)}{
+
+Using: \code{"2015-08-01T08:35:09"}
+
+| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| \code{"h"}                  | \code{"8"}   | Numeric, minimum digits          |
+| \code{"hh"}                 | \code{"08"}  | Numeric, 2 digits (zero padded)  |
+}
+
+\subsection{Hour \link{0-23} (big H)}{
+
+Using: \code{"2015-08-01T08:35:09"}
+
+| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| \code{"H"}                  | \code{"8"}   | Numeric, minimum digits          |
+| \code{"HH"}                 | \code{"08"}  | Numeric, 2 digits (zero padded)  |
+}
+
+\subsection{Hour \link{0-11} (big K)}{
+
+Using: \code{"2015-08-01T08:35:09"}
+
+| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| \code{"K"}                  | \code{"7"}   | Numeric, minimum digits          |
+| \code{"KK"}                 | \code{"07"}  | Numeric, 2 digits (zero padded)  |
+}
+
+\subsection{Hour \link{1-24} (little k)}{
+
+Using: \code{"2015-08-01T08:35:09"}
+
+| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| \code{"k"}                  | \code{"9"}   | Numeric, minimum digits          |
+| \code{"kk"}                 | \code{"09"}  | Numeric, 2 digits (zero padded)  |
+}
+
+\subsection{Minute (little m)}{
+
+| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| \code{"m"}                  | \code{"5"}   | Numeric, minimum digits          |
+| \code{"mm"}                 | \code{"06"}  | Numeric, 2 digits (zero padded)  |
+}
+
+\subsection{Second (little s)}{
+
+| Formatting String      | Output  | Note                             |
+| -----------------------|--------------------------------------------|
+| \code{"s"}                  | \code{"9"}   | Numeric, minimum digits          |
+| \code{"ss"}                 | \code{"09"}  | Numeric, 2 digits (zero padded)  |
+}
+
+\subsection{Fractional Second (big S)}{\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"S"} \tab \code{"2"} \cr
+   \code{"SS"} \tab \code{"23"} \cr
+   \code{"SSS"} \tab \code{"235"} \cr
+   \code{"SSSS"} \tab \code{"2350"} \cr
+   \code{"SSSSS"} \tab \code{"23500"} \cr
+   \code{"SSSSSS"} \tab \code{"235000"} \cr
+   \code{"SSSSSSS"} \tab \code{"2350000"} \cr
+   \code{"SSSSSSSS"} \tab \code{"23500000"} \cr
+   \code{"SSSSSSSSS"} \tab \code{"235000000"} \cr
+}
+
+}
+
+\subsection{Milliseconds Elapsed in Day (big A)}{
+
+Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
+   Formatting String \tab Output \cr
+   \code{"A"} \tab \code{"439722"} \cr
+   \code{"AA"} \tab \code{"439722"} \cr
+   \code{"AAA"} \tab \code{"439722"} \cr
+   \code{"AAAA"} \tab \code{"439722"} \cr
+   \code{"AAAAA"} \tab \code{"439722"} \cr
+   \code{"AAAAAA"} \tab \code{"439722"} \cr
+   \code{"AAAAAAA"} \tab \code{"0439722"} \cr
+   \code{"AAAAAAAA"} \tab \code{"00439722"} \cr
+   \code{"AAAAAAAAA"} \tab \code{"000439722"} \cr
 }
 
 }
