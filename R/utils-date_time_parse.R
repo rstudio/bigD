@@ -349,8 +349,6 @@ get_tz_short_specific <- function(long_tzid, input_dt) {
 
 # The long specific non-location format (e.g., 'Pacific Standard Time') from
 # a `long_tzid`
-# TODO: this requires a change to the internal dataset; right now,
-# this is no different than `get_tz_short_specific()`
 get_tz_long_specific <- function(long_tzid, input_dt, locale) {
 
   input_date <- as.Date(input_dt)
