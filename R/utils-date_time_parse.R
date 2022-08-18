@@ -372,13 +372,37 @@ get_tz_long_specific <- function(long_tzid, input_dt, locale) {
   tz_long_specific_pattern <-
     tz_formats[tz_formats$locale == locale, ][[pattern_col_tz_formats]]
 
-  exemplar_city_localized <-
-    get_localized_exemplar_city(
-      long_tzid = long_tzid,
-      locale = locale
+  # Get the metazone in its long ID format
+  metazone_long_id <- long_tz_id_to_metazone_long_id(long_tzid = long_tzid)
+
+  if (is.na(metazone_long_id)) {
+    return(NA_character_)
+  }
+
+  # Get the row of the `tz_metazone_names` table based on the supplied locale
+  tz_metazone_names_row <- tz_metazone_names[tz_metazone_names$locale == locale, ]
+
+  # Get the list entry corresponding to the metazone and the locale
+  tz_metazone_names_entry <-
+    unlist(
+      tz_metazone_names_row[, colnames(tz_metazone_names_row) == metazone_long_id][[1]]
     )
 
-  gsub("{0}", exemplar_city_localized, tz_long_specific_pattern, fixed = TRUE)
+  if (tzdb_entries_tzid_ln$dst) {
+    daylight_standard <- "daylight"
+  } else {
+    daylight_standard <- "standard"
+  }
+
+  tz_metazone_names_filtered <-
+    tz_metazone_names_entry[
+      grepl(daylight_standard, names(tz_metazone_names_entry))]
+
+  tz_metazone_name <-
+    unname(tz_metazone_names_filtered[
+      grepl("long", names(tz_metazone_names_filtered))])
+
+  tz_metazone_name
 }
 
 get_tz_bcp_id <- function(long_tzid) {
