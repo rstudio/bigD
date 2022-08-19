@@ -300,7 +300,7 @@
 #' | `"" "" ""`                 | (b) `"in the afternoon"` | `"" "" ""`      |
 #'
 #'
-#' ## Hour [1-12] (little h)
+#' ## Hour 1-12 (little h)
 #'
 #' Using: `"2015-08-01T08:35:09"`
 #'
@@ -310,7 +310,7 @@
 #' | `"hh"`                 | `"08"`  | Numeric, 2 digits (zero padded)  |
 #'
 #'
-#' ## Hour [0-23] (big H)
+#' ## Hour 0-23 (big H)
 #'
 #' Using: `"2015-08-01T08:35:09"`
 #'
@@ -320,7 +320,7 @@
 #' | `"HH"`                 | `"08"`  | Numeric, 2 digits (zero padded)  |
 #'
 #'
-#' ## Hour [0-11] (big K)
+#' ## Hour 0-11 (big K)
 #'
 #' Using: `"2015-08-01T08:35:09"`
 #'
@@ -330,7 +330,7 @@
 #' | `"KK"`                 | `"07"`  | Numeric, 2 digits (zero padded)  |
 #'
 #'
-#' ## Hour [1-24] (little k)
+#' ## Hour 1-24 (little k)
 #'
 #' Using: `"2015-08-01T08:35:09"`
 #'
