@@ -69,20 +69,24 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header">
-<img src="logo.svg" class="logo" alt=""><h1 id="bigd">bigD<a class="anchor" aria-label="anchor" href="#bigd"></a>
-</h1>
+  <main id="main" class="col-md-9"><div align="center">
+
+<p><br><!-- badges: start --><a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a> <a href="https://github.com/rich-iannone/bigD/actions" class="external-link"><img src="https://github.com/rich-iannone/bigD/workflows/R-CMD-check/badge.svg" alt="R build status"></a></p>
+<p><a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct/" class="external-link"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant"></a> <!-- badges: end --> <br></p>
 </div>
-<p>The goal of <strong>bigD</strong> is to flexibly format dates and times to a given locale.</p>
-<p>Given the ISO-8601 date string <code>"2018-07-04"</code> we can use formatting strings to precisely get the date in the form we need.</p>
+<p>The goal of <strong>bigD</strong> is to give everyone an easy yet flexible solution for formatting dates and times. The main function, <code><a href="reference/fdt.html">fdt()</a></code>, can take dates, times, and datetimes in various formats (including just strings) and it provides a means to format the output in different locales. The formatting syntax is much more powerful than <code>strptime</code>-based formatting (plus no need for <code>%</code> everywhere). Time zones in the input can be expressed in multiple ways and there’s a ton of options for formatting time zones in the output too.</p>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
+<p>Given the ISO-8601 date string <code>"2018-07-04"</code>, let’s adjust the <code>format</code> string to precisely get the date in the form we need. With <code>"y/M/d"</code> a nice year/month/day date is returned to us.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span>, format <span class="op">=</span> <span class="st">"y/M/d"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="fl">2018</span><span class="op">/</span><span class="fl">7</span><span class="op">/</span><span class="fl">4</span></span></code></pre>
+<p>With variations of the same time parts, it’s possible to get a friendlier version of the same date.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span>, format <span class="op">=</span> <span class="st">"MMMM d, y."</span><span class="op">)</span></span></code></pre></div>
 <pre><code>July 4, 2018.</code></pre>
-<p>With the <code>locale</code> option, we can localize the date.</p>
+<p>With the <code>locale</code> option, we can localize the date. Let’s change up the format string and use the German locale (<code>"de"</code>).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04"</span>,</span>
@@ -90,7 +94,7 @@
 <span>  locale <span class="op">=</span> <span class="st">"de"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>4. Juli 2018 (Mittwoch).</code></pre>
-<p>With a datetime string, we have more possibilities.</p>
+<p>With a datetime string like <code>"2018-07-24T14:44:22.234343-0800"</code>, we have more possibilities. This follows the ISO 8601 spec pretty closely and notice that the UTC offset value is added at the end (where it ought to be) to express some time zone information. Let’s see a different datetime in French.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-24T14:44:22.234343-0800"</span>,</span>
@@ -98,6 +102,7 @@
 <span>  locale <span class="op">=</span> <span class="st">"fr"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>juil. 24 14:44:22 GMT-8:00 2018</code></pre>
+<p>Next, let’s take a look at a slight variation in Finnish. In the above the tz offset was formatted with <code>"ZZZZ"</code>. Below, let’s use <code>"XX"</code> for that.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-24T14:44:22.234343-0800"</span>,</span>
@@ -105,7 +110,7 @@
 <span>  locale <span class="op">=</span> <span class="st">"fi"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>heinäkuuta 24 14:44:22 '18 -0800</code></pre>
-<p>Time zone support is super comprehensive. We can attach a time zone ID to a datetime string or provide it with the <code>use_tz</code> argument.</p>
+<p>Time zone support is super comprehensive. We can attach a time zone ID, like <code>"America/Vancouver"</code> (and there are many others), to a datetime string. We just got to make sure it’s wrapped up in parens.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2014-06-23T13:24:09.84(America/Vancouver)"</span>,</span>
@@ -113,6 +118,9 @@
 <span>  locale <span class="op">=</span> <span class="st">"es"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>2014.06.23 d. C., 13:24:09 hora de verano del Pacífico</code></pre>
+<p>Just so you know, the time zone ID can alternatively be set to the <code>use_tz</code> argument of <code><a href="reference/fdt.html">fdt()</a></code>. Also, POSIXct/POSIXlt/Date times can be used as inputs. Plus, this function is vectorized.</p>
+<p>The formatting syntax has a lot to it but you can learn all about it in the fairly comprehensive documentation.</p>
+</div>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
@@ -131,7 +139,7 @@
 <p>This project is maintained by <a href="https://github.com/rich-iannone" class="external-link">Rich Iannone</a>.</p>
 </div>
 </div>
-</div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -170,7 +178,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://rich-iannone.github.io/bigD/" class="external-link"><img src="reference/figures/logo.svg" height="350px"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
