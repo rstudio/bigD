@@ -332,7 +332,7 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 
 }
 
-\subsection{Hour \link{1-12} (little h)}{
+\subsection{Hour 1-12 (little h)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
    Formatting String \tab Output \tab Note \cr
@@ -342,7 +342,7 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 }
 
-\subsection{Hour \link{0-23} (big H)}{
+\subsection{Hour 0-23 (big H)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
    Formatting String \tab Output \tab Note \cr
@@ -352,7 +352,7 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 }
 
-\subsection{Hour \link{0-11} (big K)}{
+\subsection{Hour 0-11 (big K)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
    Formatting String \tab Output \tab Note \cr
@@ -362,7 +362,7 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 }
 
-\subsection{Hour \link{1-24} (little k)}{
+\subsection{Hour 1-24 (little k)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
    Formatting String \tab Output \tab Note \cr
