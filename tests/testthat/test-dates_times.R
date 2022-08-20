@@ -162,6 +162,35 @@ test_that("Years by themselves are accepted", {
     expect_equal("9001")
 })
 
+test_that("The YYYY-MM format is accepted", {
+
+  fdt(input = "1001-02") %>%
+    expect_equal("1001-02-01T00:00:00Z")
+  fdt(input = "0900-03") %>%
+    expect_equal("0900-03-01T00:00:00Z")
+  fdt(input = "0090-04") %>%
+    expect_equal("0090-04-01T00:00:00Z")
+  fdt(input = "0009-05") %>%
+    expect_equal("0009-05-01T00:00:00Z")
+  fdt(input = "0000-06") %>%
+    expect_equal("0000-06-01T00:00:00Z")
+  fdt(input = "9001-11") %>%
+    expect_equal("9001-11-01T00:00:00Z")
+
+  fdt(input = "1001-05", format = "y/MM") %>%
+    expect_equal("1001/05")
+  fdt(input = "0900-10", format = "y/MM") %>%
+    expect_equal("900/10")
+  fdt(input = "0090-05", format = "y/MM") %>%
+    expect_equal("90/05")
+  fdt(input = "0009-10", format = "y/MM") %>%
+    expect_equal("9/10")
+  fdt(input = "0000-05", format = "y/MM") %>%
+    expect_equal("0/05")
+  fdt(input = "9001-10", format = "y/MM") %>%
+    expect_equal("9001/10")
+})
+
 test_that("ISO dates can be formatted even with string literals", {
 
   iso_date_1 <- "2018-07-04"
