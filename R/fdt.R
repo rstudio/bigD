@@ -573,7 +573,7 @@ fdt <- function(
   }
 
   if (is.null(format)) {
-    format <- "y-MM-dd'T'HH:mm:ssXXX"
+    format <- "yyyy-MM-dd'T'HH:mm:ssXXX"
   }
 
   if (inherits(input, "POSIXlt")) {
