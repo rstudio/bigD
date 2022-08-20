@@ -341,7 +341,7 @@ dt_GGGGG <- function(input, locale = NULL) {
 
 # Calendar year
 dt_y <- function(input) {
-  format(input, format = "%Y")
+  as.character(as.integer(format(input, format = "%Y")))
 }
 
 # Abbreviated year (final 2 digits)
