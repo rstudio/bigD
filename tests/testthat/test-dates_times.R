@@ -107,6 +107,61 @@ test_that("Distant years can be accepted", {
     expect_equal("9001")
 })
 
+test_that("Years by themselves are accepted", {
+
+  fdt(input = "1001") %>%
+    expect_equal("1001-01-01T00:00:00Z")
+  fdt(input = "0900") %>%
+    expect_equal("0900-01-01T00:00:00Z")
+  fdt(input = "0090") %>%
+    expect_equal("0090-01-01T00:00:00Z")
+  fdt(input = "0009") %>%
+    expect_equal("0009-01-01T00:00:00Z")
+  fdt(input = "0000") %>%
+    expect_equal("0000-01-01T00:00:00Z")
+  fdt(input = "9001") %>%
+    expect_equal("9001-01-01T00:00:00Z")
+
+  fdt(input = "1001", format = "y") %>%
+    expect_equal("1001")
+  fdt(input = "0900", format = "y") %>%
+    expect_equal("900")
+  fdt(input = "0090", format = "y") %>%
+    expect_equal("90")
+  fdt(input = "0009", format = "y") %>%
+    expect_equal("9")
+  fdt(input = "0000", format = "y") %>%
+    expect_equal("0")
+  fdt(input = "9001", format = "y") %>%
+    expect_equal("9001")
+
+  fdt(input = "1001", format = "yy") %>%
+    expect_equal("01")
+  fdt(input = "0900", format = "yy") %>%
+    expect_equal("00")
+  fdt(input = "0090", format = "yy") %>%
+    expect_equal("90")
+  fdt(input = "0009", format = "yy") %>%
+    expect_equal("09")
+  fdt(input = "0000", format = "yy") %>%
+    expect_equal("00")
+  fdt(input = "9001", format = "yy") %>%
+    expect_equal("01")
+
+  fdt(input = "1001", format = "yyy") %>%
+    expect_equal("1001")
+  fdt(input = "0900", format = "yyy") %>%
+    expect_equal("900")
+  fdt(input = "0090", format = "yyy") %>%
+    expect_equal("090")
+  fdt(input = "0009", format = "yyy") %>%
+    expect_equal("009")
+  fdt(input = "0000", format = "yyy") %>%
+    expect_equal("000")
+  fdt(input = "9001", format = "yyy") %>%
+    expect_equal("9001")
+})
+
 test_that("ISO dates can be formatted even with string literals", {
 
   iso_date_1 <- "2018-07-04"
