@@ -644,6 +644,14 @@ fdt <- function(
           input_dt <- as.POSIXct(input_str, tz = "UTC")
         }
 
+        if (nchar(input_str) == 7 && grepl("^[0-9]{4}-[0-9]{2}$", input_str)) {
+
+          # Case where the year and month are provided in the
+          # YYYY-MM format
+          input_str <- paste0(input_str, "-01")
+          input_dt <- as.POSIXct(input_str, tz = "UTC")
+        }
+
         # TODO: Add parsers for different date/time cases
       }
 
