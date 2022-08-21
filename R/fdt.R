@@ -646,10 +646,34 @@ fdt <- function(
 
         if (nchar(input_str) == 7 && grepl("^[0-9]{4}-[0-9]{2}$", input_str)) {
 
-          # Case where the year and month are provided in the
-          # YYYY-MM format
+          # Case where the year and month are provided in the YYYY-MM format
           input_str <- paste0(input_str, "-01")
           input_dt <- as.POSIXct(input_str, tz = "UTC")
+        }
+
+        if (grepl("W", input_str)) {
+
+          # Case where week dates are possibly provided in one of
+          # several permitted ISO 8601 formats
+
+          # Perform check of `input_str` to confirm that week dates
+          # conform to one of four ISO 8601 specifications:
+          # (1) YYYY-Www
+          # (2) YYYYWww
+          # (3) YYYY-Www-D
+          # (4) YYYYWwwD
+          if (!grepl("^([0-9]{4}-?W[0-9]{2}|[0-9]{4}-?W[0-9]{2}-?[1-7])$", input_str)) {
+            stop(
+              "The provided input '", input_str, "' does not conform to a week ",
+              "date representation.",
+              call. = FALSE
+            )
+          }
+
+          # Remove hyphens if any are present
+          input_str <- gsub("-", "", input_str)
+
+          input_dt <- week_date_as_datetime(input_str = input_str)
         }
 
         # TODO: Add parsers for different date/time cases

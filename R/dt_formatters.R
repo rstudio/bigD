@@ -119,6 +119,32 @@ get_dow_n_in_month <- function(input) {
   length(seq(from = day_input, to = 1, by = -7))
 }
 
+zero_weekday <- function(input) {
+  as.integer((as.integer(format(input, "%w")) + 6) %% 7 + 1L)
+}
+
+zero_thursday <- function(date) {
+  date - zero_weekday(input = as.Date(date)) + 3L
+}
+
+week_date_as_datetime <- function(input_str) {
+
+  year <- as.integer(substr(input_str, 1, 4))
+  week <- as.integer(substr(input_str, 6, 7))
+
+  if (nchar(input_str) == 8) {
+    weekday <- as.integer(substr(input_str, 8, 8))
+  } else {
+    weekday <- 1L
+  }
+
+  january_fourth <- as.Date(paste(year, "01", "04", sep = "-"), tz = "UTC")
+  first_thursday <- zero_thursday(date = january_fourth)
+  nearest_thursday <- first_thursday + 7 * (week - 1)
+  final_date <- nearest_thursday - 4 + weekday + 1
+  as.POSIXct(as.character(final_date), tz = "UTC")
+}
+
 get_modified_julian_day <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
