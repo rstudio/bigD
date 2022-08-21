@@ -162,6 +162,27 @@ test_that("Years by themselves are accepted", {
     expect_equal("9001")
 })
 
+test_that("The various week date formats are accepted", {
+
+  expect_equal(fdt("2023-W52"), "2023-12-25T00:00:00Z")
+  expect_equal(fdt("2023-W52"), fdt("2023W52"))
+  expect_equal(fdt("2023-W52"), fdt("2023-W52-1"))
+  expect_equal(fdt("2023-W52"), fdt("2023W521"))
+  expect_equal(fdt("2023-W01"), "2023-01-02T00:00:00Z")
+  expect_equal(fdt("2023-W01-1"), "2023-01-02T00:00:00Z")
+  expect_equal(fdt("2023-W01-2"), "2023-01-03T00:00:00Z")
+
+  expect_equal(fdt("2023-W01-3"), "2023-01-04T00:00:00Z")
+  expect_equal(fdt("2023-W01-4"), "2023-01-05T00:00:00Z")
+  expect_equal(fdt("2023-W01-5"), "2023-01-06T00:00:00Z")
+  expect_equal(fdt("2023-W01-6"), "2023-01-07T00:00:00Z")
+  expect_equal(fdt("2023-W01-7"), "2023-01-08T00:00:00Z")
+
+  expect_equal(fdt("1922-W01"), "1922-01-02T00:00:00Z")
+  expect_equal(fdt("1963-W01"), "1962-12-31T00:00:00Z")
+  expect_equal(fdt("1963-W53"), "1963-12-30T00:00:00Z")
+})
+
 test_that("The YYYY-MM format is accepted", {
 
   fdt(input = "1001-02") %>%
