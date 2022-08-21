@@ -15,7 +15,10 @@ The goal of **bigD** is to give everyone an easy yet flexible solution for forma
 Given the ISO-8601 date string `"2018-07-04"`, let's adjust the `format` string to precisely get the date in the form we need. With `"y/M/d"` a nice year/month/day date is returned to us.
 
 ```r
-fdt(input = "2018-07-04", format = "y/M/d")
+fdt(
+  input = "2018-07-04",
+  format = "y/M/d"
+)
 ```
 ```
 2018/7/4
@@ -24,7 +27,10 @@ fdt(input = "2018-07-04", format = "y/M/d")
 With variations of the same time parts, it's possible to get a friendlier version of the same date.
 
 ```r
-fdt(input = "2018-07-04", format = "MMMM d, y.")
+fdt(
+  input = "2018-07-04",
+  format = "MMMM d, y."
+)
 ```
 ```
 July 4, 2018.
