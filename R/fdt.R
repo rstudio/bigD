@@ -842,7 +842,9 @@ fdt <- function(
       dt <- gsub("{ww}", dt_ww(input_dt), dt, fixed = TRUE)
     }
 
-    dt <- gsub("{W}", dt_W(input_dt), dt, fixed = TRUE)
+    if ("W" %in% dt_lett) {
+      dt <- gsub("{W}", dt_W(input_dt), dt, fixed = TRUE)
+    }
 
     if ("d" %in% dt_lett) {
       dt <- gsub("{d}", dt_d(input_dt), dt, fixed = TRUE)
