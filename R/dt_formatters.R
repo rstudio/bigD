@@ -145,6 +145,17 @@ week_date_as_datetime <- function(input_str) {
   as.POSIXct(as.character(final_date), tz = "UTC")
 }
 
+month_day_as_datetime <- function(input_str) {
+
+  month_str <- substr(input_str, 1, 2)
+  day_str <- substr(input_str, 3, 4)
+
+  date_now <- as.character(Sys.Date())
+  year_str <- substr(date_now, 1, 4)
+
+  as.POSIXct(paste(year_str, month_str, day_str, sep = "-"), tz = "UTC")
+}
+
 get_modified_julian_day <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")

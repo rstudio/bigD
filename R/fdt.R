@@ -676,6 +676,22 @@ fdt <- function(
           input_dt <- week_date_as_datetime(input_str = input_str)
         }
 
+        if (grepl("^--", input_str)) {
+
+          if (!grepl("^--[0-9]{2}-?[0-9]{2}$", input_str)) {
+            stop(
+              "The provided input '", input_str, "' does not conform to a ",
+              "month-day representation.",
+              call. = FALSE
+            )
+          }
+
+          # Remove all hyphens from `input_str`
+          input_str <- gsub("-", "", input_str)
+
+          input_dt <- month_day_as_datetime(input_str = input_str)
+        }
+
         # TODO: Add parsers for different date/time cases
       }
 
