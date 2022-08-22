@@ -643,7 +643,7 @@ fdt <- function(
 
         if (nchar(input_str) == 4 && grepl("^[0-9]{4}$", input_str)) {
 
-          # Case where only the year is provided
+          # Case where only a four-digit C.E. year is provided
           input_str <- paste0(input_str, "-01-01")
           input_dt <- as.POSIXct(input_str, tz = "UTC")
         }
