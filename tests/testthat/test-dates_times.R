@@ -195,6 +195,26 @@ test_that("The --MM-DD and --MMDD formats are accepted", {
   expect_equal(fdt(input = "--0630", format = "MM-dd"), "06-30")
 })
 
+test_that("Years with BC or AD (or variations of these) can be parsed", {
+
+  expect_equal(fdt(input = "5000 BC", format = "y G"), "5000 BC")
+  expect_equal(fdt(input = "5000 BC", format = "y GGGG"), "5000 Before Christ")
+  expect_equal(fdt(input = "5000 BC", format = "y GGGGG"), "5000 B")
+
+  expect_equal(fdt(input = "101010 BC", format = "y G"), "101010 BC")
+  expect_equal(fdt(input = "5101010 AD", format = "y G"), "5101010 AD")
+
+  expect_equal(fdt(input = "500 BCE", format = "y G"), "500 BC")
+  expect_equal(fdt(input = "500 B.C.E.", format = "y G"), "500 BC")
+  expect_equal(fdt(input = "20 AD", format = "y G"), "20 AD")
+  expect_equal(fdt(input = "20 CE", format = "y G"), "20 AD")
+  expect_equal(fdt(input = "20 C.E.", format = "y G"), "20 AD")
+  expect_equal(fdt(input = "20 EV", format = "y G"), "20 AD")
+
+  expect_equal(fdt(input = "500 BCE", format = "y G", locale = "es"), "500 a. C.")
+  expect_equal(fdt(input = "500 AD", format = "y G", locale = "es"), "500 d. C.")
+})
+
 test_that("The YYYY-MM format is accepted", {
 
   fdt(input = "1001-02") %>%
