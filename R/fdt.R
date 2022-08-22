@@ -480,7 +480,7 @@
 #' )
 #' ```
 #' ```
-#' [1] "2018-Jul-04"
+#' #> [1] "2018-Jul-04"
 #' ```
 #'
 #' There are sometimes many options for each time part. Instead of using
@@ -493,7 +493,7 @@
 #' )
 #' ```
 #' ```
-#' [1] "18-July-4"
+#' #> [1] "18-July-4"
 #' ```
 #'
 #' The output is localizable and so elements will be translated when supplying
@@ -508,7 +508,7 @@
 #' )
 #' ```
 #' ```
-#' [1] "18-julio-4"
+#' #> [1] "18-julio-4"
 #' ```
 #'
 #' If you're going minimal, it's possible to supply an input datetime string
@@ -519,7 +519,7 @@
 #' fdt(input = "2018-07-04 22:05")
 #' ```
 #' ```
-#' [1] "2018-07-04T22:05:00Z"
+#' #> [1] "2018-07-04T22:05:00Z"
 #' ````
 #'
 #' Going further, you can omit the time and just supply the date portion. This
@@ -530,7 +530,7 @@
 #' fdt(input = "2018-07-04")
 #' ```
 #' ```
-#' [1] "2018-07-04T00:00:00Z"
+#' #> [1] "2018-07-04T00:00:00Z"
 #' ````
 #'
 #' If you omit the date and just supply a time, `fdt()` will correctly parse
@@ -542,7 +542,7 @@
 #' fdt(input = "22:05")
 #' ```
 #' ```
-#' [1] "2022-08-16T22:05:00Z"
+#' #> [1] "2022-08-16T22:05:00Z"
 #' ````
 #'
 #' POSIXct or POSIXlt datetimes can serve as an `input` to `fdt()`. Let's create
@@ -555,7 +555,7 @@
 #' )
 #' ```
 #' ```
-#' [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+#' #> [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
 #' ```
 #'
 #' @export
