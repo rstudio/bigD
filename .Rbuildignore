@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
+^index\.md$
 ^CODE_OF_CONDUCT\.md$
 ^data-raw$
 ^_pkgdown\.yml$
