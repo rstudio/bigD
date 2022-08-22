@@ -499,7 +499,7 @@ second, and the day of the month last (separated by hyphens):
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2018-Jul-04"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "2018-Jul-04"
 }\if{html}{\out{</div>}}
 
 There are sometimes many options for each time part. Instead of using
@@ -511,7 +511,7 @@ There are sometimes many options for each time part. Instead of using
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "18-July-4"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-July-4"
 }\if{html}{\out{</div>}}
 
 The output is localizable and so elements will be translated when supplying
@@ -525,7 +525,7 @@ in Spanish:
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "18-julio-4"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-julio-4"
 }\if{html}{\out{</div>}}
 
 If you're going minimal, it's possible to supply an input datetime string
@@ -535,7 +535,7 @@ output that conforms to ISO 8601. Note that the implied time zone is UTC.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(input = "2018-07-04 22:05")
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2018-07-04T22:05:00Z"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "2018-07-04T22:05:00Z"
 }\if{html}{\out{</div>}}
 
 Going further, you can omit the time and just supply the date portion. This
@@ -545,7 +545,7 @@ anyway).
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(input = "2018-07-04")
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2018-07-04T00:00:00Z"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "2018-07-04T00:00:00Z"
 }\if{html}{\out{</div>}}
 
 If you omit the date and just supply a time, \code{fdt()} will correctly parse
@@ -556,7 +556,7 @@ you just intend to present a formatted time value.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(input = "22:05")
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "2022-08-16T22:05:00Z"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "2022-08-16T22:05:00Z"
 }\if{html}{\out{</div>}}
 
 POSIXct or POSIXlt datetimes can serve as an \code{input} to \code{fdt()}. Let's create
@@ -568,7 +568,7 @@ a single datetime value where the timezone is set as \code{"Asia/Tokyo"}.
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{[1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
 }\if{html}{\out{</div>}}
 }
 
