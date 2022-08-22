@@ -696,6 +696,26 @@ fdt <- function(
           input_dt <- month_day_as_datetime(input_str = input_str)
         }
 
+        if (grepl("[0-9]+\\s?(BC|AD|BCE|CE|B\\.C\\.E\\.|C\\.E\\.|EV)$", input_str)) {
+
+          # Remove any spaces or periods from `input_str`
+          input_str <- gsub(" ", "", input_str)
+          input_str <- gsub("\\.", "", input_str)
+
+          year <- as.integer(gsub("([0-9]+).*", "\\1", input_str))
+          era <- gsub("[0-9]+", "", input_str)
+
+          if (any(c("BC", "BCE") %in% era)) {
+            year <- year * (-1)
+          }
+
+          adjustment <- -1900L
+
+          posixlt_dt <- as.POSIXlt("0000-01-01", tz = "UTC")
+          posixlt_dt$year <- year + adjustment
+          input_dt <- as.POSIXct(posixlt_dt)
+        }
+
         # TODO: Add parsers for different date/time cases
       }
 
