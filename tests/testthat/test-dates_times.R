@@ -183,6 +183,18 @@ test_that("The various week date formats are accepted", {
   expect_equal(fdt("1963-W53"), "1963-12-30T00:00:00Z")
 })
 
+test_that("The --MM-DD and --MMDD formats are accepted", {
+
+  expect_equal(fdt(input = "--03-05", format = "MM-dd"), "03-05")
+  expect_equal(fdt(input = "--0305", format = "MM-dd"), "03-05")
+
+  expect_equal(fdt(input = "--12-05", format = "MM-dd"), "12-05")
+  expect_equal(fdt(input = "--1205", format = "MM-dd"), "12-05")
+
+  expect_equal(fdt(input = "--06-30", format = "MM-dd"), "06-30")
+  expect_equal(fdt(input = "--0630", format = "MM-dd"), "06-30")
+})
+
 test_that("The YYYY-MM format is accepted", {
 
   fdt(input = "1001-02") %>%
