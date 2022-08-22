@@ -389,7 +389,7 @@ dt_yy <- function(input) {
 # Full year with minimum zero padding (yyy -> 2, yyyy -> 3, etc.)
 dt_yyy_plus <- function(input, length) {
   zero_pad_to_width(
-    value = as.integer(format(input, format = "%Y")),
+    value = abs(as.integer(format(input, format = "%Y"))),
     width = length
   )
 }
