@@ -568,6 +568,10 @@ fdt <- function(
 
   # TODO: Validate locale
 
+  if (!is.null(locale)) {
+    locale <- gsub("_", "-", locale)
+  }
+
   if (is.null(locale)) {
     locale <- "en"
   }
