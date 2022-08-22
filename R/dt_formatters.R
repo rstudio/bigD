@@ -346,7 +346,7 @@ format_quarter <- function(input) {
 # Era // abbreviated (G..GGG) (AD, variant: CE)
 dt_G <- function(input, locale = NULL) {
 
-  year <- as.integer(dt_Y(input = input))
+  year <- as.integer(format(input, format = "%Y"))
 
   cldr_dates_bigd(
     locale = locale,
@@ -357,7 +357,7 @@ dt_G <- function(input, locale = NULL) {
 # Era // wide (Anno Domini, variant: Common Era)
 dt_GGGG <- function(input, locale = NULL) {
 
-  year <- as.integer(dt_Y(input = input))
+  year <- as.integer(format(input, format = "%Y"))
 
   cldr_dates_bigd(
     locale = locale,
@@ -368,7 +368,7 @@ dt_GGGG <- function(input, locale = NULL) {
 # Era // narrow (A)
 dt_GGGGG <- function(input, locale = NULL) {
 
-  year <- as.integer(dt_Y(input = input))
+  year <- as.integer(format(input, format = "%Y"))
 
   cldr_dates_bigd(
     locale = locale,
