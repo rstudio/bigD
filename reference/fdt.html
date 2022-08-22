@@ -352,14 +352,14 @@ second, and the day of the month last (separated by hyphens):</p>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"y-MMM-dd"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>[<span class="dv">1</span>] <span class="st">"2018-Jul-04"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2018-Jul-04"</span></span></code></pre><p></p></div>
 <p>There are sometimes many options for each time part. Instead of using
 <code>"y-MMM-dd"</code>, let's try a variation on that with <code>"yy-MMMM-d"</code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"yy-MMMM-d"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>[<span class="dv">1</span>] <span class="st">"18-July-4"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "18-July-4"</span></span></code></pre><p></p></div>
 <p>The output is localizable and so elements will be translated when supplying
 the appropriate locale code. Let's use <code>locale = es</code> to get the month written
 in Spanish:</p>
@@ -368,30 +368,30 @@ in Spanish:</p>
 <span>  format <span class="op">=</span> <span class="st">"yy-MMMM-d"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="st">"es"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>[<span class="dv">1</span>] <span class="st">"18-julio-4"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "18-julio-4"</span></span></code></pre><p></p></div>
 <p>If you're going minimal, it's possible to supply an input datetime string
 without a <code>format</code> directive. What this gives us is formatted datetime
 output that conforms to ISO 8601. Note that the implied time zone is UTC.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>[<span class="dv">1</span>] <span class="st">"2018-07-04T22:05:00Z"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2018-07-04T22:05:00Z"</span></span></code></pre><p></p></div>
 <p>Going further, you can omit the time and just supply the date portion. This
 implies midnight (and is just fine if you're only going to present the date
 anyway).</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>[<span class="dv">1</span>] <span class="st">"2018-07-04T00:00:00Z"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2018-07-04T00:00:00Z"</span></span></code></pre><p></p></div>
 <p>If you omit the date and just supply a time, <code>fdt()</code> will correctly parse
 this. The current date on the user system will be used because we need to
 create some sort of datetime value internally. Again, this is alright if
 you just intend to present a formatted time value.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"22:05"</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>[<span class="dv">1</span>] <span class="st">"2022-08-16T22:05:00Z"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2022-08-16T22:05:00Z"</span></span></code></pre><p></p></div>
 <p>POSIXct or POSIXlt datetimes can serve as an <code>input</code> to <code>fdt()</code>. Let's create
 a single datetime value where the timezone is set as <code>"Asia/Tokyo"</code>.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html" class="external-link">ymd_hms</a></span><span class="op">(</span><span class="st">"2020-03-15 19:09:12"</span>, tz <span class="op">=</span> <span class="st">"Asia/Tokyo"</span><span class="op">)</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>[<span class="dv">1</span>] <span class="st">"Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
