@@ -86,14 +86,14 @@
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04"</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"y/M/d"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="fl">2018</span><span class="op">/</span><span class="fl">7</span><span class="op">/</span><span class="fl">4</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] 2018/7/4</span></span></code></pre>
 <p>With variations of the same time parts, it’s possible to get a friendlier version of the same date.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04"</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"MMMM d, y."</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>July 4, 2018.</code></pre>
+<pre><code><span><span class="co">#&gt; [1] July 4, 2018.</span></span></code></pre>
 <p>With the <code>locale</code> option, we can localize the date. Let’s change up the format string and use the German locale (<code>"de"</code>).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
@@ -101,7 +101,7 @@
 <span>  format <span class="op">=</span> <span class="st">"d. MMMM y (EEEE)."</span>,</span>
 <span>  locale <span class="op">=</span> <span class="st">"de"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>4. Juli 2018 (Mittwoch).</code></pre>
+<pre><code><span><span class="co">#&gt; [1] 4. Juli 2018 (Mittwoch).</span></span></code></pre>
 <p>With a datetime string like <code>"2018-07-24T14:44:22.234343-0800"</code>, we have more possibilities. This follows the ISO 8601 spec pretty closely and notice that the UTC offset value is added at the end (where it ought to be) to express some time zone information. Let’s see a different datetime in French.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
@@ -109,7 +109,7 @@
 <span>  format <span class="op">=</span> <span class="st">"MMM dd HH:mm:ss ZZZZ yyyy"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="st">"fr"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>juil. 24 14:44:22 GMT-8:00 2018</code></pre>
+<pre><code><span><span class="co">#&gt; [1] juil. 24 14:44:22 GMT-8:00 2018</span></span></code></pre>
 <p>Next, let’s take a look at a slight variation in Finnish. In the above the tz offset was formatted with <code>"ZZZZ"</code>. Below, let’s use <code>"XX"</code> for that.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
@@ -117,7 +117,7 @@
 <span>  format <span class="op">=</span> <span class="st">"MMMM dd HH:mm:ss 'yy XX"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="st">"fi"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>heinäkuuta 24 14:44:22 '18 -0800</code></pre>
+<pre><code><span><span class="co">#&gt; [1] heinäkuuta 24 14:44:22 '18 -0800</span></span></code></pre>
 <p>Time zone support is super comprehensive. We can attach a time zone ID, like <code>"America/Vancouver"</code> (and there are many others), to a datetime string. We just got to make sure it’s wrapped up in parens.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fdt.html">fdt</a></span><span class="op">(</span></span>
@@ -125,7 +125,7 @@
 <span>  format <span class="op">=</span> <span class="st">"yyyy.MM.dd G, HH:mm:ss zzzz"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="st">"es"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>2014.06.23 d. C., 13:24:09 hora de verano del Pacífico</code></pre>
+<pre><code><span><span class="co">#&gt; [1] 2014.06.23 d. C., 13:24:09 hora de verano del Pacífico</span></span></code></pre>
 <p>Just so you know, the time zone ID can alternatively be set to the <code>use_tz</code> argument of <code><a href="reference/fdt.html">fdt()</a></code>. Also, POSIXct/POSIXlt/Date times can be used as inputs. Plus, this function is vectorized.</p>
 <p>The formatting syntax has a lot to it but you can learn all about it in the fairly comprehensive documentation.</p>
 </div>
