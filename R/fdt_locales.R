@@ -97,7 +97,7 @@ fdt_locales_vec <- function() {
 #' with a locale identifier and this generates valid input for the `locale`
 #' argument.
 #'
-#' @return A list where each element corresponds to a supported locale ID..
+#' @return A list where each element corresponds to a supported locale ID.
 #'
 #' @section Examples:
 #'
