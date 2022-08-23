@@ -11,7 +11,7 @@ An object of class \code{list} of length 574.
 fdt_locales_lst
 }
 \value{
-A list where each element corresponds to a supported locale ID..
+A list where each element corresponds to a supported locale ID.
 }
 \description{
 The \code{fdt_locales_lst} object is a list of all supported locales. This is
