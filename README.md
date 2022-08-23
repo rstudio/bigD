@@ -25,7 +25,7 @@ fdt(
 )
 ```
 ```
-2018/7/4
+#> [1] 2018/7/4
 ```
 
 With variations of the same time parts, it's possible to get a friendlier version of the same date.
@@ -37,7 +37,7 @@ fdt(
 )
 ```
 ```
-July 4, 2018.
+#> [1] July 4, 2018.
 ```
 
 With the `locale` option, we can localize the date. Let's change up the format string and use the German locale (`"de"`).
@@ -50,7 +50,7 @@ fdt(
 )
 ```
 ```
-4. Juli 2018 (Mittwoch).
+#> [1] 4. Juli 2018 (Mittwoch).
 ```
 
 With a datetime string like `"2018-07-24T14:44:22.234343-0800"`, we have more possibilities. This follows the ISO 8601 spec pretty closely and notice that the UTC offset value is added at the end (where it ought to be) to express some time zone information. Let's see a different datetime in French.
@@ -63,7 +63,7 @@ fdt(
 )
 ```
 ```
-juil. 24 14:44:22 GMT-8:00 2018
+#> [1] juil. 24 14:44:22 GMT-8:00 2018
 ```
 
 Next, let's take a look at a slight variation in Finnish. In the above the tz offset was formatted with `"ZZZZ"`. Below, let's use `"XX"` for that.
@@ -76,7 +76,7 @@ fdt(
 )
 ```
 ```
-heinäkuuta 24 14:44:22 '18 -0800
+#> [1] heinäkuuta 24 14:44:22 '18 -0800
 ```
 
 Time zone support is super comprehensive. We can attach a time zone ID, like `"America/Vancouver"` (and there are many others), to a datetime string. We just got to make sure it's wrapped up in parens.
@@ -89,7 +89,7 @@ fdt(
 )
 ```
 ```
-2014.06.23 d. C., 13:24:09 hora de verano del Pacífico
+#> [1] 2014.06.23 d. C., 13:24:09 hora de verano del Pacífico
 ```
 
 Just so you know, the time zone ID can alternatively be set to the `use_tz` argument of `fdt()`. Also, POSIXct/POSIXlt/Date times can be used as inputs. Plus, this function is vectorized.
