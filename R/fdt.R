@@ -1125,7 +1125,7 @@ dt_format_pattern <- function(format) {
 
   for (i in seq_along(literals)) {
     if (literals[i] != "") {
-      format <- sub(literals[i], i, format)
+      format <- sub(paste0("'", literals[i], "'"), paste0("'", i, "'"), format)
     }
   }
 
