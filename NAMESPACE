@@ -3,3 +3,8 @@
 export(fdt)
 export(fdt_locales_lst)
 export(fdt_locales_vec)
+export(flex_d_lst)
+export(flex_d_vec)
+export(flex_t12_lst)
+export(flex_t12_vec)
+export(flex_t24_vec)
