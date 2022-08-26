@@ -253,6 +253,15 @@ test_that("ISO dates can be formatted even with string literals", {
   fdt(input = iso_date_1, format = "'Day': dd, 'Month': MM (yy)") %>%
     expect_equal("Day: 04, Month: 07 (18)")
 
+  fdt(input = iso_date_1, format = "'dd': dd, 'MM': MM ('yy': yy)") %>%
+    expect_equal("dd: 04, MM: 07 (yy: 18)")
+
+  fdt(input = iso_date_1, format = "'d': dd, 'M': MM ('y': yy)") %>%
+    expect_equal("d: 04, M: 07 (y: 18)")
+
+  fdt(input = iso_date_1, format = "h 'h' mm 'min' ss 's' B", locale = "fr_CA") %>%
+    expect_equal("12 h 00 min 00 s minuit")
+
   fdt(input = iso_date_1, format = "d'th' MMMM y (EEEE).") %>%
     expect_equal("4th July 2018 (Wednesday).")
 
