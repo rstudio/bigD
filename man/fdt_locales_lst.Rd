@@ -34,7 +34,7 @@ use of the list.
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-ијул-4"`
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-ијул-4"
 }\if{html}{\out{</div>}}
 }
 
