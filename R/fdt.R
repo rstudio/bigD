@@ -578,6 +578,8 @@ fdt <- function(
 
   if (is.null(format)) {
     format <- "yyyy-MM-dd'T'HH:mm:ssXXX"
+  } else if (inherits(format, "date_time_pattern")) {
+    format <- dates[dates$locale == locale, ][["date_time_available_formats"]][["value"]][[format]]
   }
 
   if (inherits(input, "POSIXlt")) {
