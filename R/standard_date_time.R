@@ -22,7 +22,7 @@ standard_date_time <- function(
 #'
 #' @export
 standard_date <- function(
-    type = c("full", "long", "medium", "short")
+    type = c("short", "medium", "long", "full")
 ) {
   type <- match.arg(type)
   x <- "sdt"
@@ -38,7 +38,7 @@ standard_date <- function(
 #'
 #' @export
 standard_time <- function(
-    type = c("full", "long", "medium", "short")
+    type = c("short", "medium", "long", "full")
 ) {
   type <- match.arg(type)
   x <- "sdt"
