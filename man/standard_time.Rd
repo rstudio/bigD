@@ -4,7 +4,7 @@
 \alias{standard_time}
 \title{Obtain a standard time format that works across locales}
 \usage{
-standard_time(type = c("full", "long", "medium", "short"))
+standard_time(type = c("short", "medium", "long", "full"))
 }
 \arguments{
 \item{type}{One of four standardized types for the resulting time that range
