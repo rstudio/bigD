@@ -124,7 +124,7 @@ flex_d_lst <-
   lapply(
     stats::setNames(as.list(flex_d_vec()), as.list(flex_d_vec())),
     FUN = function(x) {
-      class(x) <- "date_time_pattern"
+      class(x) <- c("date_time_pattern", "flex_d")
       x
     }
   )
@@ -181,7 +181,7 @@ flex_t12_lst <-
   lapply(
     stats::setNames(as.list(flex_t12_vec()), as.list(flex_t12_vec())),
     FUN = function(x) {
-      class(x) <- "date_time_pattern"
+      class(x) <- c("date_time_pattern", "flex_t12")
       x
     }
   )
@@ -238,7 +238,7 @@ flex_t24_lst <-
   lapply(
     stats::setNames(as.list(flex_t24_vec()), as.list(flex_t24_vec())),
     FUN = function(x) {
-      class(x) <- "date_time_pattern"
+      class(x) <- c("date_time_pattern", "flex_t24")
       x
     }
   )
