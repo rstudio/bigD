@@ -578,8 +578,90 @@ fdt <- function(
 
   if (is.null(format)) {
     format <- "yyyy-MM-dd'T'HH:mm:ssXXX"
-  } else if (inherits(format, "date_time_pattern")) {
+  } else if (
+    length(format) == 1 &&
+    is.character(format) &&
+    !inherits(format, "date_time_pattern")
+  ) {
+    NULL
+  } else if (
+    length(format) == 1 &&
+    is.character(format) &&
+    inherits(format, "date_time_pattern") &&
+    !inherits(format, "standard")
+  ) {
     format <- dates[dates$locale == locale, ][["date_time_available_formats"]][["value"]][[format]]
+  } else if (
+    length(format) == 1 &&
+    is.character(format) &&
+    inherits(format, "date_time_pattern") &&
+    inherits(format, "standard")
+  ) {
+
+    dt_types <- base::setdiff(class(format), c("date_time_pattern", "standard"))
+    type_date_time <- dt_types[1]
+    type_size <- dt_types[2]
+
+    date_format <-
+      dates[dates$locale == locale, ][["date_formats"]][["value"]][[type_size]]
+
+    time_format <-
+      dates[dates$locale == locale, ][["time_formats"]][["value"]][[type_size]]
+
+    combining_format <-
+      dates[dates$locale == locale, ][["date_time_patterns"]][["value"]][[type_size]]
+
+    if (type_date_time == "date_time") {
+      format <- gsub("{1}", date_format, combining_format, fixed = TRUE)
+      format <- gsub("{0}", time_format, format, fixed = TRUE)
+    } else if (type_date_time == "date") {
+      format <- date_format
+    } else {
+      format <- time_format
+    }
+
+  } else if (
+    is.list(format) &&
+    length(format) == 2 &&
+    inherits(format[[1]], "date_time_pattern") &&
+    inherits(format[[2]], "date_time_pattern")
+  ) {
+    if (inherits(format[[1]], "flex_d")) {
+      format_1 <- "date"
+    } else {
+      format_1 <- "time"
+    }
+
+    if (inherits(format[[2]], "flex_d")) {
+      format_2 <- "date"
+    } else {
+      format_2 <- "time"
+    }
+
+    if (identical(format_1, format_2)) {
+      stop(
+        "When supplying two flexible formats, one must represent a date and ",
+        "the other a time",
+        call. = FALSE
+      )
+    }
+
+    date_format <- if (format_1 == "date") format[[1]] else format[[2]]
+    time_format <- if (format_2 == "time") format[[2]] else format[[1]]
+
+    combine_length <- "medium"
+
+    date_format <-
+      dates[dates$locale == locale, ][["date_time_available_formats"]][["value"]][[date_format]]
+
+    time_format <-
+      dates[dates$locale == locale, ][["date_time_available_formats"]][["value"]][[time_format]]
+
+    combining_format <-
+      dates[dates$locale == locale, ][["date_time_patterns"]][["value"]][[combine_length]]
+
+    format <- gsub("{1}", date_format, combining_format, fixed = TRUE)
+    format <- gsub("{0}", time_format, format, fixed = TRUE)
   }
 
   if (inherits(input, "POSIXlt")) {
