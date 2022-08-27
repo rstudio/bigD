@@ -57,4 +57,13 @@
   <url>
     <loc>/reference/index.html</loc>
   </url>
+  <url>
+    <loc>/reference/standard_date.html</loc>
+  </url>
+  <url>
+    <loc>/reference/standard_date_time.html</loc>
+  </url>
+  <url>
+    <loc>/reference/standard_time.html</loc>
+  </url>
 </urlset>
