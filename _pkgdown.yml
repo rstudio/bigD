@@ -1,4 +1,47 @@
 url: ~
+
 template:
   bootstrap: 5
 
+reference:
+  - title: 'The Main Function: `fdt()`'
+    desc: >
+      The `fdt()` function is the one that takes in your date/time/datetime
+      (in whichever way you want to provide it) and provides ways to format
+      that input in a flexible manner.
+    contents:
+    - fdt
+
+  - title: Locale Helpers
+    desc: >
+      You have the option to format dates times according to a specified locale,
+      and there are hundreds of locales. These helpers make selecting a locale
+      (and knowing which are formally supported here) much more convenient.
+    contents:
+    - fdt_locales_lst
+    - fdt_locales_vec
+
+  - title: Flexible Date and Time Helpers
+    desc: >
+      Flexible dates and times (divided into 12- and 24-hour variants) embody
+      the idea of canonical forms that are translated faithfully across many
+      different locales. These helpers show which of these are available for
+      dates, 12-hour time, and 24-hour time.
+    contents:
+    - flex_d_lst
+    - flex_d_vec
+    - flex_t12_lst
+    - flex_t12_vec
+    - flex_t24_lst
+    - flex_t24_vec
+
+  - title: Standard Dates and Times
+    desc: >
+      Standard dates and times follow the convention of four different types
+      ("short", "medium", "long", and "full") that are specially formulated for
+      each and every locale. These helper functions provide a simple interface
+      for choosing a standardized formatting pattern.
+    contents:
+    - standard_date
+    - standard_date_time
+    - standard_time
