@@ -4,7 +4,7 @@
 \alias{standard_date}
 \title{Obtain a standard date format that works across locales}
 \usage{
-standard_date(type = c("full", "long", "medium", "short"))
+standard_date(type = c("short", "medium", "long", "full"))
 }
 \arguments{
 \item{type}{One of four standardized types for the resulting date that range
