@@ -4,7 +4,12 @@
 \alias{standard_date_time}
 \title{Obtain a standard datetime format that works across locales}
 \usage{
-standard_date_time(type = c("full", "long", "medium", "short"))
+standard_date_time(type = c("short", "medium", "long", "full"))
+}
+\arguments{
+\item{type}{One of four standardized types for the resulting datetime that
+range in precision and verbosity. These are \code{"short"} (the default),
+\code{"medium"}, \code{"long"}, and \code{"full"}.}
 }
 \description{
 Obtain a standard datetime format that works across locales

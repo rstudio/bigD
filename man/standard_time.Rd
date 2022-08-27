@@ -6,6 +6,11 @@
 \usage{
 standard_time(type = c("full", "long", "medium", "short"))
 }
+\arguments{
+\item{type}{One of four standardized types for the resulting time that range
+in precision and verbosity. These are \code{"short"} (the default), \code{"medium"},
+\code{"long"}, and \code{"full"}.}
+}
 \description{
 Obtain a standard time format that works across locales
 }
