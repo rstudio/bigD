@@ -185,3 +185,60 @@ flex_t12_lst <-
       x
     }
   )
+
+#' A list of all 24-hour flexible time types
+#'
+#' @description
+#' The `flex_t24_lst` object is a list of the 24-hour flexible time types which
+#' are widely supported. Flexible time types are classes of time formatting
+#' which can be translated across locales. There are `r length(flex_t24_lst)`
+#' flexible time types of the 24-hour variety in `flex_t24_lst`.
+#'
+#' @return A list where each element corresponds to a classifier for a 24-hour
+#' flexible time type.
+#'
+#' @section Examples:
+#'
+#' The `flex_t24_lst` object can be incredibly useful when you need to get a
+#' format for 24-hour time formatting that works across all locales. You can
+#' avoid typing errors by using this list and every flexible time type from this
+#' list is guaranteed to work across all supported locales. In this example,
+#' we'll use the `"EHms"` flexible time type by accessing it from the
+#' `flex_t24_lst` object.
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05",
+#'   format = flex_t24_lst$EHms,
+#'   locale = "en"
+#' )
+#' ```
+#' ```
+#' #> [1] "Wed 22:05:00"
+#' ```
+#'
+#' If we wanted this in a different locale, the locale-specific `format` pattern
+#' behind the flexible date identifier would ensure consistency while moving to
+#' that locale. Let's use the `fdt_locales_lst` object in the same spirit to
+#' specify the Japanese locale.
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05",
+#'   format = flex_t24_lst$EHms,
+#'   locale = fdt_locales_lst$ja
+#' )
+#' ```
+#' ```
+#' #> [1] "22:05:00 (水)"
+#' ```
+#'
+#' @export
+flex_t24_lst <-
+  lapply(
+    stats::setNames(as.list(flex_t24_vec()), as.list(flex_t24_vec())),
+    FUN = function(x) {
+      class(x) <- "date_time_pattern"
+      x
+    }
+  )
