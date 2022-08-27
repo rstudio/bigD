@@ -44,9 +44,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="the-main-function-fdt-">The Main Function: <code>fdt()</code><a class="anchor" aria-label="anchor" href="#the-main-function-fdt-"></a></h2>
       
-      
+      <p class="section-desc"></p><p>The <code><a href="../reference/fdt.html">fdt()</a></code> function is the one that takes in your date/time/datetime (in whichever way you want to provide it) and provides ways to format that input in a flexible manner.</p>
 
       
     </div><div id="" class="section level2">
@@ -59,7 +59,18 @@
           <code><a href="fdt.html">fdt()</a></code> 
         </dt>
         <dd>Format a datetime with a formatting string</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="locale-helpers">Locale Helpers<a class="anchor" aria-label="anchor" href="#locale-helpers"></a></h2>
+      
+      <p class="section-desc"></p><p>You have the option to format dates times according to a specified locale, and there are hundreds of locales. These helpers make selecting a locale (and knowing which are formally supported here) much more convenient.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="fdt_locales_lst.html">fdt_locales_lst</a></code> 
         </dt>
@@ -69,7 +80,18 @@
           <code><a href="fdt_locales_vec.html">fdt_locales_vec()</a></code> 
         </dt>
         <dd>Get a vector of all supported locales</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="flexible-date-and-time-helpers">Flexible Date and Time Helpers<a class="anchor" aria-label="anchor" href="#flexible-date-and-time-helpers"></a></h2>
+      
+      <p class="section-desc"></p><p>Flexible dates and times (divided into 12- and 24-hour variants) embody the idea of canonical forms that are translated faithfully across many different locales. These helpers show which of these are available for dates, 12-hour time, and 24-hour time.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="flex_d_lst.html">flex_d_lst</a></code> 
         </dt>
@@ -99,7 +121,18 @@
           <code><a href="flex_t24_vec.html">flex_t24_vec()</a></code> 
         </dt>
         <dd>Get a vector of all 24-hour flexible time types</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="standard-dates-and-times">Standard Dates and Times<a class="anchor" aria-label="anchor" href="#standard-dates-and-times"></a></h2>
+      
+      <p class="section-desc"></p><p>Standard dates and times follow the convention of four different types (“short”, “medium”, “long”, and “full”) that are specially formulated for each and every locale. These helper functions provide a simple interface for choosing a standardized formatting pattern.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="standard_date.html">standard_date()</a></code> 
         </dt>
@@ -115,7 +148,8 @@
         </dt>
         <dd>Obtain a standard time format that works across locales</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
