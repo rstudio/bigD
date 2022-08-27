@@ -32,27 +32,27 @@ we'll use the \code{"Ehms"} flexible time type by accessing it from the
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
   input = "2018-07-04 22:05",
-  format = flex_t12_lst$Ehms,
+  format = flex_t12_lst$Bhms,
   locale = "en"
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Wed, Jul 4, 2018"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10:05:00 at night"
 }\if{html}{\out{</div>}}
 
 If we wanted this in a different locale, the locale-specific \code{format} pattern
 behind the flexible date identifier would ensure consistency while moving to
 that locale. Let's use the \code{fdt_locales_lst} object in the same spirit to
-specify the French (Canada) locale.
+specify the German (Austria) locale.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
   input = "2018-07-04 22:05",
-  format = flex_t12_lst$Ehms,
-  locale = fdt_locales_lst$fr_CA
+  format = flex_t12_lst$Bhms,
+  locale = fdt_locales_lst$de_AT
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "mer. 4 juill. 2018"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10:05:00 abends"
 }\if{html}{\out{</div>}}
 }
 
