@@ -60,9 +60,9 @@
         </dt>
         <dd>Format a datetime with a formatting string</dd>
       </dl></div><div class="section level2">
-      <h2 id="locale-helpers">Locale Helpers<a class="anchor" aria-label="anchor" href="#locale-helpers"></a></h2>
+      <h2 id="locales">Locales<a class="anchor" aria-label="anchor" href="#locales"></a></h2>
       
-      <p class="section-desc"></p><p>You have the option to format dates times according to a specified locale, and there are hundreds of locales. These helpers make selecting a locale (and knowing which are formally supported here) much more convenient.</p>
+      <p class="section-desc"></p><p>You have the option to format dates times according to a specified locale, and there are hundreds of locales. The vector object <code>fdt_locales_vec</code> contains the locale IDs that accepted by <code><a href="../reference/fdt.html">fdt()</a></code> and the <code>fdt_locales_lst</code> list makes selecting a locale in <code><a href="../reference/fdt.html">fdt()</a></code> much more convenient (e.g., <code>locale = fdt_locales_lst$nl_BE</code>).</p>
 
       
     </div><div id="" class="section level2">
@@ -81,7 +81,7 @@
         </dt>
         <dd>Get a vector of all supported locales</dd>
       </dl></div><div class="section level2">
-      <h2 id="flexible-date-and-time-helpers">Flexible Date and Time Helpers<a class="anchor" aria-label="anchor" href="#flexible-date-and-time-helpers"></a></h2>
+      <h2 id="flexible-dates-and-times">Flexible Dates and Times<a class="anchor" aria-label="anchor" href="#flexible-dates-and-times"></a></h2>
       
       <p class="section-desc"></p><p>Flexible dates and times (divided into 12- and 24-hour variants) embody the idea of canonical forms that are translated faithfully across many different locales. The vector objects (<code>*_vec</code>) show which of these forms are available and the list objects (<code>*_lst</code>) can be directly used to form an input value for <code><a href="../reference/fdt.html">fdt()</a></code>’s <code>format</code> argument (e.g., <code>format = flex_t24_lst$Hms</code>).</p>
 
