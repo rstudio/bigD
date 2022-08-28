@@ -83,7 +83,7 @@
       </dl></div><div class="section level2">
       <h2 id="flexible-date-and-time-helpers">Flexible Date and Time Helpers<a class="anchor" aria-label="anchor" href="#flexible-date-and-time-helpers"></a></h2>
       
-      <p class="section-desc"></p><p>Flexible dates and times (divided into 12- and 24-hour variants) embody the idea of canonical forms that are translated faithfully across many different locales. These helpers show which of these are available for dates, 12-hour time, and 24-hour time.</p>
+      <p class="section-desc"></p><p>Flexible dates and times (divided into 12- and 24-hour variants) embody the idea of canonical forms that are translated faithfully across many different locales. The vector objects (<code>*_vec</code>) show which of these forms are available and the list objects (<code>*_lst</code>) can be directly used to form an input value for <code><a href="../reference/fdt.html">fdt()</a></code>’s <code>format</code> argument (e.g., <code>format = flex_t24_lst$Hms</code>).</p>
 
       
     </div><div id="" class="section level2">
@@ -124,7 +124,7 @@
       </dl></div><div class="section level2">
       <h2 id="standard-dates-and-times">Standard Dates and Times<a class="anchor" aria-label="anchor" href="#standard-dates-and-times"></a></h2>
       
-      <p class="section-desc"></p><p>Standard dates and times follow the convention of four different types (“short”, “medium”, “long”, and “full”) that are specially formulated for each and every locale. These helper functions provide a simple interface for choosing a standardized formatting pattern.</p>
+      <p class="section-desc"></p><p>Standard dates and times follow the convention of four different types (“short”, “medium”, “long”, and “full”) that are specially formulated for each and every locale. These helper functions provide a simple interface for choosing a standardized formatting pattern. Invoke any one of them as an input value for <code><a href="../reference/fdt.html">fdt()</a></code>’s <code>format</code> argument (e.g., <code>format = standard_date_time(type = "medium")</code>).</p>
 
       
     </div><div id="" class="section level2">
