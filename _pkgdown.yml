@@ -25,8 +25,10 @@ reference:
     desc: >
       Flexible dates and times (divided into 12- and 24-hour variants) embody
       the idea of canonical forms that are translated faithfully across many
-      different locales. These helpers show which of these are available for
-      dates, 12-hour time, and 24-hour time.
+      different locales. The vector objects (`*_vec`) show which of these forms
+      are available and the list objects (`*_lst`) can be directly used to form
+      an input value for `fdt()`'s `format` argument (e.g.,
+      `format = flex_t24_lst$Hms`).
     contents:
     - flex_d_lst
     - flex_d_vec
@@ -40,7 +42,9 @@ reference:
       Standard dates and times follow the convention of four different types
       ("short", "medium", "long", and "full") that are specially formulated for
       each and every locale. These helper functions provide a simple interface
-      for choosing a standardized formatting pattern.
+      for choosing a standardized formatting pattern. Invoke any one of them as
+      an input value for `fdt()`'s `format` argument (e.g.,
+      `format = standard_date_time(type = "medium")`).
     contents:
     - standard_date_time
     - standard_date
