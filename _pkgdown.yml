@@ -30,10 +30,10 @@ reference:
     contents:
     - flex_d_lst
     - flex_d_vec
-    - flex_t12_lst
-    - flex_t12_vec
     - flex_t24_lst
     - flex_t24_vec
+    - flex_t12_lst
+    - flex_t12_vec
 
   - title: Standard Dates and Times
     desc: >
@@ -42,6 +42,6 @@ reference:
       each and every locale. These helper functions provide a simple interface
       for choosing a standardized formatting pattern.
     contents:
-    - standard_date
     - standard_date_time
+    - standard_date
     - standard_time
