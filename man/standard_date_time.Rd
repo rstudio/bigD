@@ -12,5 +12,87 @@ range in precision and verbosity. These are \code{"short"} (the default),
 \code{"medium"}, \code{"long"}, and \code{"full"}.}
 }
 \description{
-Obtain a standard datetime format that works across locales
+The \code{standard_date_time()} function can be invoked in the \code{format} argument
+of the \code{fdt()} function to help generate a locale-specific formatting string
+of a certain 'type'. The \code{type} value is a keyword that represents precision
+and verbosity; the available keywords are \code{"short"} (the default),
+\code{"medium"}, \code{"long"}, and \code{"full"}.
 }
+\section{Examples}{
+
+
+With an input datetime of \code{"2018-07-04 22:05(America/Vancouver)"}, we can
+format the date and time in a standardized way with \code{standard_date_time()}
+providing the correct formatting string. This function is invoked in the
+\code{format} argument of \code{fdt()}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "full")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Wednesday, July 4, 2018 at 10:05:00 PM Pacific Daylight Time"
+}\if{html}{\out{</div>}}
+
+The locale can be changed and we don't have to worry about the particulars
+of the formatting string (they are standardized across locales).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "full"),
+  locale = fdt_locales_lst$nl
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "woensdag 4 juli 2018 om 22:05:00 Pacific-zomertijd"
+}\if{html}{\out{</div>}}
+
+We can use different \code{type} values to control the output datetime string. The
+default is \code{"short"}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time()
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "7/4/18, 10:05 PM"
+}\if{html}{\out{</div>}}
+
+After that, it's \code{"medium"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "medium")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Jul 4, 2018, 10:05:00 PM"
+}\if{html}{\out{</div>}}
+
+The bottom two don't display time zone information in the output. Beginning
+with \code{"long"} the tz is shown.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "long")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "July 4, 2018 at 10:05:00 PM PDT"
+}\if{html}{\out{</div>}}
+
+If you don't include time zone information in the input, the \code{"UTC"} time
+zone will be assumed:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05",
+  format = standard_date_time(type = "full")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Wednesday, July 4, 2018 at 10:05:00 PM GMT+00:00"
+}\if{html}{\out{</div>}}
+}
+
