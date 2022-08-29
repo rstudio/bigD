@@ -1,5 +1,15 @@
 #' Get a vector of all flexible date types
 #'
+#' @description
+#' The `flex_d_vec()` function produces a vector of all supported flexible date
+#' types in the **bigD** package. These types are essentially identifiers for
+#' classes of cross-locale date formatting, so, none of these should be used
+#' directly in the `format` argument of the `fdt()` function (use the
+#' [flex_d_lst] object for that).
+#'
+#' @return
+#' A character vector of supported flexible date types.
+#'
 #' @export
 flex_d_vec <- function() {
 
@@ -36,6 +46,16 @@ flex_d_vec <- function() {
 
 #' Get a vector of all 12-hour flexible time types
 #'
+#' @description
+#' The `flex_t12_vec()` function produces a vector of all supported flexible
+#' 12-hour time types in the **bigD** package. These types are essentially
+#' identifiers for classes of cross-locale time formatting, so, none of these
+#' should be used directly in the `format` argument of the `fdt()` function (use
+#' the [flex_t12_lst] object for that).
+#'
+#' @return
+#' A character vector of supported 12-hour flexible time types.
+#'
 #' @export
 flex_t12_vec <- function() {
 
@@ -56,6 +76,16 @@ flex_t12_vec <- function() {
 }
 
 #' Get a vector of all 24-hour flexible time types
+#'
+#' @description
+#' The `flex_t24_vec()` function produces a vector of all supported flexible
+#' 24-hour time types in the **bigD** package. These types are essentially
+#' identifiers for classes of cross-locale time formatting, so, none of these
+#' should be used directly in the `format` argument of the `fdt()` function (use
+#' the [flex_t24_lst] object for that).
+#'
+#' @return
+#' A character vector of supported 24-hour flexible time types.
 #'
 #' @export
 flex_t24_vec <- function() {
