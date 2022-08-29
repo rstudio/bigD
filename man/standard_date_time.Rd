@@ -14,9 +14,9 @@ range in precision and verbosity. These are \code{"short"} (the default),
 \description{
 The \code{standard_date_time()} function can be invoked in the \code{format} argument
 of the \code{fdt()} function to help generate a locale-specific formatting string
-of a certain 'type'. The \code{type} value is a keyword that represents precision
-and verbosity; the available keywords are \code{"short"} (the default),
-\code{"medium"}, \code{"long"}, and \code{"full"}.
+of a certain 'type' of formatted datetime. The \code{type} value is a keyword that
+represents precision and verbosity; the available keywords are \code{"short"} (the
+default), \code{"medium"}, \code{"long"}, and \code{"full"}.
 }
 \section{Examples}{
 
@@ -71,8 +71,8 @@ After that, it's \code{"medium"}:
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Jul 4, 2018, 10:05:00 PM"
 }\if{html}{\out{</div>}}
 
-The bottom two don't display time zone information in the output. Beginning
-with \code{"long"} the tz is shown.
+The \code{"short"} and \code{"medium"} types don't display time zone information in the
+output. Beginning with \code{"long"}, the tz is shown.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
   input = "2018-07-04 22:05(America/Vancouver)",
