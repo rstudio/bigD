@@ -6,6 +6,13 @@
 \usage{
 flex_t12_vec()
 }
+\value{
+A character vector of supported 12-hour flexible time types.
+}
 \description{
-Get a vector of all 12-hour flexible time types
+The \code{flex_t12_vec()} function produces a vector of all supported flexible
+12-hour time types in the \strong{bigD} package. These types are essentially
+identifiers for classes of cross-locale time formatting, so, none of these
+should be used directly in the \code{format} argument of the \code{fdt()} function (use
+the \link{flex_t12_lst} object for that).
 }
