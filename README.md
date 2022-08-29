@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
 <a href="https://github.com/rich-iannone/bigD/actions"><img src="https://github.com/rich-iannone/bigD/workflows/R-CMD-check/badge.svg" alt="R build status" /></a>
-[![Codecov test coverage](https://codecov.io/gh/rich-iannone/bigD/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rich-iannone/bigD?branch=main)
+<a href="https://app.codecov.io/gh/rich-iannone/bigD?branch=main"><img src="https://codecov.io/gh/rich-iannone/bigD/branch/main/graph/badge.svg" alt="Coverage status" /></a>
 
 <a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct/"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
 <!-- badges: end -->
