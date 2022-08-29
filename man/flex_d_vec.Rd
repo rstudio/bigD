@@ -6,6 +6,13 @@
 \usage{
 flex_d_vec()
 }
+\value{
+A character vector of supported flexible date types.
+}
 \description{
-Get a vector of all flexible date types
+The \code{flex_d_vec()} function produces a vector of all supported flexible date
+types in the \strong{bigD} package. These types are essentially identifiers for
+classes of cross-locale date formatting, so, none of these should be used
+directly in the \code{format} argument of the \code{fdt()} function (use the
+\link{flex_d_lst} object for that).
 }
