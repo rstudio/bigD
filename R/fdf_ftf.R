@@ -38,7 +38,7 @@ flex_d_vec <- function() {
     "MMM",
     "d",
     "Ed",
-    "E",
+    #"E",    # TODO: need to determine local day of week for this to work
     "MMMMW", # as "MMMMW-count-*" `one`, `other`, `few`, `many`, `two`, `zero`
     "yw"     # as "yw-*"          `one`, `other`, `few`, `many`, `two`, `zero`
   )
