@@ -488,6 +488,7 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 
 \section{Examples}{
 
+\subsection{Basics with \code{input} datetimes, formatting strings, and localization}{
 
 With an input datetime of \code{"2018-07-04 22:05"} supplied as a string, we can
 format to get just a date with the full year first, the month abbreviation
@@ -528,6 +529,18 @@ in Spanish:
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-julio-4"
 }\if{html}{\out{</div>}}
 
+\code{POSIXct} or \code{POSIXlt} datetimes can serve as an \code{input} to \code{fdt()}. Let's
+create a single datetime value where the timezone is set as \code{"Asia/Tokyo"}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = lubridate::ymd_hms("2020-03-15 19:09:12", tz = "Asia/Tokyo"),
+  format = "EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+}\if{html}{\out{</div>}}
+
 If you're going minimal, it's possible to supply an input datetime string
 without a \code{format} directive. What this gives us is formatted datetime
 output that conforms to ISO 8601. Note that the implied time zone is UTC.
@@ -537,10 +550,32 @@ output that conforms to ISO 8601. Note that the implied time zone is UTC.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "2018-07-04T22:05:00Z"
 }\if{html}{\out{</div>}}
+}
 
-Going further, you can omit the time and just supply the date portion. This
-implies midnight (and is just fine if you're only going to present the date
-anyway).
+\subsection{Using locales stored in the \link{fdt_locales_lst} list}{
+
+The \link{fdt_locales_lst} object is provided in \strong{bigD} to make it easier to
+choose one of supported locales. You can avoid typing errors and every
+element of the list is meant to work. For example, we can use the \code{"az_Cyrl"}
+locale by accessing it from \link{fdt_locales_lst} (autocomplete makes this
+relatively simple).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05",
+  format = "yy-MMMM-d",
+  locale = fdt_locales_lst$az_Cyrl
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-ијул-4"
+}\if{html}{\out{</div>}}
+}
+
+\subsection{Omission of date or time in \code{input}}{
+
+You don't have to supply a full datetime to \code{input}. Just supplying the date
+portion implies midnight (and is just fine if you're only going to present
+the date anyway).
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(input = "2018-07-04")
 }\if{html}{\out{</div>}}
@@ -559,16 +594,154 @@ you just intend to present a formatted time value.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "2022-08-16T22:05:00Z"
 }\if{html}{\out{</div>}}
 
-POSIXct or POSIXlt datetimes can serve as an \code{input} to \code{fdt()}. Let's create
-a single datetime value where the timezone is set as \code{"Asia/Tokyo"}.
+To see all of the supported locales, we can look at the vector supplied by
+the \code{\link[=fdt_locales_vec]{fdt_locales_vec()}} function.
+}
+
+\subsection{Using standardized forms with the \verb{standard_*()} helper functions}{
+
+With an input datetime of \code{"2018-07-04 22:05(America/Vancouver)"}, we can
+format the date and time in a standardized way with \code{standard_date_time()}
+providing the correct formatting string. This function is invoked in the
+\code{format} argument of \code{fdt()}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
-  input = lubridate::ymd_hms("2020-03-15 19:09:12", tz = "Asia/Tokyo"),
-  format = "EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "full")
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Wednesday, July 4, 2018 at 10:05:00 PM Pacific Daylight Time"
 }\if{html}{\out{</div>}}
+
+The locale can be changed and we don't have to worry about the particulars
+of the formatting string (they are standardized across locales).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "full"),
+  locale = fdt_locales_lst$nl
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "woensdag 4 juli 2018 om 22:05:00 Pacific-zomertijd"
+}\if{html}{\out{</div>}}
+
+We can use different \code{type} values to control the output datetime string. The
+default is \code{"short"}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time()
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "7/4/18, 10:05 PM"
+}\if{html}{\out{</div>}}
+
+After that, it's \code{"medium"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "medium")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Jul 4, 2018, 10:05:00 PM"
+}\if{html}{\out{</div>}}
+
+The \code{"short"} and \code{"medium"} types don't display time zone information in the
+output. Beginning with \code{"long"}, the tz is shown.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date_time(type = "long")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "July 4, 2018 at 10:05:00 PM PDT"
+}\if{html}{\out{</div>}}
+
+If you don't include time zone information in the input, the \code{"UTC"} time
+zone will be assumed:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05",
+  format = standard_date_time(type = "full")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Wednesday, July 4, 2018 at 10:05:00 PM GMT+00:00"
+}\if{html}{\out{</div>}}
+}
+
+\subsection{Using flexible date and time (12- and 24-hour) formatting}{
+
+The \strong{bigD} package supplies a set of lists to allow for flexible date and
+time formatting (\link{flex_d_lst}, \link{flex_t24_lst}, and \link{flex_t12_lst}). These
+are useful when you need a particular format that works across all locales.
+Here's an example that uses the \code{"yMMMEd"} flexible date type by accessing it
+from the \code{flex_d_lst} object, yielding a formatted date.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2021-01-09 16:32(America/Toronto)",
+  format = flex_d_lst$yMMMEd,
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Sat, Jan 9, 2021"
+}\if{html}{\out{</div>}}
+
+If we wanted this in a different locale, the locale-specific \code{format} pattern
+behind the flexible date identifier would ensure consistency while moving to
+that locale.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2021-01-09 16:32(America/Toronto)",
+  format = flex_d_lst$yMMMEd,
+  locale = "fr_CA"
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "sam. 9 janv. 2021"
+}\if{html}{\out{</div>}}
+
+Formatting as a 12-hour time with the \link{flex_t12_lst} list and using the
+\code{"hms"} flexible type:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2021-01-09 16:32(America/Toronto)",
+  format = flex_t12_lst$hms
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "4:32:00 PM"
+}\if{html}{\out{</div>}}
+
+The 24-hour variant, \link{flex_t24_lst}, has a similar \code{"Hms"} flexible type that
+will give us a 24-hour version of the same clock time:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2021-01-09 16:32(America/Toronto)",
+  format = flex_t24_lst$Hms
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "16:32:00"
+}\if{html}{\out{</div>}}
+
+A flexible date and time can be used together by enveloping the two in a
+list (\strong{bigD} will handle putting the date and time together in a sensible
+manner).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2021-01-09 16:32(America/Toronto)",
+  format = list(flex_d_lst$yMMMEd, flex_t24_lst$Hmv)
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> "Sat, Jan 9, 2021, 16:32 ET"
+}\if{html}{\out{</div>}}
+}
 }
 
