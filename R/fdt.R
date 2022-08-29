@@ -757,6 +757,15 @@ fdt <- function(
     locale <- "en"
   }
 
+  if (inherits(input, "POSIXlt")) {
+    input <- as.POSIXct(input)
+  }
+
+  if (inherits(input, "Date")) {
+    input <- as.POSIXct(as.POSIXlt(input))
+  }
+
+
   if (is.null(format)) {
     format <- "yyyy-MM-dd'T'HH:mm:ssXXX"
   } else if (
@@ -771,7 +780,11 @@ fdt <- function(
     inherits(format, "date_time_pattern") &&
     !inherits(format, "standard")
   ) {
+
+    format <- amend_week_pattern(format = format, input = input)
+
     format <- dates[dates$locale == locale, ][["date_time_available_formats"]][["value"]][[format]]
+
   } else if (
     length(format) == 1 &&
     is.character(format) &&
@@ -830,6 +843,8 @@ fdt <- function(
     date_format <- if (format_1 == "date") format[[1]] else format[[2]]
     time_format <- if (format_2 == "time") format[[2]] else format[[1]]
 
+    date_format <- amend_week_pattern(format = date_format, input = input)
+
     combine_length <- "medium"
 
     date_format <-
@@ -845,13 +860,7 @@ fdt <- function(
     format <- gsub("{0}", time_format, format, fixed = TRUE)
   }
 
-  if (inherits(input, "POSIXlt")) {
-    input <- as.POSIXct(input)
-  }
 
-  if (inherits(input, "Date")) {
-    input <- as.POSIXct(as.POSIXlt(input))
-  }
 
   dt_out <- rep(NA_character_, length(input))
 
@@ -1411,4 +1420,20 @@ dt_format_pattern <- function(format) {
     literals = literals,
     dt_letters = dt_letters
   )
+}
+
+amend_week_pattern <- function(format, input) {
+
+  if (format == "MMMMW" || format == "yw") {
+
+    year_week <- format_yearweek(input = input)
+
+    if (grepl("W01", year_week)) {
+      format <- paste0(format, "-count-one")
+    } else {
+      format <- paste0(format, "-count-other")
+    }
+  }
+
+  format
 }
