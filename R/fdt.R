@@ -469,6 +469,8 @@
 #'
 #' @section Examples:
 #'
+#' ## Basics with `input` datetimes, formatting strings, and localization
+#'
 #' With an input datetime of `"2018-07-04 22:05"` supplied as a string, we can
 #' format to get just a date with the full year first, the month abbreviation
 #' second, and the day of the month last (separated by hyphens):
@@ -511,6 +513,19 @@
 #' #> [1] "18-julio-4"
 #' ```
 #'
+#' `POSIXct` or `POSIXlt` datetimes can serve as an `input` to `fdt()`. Let's
+#' create a single datetime value where the timezone is set as `"Asia/Tokyo"`.
+#'
+#' ```r
+#' fdt(
+#'   input = lubridate::ymd_hms("2020-03-15 19:09:12", tz = "Asia/Tokyo"),
+#'   format = "EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"
+#' )
+#' ```
+#' ```
+#' #> [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+#' ```
+#'
 #' If you're going minimal, it's possible to supply an input datetime string
 #' without a `format` directive. What this gives us is formatted datetime
 #' output that conforms to ISO 8601. Note that the implied time zone is UTC.
@@ -522,9 +537,30 @@
 #' #> [1] "2018-07-04T22:05:00Z"
 #' ````
 #'
-#' Going further, you can omit the time and just supply the date portion. This
-#' implies midnight (and is just fine if you're only going to present the date
-#' anyway).
+#' ## Using locales stored in the [fdt_locales_lst] list
+#'
+#' The [fdt_locales_lst] object is provided in **bigD** to make it easier to
+#' choose one of supported locales. You can avoid typing errors and every
+#' element of the list is meant to work. For example, we can use the `"az_Cyrl"`
+#' locale by accessing it from [fdt_locales_lst] (autocomplete makes this
+#' relatively simple).
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05",
+#'   format = "yy-MMMM-d",
+#'   locale = fdt_locales_lst$az_Cyrl
+#' )
+#' ```
+#' ```
+#' #> [1] "18-ијул-4"
+#' ````
+#'
+#' ## Omission of date or time in `input`
+#'
+#' You don't have to supply a full datetime to `input`. Just supplying the date
+#' portion implies midnight (and is just fine if you're only going to present
+#' the date anyway).
 #'
 #' ```r
 #' fdt(input = "2018-07-04")
@@ -545,17 +581,162 @@
 #' #> [1] "2022-08-16T22:05:00Z"
 #' ````
 #'
-#' POSIXct or POSIXlt datetimes can serve as an `input` to `fdt()`. Let's create
-#' a single datetime value where the timezone is set as `"Asia/Tokyo"`.
+#' To see all of the supported locales, we can look at the vector supplied by
+#' the [fdt_locales_vec()] function.
+#'
+#' ## Using standardized forms with the `standard_*()` helper functions
+#'
+#' With an input datetime of `"2018-07-04 22:05(America/Vancouver)"`, we can
+#' format the date and time in a standardized way with `standard_date_time()`
+#' providing the correct formatting string. This function is invoked in the
+#' `format` argument of `fdt()`:
 #'
 #' ```r
 #' fdt(
-#'   input = lubridate::ymd_hms("2020-03-15 19:09:12", tz = "Asia/Tokyo"),
-#'   format = "EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_date_time(type = "full")
 #' )
 #' ```
 #' ```
-#' #> [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"
+#' #> [1] "Wednesday, July 4, 2018 at 10:05:00 PM Pacific Daylight Time"
+#' ```
+#'
+#' The locale can be changed and we don't have to worry about the particulars
+#' of the formatting string (they are standardized across locales).
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_date_time(type = "full"),
+#'   locale = fdt_locales_lst$nl
+#' )
+#' ```
+#' ```
+#' #> [1] "woensdag 4 juli 2018 om 22:05:00 Pacific-zomertijd"
+#' ```
+#'
+#' We can use different `type` values to control the output datetime string. The
+#' default is `"short"`.
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_date_time()
+#' )
+#' ```
+#' ```
+#' #> [1] "7/4/18, 10:05 PM"
+#' ```
+#'
+#' After that, it's `"medium"`:
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_date_time(type = "medium")
+#' )
+#' ```
+#' ```
+#' #> [1] "Jul 4, 2018, 10:05:00 PM"
+#' ```
+#'
+#' The `"short"` and `"medium"` types don't display time zone information in the
+#' output. Beginning with `"long"`, the tz is shown.
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_date_time(type = "long")
+#' )
+#' ```
+#' ```
+#' #> [1] "July 4, 2018 at 10:05:00 PM PDT"
+#' ```
+#'
+#' If you don't include time zone information in the input, the `"UTC"` time
+#' zone will be assumed:
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05",
+#'   format = standard_date_time(type = "full")
+#' )
+#' ```
+#' ```
+#' #> [1] "Wednesday, July 4, 2018 at 10:05:00 PM GMT+00:00"
+#' ```
+#'
+#' ## Using flexible date and time (12- and 24-hour) formatting
+#'
+#' The **bigD** package supplies a set of lists to allow for flexible date and
+#' time formatting ([flex_d_lst], [flex_t24_lst], and [flex_t12_lst]). These
+#' are useful when you need a particular format that works across all locales.
+#' Here's an example that uses the `"yMMMEd"` flexible date type by accessing it
+#' from the `flex_d_lst` object, yielding a formatted date.
+#'
+#' ```r
+#' fdt(
+#'   input = "2021-01-09 16:32(America/Toronto)",
+#'   format = flex_d_lst$yMMMEd,
+#' )
+#' ```
+#' ```
+#' #> [1] "Sat, Jan 9, 2021"
+#' ```
+#'
+#' If we wanted this in a different locale, the locale-specific `format` pattern
+#' behind the flexible date identifier would ensure consistency while moving to
+#' that locale.
+#'
+#' ```r
+#' fdt(
+#'   input = "2021-01-09 16:32(America/Toronto)",
+#'   format = flex_d_lst$yMMMEd,
+#'   locale = "fr_CA"
+#' )
+#' ```
+#' ```
+#' #> [1] "sam. 9 janv. 2021"
+#' ```
+#'
+#' Formatting as a 12-hour time with the [flex_t12_lst] list and using the
+#' `"hms"` flexible type:
+#'
+#' ```r
+#' fdt(
+#'   input = "2021-01-09 16:32(America/Toronto)",
+#'   format = flex_t12_lst$hms
+#' )
+#' ```
+#' ```
+#' #> [1] "4:32:00 PM"
+#' ```
+#'
+#' The 24-hour variant, [flex_t24_lst], has a similar `"Hms"` flexible type that
+#' will give us a 24-hour version of the same clock time:
+#'
+#' ```r
+#' fdt(
+#'   input = "2021-01-09 16:32(America/Toronto)",
+#'   format = flex_t24_lst$Hms
+#' )
+#' ```
+#' ```
+#' #> [1] "16:32:00"
+#' ```
+#'
+#' A flexible date and time can be used together by enveloping the two in a
+#' list (**bigD** will handle putting the date and time together in a sensible
+#' manner).
+#'
+#' ```r
+#' fdt(
+#'   input = "2021-01-09 16:32(America/Toronto)",
+#'   format = list(flex_d_lst$yMMMEd, flex_t24_lst$Hmv)
+#' )
+#' ```
+#' ```
+#' #> "Sat, Jan 9, 2021, 16:32 ET"
 #' ```
 #'
 #' @export
