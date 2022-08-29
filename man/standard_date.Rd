@@ -12,5 +12,76 @@ in precision and verbosity. These are \code{"short"} (the default), \code{"mediu
 \code{"long"}, and \code{"full"}.}
 }
 \description{
-Obtain a standard date format that works across locales
+The \code{standard_date()} function can be invoked in the \code{format} argument of the
+\code{fdt()} function to help generate a locale-specific formatting string of a
+certain 'type' of formatted date. The \code{type} value is a keyword that
+represents precision and verbosity; the available keywords are \code{"short"} (the
+default), \code{"medium"}, \code{"long"}, and \code{"full"}.
 }
+\section{Examples}{
+
+
+With an input datetime of \code{"2018-07-04 22:05(America/Vancouver)"}, we can
+format as a date in a standardized way with \code{standard_date()} providing the
+correct formatting string. This function is invoked in the \code{format} argument
+of \code{fdt()}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date(type = "full")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Wednesday, July 4, 2018"
+}\if{html}{\out{</div>}}
+
+The locale can be changed and we don't have to worry about the particulars
+of the formatting string (they are standardized across locales).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date(type = "full"),
+  locale = fdt_locales_lst$nl
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "woensdag 4 juli 2018"
+}\if{html}{\out{</div>}}
+
+We can use different \code{type} values to control the output date string. The
+default is \code{"short"}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date()
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "7/4/18"
+}\if{html}{\out{</div>}}
+
+After that, it's \code{"medium"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date(type = "medium")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Jul 4, 2018"
+}\if{html}{\out{</div>}}
+
+Then, \code{"long"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_date(type = "long")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "July 4, 2018"
+}\if{html}{\out{</div>}}
+
+And finally up to \code{"full"}, which was demonstrated in the first example.
+}
+
