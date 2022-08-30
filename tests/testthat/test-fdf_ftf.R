@@ -120,8 +120,8 @@ test_that("`flex_*_lst` can be used in `fdt()`", {
 
   select_locales <-
     c(
-      "ccp", "en_AU", "zh", "et", "cs", "ja",
-      "ar", "sl", "ru", "pt", "fr", "en", "am"
+      "en_AU", "zh", "et", "cs",
+      "sl", "ru", "pt", "fr", "en"
     )
 
   for (i in seq_along(select_locales)) {
