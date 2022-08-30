@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_on_ci()
 
 test_that("Vectors can be obtained from the `*_vec()` functions", {
 
