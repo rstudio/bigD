@@ -230,5 +230,3 @@ cldr_dates_bigd <- function(locale = "en", element) {
 
   as.list(values)
 }
-
-
