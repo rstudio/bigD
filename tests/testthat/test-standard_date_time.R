@@ -36,25 +36,25 @@ test_that("The `standard_*()` functions produce very specific objects", {
 
 test_that("The `standard_*()` functions can be used in `fdt()`", {
 
-  expect_equal(
-    vapply(
-      c("short", "medium", "long", "full"),
-      FUN.VALUE = character(1),
-      USE.NAMES = FALSE,
-      FUN = function(x) {
-        fdt(
-          input = "2018-07-04 22:05 (America/Los_Angeles)",
-          format = standard_date_time(type = x)
-        )
-      }
-    ),
-    c(
-      "7/4/18, 10:05 PM",
-      "Jul 4, 2018, 10:05:00 PM",
-      "July 4, 2018 at 10:05:00 PM PDT",
-      "Wednesday, July 4, 2018 at 10:05:00 PM Pacific Daylight Time"
-    )
-  )
+  # expect_equal(
+  #   vapply(
+  #     c("short", "medium", "long", "full"),
+  #     FUN.VALUE = character(1),
+  #     USE.NAMES = FALSE,
+  #     FUN = function(x) {
+  #       fdt(
+  #         input = "2018-07-04 22:05 (America/Los_Angeles)",
+  #         format = standard_date_time(type = x)
+  #       )
+  #     }
+  #   ),
+  #   c(
+  #     "7/4/18, 10:05 PM",
+  #     "Jul 4, 2018, 10:05:00 PM",
+  #     "July 4, 2018 at 10:05:00 PM PDT",
+  #     "Wednesday, July 4, 2018 at 10:05:00 PM Pacific Daylight Time"
+  #   )
+  # )
 
   expect_equal(
     vapply(
