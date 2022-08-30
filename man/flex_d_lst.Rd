@@ -5,7 +5,7 @@
 \alias{flex_d_lst}
 \title{A list of all flexible date types}
 \format{
-An object of class \code{list} of length 27.
+An object of class \code{list} of length 26.
 }
 \usage{
 flex_d_lst
@@ -17,7 +17,7 @@ date type.
 \description{
 The \code{flex_d_lst} object is a list of widely supported flexible date types.
 Flexible date types are classes of date formatting which can be translated
-across locales. There are 27 flexible date types in
+across locales. There are 26 flexible date types in
 \code{flex_d_lst}.
 }
 \section{Examples}{
