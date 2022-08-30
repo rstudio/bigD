@@ -96,7 +96,7 @@ test_that("The `standard_*()` functions can be used in `fdt()`", {
     )
   )
 
-  select_locales <- c("en_AU", "zh", "et", "cs", "sl", "ru", "pt", "fr", "en")
+  select_locales <- c("pt", "fr", "en")
 
   for (i in seq_along(select_locales)) {
     for (j in c("short", "medium", "long", "full")) {
