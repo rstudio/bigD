@@ -1,3 +1,5 @@
+skip_on_cran()
+
 test_that("The `standard_*()` functions produce very specific objects", {
 
   expect_vector(standard_date_time())
