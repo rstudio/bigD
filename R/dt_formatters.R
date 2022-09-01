@@ -844,7 +844,7 @@ dt_a <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_abbrev
-  )[[format(input, format = "%p")]]
+  )[[tolower(format(input, format = "%p"))]]
 }
 
 # Period: am, pm // wide
@@ -852,7 +852,7 @@ dt_aaaa <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_wide
-  )[[format(input, format = "%p")]]
+  )[[tolower(format(input, format = "%p"))]]
 }
 
 # Period: am, pm // narrow
@@ -860,7 +860,7 @@ dt_aaaaa <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_narrow
-  )[[format(input, format = "%p")]]
+  )[[tolower(format(input, format = "%p"))]]
 }
 
 # Period: am, pm, noon, midnight // abbreviated (b..bbb)
