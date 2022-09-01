@@ -10,3 +10,5 @@
 ^pkgdown$
 ^codecov\.yml$
 ^\.github$
+tests/testthat/test-fdf_ftf.R
+tests/testthat/test-standard_date_time.R
