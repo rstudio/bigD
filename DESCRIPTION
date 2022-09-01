@@ -5,7 +5,13 @@ Version: 0.1.0.9000
 Authors@R: person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3925-190X"))
 Description: Format dates and times flexibly and to whichever locales
-    make sense.
+    make sense. Parses dates, times, and datetimes in various formats (including
+    string-based ISO-8601 constructions). The formatting syntax is quite
+    powerful; time zones in the input can be expressed in multiple ways and
+    there are many options for formatting time zones in the output as well.
+    Several of the provided helper functions allow for automatic generation of
+    locale-aware formatting patterns based on date/time skeleton formats and
+    standardized date/time formats with variable specificity.
 License: MIT + file LICENSE
 URL: https://github.com/rich-iannone/bigD
 BugReports: https://github.com/rich-iannone/bigD/issues
