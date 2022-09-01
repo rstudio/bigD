@@ -11,6 +11,80 @@ standard_time(type = c("short", "medium", "long", "full"))
 in precision and verbosity. These are \code{"short"} (the default), \code{"medium"},
 \code{"long"}, and \code{"full"}.}
 }
-\description{
-Obtain a standard time format that works across locales
+\value{
+A vector of class \code{date_time_pattern}.
 }
+\description{
+The \code{standard_time()} function can be invoked in the \code{format} argument of the
+\code{fdt()} function to help generate a locale-specific formatting string of a
+certain 'type' of formatted time The \code{type} value is a keyword that
+represents precision and verbosity; the available keywords are \code{"short"} (the
+default), \code{"medium"}, \code{"long"}, and \code{"full"}.
+}
+\section{Examples}{
+
+
+With an input datetime of \code{"2018-07-04 22:05(America/Vancouver)"}, we can
+format as a time in a standardized way with \code{standard_time()} providing the
+correct formatting string. This function is invoked in the \code{format} argument
+of \code{fdt()}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_time(type = "full")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10:05:00 PM Pacific Daylight Time"
+}\if{html}{\out{</div>}}
+
+The locale can be changed and we don't have to worry about the particulars
+of the formatting string (they are standardized across locales).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_time(type = "full"),
+  locale = fdt_locales_lst$nl
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "22:05:00 Pacific-zomertijd"
+}\if{html}{\out{</div>}}
+
+We can use different \code{type} values to control the output date string. The
+default is \code{"short"}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_time()
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10:05 PM"
+}\if{html}{\out{</div>}}
+
+After that, it's \code{"medium"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_time(type = "medium")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10:05:00 PM"
+}\if{html}{\out{</div>}}
+
+Then, \code{"long"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
+  input = "2018-07-04 22:05(America/Vancouver)",
+  format = standard_time(type = "long")
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10:05:00 PM PDT"
+}\if{html}{\out{</div>}}
+
+And finally up to \code{"full"}, which was demonstrated in the first example.
+}
+
