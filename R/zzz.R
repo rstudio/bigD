@@ -16,5 +16,5 @@ utf8_aware_sub <- NULL
 
   utf8_aware_sub <<- identical("UTF-8", Encoding(sub(".", "\u00B1", ".", fixed = TRUE)))
 
-  invisible()
+  invisible(NULL)
 }
