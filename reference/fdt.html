@@ -392,15 +392,15 @@ output that conforms to ISO 8601. Note that the implied time zone is UTC.</p>
 
 <p>The <a href="fdt_locales_lst.html">fdt_locales_lst</a> object is provided in <strong>bigD</strong> to make it easier to
 choose one of supported locales. You can avoid typing errors and every
-element of the list is meant to work. For example, we can use the <code>"az_Cyrl"</code>
+element of the list is meant to work. For example, we can use the <code>"it"</code>
 locale by accessing it from <a href="fdt_locales_lst.html">fdt_locales_lst</a> (autocomplete makes this
 relatively simple).</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"yy-MMMM-d"</span>,</span>
-<span>  locale <span class="op">=</span> <span class="va">fdt_locales_lst</span><span class="op">$</span><span class="va">az_Cyrl</span></span>
+<span>  locale <span class="op">=</span> <span class="va">fdt_locales_lst</span><span class="op">$</span><span class="va">it</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "18-ијул-4"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "18-luglio-4"</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
