@@ -202,7 +202,7 @@ standard_date <- function(
 #'
 #' The `standard_time()` function can be invoked in the `format` argument of the
 #' `fdt()` function to help generate a locale-specific formatting string of a
-#' certain 'type' of formatted time The `type` value is a keyword that
+#' certain 'type' of formatted time. The `type` value is a keyword that
 #' represents precision and verbosity; the available keywords are `"short"` (the
 #' default), `"medium"`, `"long"`, and `"full"`.
 #'
