@@ -24,17 +24,17 @@ argument.
 
 The \code{fdt_locales_lst} object can be incredibly useful when choosing one of
 supported locales. You can avoid typing errors and every element of the list
-is meant to work. In this example, we'll use the \code{"az_Cyrl"} locale through
+is meant to work. In this example, we'll use the \code{"da"} locale through
 use of the list.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
   input = "2018-07-04 22:05",
   format = "yy-MMMM-d",
-  locale = fdt_locales_lst$az_Cyrl
+  locale = fdt_locales_lst$da
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-ијул-4"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-juli-4"
 }\if{html}{\out{</div>}}
 }
 
