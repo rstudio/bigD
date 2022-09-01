@@ -17,7 +17,7 @@ A vector of class \code{date_time_pattern}.
 \description{
 The \code{standard_time()} function can be invoked in the \code{format} argument of the
 \code{fdt()} function to help generate a locale-specific formatting string of a
-certain 'type' of formatted time The \code{type} value is a keyword that
+certain 'type' of formatted time. The \code{type} value is a keyword that
 represents precision and verbosity; the available keywords are \code{"short"} (the
 default), \code{"medium"}, \code{"long"}, and \code{"full"}.
 }
