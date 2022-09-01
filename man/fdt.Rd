@@ -556,18 +556,18 @@ output that conforms to ISO 8601. Note that the implied time zone is UTC.
 
 The \link{fdt_locales_lst} object is provided in \strong{bigD} to make it easier to
 choose one of supported locales. You can avoid typing errors and every
-element of the list is meant to work. For example, we can use the \code{"az_Cyrl"}
+element of the list is meant to work. For example, we can use the \code{"it"}
 locale by accessing it from \link{fdt_locales_lst} (autocomplete makes this
 relatively simple).
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
   input = "2018-07-04 22:05",
   format = "yy-MMMM-d",
-  locale = fdt_locales_lst$az_Cyrl
+  locale = fdt_locales_lst$it
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-ијул-4"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "18-luglio-4"
 }\if{html}{\out{</div>}}
 }
 
