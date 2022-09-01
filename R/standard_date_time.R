@@ -10,6 +10,8 @@
 #'   range in precision and verbosity. These are `"short"` (the default),
 #'   `"medium"`, `"long"`, and `"full"`.
 #'
+#' @return A vector of class `date_time_pattern`.
+#'
 #' @section Examples:
 #'
 #' With an input datetime of `"2018-07-04 22:05(America/Vancouver)"`, we can
@@ -114,6 +116,8 @@ standard_date_time <- function(
 #'   in precision and verbosity. These are `"short"` (the default), `"medium"`,
 #'   `"long"`, and `"full"`.
 #'
+#' @return A vector of class `date_time_pattern`.
+#'
 #' @section Examples:
 #'
 #' With an input datetime of `"2018-07-04 22:05(America/Vancouver)"`, we can
@@ -196,9 +200,87 @@ standard_date <- function(
 
 #' Obtain a standard time format that works across locales
 #'
+#' The `standard_time()` function can be invoked in the `format` argument of the
+#' `fdt()` function to help generate a locale-specific formatting string of a
+#' certain 'type' of formatted time The `type` value is a keyword that
+#' represents precision and verbosity; the available keywords are `"short"` (the
+#' default), `"medium"`, `"long"`, and `"full"`.
+#'
 #' @param type One of four standardized types for the resulting time that range
 #'   in precision and verbosity. These are `"short"` (the default), `"medium"`,
 #'   `"long"`, and `"full"`.
+#'
+#' @return A vector of class `date_time_pattern`.
+#'
+#' @section Examples:
+#'
+#' With an input datetime of `"2018-07-04 22:05(America/Vancouver)"`, we can
+#' format as a time in a standardized way with `standard_time()` providing the
+#' correct formatting string. This function is invoked in the `format` argument
+#' of `fdt()`:
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_time(type = "full")
+#' )
+#' ```
+#' ```
+#' #> [1] "10:05:00 PM Pacific Daylight Time"
+#' ```
+#'
+#' The locale can be changed and we don't have to worry about the particulars
+#' of the formatting string (they are standardized across locales).
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_time(type = "full"),
+#'   locale = fdt_locales_lst$nl
+#' )
+#' ```
+#' ```
+#' #> [1] "22:05:00 Pacific-zomertijd"
+#' ```
+#'
+#' We can use different `type` values to control the output date string. The
+#' default is `"short"`.
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_time()
+#' )
+#' ```
+#' ```
+#' #> [1] "10:05 PM"
+#' ```
+#'
+#' After that, it's `"medium"`:
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_time(type = "medium")
+#' )
+#' ```
+#' ```
+#' #> [1] "10:05:00 PM"
+#' ```
+#'
+#' Then, `"long"`:
+#'
+#' ```r
+#' fdt(
+#'   input = "2018-07-04 22:05(America/Vancouver)",
+#'   format = standard_time(type = "long")
+#' )
+#' ```
+#' ```
+#' #> [1] "10:05:00 PM PDT"
+#' ```
+#'
+#' And finally up to `"full"`, which was demonstrated in the first example.
 #'
 #' @export
 standard_time <- function(
