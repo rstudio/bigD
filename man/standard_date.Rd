@@ -11,6 +11,9 @@ standard_date(type = c("short", "medium", "long", "full"))
 in precision and verbosity. These are \code{"short"} (the default), \code{"medium"},
 \code{"long"}, and \code{"full"}.}
 }
+\value{
+A vector of class \code{date_time_pattern}.
+}
 \description{
 The \code{standard_date()} function can be invoked in the \code{format} argument of the
 \code{fdt()} function to help generate a locale-specific formatting string of a
