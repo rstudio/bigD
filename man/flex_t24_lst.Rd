@@ -43,16 +43,16 @@ we'll use the \code{"EHms"} flexible time type by accessing it from the
 If we wanted this in a different locale, the locale-specific \code{format} pattern
 behind the flexible date identifier would ensure consistency while moving to
 that locale. Let's use the \code{fdt_locales_lst} object in the same spirit to
-specify the Japanese locale.
+specify the German locale.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fdt(
   input = "2018-07-04 22:05",
   format = flex_t24_lst$EHms,
-  locale = fdt_locales_lst$ja
+  locale = fdt_locales_lst$de
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "22:05:00 (水)"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Mi, 22:05:00"
 }\if{html}{\out{</div>}}
 }
 
