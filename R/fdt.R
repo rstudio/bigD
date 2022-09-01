@@ -541,7 +541,7 @@
 #'
 #' The [fdt_locales_lst] object is provided in **bigD** to make it easier to
 #' choose one of supported locales. You can avoid typing errors and every
-#' element of the list is meant to work. For example, we can use the `"az_Cyrl"`
+#' element of the list is meant to work. For example, we can use the `"it"`
 #' locale by accessing it from [fdt_locales_lst] (autocomplete makes this
 #' relatively simple).
 #'
@@ -549,11 +549,11 @@
 #' fdt(
 #'   input = "2018-07-04 22:05",
 #'   format = "yy-MMMM-d",
-#'   locale = fdt_locales_lst$az_Cyrl
+#'   locale = fdt_locales_lst$it
 #' )
 #' ```
 #' ```
-#' #> [1] "18-ијул-4"
+#' #> [1] "18-luglio-4"
 #' ````
 #'
 #' ## Omission of date or time in `input`
