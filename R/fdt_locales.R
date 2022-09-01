@@ -103,18 +103,18 @@ fdt_locales_vec <- function() {
 #'
 #' The `fdt_locales_lst` object can be incredibly useful when choosing one of
 #' supported locales. You can avoid typing errors and every element of the list
-#' is meant to work. In this example, we'll use the `"az_Cyrl"` locale through
+#' is meant to work. In this example, we'll use the `"da"` locale through
 #' use of the list.
 #'
 #' ```r
 #' fdt(
 #'   input = "2018-07-04 22:05",
 #'   format = "yy-MMMM-d",
-#'   locale = fdt_locales_lst$az_Cyrl
+#'   locale = fdt_locales_lst$da
 #' )
 #' ```
 #' ```
-#' #> [1] "18-ијул-4"
+#' #> [1] "18-juli-4"
 #' ````
 #'
 #' @export
