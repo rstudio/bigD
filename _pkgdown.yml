@@ -57,6 +57,7 @@ reference:
       Sometimes you need to know things about days of the week and months (like,
       their short names). We can get information like that with the
       `names_wkdays()`, `names_months()`, and `first_day_of_week()` functions.
+    contents:
     - names_wkdays
     - names_months
     - first_day_of_week
