@@ -457,15 +457,21 @@
 #'   `POSIXct` objects. Refer to the *Valid Input Values* section for more
 #'   information.
 #' @param format The formatting string to apply to all `input` values. If not
-#'   provided, the inputs will be formatted to ISO 8601 datetime strings.
+#'   provided, the inputs will be formatted to ISO 8601 datetime strings. The
+#'   *Date/Time Format Syntax* section has detailed information on how to create
+#'   a formatting string.
 #' @param use_tz A tzid (e.g., `"America/New_York"`) time-zone designation for
 #'   precise formatting of related outputs. This overrides any time zone
-#'   information available in string-based input values and is applied to all
-#'   vector components.
+#'   information available in `character`-based input values and is applied to
+#'   all vector components.
 #' @param locale The output locale to use for formatting the input value
 #'   according to the specified locale's rules. Example locale names include
 #'   `"en"` for English (United States) and `"es-EC"` for Spanish (Ecuador). If
-#'   a locale isn't provided the `"en"` locale will be used.
+#'   a locale isn't provided the `"en"` locale will be used. The
+#'   [fdt_locales_vec] vector contains the valid locales and [fdt_locales_lst]
+#'   list provides an easy way to obtain a valid locale.
+#'
+#' @return A character vector of formatted dates, times, or datetimes.
 #'
 #' @section Examples:
 #'

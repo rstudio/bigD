@@ -707,7 +707,7 @@ dt_E <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$days_standalone_abbrev
-  )[[cldr_wkdays()[dow]]]
+  )[[names_wkdays()[dow]]]
 }
 
 # Day of Week Name // wide ("Tuesday")
@@ -718,7 +718,7 @@ dt_EEEE <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$days_standalone_wide
-  )[[cldr_wkdays()[dow]]]
+  )[[names_wkdays()[dow]]]
 }
 
 # Day of Week Name // narrow ("T")
@@ -729,7 +729,7 @@ dt_EEEEE <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$days_standalone_narrow
-  )[[cldr_wkdays()[dow]]]
+  )[[names_wkdays()[dow]]]
 }
 
 # Day of Week Name // short ("Tu")
@@ -740,7 +740,7 @@ dt_EEEEEE <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$days_standalone_short
-  )[[cldr_wkdays()[dow]]]
+  )[[names_wkdays()[dow]]]
 }
 
 # Local Day of Week Name/Number // 1 digit
@@ -844,7 +844,7 @@ dt_a <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_abbrev
-  )[[format(input, format = "%p")]]
+  )[[tolower(format(input, format = "%p"))]]
 }
 
 # Period: am, pm // wide
@@ -852,7 +852,7 @@ dt_aaaa <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_wide
-  )[[format(input, format = "%p")]]
+  )[[tolower(format(input, format = "%p"))]]
 }
 
 # Period: am, pm // narrow
@@ -860,7 +860,7 @@ dt_aaaaa <- function(input, locale = NULL) {
   cldr_dates_bigd(
     locale = locale,
     element = dates_elements_bigd$dayperiods_format_narrow
-  )[[format(input, format = "%p")]]
+  )[[tolower(format(input, format = "%p"))]]
 }
 
 # Period: am, pm, noon, midnight // abbreviated (b..bbb)

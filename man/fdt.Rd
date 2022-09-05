@@ -13,17 +13,24 @@ representations are acceptable here including strings, \code{Date} objects, or
 information.}
 
 \item{format}{The formatting string to apply to all \code{input} values. If not
-provided, the inputs will be formatted to ISO 8601 datetime strings.}
+provided, the inputs will be formatted to ISO 8601 datetime strings. The
+\emph{Date/Time Format Syntax} section has detailed information on how to create
+a formatting string.}
 
 \item{use_tz}{A tzid (e.g., \code{"America/New_York"}) time-zone designation for
 precise formatting of related outputs. This overrides any time zone
-information available in string-based input values and is applied to all
-vector components.}
+information available in \code{character}-based input values and is applied to
+all vector components.}
 
 \item{locale}{The output locale to use for formatting the input value
 according to the specified locale's rules. Example locale names include
 \code{"en"} for English (United States) and \code{"es-EC"} for Spanish (Ecuador). If
-a locale isn't provided the \code{"en"} locale will be used.}
+a locale isn't provided the \code{"en"} locale will be used. The
+\link{fdt_locales_vec} vector contains the valid locales and \link{fdt_locales_lst}
+list provides an easy way to obtain a valid locale.}
+}
+\value{
+A character vector of formatted dates, times, or datetimes.
 }
 \description{
 With \code{fdt()}, we can format datetime values with the greatest of ease, and,

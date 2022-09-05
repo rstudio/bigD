@@ -51,3 +51,12 @@ reference:
     - standard_date_time
     - standard_date
     - standard_time
+
+  - title: Useful Day and Month Vectors
+    desc: >
+      Sometimes you need to know things about days of the week and months (like,
+      their short names). We can get information like that with the
+      `names_wkdays()`, `names_months()`, and `first_day_of_week()` functions.
+    - names_wkdays
+    - names_months
+    - first_day_of_week

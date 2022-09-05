@@ -1,1 +1,3 @@
-# bigD 0.1.0.9000
+# bigD 0.2.0
+
+* New package with everything you need to format dates and times.
