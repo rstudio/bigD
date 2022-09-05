@@ -4,9 +4,14 @@
 
 <br />
 <!-- badges: start -->
+<a href="https://cran.r-project.org/package=bigD"><img src="https://www.r-pkg.org/badges/version/bigD" alt="CRAN status" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
 <a href="https://github.com/rich-iannone/bigD/actions"><img src="https://github.com/rich-iannone/bigD/workflows/R-CMD-check/badge.svg" alt="R build status" /></a>
 <a href="https://app.codecov.io/gh/rich-iannone/bigD?branch=main"><img src="https://codecov.io/gh/rich-iannone/bigD/branch/main/graph/badge.svg" alt="Coverage status" /></a>
+
+<a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed." /></a>
+<a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/bigD" alt="Monthly Downloads"></a>
+<a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/grand-total/bigD" alt="Total Downloads"></a>
 
 <a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct/"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
 <!-- badges: end -->
@@ -99,7 +104,13 @@ The formatting syntax has a lot to it but you can learn all about it in the fair
 
 ### Installation
 
-Want to try this out? Install the development version of **bigD** from **GitHub**:
+Want to try this out? The **bigD** package is available on **CRAN**:
+
+```r
+install.packages("bigD")
+```
+
+You can also install the development version of **bigD** from **GitHub**:
 
 ```r
 devtools::install_github("rich-iannone/bigD")
@@ -110,6 +121,11 @@ If you encounter a bug, have usage questions, or want to share ideas to make thi
 ##### Code of Conduct
 
 Please note that the `rich-iannone/bigD` project is released with a [contributor code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By participating in this project you agree to abide by its terms.
+
+##### 📄 License
+
+**bigD** is licensed under the MIT license.
+See the [`LICENSE.md`](LICENSE.md) file for more details.
 
 ##### 🏛️ Governance
 
