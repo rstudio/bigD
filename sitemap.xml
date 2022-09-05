@@ -37,6 +37,9 @@
     <loc>/reference/fdt_locales_vec.html</loc>
   </url>
   <url>
+    <loc>/reference/first_day_of_week.html</loc>
+  </url>
+  <url>
     <loc>/reference/flex_d_lst.html</loc>
   </url>
   <url>
@@ -56,6 +59,12 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/names_months.html</loc>
+  </url>
+  <url>
+    <loc>/reference/names_wkdays.html</loc>
   </url>
   <url>
     <loc>/reference/standard_date.html</loc>

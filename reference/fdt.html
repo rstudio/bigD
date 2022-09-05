@@ -28,7 +28,7 @@ formatting."><meta property="og:image" content="/logo.svg"><!-- mathjax --><scri
     
     <a class="navbar-brand me-2" href="../index.html">bigD</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,23 +92,33 @@ information.</p></dd>
 
 <dt>format</dt>
 <dd><p>The formatting string to apply to all <code>input</code> values. If not
-provided, the inputs will be formatted to ISO 8601 datetime strings.</p></dd>
+provided, the inputs will be formatted to ISO 8601 datetime strings. The
+<em>Date/Time Format Syntax</em> section has detailed information on how to create
+a formatting string.</p></dd>
 
 
 <dt>use_tz</dt>
 <dd><p>A tzid (e.g., <code>"America/New_York"</code>) time-zone designation for
 precise formatting of related outputs. This overrides any time zone
-information available in string-based input values and is applied to all
-vector components.</p></dd>
+information available in <code>character</code>-based input values and is applied to
+all vector components.</p></dd>
 
 
 <dt>locale</dt>
 <dd><p>The output locale to use for formatting the input value
 according to the specified locale's rules. Example locale names include
 <code>"en"</code> for English (United States) and <code>"es-EC"</code> for Spanish (Ecuador). If
-a locale isn't provided the <code>"en"</code> locale will be used.</p></dd>
+a locale isn't provided the <code>"en"</code> locale will be used. The
+<a href="fdt_locales_vec.html">fdt_locales_vec</a> vector contains the valid locales and <a href="fdt_locales_lst.html">fdt_locales_lst</a>
+list provides an easy way to obtain a valid locale.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A character vector of formatted dates, times, or datetimes.</p>
+    </div>
     <div class="section level2">
     <h2 id="valid-input-values">Valid Input Values<a class="anchor" aria-label="anchor" href="#valid-input-values"></a></h2>
     

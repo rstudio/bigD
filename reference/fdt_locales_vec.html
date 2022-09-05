@@ -12,7 +12,7 @@ IDs in the bigD package."><meta property="og:image" content="/logo.svg"><!-- mat
     
     <a class="navbar-brand me-2" href="../index.html">bigD</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,24 @@ IDs in the <strong>bigD</strong> package.</p>
 <p>A character vector of supported locale IDs.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Let's get all the `ar` locales that exist</span></span></span>
+<span class="r-in"><span><span class="co"># in the vector produced by `fdt_locales_vec()`</span></span></span>
+<span class="r-in"><span><span class="fu">fdt_locales_vec</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"^ar"</span>, <span class="fu">fdt_locales_vec</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "ar"    "ar_AE" "ar_BH" "ar_DJ" "ar_DZ" "ar_EG" "ar_EH" "ar_ER" "ar_IL"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "ar_IQ" "ar_JO" "ar_KM" "ar_KW" "ar_LB" "ar_LY" "ar_MA" "ar_MR" "ar_OM"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "ar_PS" "ar_QA" "ar_SA" "ar_SD" "ar_SO" "ar_SS" "ar_SY" "ar_TD" "ar_TN"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "ar_YE"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Let's get all the locales that pertain to the</span></span></span>
+<span class="r-in"><span><span class="co"># `CH` territory in the vector produced by</span></span></span>
+<span class="r-in"><span><span class="co"># `fdt_locales_vec()`</span></span></span>
+<span class="r-in"><span><span class="fu">fdt_locales_vec</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"CH"</span>, <span class="fu">fdt_locales_vec</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "de_CH" "en_CH" "fr_CH" "it_CH" "pt_CH"</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
