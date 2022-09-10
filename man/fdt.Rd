@@ -143,26 +143,19 @@ possible what each string will produce. All of the examples will use this
 string-based datetime input unless otherwise indicated:
 
 \code{"2018-07-04T22:05:09.2358(America/Vancouver)"}
-\subsection{The Era Designator (big G)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"G"}, \code{"GG"}, or \code{"GGG"} \tab \code{"AD"} \cr
-   \code{"GGGG"} \tab \code{"Anno Domini"} \cr
-   \code{"GGGGG"} \tab \code{"A"} \cr
-}
+\subsection{Year}{
+\subsection{Year (little y)}{
 
-}
-
-\subsection{Year (little y)}{\tabular{ll}{
-   Formatting String \tab Output \cr
+This yields the calendar year, which is always numeric. In most cases the
+length of the \code{"y"} field specifies the minimum number of digits to display,
+zero-padded as necessary. More digits will be displayed if needed to show the
+full year. There is an exception: \code{"yy"} gives use just the two low-order
+digits of the year, zero-padded as necessary. For most use cases, \code{"y"} or
+\code{"yy"} should be good enough.\tabular{ll}{
+   Field Patterns \tab Output \cr
    \code{"y"} \tab \code{"2018"} \cr
    \code{"yy"} \tab \code{"18"} \cr
-   \code{"yyy"} \tab \code{"2018"} \cr
-   \code{"yyyy"} \tab \code{"2018"} \cr
-   \code{"yyyyy"} \tab \code{"02018"} \cr
-   \code{"yyyyyy"} \tab \code{"002018"} \cr
-   \code{"yyyyyyy"} \tab \code{"0002018"} \cr
-   \code{"yyyyyyyy"} \tab \code{"00002018"} \cr
-   \code{"yyyyyyyyy"} \tab \code{"000002018"} \cr
+   \code{"yyy"} to \code{"yyyyyyyyy"} \tab \code{"2018"} to \code{"000002018"} \cr
 }
 
 }
@@ -170,136 +163,138 @@ string-based datetime input unless otherwise indicated:
 \subsection{Year in the Week in Year Calendar (big Y)}{
 
 This is the year in 'Week of Year' based calendars in which the year
-transition occurs on a week boundary. This may differ from calendar year 'y'
-near a year transition. This numeric year designation is used in conjunction
-with pattern character 'w' in the ISO year-week calendar as defined by ISO
-8601.\tabular{ll}{
-   Formatting String \tab Output \cr
+transition occurs on a week boundary. This may differ from calendar year
+\code{"y"} near a year transition. This numeric year designation is used in
+conjunction with pattern character \code{"w"} in the ISO year-week calendar as
+defined by ISO 8601.\tabular{ll}{
+   Field Patterns \tab Output \cr
    \code{"Y"} \tab \code{"2018"} \cr
    \code{"YY"} \tab \code{"18"} \cr
-   \code{"YYY"} \tab \code{"2018"} \cr
-   \code{"YYYY"} \tab \code{"2018"} \cr
-   \code{"YYYYY"} \tab \code{"02018"} \cr
-   \code{"YYYYYY"} \tab \code{"002018"} \cr
-   \code{"YYYYYYY"} \tab \code{"0002018"} \cr
-   \code{"YYYYYYYY"} \tab \code{"00002018"} \cr
-   \code{"YYYYYYYYY"} \tab \code{"000002018"} \cr
+   \code{"YYY"} to \code{"YYYYYYYYY"} \tab \code{"2018"} to \code{"000002018"} \cr
 }
 
 }
 
-\subsection{Quarter of the Year: formatting ver. (big Q)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"Q"} \tab \code{"3"} \cr
-   \code{"QQ"} \tab \code{"03"} \cr
-   \code{"QQQ"} \tab \code{"Q3"} \cr
-   \code{"QQQQ"} \tab \code{"3rd quarter"} \cr
-   \code{"QQQQQ"} \tab \code{"3"} \cr
+}
+
+\subsection{Quarter}{
+\subsection{Quarter of the Year: formatting ver. (big Q)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"Q"} \tab \code{"3"} \tab Numeric, one digit \cr
+   \code{"QQ"} \tab \code{"03"} \tab Numeric, two digits (zero padded) \cr
+   \code{"QQQ"} \tab \code{"Q3"} \tab Abbreviated \cr
+   \code{"QQQQ"} \tab \code{"3rd quarter"} \tab Wide \cr
+   \code{"QQQQQ"} \tab \code{"3"} \tab Narrow \cr
 }
 
 }
 
-\subsection{Quarter of the Year: standalone ver. (little q)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"q"} \tab \code{"3"} \cr
-   \code{"qq"} \tab \code{"03"} \cr
-   \code{"qqq"} \tab \code{"Q3"} \cr
-   \code{"qqqq"} \tab \code{"3rd quarter"} \cr
-   \code{"qqqqq"} \tab \code{"3"} \cr
+\subsection{Quarter of the Year: standalone ver. (little q)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"q"} \tab \code{"3"} \tab Numeric, one digit \cr
+   \code{"qq"} \tab \code{"03"} \tab Numeric, two digits (zero padded) \cr
+   \code{"qqq"} \tab \code{"Q3"} \tab Abbreviated \cr
+   \code{"qqqq"} \tab \code{"3rd quarter"} \tab Wide \cr
+   \code{"qqqqq"} \tab \code{"3"} \tab Narrow \cr
 }
 
 }
 
-\subsection{Month: formatting ver. (big M)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"M"} \tab \code{"7"} \cr
-   \code{"MM"} \tab \code{"07"} \cr
-   \code{"MMM"} \tab \code{"Jul"} \cr
-   \code{"MMMM"} \tab \code{"July"} \cr
-   \code{"MMMMM"} \tab \code{"J"} \cr
+}
+
+\subsection{Month}{
+\subsection{Month: formatting ver. (big M)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"M"} \tab \code{"7"} \tab Numeric, minimum digits \cr
+   \code{"MM"} \tab \code{"07"} \tab Numeric, two digits (zero padded) \cr
+   \code{"MMM"} \tab \code{"Jul"} \tab Abbreviated \cr
+   \code{"MMMM"} \tab \code{"July"} \tab Wide \cr
+   \code{"MMMMM"} \tab \code{"J"} \tab Narrow \cr
 }
 
 }
 
-\subsection{Month: standalone ver. (big L)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"L"} \tab \code{"7"} \cr
-   \code{"LL"} \tab \code{"07"} \cr
-   \code{"LLL"} \tab \code{"Jul"} \cr
-   \code{"LLLL"} \tab \code{"July"} \cr
-   \code{"LLLLL"} \tab \code{"J"} \cr
+\subsection{Month: standalone ver. (big L)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"M"} \tab \code{"7"} \tab Numeric, minimum digits \cr
+   \code{"MM"} \tab \code{"07"} \tab Numeric, two digits (zero padded) \cr
+   \code{"MMM"} \tab \code{"Jul"} \tab Abbreviated \cr
+   \code{"MMMM"} \tab \code{"July"} \tab Wide \cr
+   \code{"MMMMM"} \tab \code{"J"} \tab Narrow \cr
 }
 
 }
 
-\subsection{Week of Year (little w)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"w"} \tab \code{"27"} (minimal digits) \cr
-   \code{"ww"} \tab \code{"27"} (two digits, zero padded) \cr
+}
+
+\subsection{Week}{
+\subsection{Week of Year (little w)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"w"} \tab \code{"27"} \tab Minimum digits \cr
+   \code{"ww"} \tab \code{"27"} \tab Two digits (zero padded) \cr
 }
 
 }
 
 \subsection{Week of Month (big W)}{\tabular{ll}{
-   Formatting String \tab Output \cr
+   Field Pattern \tab Output \cr
    \code{"W"} \tab \code{"1"} \cr
 }
 
 }
 
-\subsection{Day of Month (little d)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"d"} \tab \code{"4"} (minimal digits) \cr
-   \code{"dd"} \tab \code{"04"} (two digits, zero padded) \cr
+}
+
+\subsection{Day}{
+\subsection{Day of Month (little d)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"d"} \tab \code{"4"} \tab Minimum digits \cr
+   \code{"dd"} \tab \code{"04"} \tab Two digits, zero padded \cr
 }
 
 }
 
-\subsection{Day of Year (big D)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"D"} \tab \code{"185"} \cr
-   \code{"DD"} \tab \code{"185"} (zero padded to min-width of 2) \cr
-   \code{"DDD"} \tab \code{"185"} (zero padded to min-width of 3) \cr
+\subsection{Day of Year (big D)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"D"} \tab \code{"185"} \tab  \cr
+   \code{"DD"} \tab \code{"185"} \tab Zero padded to minimum width of 2 \cr
+   \code{"DDD"} \tab \code{"185"} \tab Zero padded to minimum width of 3 \cr
 }
 
 }
 
 \subsection{Day of Week in Month (big F)}{\tabular{ll}{
-   Formatting String \tab Output \cr
+   Field Pattern \tab Output \cr
    \code{"F"} \tab \code{"1"} \cr
 }
 
 }
 
 \subsection{Modified Julian Day (little g)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"g"} \tab \code{"58303"} \cr
-   \code{"gg"} \tab \code{"58303"} \cr
-   \code{"ggg"} \tab \code{"58303"} \cr
-   \code{"gggg"} \tab \code{"58303"} \cr
-   \code{"ggggg"} \tab \code{"58303"} \cr
-   \code{"gggggg"} \tab \code{"058303"} \cr
-   \code{"ggggggg"} \tab \code{"0058303"} \cr
-   \code{"gggggggg"} \tab \code{"00058303"} \cr
-   \code{"ggggggggg"} \tab \code{"000058303"} \cr
+   Field Patterns \tab Output \cr
+   \code{"g"} to \code{"ggggggggg"} \tab \code{"58303"} -> \code{"000058303"} \cr
 }
 
 }
 
-\subsection{Day of Week Name (big E)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"E"} \tab \code{"Wed"} \cr
-   \code{"EE"} \tab \code{"Wed"} \cr
-   \code{"EEE"} \tab \code{"Wed"} \cr
-   \code{"EEEE"} \tab \code{"Wednesday"} \cr
-   \code{"EEEEE"} \tab \code{"W"} \cr
-   \code{"EEEEEE"} \tab \code{"We"} \cr
+}
+
+\subsection{Weekday}{
+\subsection{Day of Week Name (big E)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"E"}, \code{"EE"}, or \code{"EEE"} \tab \code{"Wed"} \tab Abbreviated \cr
+   \code{"EEEE"} \tab \code{"Wednesday"} \tab Wide \cr
+   \code{"EEEEE"} \tab \code{"W"} \tab Narrow \cr
+   \code{"EEEEEE"} \tab \code{"We"} \tab Short \cr
 }
 
 }
 
+}
+
+\subsection{Periods}{
 \subsection{AM/PM Period of Day (little a)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"a"}, \code{"aa"}, or \code{"aaa"} \tab \code{"PM"} \tab Abbreviated \cr
    \code{"aaaa"} \tab \code{"PM"} \tab Wide \cr
    \code{"aaaaa"} \tab \code{"p"} \tab Narrow \cr
@@ -312,13 +307,13 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 (a) \code{input_midnight}: \code{"2020-05-05T00:00:00"}
 
 (b) \code{input_noon}: \code{"2020-05-05T12:00:00"}\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"b"}, \code{"bb"}, or \code{"bbb"} \tab (a) \code{"midnight"} \tab Abbreviated \cr
-   \verb{"" "" ""} \tab (b) \code{"noon"} \tab \verb{"" "" ""} \cr
+    \tab (b) \code{"noon"} \tab  \cr
    \code{"bbbb"} \tab (a) \code{"midnight"} \tab Wide \cr
-   \verb{"" "" ""} \tab (b) \code{"noon"} \tab \verb{"" "" ""} \cr
+    \tab (b) \code{"noon"} \tab  \cr
    \code{"bbbbb"} \tab (a) \code{"mi"} \tab Narrow \cr
-   \verb{"" "" ""} \tab (b) \code{"n"} \tab \verb{"" "" ""} \cr
+    \tab (b) \code{"n"} \tab  \cr
 }
 
 }
@@ -328,21 +323,24 @@ with pattern character 'w' in the ISO year-week calendar as defined by ISO
 (a) \code{input_morning}: \code{"2020-05-05T00:08:30"}
 
 (b) \code{input_afternoon}: \code{"2020-05-05T14:00:00"}\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"B"}, \code{"BB"}, or \code{"BBB"} \tab (a) \code{"in the morning"} \tab Abbreviated \cr
-   \verb{"" "" ""} \tab (b) \code{"in the afternoon"} \tab \verb{"" "" ""} \cr
+    \tab (b) \code{"in the afternoon"} \tab  \cr
    \code{"BBBB"} \tab (a) \code{"in the morning"} \tab Wide \cr
-   \verb{"" "" ""} \tab (b) \code{"in the afternoon"} \tab \verb{"" "" ""} \cr
+    \tab (b) \code{"in the afternoon"} \tab  \cr
    \code{"BBBBB"} \tab (a) \code{"in the morning"} \tab Narrow \cr
-   \verb{"" "" ""} \tab (b) \code{"in the afternoon"} \tab \verb{"" "" ""} \cr
+    \tab (b) \code{"in the afternoon"} \tab  \cr
 }
 
 }
 
+}
+
+\subsection{Hours, Minutes, and Seconds}{
 \subsection{Hour 1-12 (little h)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"h"} \tab \code{"8"} \tab Numeric, minimum digits \cr
    \code{"hh"} \tab \code{"08"} \tab Numeric, 2 digits (zero padded) \cr
 }
@@ -352,7 +350,7 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 \subsection{Hour 0-23 (big H)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"H"} \tab \code{"8"} \tab Numeric, minimum digits \cr
    \code{"HH"} \tab \code{"08"} \tab Numeric, 2 digits (zero padded) \cr
 }
@@ -362,7 +360,7 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 \subsection{Hour 0-11 (big K)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"K"} \tab \code{"7"} \tab Numeric, minimum digits \cr
    \code{"KK"} \tab \code{"07"} \tab Numeric, 2 digits (zero padded) \cr
 }
@@ -372,7 +370,7 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 \subsection{Hour 1-24 (little k)}{
 
 Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"k"} \tab \code{"9"} \tab Numeric, minimum digits \cr
    \code{"kk"} \tab \code{"09"} \tab Numeric, 2 digits (zero padded) \cr
 }
@@ -380,15 +378,15 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 }
 
 \subsection{Minute (little m)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"m"} \tab \code{"5"} \tab Numeric, minimum digits \cr
    \code{"mm"} \tab \code{"06"} \tab Numeric, 2 digits (zero padded) \cr
 }
 
 }
 
-\subsection{Second (little s)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+\subsection{Seconds (little s)}{\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
    \code{"s"} \tab \code{"9"} \tab Numeric, minimum digits \cr
    \code{"ss"} \tab \code{"09"} \tab Numeric, 2 digits (zero padded) \cr
 }
@@ -396,16 +394,8 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 }
 
 \subsection{Fractional Second (big S)}{\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"S"} \tab \code{"2"} \cr
-   \code{"SS"} \tab \code{"23"} \cr
-   \code{"SSS"} \tab \code{"235"} \cr
-   \code{"SSSS"} \tab \code{"2350"} \cr
-   \code{"SSSSS"} \tab \code{"23500"} \cr
-   \code{"SSSSSS"} \tab \code{"235000"} \cr
-   \code{"SSSSSSS"} \tab \code{"2350000"} \cr
-   \code{"SSSSSSSS"} \tab \code{"23500000"} \cr
-   \code{"SSSSSSSSS"} \tab \code{"235000000"} \cr
+   Field Patterns \tab Output \cr
+   \code{"S"} to \code{"SSSSSSSSS"} \tab \code{"2"} -> \code{"235000000"} \cr
 }
 
 }
@@ -413,22 +403,31 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 \subsection{Milliseconds Elapsed in Day (big A)}{
 
 Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
-   Formatting String \tab Output \cr
-   \code{"A"} \tab \code{"439722"} \cr
-   \code{"AA"} \tab \code{"439722"} \cr
-   \code{"AAA"} \tab \code{"439722"} \cr
-   \code{"AAAA"} \tab \code{"439722"} \cr
-   \code{"AAAAA"} \tab \code{"439722"} \cr
-   \code{"AAAAAA"} \tab \code{"439722"} \cr
-   \code{"AAAAAAA"} \tab \code{"0439722"} \cr
-   \code{"AAAAAAAA"} \tab \code{"00439722"} \cr
-   \code{"AAAAAAAAA"} \tab \code{"000439722"} \cr
+   Field Patterns \tab Output \cr
+   \code{"A"} to \code{"AAAAAAAAA"} \tab \code{"439722"} -> \code{"000439722"} \cr
 }
 
 }
 
+}
+
+\subsection{Era}{
+\subsection{The Era Designator (big G)}{
+
+This provides the era name for the given date.\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"G"}, \code{"GG"}, or \code{"GGG"} \tab \code{"AD"} \tab Abbreviated \cr
+   \code{"GGGG"} \tab \code{"Anno Domini"} \tab Wide \cr
+   \code{"GGGGG"} \tab \code{"A"} \tab Narrow \cr
+}
+
+}
+
+}
+
+\subsection{Time Zones}{
 \subsection{TZ // Short and Long Specific non-Location Format (little z)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"z"}, \code{"zz"}, or \code{"zzz"} \tab \code{"PDT"} \tab Short Specific \cr
    \code{"zzzz"} \tab \code{"Pacific Daylight Time"} \tab Long Specific \cr
 }
@@ -436,7 +435,7 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 }
 
 \subsection{TZ // Short and Long Specific non-Location Formats (big Z)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"Z"}, \code{"ZZ"}, or \code{"ZZZ"} \tab \code{"-0700"} \tab ISO 8601 basic format \cr
    \code{"ZZZZ"} \tab \code{"GMT-7:00"} \tab Long localized GMT format \cr
    \code{"ZZZZZ"} \tab \code{"-07:00"} \tab ISO 8601 extended format \cr
@@ -445,7 +444,7 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 }
 
 \subsection{TZ // Short and Long Localized GMT Formats (big O)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"O"} \tab \code{"GMT-7"} \tab Short localized GMT format \cr
    \code{"OOOO"} \tab \code{"GMT-07:00"} \tab Long localized GMT format \cr
 }
@@ -453,7 +452,7 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 }
 
 \subsection{TZ // Short and Long Localized GMT Formats (little v)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"v"} \tab \code{"PT"} \tab Short generic non-location format \cr
    \code{"vvvv"} \tab \code{"Pacific Time"} \tab Long generic non-location format \cr
 }
@@ -461,7 +460,7 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 }
 
 \subsection{TZ // Short Time Zone IDs and Exemplar City Formats (big V)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
+   Field Patterns \tab Output \tab Notes \cr
    \code{"V"} \tab \code{"cavan"} \tab Short time zone ID \cr
    \code{"VV"} \tab \code{"America/Vancouver"} \tab Long time zone ID \cr
    \code{"VVV"} \tab \code{"Vancouver"} \tab The tz exemplar city \cr
@@ -471,8 +470,8 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 }
 
 \subsection{TZ // ISO 8601 Formats with Z for +0000 (big X)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
-   \code{"X"} \tab \code{"-07"} \tab ISO 8601 basic format (h; optional m) \cr
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"X"} \tab \code{"-07"} \tab ISO 8601 basic format (h, optional m) \cr
    \code{"XX"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m) \cr
    \code{"XXX"} \tab \code{"-07:00"} \tab ISO 8601 extended format (h & m) \cr
    \code{"XXXX"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m, optional s) \cr
@@ -482,12 +481,14 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 }
 
 \subsection{TZ // ISO 8601 Formats (no use of Z for +0000) (little x)}{\tabular{lll}{
-   Formatting String \tab Output \tab Note \cr
-   \code{"x"} \tab \code{"-07"} \tab ISO 8601 basic format (h; optional m) \cr
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"x"} \tab \code{"-07"} \tab ISO 8601 basic format (h, optional m) \cr
    \code{"xx"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m) \cr
    \code{"xxx"} \tab \code{"-07:00"} \tab ISO 8601 extended format (h & m) \cr
    \code{"xxxx"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m, optional s) \cr
    \code{"xxxxx"} \tab \code{"-07:00"} \tab ISO 8601 extended format (h & m, optional s) \cr
+}
+
 }
 
 }
