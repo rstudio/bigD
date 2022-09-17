@@ -178,24 +178,22 @@ defined by ISO 8601.\tabular{ll}{
 }
 
 \subsection{Quarter}{
-\subsection{Quarter of the Year: formatting ver. (big Q)}{\tabular{lll}{
-   Field Patterns \tab Output \tab Notes \cr
-   \code{"Q"} \tab \code{"3"} \tab Numeric, one digit \cr
-   \code{"QQ"} \tab \code{"03"} \tab Numeric, two digits (zero padded) \cr
-   \code{"QQQ"} \tab \code{"Q3"} \tab Abbreviated \cr
-   \code{"QQQQ"} \tab \code{"3rd quarter"} \tab Wide \cr
-   \code{"QQQQQ"} \tab \code{"3"} \tab Narrow \cr
-}
+\subsection{Quarter of the Year: formatting (big Q) and standalone (little q)}{
 
-}
-
-\subsection{Quarter of the Year: standalone ver. (little q)}{\tabular{lll}{
+The quarter names are identified numerically, starting at \code{1} and ending at
+\code{4}. Quarter names may vary along two axes: the width and the context. The
+context is either 'formatting' (taken as a default), which the form used
+within a complete date format string, or, 'standalone', the form for date
+elements used independently (such as in calendar headers). The standalone
+form may be used in any other date format that shares the same form of the
+name. Here, the formatting form for quarters of the year consists of some run
+of \code{"Q"} values whereas the standalone form uses \code{"q"}.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
-   \code{"q"} \tab \code{"3"} \tab Numeric, one digit \cr
-   \code{"qq"} \tab \code{"03"} \tab Numeric, two digits (zero padded) \cr
-   \code{"qqq"} \tab \code{"Q3"} \tab Abbreviated \cr
-   \code{"qqqq"} \tab \code{"3rd quarter"} \tab Wide \cr
-   \code{"qqqqq"} \tab \code{"3"} \tab Narrow \cr
+   \code{"Q"}/\code{"q"} \tab \code{"3"} \tab Numeric, one digit \cr
+   \code{"QQ"}/\code{"qq"} \tab \code{"03"} \tab Numeric, two digits (zero padded) \cr
+   \code{"QQQ"}/\code{"qqq"} \tab \code{"Q3"} \tab Abbreviated \cr
+   \code{"QQQQ"}/\code{"qqqq"} \tab \code{"3rd quarter"} \tab Wide \cr
+   \code{"QQQQQ"}/\code{"qqqqq"} \tab \code{"3"} \tab Narrow \cr
 }
 
 }
@@ -203,24 +201,22 @@ defined by ISO 8601.\tabular{ll}{
 }
 
 \subsection{Month}{
-\subsection{Month: formatting ver. (big M)}{\tabular{lll}{
-   Field Patterns \tab Output \tab Notes \cr
-   \code{"M"} \tab \code{"7"} \tab Numeric, minimum digits \cr
-   \code{"MM"} \tab \code{"07"} \tab Numeric, two digits (zero padded) \cr
-   \code{"MMM"} \tab \code{"Jul"} \tab Abbreviated \cr
-   \code{"MMMM"} \tab \code{"July"} \tab Wide \cr
-   \code{"MMMMM"} \tab \code{"J"} \tab Narrow \cr
-}
+\subsection{Month: formatting (big M) and standalone (big L)}{
 
-}
-
-\subsection{Month: standalone ver. (big L)}{\tabular{lll}{
+The month names are identified numerically, starting at \code{1} and ending at
+\code{12}. Month names may vary along two axes: the width and the context. The
+context is either 'formatting' (taken as a default), which the form used
+within a complete date format string, or, 'standalone', the form for date
+elements used independently (such as in calendar headers). The standalone
+form may be used in any other date format that shares the same form of the
+name. Here, the formatting form for months consists of some run of \code{"M"}
+values whereas the standalone form uses \code{"L"}.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
-   \code{"M"} \tab \code{"7"} \tab Numeric, minimum digits \cr
-   \code{"MM"} \tab \code{"07"} \tab Numeric, two digits (zero padded) \cr
-   \code{"MMM"} \tab \code{"Jul"} \tab Abbreviated \cr
-   \code{"MMMM"} \tab \code{"July"} \tab Wide \cr
-   \code{"MMMMM"} \tab \code{"J"} \tab Narrow \cr
+   \code{"M"}/\code{"L"} \tab \code{"7"} \tab Numeric, minimum digits \cr
+   \code{"MM"}/\code{"LL"} \tab \code{"07"} \tab Numeric, two digits (zero padded) \cr
+   \code{"MMM"}/\code{"LLL"} \tab \code{"Jul"} \tab Abbreviated \cr
+   \code{"MMMM"}/\code{"LLLL"} \tab \code{"July"} \tab Wide \cr
+   \code{"MMMMM"}/\code{"LLLLL"} \tab \code{"J"} \tab Narrow \cr
 }
 
 }
