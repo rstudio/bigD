@@ -230,12 +230,17 @@ defined by ISO 8601.</p><table class="table table"><tr><td>Field Patterns</td><t
 <h3 id="quarter">Quarter<a class="anchor" aria-label="anchor" href="#quarter"></a></h3>
 
 <div class="section">
-<h4 id="quarter-of-the-year-formatting-ver-big-q-">Quarter of the Year: formatting ver. (big Q)<a class="anchor" aria-label="anchor" href="#quarter-of-the-year-formatting-ver-big-q-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"Q"</code></td><td><code>"3"</code></td><td>Numeric, one digit</td></tr><tr><td><code>"QQ"</code></td><td><code>"03"</code></td><td>Numeric, two digits (zero padded)</td></tr><tr><td><code>"QQQ"</code></td><td><code>"Q3"</code></td><td>Abbreviated</td></tr><tr><td><code>"QQQQ"</code></td><td><code>"3rd quarter"</code></td><td>Wide</td></tr><tr><td><code>"QQQQQ"</code></td><td><code>"3"</code></td><td>Narrow</td></tr></table></div>
+<h4 id="quarter-of-the-year-formatting-big-q-and-standalone-little-q-">Quarter of the Year: formatting (big Q) and standalone (little q)<a class="anchor" aria-label="anchor" href="#quarter-of-the-year-formatting-big-q-and-standalone-little-q-"></a></h4>
 
-<div class="section">
-<h4 id="quarter-of-the-year-standalone-ver-little-q-">Quarter of the Year: standalone ver. (little q)<a class="anchor" aria-label="anchor" href="#quarter-of-the-year-standalone-ver-little-q-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"q"</code></td><td><code>"3"</code></td><td>Numeric, one digit</td></tr><tr><td><code>"qq"</code></td><td><code>"03"</code></td><td>Numeric, two digits (zero padded)</td></tr><tr><td><code>"qqq"</code></td><td><code>"Q3"</code></td><td>Abbreviated</td></tr><tr><td><code>"qqqq"</code></td><td><code>"3rd quarter"</code></td><td>Wide</td></tr><tr><td><code>"qqqqq"</code></td><td><code>"3"</code></td><td>Narrow</td></tr></table></div>
+
+<p>The quarter names are identified numerically, starting at <code>1</code> and ending at
+<code>4</code>. Quarter names may vary along two axes: the width and the context. The
+context is either 'formatting' (taken as a default), which the form used
+within a complete date format string, or, 'standalone', the form for date
+elements used independently (such as in calendar headers). The standalone
+form may be used in any other date format that shares the same form of the
+name. Here, the formatting form for quarters of the year consists of some run
+of <code>"Q"</code> values whereas the standalone form uses <code>"q"</code>.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"Q"</code>/<code>"q"</code></td><td><code>"3"</code></td><td>Numeric, one digit</td></tr><tr><td><code>"QQ"</code>/<code>"qq"</code></td><td><code>"03"</code></td><td>Numeric, two digits (zero padded)</td></tr><tr><td><code>"QQQ"</code>/<code>"qqq"</code></td><td><code>"Q3"</code></td><td>Abbreviated</td></tr><tr><td><code>"QQQQ"</code>/<code>"qqqq"</code></td><td><code>"3rd quarter"</code></td><td>Wide</td></tr><tr><td><code>"QQQQQ"</code>/<code>"qqqqq"</code></td><td><code>"3"</code></td><td>Narrow</td></tr></table></div>
 
 
 </div>
@@ -244,12 +249,17 @@ defined by ISO 8601.</p><table class="table table"><tr><td>Field Patterns</td><t
 <h3 id="month">Month<a class="anchor" aria-label="anchor" href="#month"></a></h3>
 
 <div class="section">
-<h4 id="month-formatting-ver-big-m-">Month: formatting ver. (big M)<a class="anchor" aria-label="anchor" href="#month-formatting-ver-big-m-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"M"</code></td><td><code>"7"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"MM"</code></td><td><code>"07"</code></td><td>Numeric, two digits (zero padded)</td></tr><tr><td><code>"MMM"</code></td><td><code>"Jul"</code></td><td>Abbreviated</td></tr><tr><td><code>"MMMM"</code></td><td><code>"July"</code></td><td>Wide</td></tr><tr><td><code>"MMMMM"</code></td><td><code>"J"</code></td><td>Narrow</td></tr></table></div>
+<h4 id="month-formatting-big-m-and-standalone-big-l-">Month: formatting (big M) and standalone (big L)<a class="anchor" aria-label="anchor" href="#month-formatting-big-m-and-standalone-big-l-"></a></h4>
 
-<div class="section">
-<h4 id="month-standalone-ver-big-l-">Month: standalone ver. (big L)<a class="anchor" aria-label="anchor" href="#month-standalone-ver-big-l-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"M"</code></td><td><code>"7"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"MM"</code></td><td><code>"07"</code></td><td>Numeric, two digits (zero padded)</td></tr><tr><td><code>"MMM"</code></td><td><code>"Jul"</code></td><td>Abbreviated</td></tr><tr><td><code>"MMMM"</code></td><td><code>"July"</code></td><td>Wide</td></tr><tr><td><code>"MMMMM"</code></td><td><code>"J"</code></td><td>Narrow</td></tr></table></div>
+
+<p>The month names are identified numerically, starting at <code>1</code> and ending at
+<code>12</code>. Month names may vary along two axes: the width and the context. The
+context is either 'formatting' (taken as a default), which the form used
+within a complete date format string, or, 'standalone', the form for date
+elements used independently (such as in calendar headers). The standalone
+form may be used in any other date format that shares the same form of the
+name. Here, the formatting form for months consists of some run of <code>"M"</code>
+values whereas the standalone form uses <code>"L"</code>.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"M"</code>/<code>"L"</code></td><td><code>"7"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"MM"</code>/<code>"LL"</code></td><td><code>"07"</code></td><td>Numeric, two digits (zero padded)</td></tr><tr><td><code>"MMM"</code>/<code>"LLL"</code></td><td><code>"Jul"</code></td><td>Abbreviated</td></tr><tr><td><code>"MMMM"</code>/<code>"LLLL"</code></td><td><code>"July"</code></td><td>Wide</td></tr><tr><td><code>"MMMMM"</code>/<code>"LLLLL"</code></td><td><code>"J"</code></td><td>Narrow</td></tr></table></div>
 
 
 </div>
@@ -454,7 +464,7 @@ in Spanish:</p>
 <p><code>POSIXct</code> or <code>POSIXlt</code> datetimes can serve as an <code>input</code> to <code>fdt()</code>. Let's
 create a single datetime value where the timezone is set as <code>"Asia/Tokyo"</code>.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
-<span>  input <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html" class="external-link">ymd_hms</a></span><span class="op">(</span><span class="st">"2020-03-15 19:09:12"</span>, tz <span class="op">=</span> <span class="st">"Asia/Tokyo"</span><span class="op">)</span>,</span>
+<span>  input <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu">ymd_hms</span><span class="op">(</span><span class="st">"2020-03-15 19:09:12"</span>, tz <span class="op">=</span> <span class="st">"Asia/Tokyo"</span><span class="op">)</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"</span></span></code></pre><p></p></div>
