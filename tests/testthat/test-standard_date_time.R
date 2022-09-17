@@ -1,6 +1,3 @@
-skip_on_cran()
-skip_on_ci()
-
 test_that("The `standard_*()` functions produce very specific objects", {
 
   expect_vector(standard_date_time())
