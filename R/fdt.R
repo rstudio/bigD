@@ -137,47 +137,45 @@
 #'
 #' ## Quarter
 #'
-#' ### Quarter of the Year: formatting ver. (big Q)
+#' ### Quarter of the Year: formatting (big Q) and standalone (little q)
+#'
+#' The quarter names are identified numerically, starting at `1` and ending at
+#' `4`. Quarter names may vary along two axes: the width and the context. The
+#' context is either 'formatting' (taken as a default), which the form used
+#' within a complete date format string, or, 'standalone', the form for date
+#' elements used independently (such as in calendar headers). The standalone
+#' form may be used in any other date format that shares the same form of the
+#' name. Here, the formatting form for quarters of the year consists of some run
+#' of `"Q"` values whereas the standalone form uses `"q"`.
 #'
 #' | Field Patterns    | Output          | Notes                             |
 #' |-------------------|-----------------|-----------------------------------|
-#' | `"Q"`             | `"3"`           | Numeric, one digit                |
-#' | `"QQ"`            | `"03"`          | Numeric, two digits (zero padded) |
-#' | `"QQQ"`           | `"Q3"`          | Abbreviated                       |
-#' | `"QQQQ"`          | `"3rd quarter"` | Wide                              |
-#' | `"QQQQQ"`         | `"3"`           | Narrow                            |
-#'
-#' ### Quarter of the Year: standalone ver. (little q)
-#'
-#' | Field Patterns    | Output          | Notes                             |
-#' |-------------------|-----------------|-----------------------------------|
-#' | `"q"`             | `"3"`           | Numeric, one digit                |
-#' | `"qq"`            | `"03"`          | Numeric, two digits (zero padded) |
-#' | `"qqq"`           | `"Q3"`          | Abbreviated                       |
-#' | `"qqqq"`          | `"3rd quarter"` | Wide                              |
-#' | `"qqqqq"`         | `"3"`           | Narrow                            |
+#' | `"Q"`/`"q"`       | `"3"`           | Numeric, one digit                |
+#' | `"QQ"`/`"qq"`     | `"03"`          | Numeric, two digits (zero padded) |
+#' | `"QQQ"`/`"qqq"`   | `"Q3"`          | Abbreviated                       |
+#' | `"QQQQ"`/`"qqqq"` | `"3rd quarter"` | Wide                              |
+#' | `"QQQQQ"`/`"qqqqq"` | `"3"`         | Narrow                            |
 #'
 #' ## Month
 #'
-#' ### Month: formatting ver. (big M)
+#' ### Month: formatting (big M) and standalone (big L)
+#'
+#' The month names are identified numerically, starting at `1` and ending at
+#' `12`. Month names may vary along two axes: the width and the context. The
+#' context is either 'formatting' (taken as a default), which the form used
+#' within a complete date format string, or, 'standalone', the form for date
+#' elements used independently (such as in calendar headers). The standalone
+#' form may be used in any other date format that shares the same form of the
+#' name. Here, the formatting form for months consists of some run of `"M"`
+#' values whereas the standalone form uses `"L"`.
 #'
 #' | Field Patterns    | Output          | Notes                             |
 #' |-------------------|-----------------|-----------------------------------|
-#' | `"M"`             | `"7"`           | Numeric, minimum digits           |
-#' | `"MM"`            | `"07"`          | Numeric, two digits (zero padded) |
-#' | `"MMM"`           | `"Jul"`         | Abbreviated                       |
-#' | `"MMMM"`          | `"July"`        | Wide                              |
-#' | `"MMMMM"`         | `"J"`           | Narrow                            |
-#'
-#' ### Month: standalone ver. (big L)
-#'
-#' | Field Patterns    | Output          | Notes                             |
-#' |-------------------|-----------------|-----------------------------------|
-#' | `"M"`             | `"7"`           | Numeric, minimum digits           |
-#' | `"MM"`            | `"07"`          | Numeric, two digits (zero padded) |
-#' | `"MMM"`           | `"Jul"`         | Abbreviated                       |
-#' | `"MMMM"`          | `"July"`        | Wide                              |
-#' | `"MMMMM"`         | `"J"`           | Narrow                            |
+#' | `"M"`/`"L"`       | `"7"`           | Numeric, minimum digits           |
+#' | `"MM"`/`"LL"`     | `"07"`          | Numeric, two digits (zero padded) |
+#' | `"MMM"`/`"LLL"`   | `"Jul"`         | Abbreviated                       |
+#' | `"MMMM"`/`"LLLL"` | `"July"`        | Wide                              |
+#' | `"MMMMM"`/`"LLLLL"` | `"J"`         | Narrow                            |
 #'
 #' ## Week
 #'
