@@ -224,7 +224,17 @@ values whereas the standalone form uses \code{"L"}.\tabular{lll}{
 }
 
 \subsection{Week}{
-\subsection{Week of Year (little w)}{\tabular{lll}{
+\subsection{Week of Year (little w)}{
+
+Values calculated for the week of year range from \code{1} to \code{53}. Week \code{1} for a
+year is the first week that contains at least the specified minimum number of
+days from that year. Weeks between week \code{1} of one year and week \code{1} of the
+following year are numbered sequentially from \code{2} to \code{52} or \code{53} (if
+needed).
+
+There are two available field lengths. Both will display the week of year
+value but the \code{"ww"} width will always show two digits (where weeks \code{1} to
+\code{9} are zero padded).\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"w"} \tab \code{"27"} \tab Minimum digits \cr
    \code{"ww"} \tab \code{"27"} \tab Two digits (zero padded) \cr
@@ -232,7 +242,11 @@ values whereas the standalone form uses \code{"L"}.\tabular{lll}{
 
 }
 
-\subsection{Week of Month (big W)}{\tabular{ll}{
+\subsection{Week of Month (big W)}{
+
+The week of a month can range from \code{1} to \code{5}. The first day of every month
+always begins at week \code{1} and with every transition into the beginning of a
+week, the week of month value is incremented by \code{1}.\tabular{ll}{
    Field Pattern \tab Output \cr
    \code{"W"} \tab \code{"1"} \cr
 }
@@ -242,7 +256,12 @@ values whereas the standalone form uses \code{"L"}.\tabular{lll}{
 }
 
 \subsection{Day}{
-\subsection{Day of Month (little d)}{\tabular{lll}{
+\subsection{Day of Month (little d)}{
+
+The day of month value is always numeric and there are two available field
+length choices in its formatting. Both will display the day of month value
+but the \code{"dd"} formatting will always show two digits (where days \code{1} to \code{9}
+are zero padded).\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"d"} \tab \code{"4"} \tab Minimum digits \cr
    \code{"dd"} \tab \code{"04"} \tab Two digits, zero padded \cr
@@ -250,7 +269,12 @@ values whereas the standalone form uses \code{"L"}.\tabular{lll}{
 
 }
 
-\subsection{Day of Year (big D)}{\tabular{lll}{
+\subsection{Day of Year (big D)}{
+
+The day of year value ranges from \code{1} (January 1) to either \code{365} or \code{366}
+(December 31), where the higher value of the range indicates that the year is
+a leap year (29 days in February, instead of 28). The field length specifies
+the minimum number of digits, with zero-padding as necessary.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"D"} \tab \code{"185"} \tab  \cr
    \code{"DD"} \tab \code{"185"} \tab Zero padded to minimum width of 2 \cr
@@ -259,7 +283,19 @@ values whereas the standalone form uses \code{"L"}.\tabular{lll}{
 
 }
 
-\subsection{Day of Week in Month (big F)}{\tabular{ll}{
+\subsection{Day of Week in Month (big F)}{
+
+The day of week in month returns a numerical value indicating the number of
+times a given weekday had occurred in the month (e.g., '2nd Monday in
+March'). This conveniently resolves to predicable case structure where ranges
+of day of the month values return predictable day of week in month values:
+\itemize{
+\item days \code{1} - \code{7} -> \code{1}
+\item days \code{8} - \code{14} -> \code{2}
+\item days \code{15} - \code{21} -> \code{3}
+\item days \code{22} - \code{28} -> \code{4}
+\item days \code{29} - \code{31} -> \code{5}
+}\tabular{ll}{
    Field Pattern \tab Output \cr
    \code{"F"} \tab \code{"1"} \cr
 }
