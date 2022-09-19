@@ -269,11 +269,24 @@ values whereas the standalone form uses <code>"L"</code>.</p><table class="table
 
 <div class="section">
 <h4 id="week-of-year-little-w-">Week of Year (little w)<a class="anchor" aria-label="anchor" href="#week-of-year-little-w-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"w"</code></td><td><code>"27"</code></td><td>Minimum digits</td></tr><tr><td><code>"ww"</code></td><td><code>"27"</code></td><td>Two digits (zero padded)</td></tr></table></div>
+
+
+<p>Values calculated for the week of year range from <code>1</code> to <code>53</code>. Week <code>1</code> for a
+year is the first week that contains at least the specified minimum number of
+days from that year. Weeks between week <code>1</code> of one year and week <code>1</code> of the
+following year are numbered sequentially from <code>2</code> to <code>52</code> or <code>53</code> (if
+needed).</p>
+<p>There are two available field lengths. Both will display the week of year
+value but the <code>"ww"</code> width will always show two digits (where weeks <code>1</code> to
+<code>9</code> are zero padded).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"w"</code></td><td><code>"27"</code></td><td>Minimum digits</td></tr><tr><td><code>"ww"</code></td><td><code>"27"</code></td><td>Two digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h4 id="week-of-month-big-w-">Week of Month (big W)<a class="anchor" aria-label="anchor" href="#week-of-month-big-w-"></a></h4>
-<table class="table table"><tr><td>Field Pattern</td><td>Output</td></tr><tr><td><code>"W"</code></td><td><code>"1"</code></td></tr></table></div>
+
+
+<p>The week of a month can range from <code>1</code> to <code>5</code>. The first day of every month
+always begins at week <code>1</code> and with every transition into the beginning of a
+week, the week of month value is incremented by <code>1</code>.</p><table class="table table"><tr><td>Field Pattern</td><td>Output</td></tr><tr><td><code>"W"</code></td><td><code>"1"</code></td></tr></table></div>
 
 
 </div>
@@ -283,15 +296,35 @@ values whereas the standalone form uses <code>"L"</code>.</p><table class="table
 
 <div class="section">
 <h4 id="day-of-month-little-d-">Day of Month (little d)<a class="anchor" aria-label="anchor" href="#day-of-month-little-d-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"d"</code></td><td><code>"4"</code></td><td>Minimum digits</td></tr><tr><td><code>"dd"</code></td><td><code>"04"</code></td><td>Two digits, zero padded</td></tr></table></div>
+
+
+<p>The day of month value is always numeric and there are two available field
+length choices in its formatting. Both will display the day of month value
+but the <code>"dd"</code> formatting will always show two digits (where days <code>1</code> to <code>9</code>
+are zero padded).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"d"</code></td><td><code>"4"</code></td><td>Minimum digits</td></tr><tr><td><code>"dd"</code></td><td><code>"04"</code></td><td>Two digits, zero padded</td></tr></table></div>
 
 <div class="section">
 <h4 id="day-of-year-big-d-">Day of Year (big D)<a class="anchor" aria-label="anchor" href="#day-of-year-big-d-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"D"</code></td><td><code>"185"</code></td><td></td></tr><tr><td><code>"DD"</code></td><td><code>"185"</code></td><td>Zero padded to minimum width of 2</td></tr><tr><td><code>"DDD"</code></td><td><code>"185"</code></td><td>Zero padded to minimum width of 3</td></tr></table></div>
+
+
+<p>The day of year value ranges from <code>1</code> (January 1) to either <code>365</code> or <code>366</code>
+(December 31), where the higher value of the range indicates that the year is
+a leap year (29 days in February, instead of 28). The field length specifies
+the minimum number of digits, with zero-padding as necessary.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"D"</code></td><td><code>"185"</code></td><td></td></tr><tr><td><code>"DD"</code></td><td><code>"185"</code></td><td>Zero padded to minimum width of 2</td></tr><tr><td><code>"DDD"</code></td><td><code>"185"</code></td><td>Zero padded to minimum width of 3</td></tr></table></div>
 
 <div class="section">
 <h4 id="day-of-week-in-month-big-f-">Day of Week in Month (big F)<a class="anchor" aria-label="anchor" href="#day-of-week-in-month-big-f-"></a></h4>
-<table class="table table"><tr><td>Field Pattern</td><td>Output</td></tr><tr><td><code>"F"</code></td><td><code>"1"</code></td></tr></table></div>
+
+
+<p>The day of week in month returns a numerical value indicating the number of
+times a given weekday had occurred in the month (e.g., '2nd Monday in
+March'). This conveniently resolves to predicable case structure where ranges
+of day of the month values return predictable day of week in month values:</p><ul><li><p>days <code>1</code> - <code>7</code> -&gt; <code>1</code></p></li>
+<li><p>days <code>8</code> - <code>14</code> -&gt; <code>2</code></p></li>
+<li><p>days <code>15</code> - <code>21</code> -&gt; <code>3</code></p></li>
+<li><p>days <code>22</code> - <code>28</code> -&gt; <code>4</code></p></li>
+<li><p>days <code>29</code> - <code>31</code> -&gt; <code>5</code></p></li>
+</ul><table class="table table"><tr><td>Field Pattern</td><td>Output</td></tr><tr><td><code>"F"</code></td><td><code>"1"</code></td></tr></table></div>
 
 <div class="section">
 <h4 id="modified-julian-day-little-g-">Modified Julian Day (little g)<a class="anchor" aria-label="anchor" href="#modified-julian-day-little-g-"></a></h4>
