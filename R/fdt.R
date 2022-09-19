@@ -181,12 +181,26 @@
 #'
 #' ### Week of Year (little w)
 #'
+#' Values calculated for the week of year range from `1` to `53`. Week `1` for a
+#' year is the first week that contains at least the specified minimum number of
+#' days from that year. Weeks between week `1` of one year and week `1` of the
+#' following year are numbered sequentially from `2` to `52` or `53` (if
+#' needed).
+#'
+#' There are two available field lengths. Both will display the week of year
+#' value but the `"ww"` width will always show two digits (where weeks `1` to
+#' `9` are zero padded).
+#'
 #' | Field Patterns   | Output    | Notes                                    |
 #' |------------------|-----------|------------------------------------------|
 #' | `"w"`            | `"27"`    | Minimum digits                           |
 #' | `"ww"`           | `"27"`    | Two digits (zero padded)                 |
 #'
 #' ### Week of Month (big W)
+#'
+#' The week of a month can range from `1` to `5`. The first day of every month
+#' always begins at week `1` and with every transition into the beginning of a
+#' week, the week of month value is incremented by `1`.
 #'
 #' | Field Pattern    | Output                                               |
 #' |------------------|------------------------------------------------------|
@@ -196,12 +210,22 @@
 #'
 #' ### Day of Month (little d)
 #'
+#' The day of month value is always numeric and there are two available field
+#' length choices in its formatting. Both will display the day of month value
+#' but the `"dd"` formatting will always show two digits (where days `1` to `9`
+#' are zero padded).
+#'
 #' | Field Patterns | Output    | Notes                                      |
 #' |----------------|-----------|--------------------------------------------|
 #' | `"d"`          | `"4"`     | Minimum digits                             |
 #' | `"dd"`         | `"04"`    | Two digits, zero padded                    |
 #'
 #' ### Day of Year (big D)
+#'
+#' The day of year value ranges from `1` (January 1) to either `365` or `366`
+#' (December 31), where the higher value of the range indicates that the year is
+#' a leap year (29 days in February, instead of 28). The field length specifies
+#' the minimum number of digits, with zero-padding as necessary.
 #'
 #' | Field Patterns  | Output   | Notes                                      |
 #' |-----------------|----------|--------------------------------------------|
@@ -210,6 +234,17 @@
 #' | `"DDD"`         | `"185"`  | Zero padded to minimum width of 3          |
 #'
 #' ### Day of Week in Month (big F)
+#'
+#' The day of week in month returns a numerical value indicating the number of
+#' times a given weekday had occurred in the month (e.g., '2nd Monday in
+#' March'). This conveniently resolves to predicable case structure where ranges
+#' of day of the month values return predictable day of week in month values:
+#'
+#' - days `1` - `7` -> `1`
+#' - days `8` - `14` -> `2`
+#' - days `15` - `21` -> `3`
+#' - days `22` - `28` -> `4`
+#' - days `29` - `31` -> `5`
 #'
 #' | Field Pattern                  | Output                                 |
 #' |--------------------------------|----------------------------------------|
