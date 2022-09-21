@@ -447,12 +447,27 @@
 #'
 #' ### TZ // Short and Long Specific non-Location Format (little z)
 #'
+#' The short and long specific non-location formats for time zones are suggested
+#' for displaying a time with a user friendly time zone name. Where the short
+#' specific format is unavailable, it will fall back to the short localized GMT
+#' format (`"O"`). Where the long specific format is unavailable, it will fall
+#' back to the long localized GMT format (`"OOOO"`).
+#'
 #' | Field Patterns             | Output                    | Notes          |
 #' |----------------------------|---------------------------|----------------|
 #' | `"z"`, `"zz"`, or `"zzz"`  | `"PDT"`                   | Short Specific |
 #' | `"zzzz"`                   | `"Pacific Daylight Time"` | Long Specific  |
 #'
-#' ### TZ // Short and Long Specific non-Location Formats (big Z)
+#' ### TZ // Common UTC Offset Formats (big Z)
+#'
+#' The ISO8601 basic format with hours, minutes and optional seconds fields is
+#' represented by `"Z"`, `"ZZ"`, or `"ZZZ"`. The format is equivalent to RFC 822
+#' zone format (when the optional seconds field is absent). This is equivalent
+#' to the `"xxxx"` specifier. The field pattern `"ZZZZ"` represents the long
+#' localized GMT format. This is equivalent to the `"OOOO"` specifier. Finally,
+#' `"ZZZZZ"` pattern yields the ISO8601 extended format with hours, minutes and
+#' optional seconds fields. The ISO8601 UTC indicator `Z` is used when local
+#' time offset is `0`. This is equivalent to the `"XXXXX"` specifier.
 #'
 #' | Field Patterns             | Output       | Notes                       |
 #' |----------------------------|--------------|-----------------------------|
@@ -467,7 +482,13 @@
 #' | `"O"`                   | `"GMT-7"`     | Short localized GMT format    |
 #' | `"OOOO"`                | `"GMT-07:00"` | Long localized GMT format     |
 #'
-#' ### TZ // Short and Long Localized GMT Formats (little v)
+#' ### TZ // Short and Long Generic non-Location Formats (little v)
+#'
+#' The generic non-location formats are useful for displaying a recurring wall
+#' time (e.g., events, meetings) or anywhere people do not want to be overly
+#' specific. Where either of these is unavailable, there is a fallback to the
+#' generic location format (`"VVVV"`), then the short localized GMT format as
+#' the final fallback.
 #'
 #' | Field Patterns  | Output           | Notes                              |
 #' |-----------------|------------------|------------------------------------|
@@ -475,6 +496,11 @@
 #' | `"vvvv"`        | `"Pacific Time"` | Long generic non-location format   |
 #'
 #' ### TZ // Short Time Zone IDs and Exemplar City Formats (big V)
+#'
+#' These formats provide variations of the time zone ID and often include the
+#' exemplar city. The widest of these formats, `"VVVV"`, is useful for
+#' populating a choice list for time zones, because it supports 1-to-1 name/zone
+#' ID mapping and is more uniform than other text formats.
 #'
 #' | Field Patterns     | Output                | Notes                      |
 #' |--------------------|-----------------------|----------------------------|
