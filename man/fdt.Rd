@@ -516,7 +516,13 @@ preceded by 1 BC, with nothing in between them (there was no year zero).\tabular
 }
 
 \subsection{Time Zones}{
-\subsection{TZ // Short and Long Specific non-Location Format (little z)}{\tabular{lll}{
+\subsection{TZ // Short and Long Specific non-Location Format (little z)}{
+
+The short and long specific non-location formats for time zones are suggested
+for displaying a time with a user friendly time zone name. Where the short
+specific format is unavailable, it will fall back to the short localized GMT
+format (\code{"O"}). Where the long specific format is unavailable, it will fall
+back to the long localized GMT format (\code{"OOOO"}).\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"z"}, \code{"zz"}, or \code{"zzz"} \tab \code{"PDT"} \tab Short Specific \cr
    \code{"zzzz"} \tab \code{"Pacific Daylight Time"} \tab Long Specific \cr
@@ -524,7 +530,16 @@ preceded by 1 BC, with nothing in between them (there was no year zero).\tabular
 
 }
 
-\subsection{TZ // Short and Long Specific non-Location Formats (big Z)}{\tabular{lll}{
+\subsection{TZ // Common UTC Offset Formats (big Z)}{
+
+The ISO8601 basic format with hours, minutes and optional seconds fields is
+represented by \code{"Z"}, \code{"ZZ"}, or \code{"ZZZ"}. The format is equivalent to RFC 822
+zone format (when the optional seconds field is absent). This is equivalent
+to the \code{"xxxx"} specifier. The field pattern \code{"ZZZZ"} represents the long
+localized GMT format. This is equivalent to the \code{"OOOO"} specifier. Finally,
+\code{"ZZZZZ"} pattern yields the ISO8601 extended format with hours, minutes and
+optional seconds fields. The ISO8601 UTC indicator \code{Z} is used when local
+time offset is \code{0}. This is equivalent to the \code{"XXXXX"} specifier.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"Z"}, \code{"ZZ"}, or \code{"ZZZ"} \tab \code{"-0700"} \tab ISO 8601 basic format \cr
    \code{"ZZZZ"} \tab \code{"GMT-7:00"} \tab Long localized GMT format \cr
@@ -541,7 +556,13 @@ preceded by 1 BC, with nothing in between them (there was no year zero).\tabular
 
 }
 
-\subsection{TZ // Short and Long Localized GMT Formats (little v)}{\tabular{lll}{
+\subsection{TZ // Short and Long Generic non-Location Formats (little v)}{
+
+The generic non-location formats are useful for displaying a recurring wall
+time (e.g., events, meetings) or anywhere people do not want to be overly
+specific. Where either of these is unavailable, there is a fallback to the
+generic location format (\code{"VVVV"}), then the short localized GMT format as
+the final fallback.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"v"} \tab \code{"PT"} \tab Short generic non-location format \cr
    \code{"vvvv"} \tab \code{"Pacific Time"} \tab Long generic non-location format \cr
@@ -549,7 +570,12 @@ preceded by 1 BC, with nothing in between them (there was no year zero).\tabular
 
 }
 
-\subsection{TZ // Short Time Zone IDs and Exemplar City Formats (big V)}{\tabular{lll}{
+\subsection{TZ // Short Time Zone IDs and Exemplar City Formats (big V)}{
+
+These formats provide variations of the time zone ID and often include the
+exemplar city. The widest of these formats, \code{"VVVV"}, is useful for
+populating a choice list for time zones, because it supports 1-to-1 name/zone
+ID mapping and is more uniform than other text formats.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"V"} \tab \code{"cavan"} \tab Short time zone ID \cr
    \code{"VV"} \tab \code{"America/Vancouver"} \tab Long time zone ID \cr
