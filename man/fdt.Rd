@@ -548,7 +548,11 @@ time offset is \code{0}. This is equivalent to the \code{"XXXXX"} specifier.\tab
 
 }
 
-\subsection{TZ // Short and Long Localized GMT Formats (big O)}{\tabular{lll}{
+\subsection{TZ // Short and Long Localized GMT Formats (big O)}{
+
+The localized GMT formats come in two widths \code{"O"} (which removes the minutes
+field if it's \code{0}) and \code{"OOOO"} (which always contains the minutes field).
+The use of the \code{GMT} indicator changes according to the locale.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"O"} \tab \code{"GMT-7"} \tab Short localized GMT format \cr
    \code{"OOOO"} \tab \code{"GMT-07:00"} \tab Long localized GMT format \cr
@@ -585,7 +589,13 @@ ID mapping and is more uniform than other text formats.\tabular{lll}{
 
 }
 
-\subsection{TZ // ISO 8601 Formats with Z for +0000 (big X)}{\tabular{lll}{
+\subsection{TZ // ISO 8601 Formats with Z for +0000 (big X)}{
+
+The \code{"X"}-\code{"XXX"} field patterns represent valid ISO 8601 patterns for time
+zone offsets in datetimes. The final two widths, \code{"XXXX"} and \code{"XXXXX"} allow
+for optional seconds fields. The seconds field is \emph{not} supported by the ISO
+8601 specification. For all of these, the ISO 8601 UTC indicator \code{Z} is used
+when the local time offset is \code{0}.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"X"} \tab \code{"-07"} \tab ISO 8601 basic format (h, optional m) \cr
    \code{"XX"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m) \cr
@@ -596,7 +606,12 @@ ID mapping and is more uniform than other text formats.\tabular{lll}{
 
 }
 
-\subsection{TZ // ISO 8601 Formats (no use of Z for +0000) (little x)}{\tabular{lll}{
+\subsection{TZ // ISO 8601 Formats (no use of Z for +0000) (little x)}{
+
+The \code{"x"}-\code{"xxxxx"} field patterns represent valid ISO 8601 patterns for time
+zone offsets in datetimes. They are similar to the \code{"X"}-\code{"XXXXX"} field
+patterns except that the ISO 8601 UTC indicator \code{Z} \emph{will not} be used when
+the local time offset is \code{0}.\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"x"} \tab \code{"-07"} \tab ISO 8601 basic format (h, optional m) \cr
    \code{"xx"} \tab \code{"-0700"} \tab ISO 8601 basic format (h & m) \cr
