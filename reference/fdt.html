@@ -508,7 +508,11 @@ time offset is <code>0</code>. This is equivalent to the <code>"XXXXX"</code> sp
 
 <div class="section">
 <h4 id="tz-short-and-long-localized-gmt-formats-big-o-">TZ // Short and Long Localized GMT Formats (big O)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-localized-gmt-formats-big-o-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"O"</code></td><td><code>"GMT-7"</code></td><td>Short localized GMT format</td></tr><tr><td><code>"OOOO"</code></td><td><code>"GMT-07:00"</code></td><td>Long localized GMT format</td></tr></table></div>
+
+
+<p>The localized GMT formats come in two widths <code>"O"</code> (which removes the minutes
+field if it's <code>0</code>) and <code>"OOOO"</code> (which always contains the minutes field).
+The use of the <code>GMT</code> indicator changes according to the locale.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"O"</code></td><td><code>"GMT-7"</code></td><td>Short localized GMT format</td></tr><tr><td><code>"OOOO"</code></td><td><code>"GMT-07:00"</code></td><td>Long localized GMT format</td></tr></table></div>
 
 <div class="section">
 <h4 id="tz-short-and-long-generic-non-location-formats-little-v-">TZ // Short and Long Generic non-Location Formats (little v)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-generic-non-location-formats-little-v-"></a></h4>
@@ -531,11 +535,22 @@ ID mapping and is more uniform than other text formats.</p><table class="table t
 
 <div class="section">
 <h4 id="tz-iso-formats-with-z-for-big-x-">TZ // ISO 8601 Formats with Z for +0000 (big X)<a class="anchor" aria-label="anchor" href="#tz-iso-formats-with-z-for-big-x-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"X"</code></td><td><code>"-07"</code></td><td>ISO 8601 basic format (h, optional m)</td></tr><tr><td><code>"XX"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m)</td></tr><tr><td><code>"XXX"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m)</td></tr><tr><td><code>"XXXX"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m, optional s)</td></tr><tr><td><code>"XXXXX"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m, optional s)</td></tr></table></div>
+
+
+<p>The <code>"X"</code>-<code>"XXX"</code> field patterns represent valid ISO 8601 patterns for time
+zone offsets in datetimes. The final two widths, <code>"XXXX"</code> and <code>"XXXXX"</code> allow
+for optional seconds fields. The seconds field is <em>not</em> supported by the ISO
+8601 specification. For all of these, the ISO 8601 UTC indicator <code>Z</code> is used
+when the local time offset is <code>0</code>.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"X"</code></td><td><code>"-07"</code></td><td>ISO 8601 basic format (h, optional m)</td></tr><tr><td><code>"XX"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m)</td></tr><tr><td><code>"XXX"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m)</td></tr><tr><td><code>"XXXX"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m, optional s)</td></tr><tr><td><code>"XXXXX"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m, optional s)</td></tr></table></div>
 
 <div class="section">
 <h4 id="tz-iso-formats-no-use-of-z-for-little-x-">TZ // ISO 8601 Formats (no use of Z for +0000) (little x)<a class="anchor" aria-label="anchor" href="#tz-iso-formats-no-use-of-z-for-little-x-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"x"</code></td><td><code>"-07"</code></td><td>ISO 8601 basic format (h, optional m)</td></tr><tr><td><code>"xx"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m)</td></tr><tr><td><code>"xxx"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m)</td></tr><tr><td><code>"xxxx"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m, optional s)</td></tr><tr><td><code>"xxxxx"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m, optional s)</td></tr></table></div>
+
+
+<p>The <code>"x"</code>-<code>"xxxxx"</code> field patterns represent valid ISO 8601 patterns for time
+zone offsets in datetimes. They are similar to the <code>"X"</code>-<code>"XXXXX"</code> field
+patterns except that the ISO 8601 UTC indicator <code>Z</code> <em>will not</em> be used when
+the local time offset is <code>0</code>.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"x"</code></td><td><code>"-07"</code></td><td>ISO 8601 basic format (h, optional m)</td></tr><tr><td><code>"xx"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m)</td></tr><tr><td><code>"xxx"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m)</td></tr><tr><td><code>"xxxx"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format (h &amp; m, optional s)</td></tr><tr><td><code>"xxxxx"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format (h &amp; m, optional s)</td></tr></table></div>
 
 
 </div>
