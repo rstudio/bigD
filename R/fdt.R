@@ -250,7 +250,13 @@
 #' |--------------------------------|----------------------------------------|
 #' | `"F"`                          | `"1"`                                  |
 #'
-#' ### Modified Julian Day (little g)
+#' ### Modified Julian Date (little g)
+#'
+#' The modified version of the Julian date is obtained by subtracting
+#' 2,400,000.5 days from the Julian date (the number of days since January 1,
+#' 4713 BC). This essentially results in the number of days since midnight
+#' November 17, 1858. There is a half day offset (unlike the Julian date, the
+#' modified Julian date is referenced to midnight instead of noon).
 #'
 #' | Field Patterns                 | Output                                 |
 #' |--------------------------------|----------------------------------------|
@@ -259,6 +265,8 @@
 #' ## Weekday
 #'
 #' ### Day of Week Name (big E)
+#'
+#' The name of the day of week is offered in four different widths.
 #'
 #' | Field Patterns             | Output         | Notes                     |
 #' |----------------------------|----------------|---------------------------|
@@ -271,6 +279,12 @@
 #'
 #' ### AM/PM Period of Day (little a)
 #'
+#' This denotes before noon and after noon time periods. May be upper or
+#' lowercase depending on the locale and other options. The wide form may be
+#' the same as the short form if the 'real' long form (e.g. 'ante meridiem') is
+#' not customarily used. The narrow form must be unique, unlike some other
+#' fields.
+#'
 #' | Field Patterns                 | Output   | Notes                       |
 #' |--------------------------------|----------|-----------------------------|
 #' | `"a"`, `"aa"`, or `"aaa"`      | `"PM"`   | Abbreviated                 |
@@ -278,6 +292,12 @@
 #' | `"aaaaa"`                      | `"p"`    | Narrow                      |
 #'
 #' ### AM/PM Period of Day Plus Noon and Midnight (little b)
+#'
+#' Provide AM and PM as well as phrases for exactly noon and midnight. May be
+#' upper or lowercase depending on the locale and other options. If the locale
+#' doesn't have the notion of a unique 'noon' (i.e., 12:00), then the PM form
+#' may be substituted. A similar behavior can occur for 'midnight' (00:00) and
+#' the AM form. The narrow form must be unique, unlike some other fields.
 #'
 #' (a) `input_midnight`: `"2020-05-05T00:00:00"`
 #'
@@ -293,6 +313,11 @@
 #' |                                | (b) `"n"`          |                   |
 #'
 #' ### Flexible Day Periods (big B)
+#'
+#' Flexible day periods denotes things like 'in the afternoon', 'in the
+#' evening', etc., and the flexibility comes from a locale's language and
+#' script. Each locale has an associated rule set that specifies when the day
+#' periods start and end for that locale.
 #'
 #' (a) `input_morning`: `"2020-05-05T00:08:30"`
 #'
