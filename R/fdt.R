@@ -300,7 +300,6 @@
 #' the AM form. The narrow form must be unique, unlike some other fields.
 #'
 #' (a) `input_midnight`: `"2020-05-05T00:00:00"`
-#'
 #' (b) `input_noon`: `"2020-05-05T12:00:00"`
 #'
 #' | Field Patterns                 | Output             | Notes             |
@@ -320,7 +319,6 @@
 #' periods start and end for that locale.
 #'
 #' (a) `input_morning`: `"2020-05-05T00:08:30"`
-#'
 #' (b) `input_afternoon`: `"2020-05-05T14:00:00"`
 #'
 #' | Field Patterns             | Output                   | Notes           |
@@ -334,43 +332,63 @@
 #'
 #' ## Hours, Minutes, and Seconds
 #'
-#' ### Hour 1-12 (little h)
-#'
-#' Using: `"2015-08-01T08:35:09"`
-#'
-#' | Field Patterns         | Output  | Notes                                |
-#' |------------------------|---------|--------------------------------------|
-#' | `"h"`                  | `"8"`   | Numeric, minimum digits              |
-#' | `"hh"`                 | `"08"`  | Numeric, 2 digits (zero padded)      |
-#'
 #' ### Hour 0-23 (big H)
 #'
-#' Using: `"2015-08-01T08:35:09"`
+#' Hours from `0` to `23` are for a standard 24-hour clock cycle (midnight plus
+#' 1 minute is `00:01`) when using `"HH"` (which is the more common width that
+#' indicates zero-padding to 2 digits).
+#'
+#' Using `"2015-08-01T08:35:09"`:
 #'
 #' | Field Patterns         | Output  | Notes                                |
 #' |------------------------|---------|--------------------------------------|
 #' | `"H"`                  | `"8"`   | Numeric, minimum digits              |
 #' | `"HH"`                 | `"08"`  | Numeric, 2 digits (zero padded)      |
 #'
-#' ### Hour 0-11 (big K)
+#' ### Hour 1-12 (little h)
 #'
-#' Using: `"2015-08-01T08:35:09"`
+#' Hours from `1` to `12` are for a standard 12-hour clock cycle (midnight plus
+#' 1 minute is `12:01`) when using `"hh"` (which is the more common width that
+#' indicates zero-padding to 2 digits).
+#'
+#' Using `"2015-08-01T08:35:09"`:
 #'
 #' | Field Patterns         | Output  | Notes                                |
 #' |------------------------|---------|--------------------------------------|
-#' | `"K"`                  | `"7"`   | Numeric, minimum digits              |
-#' | `"KK"`                 | `"07"`  | Numeric, 2 digits (zero padded)      |
+#' | `"h"`                  | `"8"`   | Numeric, minimum digits              |
+#' | `"hh"`                 | `"08"`  | Numeric, 2 digits (zero padded)      |
 #'
 #' ### Hour 1-24 (little k)
 #'
-#' Using: `"2015-08-01T08:35:09"`
+#' Using hours from `1` to `24` is a less common way to express a 24-hour clock
+#' cycle (midnight plus 1 minute is `24:01`) when using `"kk"` (which is the
+#' more common width that indicates zero-padding to 2 digits).
+#'
+#' Using `"2015-08-01T08:35:09"`:
 #'
 #' | Field Patterns         | Output  | Notes                                |
 #' |------------------------|---------|--------------------------------------|
 #' | `"k"`                  | `"9"`   | Numeric, minimum digits              |
 #' | `"kk"`                 | `"09"`  | Numeric, 2 digits (zero padded)      |
 #'
+#' ### Hour 0-11 (big K)
+#'
+#' Using hours from `0` to `11` is a less common way to express a 12-hour clock
+#' cycle (midnight plus 1 minute is `00:01`) when using `"KK"` (which is the
+#' more common width that indicates zero-padding to 2 digits).
+#'
+#' Using `"2015-08-01T08:35:09"`:
+#'
+#' | Field Patterns         | Output  | Notes                                |
+#' |------------------------|---------|--------------------------------------|
+#' | `"K"`                  | `"7"`   | Numeric, minimum digits              |
+#' | `"KK"`                 | `"07"`  | Numeric, 2 digits (zero padded)      |
+#'
 #' ### Minute (little m)
+#'
+#' The minute of the hour which can be any number from `0` to `59`. Use `"m"` to
+#' show the minimum number of digits, or `"mm"` to always show two digits
+#' (zero-padding, if necessary).
 #'
 #' | Field Patterns         | Output  | Notes                                |
 #' |------------------------|---------|--------------------------------------|
@@ -379,6 +397,10 @@
 #'
 #' ### Seconds (little s)
 #'
+#' The second of the minute which can be any number from `0` to `59`. Use `"s"`
+#' to show the minimum number of digits, or `"ss"` to always show two digits
+#' (zero-padding, if necessary).
+#'
 #' | Field Patterns         | Output  | Notes                                |
 #' |------------------------|---------|--------------------------------------|
 #' | `"s"`                  | `"9"`   | Numeric, minimum digits              |
@@ -386,13 +408,22 @@
 #'
 #' ### Fractional Second (big S)
 #'
+#' The fractional second truncates (like other time fields) to the width
+#' requested (i.e., count of letters). So using pattern `"SSSS"` will display
+#' four digits past the decimal (which, incidentally, needs to be added manually
+#' to the pattern).
+#'
 #' | Field Patterns                 | Output                                 |
 #' |--------------------------------|----------------------------------------|
 #' | `"S"` to `"SSSSSSSSS"`         | `"2"` -> `"235000000"`                 |
 #'
 #' ### Milliseconds Elapsed in Day (big A)
 #'
-#' Using: `"2011-07-27T00:07:19.7223"`
+#' There are 86,400,000 milliseconds in a day and the `"A"` pattern will provide
+#' the whole number. The width can go up to nine digits with `"AAAAAAAAA"` and
+#' these higher field widths will result in zero padding if necessary.
+#'
+#' Using `"2011-07-27T00:07:19.7223"`:
 #'
 #' | Field Patterns                 | Output                                 |
 #' |--------------------------------|----------------------------------------|
@@ -402,7 +433,9 @@
 #'
 #' ### The Era Designator (big G)
 #'
-#' This provides the era name for the given date.
+#' This provides the era name for the given date. The Gregorian calendar has two
+#' eras: AD and BC. In the AD year numbering system, AD 1 is immediately
+#' preceded by 1 BC, with nothing in between them (there was no year zero).
 #'
 #' | Field Patterns                 | Output          | Notes                |
 #' |--------------------------------|-----------------|----------------------|
