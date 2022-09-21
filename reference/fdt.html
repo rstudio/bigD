@@ -327,8 +327,14 @@ of day of the month values return predictable day of week in month values:</p><u
 </ul><table class="table table"><tr><td>Field Pattern</td><td>Output</td></tr><tr><td><code>"F"</code></td><td><code>"1"</code></td></tr></table></div>
 
 <div class="section">
-<h4 id="modified-julian-day-little-g-">Modified Julian Day (little g)<a class="anchor" aria-label="anchor" href="#modified-julian-day-little-g-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td></tr><tr><td><code>"g"</code> to <code>"ggggggggg"</code></td><td><code>"58303"</code> -&gt; <code>"000058303"</code></td></tr></table></div>
+<h4 id="modified-julian-date-little-g-">Modified Julian Date (little g)<a class="anchor" aria-label="anchor" href="#modified-julian-date-little-g-"></a></h4>
+
+
+<p>The modified version of the Julian date is obtained by subtracting
+2,400,000.5 days from the Julian date (the number of days since January 1,
+4713 BC). This essentially results in the number of days since midnight
+November 17, 1858. There is a half day offset (unlike the Julian date, the
+modified Julian date is referenced to midnight instead of noon).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td></tr><tr><td><code>"g"</code> to <code>"ggggggggg"</code></td><td><code>"58303"</code> -&gt; <code>"000058303"</code></td></tr></table></div>
 
 
 </div>
@@ -338,7 +344,9 @@ of day of the month values return predictable day of week in month values:</p><u
 
 <div class="section">
 <h4 id="day-of-week-name-big-e-">Day of Week Name (big E)<a class="anchor" aria-label="anchor" href="#day-of-week-name-big-e-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"E"</code>, <code>"EE"</code>, or <code>"EEE"</code></td><td><code>"Wed"</code></td><td>Abbreviated</td></tr><tr><td><code>"EEEE"</code></td><td><code>"Wednesday"</code></td><td>Wide</td></tr><tr><td><code>"EEEEE"</code></td><td><code>"W"</code></td><td>Narrow</td></tr><tr><td><code>"EEEEEE"</code></td><td><code>"We"</code></td><td>Short</td></tr></table></div>
+
+
+<p>The name of the day of week is offered in four different widths.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"E"</code>, <code>"EE"</code>, or <code>"EEE"</code></td><td><code>"Wed"</code></td><td>Abbreviated</td></tr><tr><td><code>"EEEE"</code></td><td><code>"Wednesday"</code></td><td>Wide</td></tr><tr><td><code>"EEEEE"</code></td><td><code>"W"</code></td><td>Narrow</td></tr><tr><td><code>"EEEEEE"</code></td><td><code>"We"</code></td><td>Short</td></tr></table></div>
 
 
 </div>
@@ -348,12 +356,23 @@ of day of the month values return predictable day of week in month values:</p><u
 
 <div class="section">
 <h4 id="am-pm-period-of-day-little-a-">AM/PM Period of Day (little a)<a class="anchor" aria-label="anchor" href="#am-pm-period-of-day-little-a-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"a"</code>, <code>"aa"</code>, or <code>"aaa"</code></td><td><code>"PM"</code></td><td>Abbreviated</td></tr><tr><td><code>"aaaa"</code></td><td><code>"PM"</code></td><td>Wide</td></tr><tr><td><code>"aaaaa"</code></td><td><code>"p"</code></td><td>Narrow</td></tr></table></div>
+
+
+<p>This denotes before noon and after noon time periods. May be upper or
+lowercase depending on the locale and other options. The wide form may be
+the same as the short form if the 'real' long form (e.g. 'ante meridiem') is
+not customarily used. The narrow form must be unique, unlike some other
+fields.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"a"</code>, <code>"aa"</code>, or <code>"aaa"</code></td><td><code>"PM"</code></td><td>Abbreviated</td></tr><tr><td><code>"aaaa"</code></td><td><code>"PM"</code></td><td>Wide</td></tr><tr><td><code>"aaaaa"</code></td><td><code>"p"</code></td><td>Narrow</td></tr></table></div>
 
 <div class="section">
 <h4 id="am-pm-period-of-day-plus-noon-and-midnight-little-b-">AM/PM Period of Day Plus Noon and Midnight (little b)<a class="anchor" aria-label="anchor" href="#am-pm-period-of-day-plus-noon-and-midnight-little-b-"></a></h4>
 
 
+<p>Provide AM and PM as well as phrases for exactly noon and midnight. May be
+upper or lowercase depending on the locale and other options. If the locale
+doesn't have the notion of a unique 'noon' (i.e., 12:00), then the PM form
+may be substituted. A similar behavior can occur for 'midnight' (00:00) and
+the AM form. The narrow form must be unique, unlike some other fields.</p>
 <p>(a) <code>input_midnight</code>: <code>"2020-05-05T00:00:00"</code></p>
 <p>(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code></td><td>(a) <code>"midnight"</code></td><td>Abbreviated</td></tr><tr><td></td><td>(b) <code>"noon"</code></td><td></td></tr><tr><td><code>"bbbb"</code></td><td>(a) <code>"midnight"</code></td><td>Wide</td></tr><tr><td></td><td>(b) <code>"noon"</code></td><td></td></tr><tr><td><code>"bbbbb"</code></td><td>(a) <code>"mi"</code></td><td>Narrow</td></tr><tr><td></td><td>(b) <code>"n"</code></td><td></td></tr></table></div>
 
@@ -361,6 +380,10 @@ of day of the month values return predictable day of week in month values:</p><u
 <h4 id="flexible-day-periods-big-b-">Flexible Day Periods (big B)<a class="anchor" aria-label="anchor" href="#flexible-day-periods-big-b-"></a></h4>
 
 
+<p>Flexible day periods denotes things like 'in the afternoon', 'in the
+evening', etc., and the flexibility comes from a locale's language and
+script. Each locale has an associated rule set that specifies when the day
+periods start and end for that locale.</p>
 <p>(a) <code>input_morning</code>: <code>"2020-05-05T00:08:30"</code></p>
 <p>(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Abbreviated</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr><tr><td><code>"BBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Wide</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr><tr><td><code>"BBBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Narrow</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr></table></div>
 
