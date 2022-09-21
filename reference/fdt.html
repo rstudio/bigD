@@ -373,8 +373,8 @@ upper or lowercase depending on the locale and other options. If the locale
 doesn't have the notion of a unique 'noon' (i.e., 12:00), then the PM form
 may be substituted. A similar behavior can occur for 'midnight' (00:00) and
 the AM form. The narrow form must be unique, unlike some other fields.</p>
-<p>(a) <code>input_midnight</code>: <code>"2020-05-05T00:00:00"</code></p>
-<p>(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code></td><td>(a) <code>"midnight"</code></td><td>Abbreviated</td></tr><tr><td></td><td>(b) <code>"noon"</code></td><td></td></tr><tr><td><code>"bbbb"</code></td><td>(a) <code>"midnight"</code></td><td>Wide</td></tr><tr><td></td><td>(b) <code>"noon"</code></td><td></td></tr><tr><td><code>"bbbbb"</code></td><td>(a) <code>"mi"</code></td><td>Narrow</td></tr><tr><td></td><td>(b) <code>"n"</code></td><td></td></tr></table></div>
+<p>(a) <code>input_midnight</code>: <code>"2020-05-05T00:00:00"</code>
+(b) <code>input_noon</code>: <code>"2020-05-05T12:00:00"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"b"</code>, <code>"bb"</code>, or <code>"bbb"</code></td><td>(a) <code>"midnight"</code></td><td>Abbreviated</td></tr><tr><td></td><td>(b) <code>"noon"</code></td><td></td></tr><tr><td><code>"bbbb"</code></td><td>(a) <code>"midnight"</code></td><td>Wide</td></tr><tr><td></td><td>(b) <code>"noon"</code></td><td></td></tr><tr><td><code>"bbbbb"</code></td><td>(a) <code>"mi"</code></td><td>Narrow</td></tr><tr><td></td><td>(b) <code>"n"</code></td><td></td></tr></table></div>
 
 <div class="section">
 <h4 id="flexible-day-periods-big-b-">Flexible Day Periods (big B)<a class="anchor" aria-label="anchor" href="#flexible-day-periods-big-b-"></a></h4>
@@ -384,8 +384,8 @@ the AM form. The narrow form must be unique, unlike some other fields.</p>
 evening', etc., and the flexibility comes from a locale's language and
 script. Each locale has an associated rule set that specifies when the day
 periods start and end for that locale.</p>
-<p>(a) <code>input_morning</code>: <code>"2020-05-05T00:08:30"</code></p>
-<p>(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Abbreviated</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr><tr><td><code>"BBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Wide</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr><tr><td><code>"BBBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Narrow</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr></table></div>
+<p>(a) <code>input_morning</code>: <code>"2020-05-05T00:08:30"</code>
+(b) <code>input_afternoon</code>: <code>"2020-05-05T14:00:00"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"B"</code>, <code>"BB"</code>, or <code>"BBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Abbreviated</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr><tr><td><code>"BBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Wide</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr><tr><td><code>"BBBBB"</code></td><td>(a) <code>"in the morning"</code></td><td>Narrow</td></tr><tr><td></td><td>(b) <code>"in the afternoon"</code></td><td></td></tr></table></div>
 
 
 </div>
@@ -394,46 +394,74 @@ periods start and end for that locale.</p>
 <h3 id="hours-minutes-and-seconds">Hours, Minutes, and Seconds<a class="anchor" aria-label="anchor" href="#hours-minutes-and-seconds"></a></h3>
 
 <div class="section">
-<h4 id="hour-little-h-">Hour 1-12 (little h)<a class="anchor" aria-label="anchor" href="#hour-little-h-"></a></h4>
-
-
-<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"h"</code></td><td><code>"8"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"hh"</code></td><td><code>"08"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
-
-<div class="section">
 <h4 id="hour-big-h-">Hour 0-23 (big H)<a class="anchor" aria-label="anchor" href="#hour-big-h-"></a></h4>
 
 
-<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"H"</code></td><td><code>"8"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"HH"</code></td><td><code>"08"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
+<p>Hours from <code>0</code> to <code>23</code> are for a standard 24-hour clock cycle (midnight plus
+1 minute is <code>00:01</code>) when using <code>"HH"</code> (which is the more common width that
+indicates zero-padding to 2 digits).</p>
+<p>Using <code>"2015-08-01T08:35:09"</code>:</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"H"</code></td><td><code>"8"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"HH"</code></td><td><code>"08"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
-<h4 id="hour-big-k-">Hour 0-11 (big K)<a class="anchor" aria-label="anchor" href="#hour-big-k-"></a></h4>
+<h4 id="hour-little-h-">Hour 1-12 (little h)<a class="anchor" aria-label="anchor" href="#hour-little-h-"></a></h4>
 
 
-<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"K"</code></td><td><code>"7"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"KK"</code></td><td><code>"07"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
+<p>Hours from <code>1</code> to <code>12</code> are for a standard 12-hour clock cycle (midnight plus
+1 minute is <code>12:01</code>) when using <code>"hh"</code> (which is the more common width that
+indicates zero-padding to 2 digits).</p>
+<p>Using <code>"2015-08-01T08:35:09"</code>:</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"h"</code></td><td><code>"8"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"hh"</code></td><td><code>"08"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h4 id="hour-little-k-">Hour 1-24 (little k)<a class="anchor" aria-label="anchor" href="#hour-little-k-"></a></h4>
 
 
-<p>Using: <code>"2015-08-01T08:35:09"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"k"</code></td><td><code>"9"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"kk"</code></td><td><code>"09"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
+<p>Using hours from <code>1</code> to <code>24</code> is a less common way to express a 24-hour clock
+cycle (midnight plus 1 minute is <code>24:01</code>) when using <code>"kk"</code> (which is the
+more common width that indicates zero-padding to 2 digits).</p>
+<p>Using <code>"2015-08-01T08:35:09"</code>:</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"k"</code></td><td><code>"9"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"kk"</code></td><td><code>"09"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
+
+<div class="section">
+<h4 id="hour-big-k-">Hour 0-11 (big K)<a class="anchor" aria-label="anchor" href="#hour-big-k-"></a></h4>
+
+
+<p>Using hours from <code>0</code> to <code>11</code> is a less common way to express a 12-hour clock
+cycle (midnight plus 1 minute is <code>00:01</code>) when using <code>"KK"</code> (which is the
+more common width that indicates zero-padding to 2 digits).</p>
+<p>Using <code>"2015-08-01T08:35:09"</code>:</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"K"</code></td><td><code>"7"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"KK"</code></td><td><code>"07"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h4 id="minute-little-m-">Minute (little m)<a class="anchor" aria-label="anchor" href="#minute-little-m-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"m"</code></td><td><code>"5"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"mm"</code></td><td><code>"06"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
+
+
+<p>The minute of the hour which can be any number from <code>0</code> to <code>59</code>. Use <code>"m"</code> to
+show the minimum number of digits, or <code>"mm"</code> to always show two digits
+(zero-padding, if necessary).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"m"</code></td><td><code>"5"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"mm"</code></td><td><code>"06"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h4 id="seconds-little-s-">Seconds (little s)<a class="anchor" aria-label="anchor" href="#seconds-little-s-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"s"</code></td><td><code>"9"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"ss"</code></td><td><code>"09"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
+
+
+<p>The second of the minute which can be any number from <code>0</code> to <code>59</code>. Use <code>"s"</code>
+to show the minimum number of digits, or <code>"ss"</code> to always show two digits
+(zero-padding, if necessary).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"s"</code></td><td><code>"9"</code></td><td>Numeric, minimum digits</td></tr><tr><td><code>"ss"</code></td><td><code>"09"</code></td><td>Numeric, 2 digits (zero padded)</td></tr></table></div>
 
 <div class="section">
 <h4 id="fractional-second-big-s-">Fractional Second (big S)<a class="anchor" aria-label="anchor" href="#fractional-second-big-s-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td></tr><tr><td><code>"S"</code> to <code>"SSSSSSSSS"</code></td><td><code>"2"</code> -&gt; <code>"235000000"</code></td></tr></table></div>
+
+
+<p>The fractional second truncates (like other time fields) to the width
+requested (i.e., count of letters). So using pattern <code>"SSSS"</code> will display
+four digits past the decimal (which, incidentally, needs to be added manually
+to the pattern).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td></tr><tr><td><code>"S"</code> to <code>"SSSSSSSSS"</code></td><td><code>"2"</code> -&gt; <code>"235000000"</code></td></tr></table></div>
 
 <div class="section">
 <h4 id="milliseconds-elapsed-in-day-big-a-">Milliseconds Elapsed in Day (big A)<a class="anchor" aria-label="anchor" href="#milliseconds-elapsed-in-day-big-a-"></a></h4>
 
 
-<p>Using: <code>"2011-07-27T00:07:19.7223"</code></p><table class="table table"><tr><td>Field Patterns</td><td>Output</td></tr><tr><td><code>"A"</code> to <code>"AAAAAAAAA"</code></td><td><code>"439722"</code> -&gt; <code>"000439722"</code></td></tr></table></div>
+<p>There are 86,400,000 milliseconds in a day and the <code>"A"</code> pattern will provide
+the whole number. The width can go up to nine digits with <code>"AAAAAAAAA"</code> and
+these higher field widths will result in zero padding if necessary.</p>
+<p>Using <code>"2011-07-27T00:07:19.7223"</code>:</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td></tr><tr><td><code>"A"</code> to <code>"AAAAAAAAA"</code></td><td><code>"439722"</code> -&gt; <code>"000439722"</code></td></tr></table></div>
 
 
 </div>
@@ -445,7 +473,9 @@ periods start and end for that locale.</p>
 <h4 id="the-era-designator-big-g-">The Era Designator (big G)<a class="anchor" aria-label="anchor" href="#the-era-designator-big-g-"></a></h4>
 
 
-<p>This provides the era name for the given date.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"G"</code>, <code>"GG"</code>, or <code>"GGG"</code></td><td><code>"AD"</code></td><td>Abbreviated</td></tr><tr><td><code>"GGGG"</code></td><td><code>"Anno Domini"</code></td><td>Wide</td></tr><tr><td><code>"GGGGG"</code></td><td><code>"A"</code></td><td>Narrow</td></tr></table></div>
+<p>This provides the era name for the given date. The Gregorian calendar has two
+eras: AD and BC. In the AD year numbering system, AD 1 is immediately
+preceded by 1 BC, with nothing in between them (there was no year zero).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"G"</code>, <code>"GG"</code>, or <code>"GGG"</code></td><td><code>"AD"</code></td><td>Abbreviated</td></tr><tr><td><code>"GGGG"</code></td><td><code>"Anno Domini"</code></td><td>Wide</td></tr><tr><td><code>"GGGGG"</code></td><td><code>"A"</code></td><td>Narrow</td></tr></table></div>
 
 
 </div>
