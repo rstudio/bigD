@@ -357,7 +357,6 @@ may be substituted. A similar behavior can occur for 'midnight' (00:00) and
 the AM form. The narrow form must be unique, unlike some other fields.
 
 (a) \code{input_midnight}: \code{"2020-05-05T00:00:00"}
-
 (b) \code{input_noon}: \code{"2020-05-05T12:00:00"}\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"b"}, \code{"bb"}, or \code{"bbb"} \tab (a) \code{"midnight"} \tab Abbreviated \cr
@@ -378,7 +377,6 @@ script. Each locale has an associated rule set that specifies when the day
 periods start and end for that locale.
 
 (a) \code{input_morning}: \code{"2020-05-05T00:08:30"}
-
 (b) \code{input_afternoon}: \code{"2020-05-05T14:00:00"}\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"B"}, \code{"BB"}, or \code{"BBB"} \tab (a) \code{"in the morning"} \tab Abbreviated \cr
@@ -394,19 +392,13 @@ periods start and end for that locale.
 }
 
 \subsection{Hours, Minutes, and Seconds}{
-\subsection{Hour 1-12 (little h)}{
-
-Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
-   Field Patterns \tab Output \tab Notes \cr
-   \code{"h"} \tab \code{"8"} \tab Numeric, minimum digits \cr
-   \code{"hh"} \tab \code{"08"} \tab Numeric, 2 digits (zero padded) \cr
-}
-
-}
-
 \subsection{Hour 0-23 (big H)}{
 
-Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
+Hours from \code{0} to \code{23} are for a standard 24-hour clock cycle (midnight plus
+1 minute is \code{00:01}) when using \code{"HH"} (which is the more common width that
+indicates zero-padding to 2 digits).
+
+Using \code{"2015-08-01T08:35:09"}:\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"H"} \tab \code{"8"} \tab Numeric, minimum digits \cr
    \code{"HH"} \tab \code{"08"} \tab Numeric, 2 digits (zero padded) \cr
@@ -414,19 +406,27 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 }
 
-\subsection{Hour 0-11 (big K)}{
+\subsection{Hour 1-12 (little h)}{
 
-Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
+Hours from \code{1} to \code{12} are for a standard 12-hour clock cycle (midnight plus
+1 minute is \code{12:01}) when using \code{"hh"} (which is the more common width that
+indicates zero-padding to 2 digits).
+
+Using \code{"2015-08-01T08:35:09"}:\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
-   \code{"K"} \tab \code{"7"} \tab Numeric, minimum digits \cr
-   \code{"KK"} \tab \code{"07"} \tab Numeric, 2 digits (zero padded) \cr
+   \code{"h"} \tab \code{"8"} \tab Numeric, minimum digits \cr
+   \code{"hh"} \tab \code{"08"} \tab Numeric, 2 digits (zero padded) \cr
 }
 
 }
 
 \subsection{Hour 1-24 (little k)}{
 
-Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
+Using hours from \code{1} to \code{24} is a less common way to express a 24-hour clock
+cycle (midnight plus 1 minute is \code{24:01}) when using \code{"kk"} (which is the
+more common width that indicates zero-padding to 2 digits).
+
+Using \code{"2015-08-01T08:35:09"}:\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"k"} \tab \code{"9"} \tab Numeric, minimum digits \cr
    \code{"kk"} \tab \code{"09"} \tab Numeric, 2 digits (zero padded) \cr
@@ -434,7 +434,25 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 }
 
-\subsection{Minute (little m)}{\tabular{lll}{
+\subsection{Hour 0-11 (big K)}{
+
+Using hours from \code{0} to \code{11} is a less common way to express a 12-hour clock
+cycle (midnight plus 1 minute is \code{00:01}) when using \code{"KK"} (which is the
+more common width that indicates zero-padding to 2 digits).
+
+Using \code{"2015-08-01T08:35:09"}:\tabular{lll}{
+   Field Patterns \tab Output \tab Notes \cr
+   \code{"K"} \tab \code{"7"} \tab Numeric, minimum digits \cr
+   \code{"KK"} \tab \code{"07"} \tab Numeric, 2 digits (zero padded) \cr
+}
+
+}
+
+\subsection{Minute (little m)}{
+
+The minute of the hour which can be any number from \code{0} to \code{59}. Use \code{"m"} to
+show the minimum number of digits, or \code{"mm"} to always show two digits
+(zero-padding, if necessary).\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"m"} \tab \code{"5"} \tab Numeric, minimum digits \cr
    \code{"mm"} \tab \code{"06"} \tab Numeric, 2 digits (zero padded) \cr
@@ -442,7 +460,11 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 }
 
-\subsection{Seconds (little s)}{\tabular{lll}{
+\subsection{Seconds (little s)}{
+
+The second of the minute which can be any number from \code{0} to \code{59}. Use \code{"s"}
+to show the minimum number of digits, or \code{"ss"} to always show two digits
+(zero-padding, if necessary).\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"s"} \tab \code{"9"} \tab Numeric, minimum digits \cr
    \code{"ss"} \tab \code{"09"} \tab Numeric, 2 digits (zero padded) \cr
@@ -450,7 +472,12 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 }
 
-\subsection{Fractional Second (big S)}{\tabular{ll}{
+\subsection{Fractional Second (big S)}{
+
+The fractional second truncates (like other time fields) to the width
+requested (i.e., count of letters). So using pattern \code{"SSSS"} will display
+four digits past the decimal (which, incidentally, needs to be added manually
+to the pattern).\tabular{ll}{
    Field Patterns \tab Output \cr
    \code{"S"} to \code{"SSSSSSSSS"} \tab \code{"2"} -> \code{"235000000"} \cr
 }
@@ -459,7 +486,11 @@ Using: \code{"2015-08-01T08:35:09"}\tabular{lll}{
 
 \subsection{Milliseconds Elapsed in Day (big A)}{
 
-Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
+There are 86,400,000 milliseconds in a day and the \code{"A"} pattern will provide
+the whole number. The width can go up to nine digits with \code{"AAAAAAAAA"} and
+these higher field widths will result in zero padding if necessary.
+
+Using \code{"2011-07-27T00:07:19.7223"}:\tabular{ll}{
    Field Patterns \tab Output \cr
    \code{"A"} to \code{"AAAAAAAAA"} \tab \code{"439722"} -> \code{"000439722"} \cr
 }
@@ -471,7 +502,9 @@ Using: \code{"2011-07-27T00:07:19.7223"}\tabular{ll}{
 \subsection{Era}{
 \subsection{The Era Designator (big G)}{
 
-This provides the era name for the given date.\tabular{lll}{
+This provides the era name for the given date. The Gregorian calendar has two
+eras: AD and BC. In the AD year numbering system, AD 1 is immediately
+preceded by 1 BC, with nothing in between them (there was no year zero).\tabular{lll}{
    Field Patterns \tab Output \tab Notes \cr
    \code{"G"}, \code{"GG"}, or \code{"GGG"} \tab \code{"AD"} \tab Abbreviated \cr
    \code{"GGGG"} \tab \code{"Anno Domini"} \tab Wide \cr
