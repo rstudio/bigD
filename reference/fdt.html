@@ -485,23 +485,49 @@ preceded by 1 BC, with nothing in between them (there was no year zero).</p><tab
 
 <div class="section">
 <h4 id="tz-short-and-long-specific-non-location-format-little-z-">TZ // Short and Long Specific non-Location Format (little z)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-specific-non-location-format-little-z-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"z"</code>, <code>"zz"</code>, or <code>"zzz"</code></td><td><code>"PDT"</code></td><td>Short Specific</td></tr><tr><td><code>"zzzz"</code></td><td><code>"Pacific Daylight Time"</code></td><td>Long Specific</td></tr></table></div>
+
+
+<p>The short and long specific non-location formats for time zones are suggested
+for displaying a time with a user friendly time zone name. Where the short
+specific format is unavailable, it will fall back to the short localized GMT
+format (<code>"O"</code>). Where the long specific format is unavailable, it will fall
+back to the long localized GMT format (<code>"OOOO"</code>).</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"z"</code>, <code>"zz"</code>, or <code>"zzz"</code></td><td><code>"PDT"</code></td><td>Short Specific</td></tr><tr><td><code>"zzzz"</code></td><td><code>"Pacific Daylight Time"</code></td><td>Long Specific</td></tr></table></div>
 
 <div class="section">
-<h4 id="tz-short-and-long-specific-non-location-formats-big-z-">TZ // Short and Long Specific non-Location Formats (big Z)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-specific-non-location-formats-big-z-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"Z"</code>, <code>"ZZ"</code>, or <code>"ZZZ"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format</td></tr><tr><td><code>"ZZZZ"</code></td><td><code>"GMT-7:00"</code></td><td>Long localized GMT format</td></tr><tr><td><code>"ZZZZZ"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format</td></tr></table></div>
+<h4 id="tz-common-utc-offset-formats-big-z-">TZ // Common UTC Offset Formats (big Z)<a class="anchor" aria-label="anchor" href="#tz-common-utc-offset-formats-big-z-"></a></h4>
+
+
+<p>The ISO8601 basic format with hours, minutes and optional seconds fields is
+represented by <code>"Z"</code>, <code>"ZZ"</code>, or <code>"ZZZ"</code>. The format is equivalent to RFC 822
+zone format (when the optional seconds field is absent). This is equivalent
+to the <code>"xxxx"</code> specifier. The field pattern <code>"ZZZZ"</code> represents the long
+localized GMT format. This is equivalent to the <code>"OOOO"</code> specifier. Finally,
+<code>"ZZZZZ"</code> pattern yields the ISO8601 extended format with hours, minutes and
+optional seconds fields. The ISO8601 UTC indicator <code>Z</code> is used when local
+time offset is <code>0</code>. This is equivalent to the <code>"XXXXX"</code> specifier.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"Z"</code>, <code>"ZZ"</code>, or <code>"ZZZ"</code></td><td><code>"-0700"</code></td><td>ISO 8601 basic format</td></tr><tr><td><code>"ZZZZ"</code></td><td><code>"GMT-7:00"</code></td><td>Long localized GMT format</td></tr><tr><td><code>"ZZZZZ"</code></td><td><code>"-07:00"</code></td><td>ISO 8601 extended format</td></tr></table></div>
 
 <div class="section">
 <h4 id="tz-short-and-long-localized-gmt-formats-big-o-">TZ // Short and Long Localized GMT Formats (big O)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-localized-gmt-formats-big-o-"></a></h4>
 <table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"O"</code></td><td><code>"GMT-7"</code></td><td>Short localized GMT format</td></tr><tr><td><code>"OOOO"</code></td><td><code>"GMT-07:00"</code></td><td>Long localized GMT format</td></tr></table></div>
 
 <div class="section">
-<h4 id="tz-short-and-long-localized-gmt-formats-little-v-">TZ // Short and Long Localized GMT Formats (little v)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-localized-gmt-formats-little-v-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"v"</code></td><td><code>"PT"</code></td><td>Short generic non-location format</td></tr><tr><td><code>"vvvv"</code></td><td><code>"Pacific Time"</code></td><td>Long generic non-location format</td></tr></table></div>
+<h4 id="tz-short-and-long-generic-non-location-formats-little-v-">TZ // Short and Long Generic non-Location Formats (little v)<a class="anchor" aria-label="anchor" href="#tz-short-and-long-generic-non-location-formats-little-v-"></a></h4>
+
+
+<p>The generic non-location formats are useful for displaying a recurring wall
+time (e.g., events, meetings) or anywhere people do not want to be overly
+specific. Where either of these is unavailable, there is a fallback to the
+generic location format (<code>"VVVV"</code>), then the short localized GMT format as
+the final fallback.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"v"</code></td><td><code>"PT"</code></td><td>Short generic non-location format</td></tr><tr><td><code>"vvvv"</code></td><td><code>"Pacific Time"</code></td><td>Long generic non-location format</td></tr></table></div>
 
 <div class="section">
 <h4 id="tz-short-time-zone-ids-and-exemplar-city-formats-big-v-">TZ // Short Time Zone IDs and Exemplar City Formats (big V)<a class="anchor" aria-label="anchor" href="#tz-short-time-zone-ids-and-exemplar-city-formats-big-v-"></a></h4>
-<table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"V"</code></td><td><code>"cavan"</code></td><td>Short time zone ID</td></tr><tr><td><code>"VV"</code></td><td><code>"America/Vancouver"</code></td><td>Long time zone ID</td></tr><tr><td><code>"VVV"</code></td><td><code>"Vancouver"</code></td><td>The tz exemplar city</td></tr><tr><td><code>"VVVV"</code></td><td><code>"Vancouver Time"</code></td><td>Generic location format</td></tr></table></div>
+
+
+<p>These formats provide variations of the time zone ID and often include the
+exemplar city. The widest of these formats, <code>"VVVV"</code>, is useful for
+populating a choice list for time zones, because it supports 1-to-1 name/zone
+ID mapping and is more uniform than other text formats.</p><table class="table table"><tr><td>Field Patterns</td><td>Output</td><td>Notes</td></tr><tr><td><code>"V"</code></td><td><code>"cavan"</code></td><td>Short time zone ID</td></tr><tr><td><code>"VV"</code></td><td><code>"America/Vancouver"</code></td><td>Long time zone ID</td></tr><tr><td><code>"VVV"</code></td><td><code>"Vancouver"</code></td><td>The tz exemplar city</td></tr><tr><td><code>"VVVV"</code></td><td><code>"Vancouver Time"</code></td><td>Generic location format</td></tr></table></div>
 
 <div class="section">
 <h4 id="tz-iso-formats-with-z-for-big-x-">TZ // ISO 8601 Formats with Z for +0000 (big X)<a class="anchor" aria-label="anchor" href="#tz-iso-formats-with-z-for-big-x-"></a></h4>
