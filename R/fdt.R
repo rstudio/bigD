@@ -477,6 +477,10 @@
 #'
 #' ### TZ // Short and Long Localized GMT Formats (big O)
 #'
+#' The localized GMT formats come in two widths `"O"` (which removes the minutes
+#' field if it's `0`) and `"OOOO"` (which always contains the minutes field).
+#' The use of the `GMT` indicator changes according to the locale.
+#'
 #' | Field Patterns          | Output        | Notes                         |
 #' |-------------------------|---------------|-------------------------------|
 #' | `"O"`                   | `"GMT-7"`     | Short localized GMT format    |
@@ -511,6 +515,12 @@
 #'
 #' ### TZ // ISO 8601 Formats with Z for +0000 (big X)
 #'
+#' The `"X"`-`"XXX"` field patterns represent valid ISO 8601 patterns for time
+#' zone offsets in datetimes. The final two widths, `"XXXX"` and `"XXXXX"` allow
+#' for optional seconds fields. The seconds field is *not* supported by the ISO
+#' 8601 specification. For all of these, the ISO 8601 UTC indicator `Z` is used
+#' when the local time offset is `0`.
+#'
 #' | Field Patterns | Output     | Notes                                     |
 #' |----------------|------------|-------------------------------------------|
 #' | `"X"`          | `"-07"`    | ISO 8601 basic format (h, optional m)     |
@@ -520,6 +530,11 @@
 #' | `"XXXXX"`      | `"-07:00"` | ISO 8601 extended format (h & m, optional s) |
 #'
 #' ### TZ // ISO 8601 Formats (no use of Z for +0000) (little x)
+#'
+#' The `"x"`-`"xxxxx"` field patterns represent valid ISO 8601 patterns for time
+#' zone offsets in datetimes. They are similar to the `"X"`-`"XXXXX"` field
+#' patterns except that the ISO 8601 UTC indicator `Z` *will not* be used when
+#' the local time offset is `0`.
 #'
 #' | Field Patterns | Output     | Notes                                     |
 #' |----------------|------------|-------------------------------------------|
