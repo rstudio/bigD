@@ -144,7 +144,7 @@ string-based datetime input unless otherwise indicated:
 
 \code{"2018-07-04T22:05:09.2358(America/Vancouver)"}
 \subsection{Year}{
-\subsection{Year (little y)}{
+\subsection{Calendar Year (little y)}{
 
 This yields the calendar year, which is always numeric. In most cases the
 length of the \code{"y"} field specifies the minimum number of digits to display,
