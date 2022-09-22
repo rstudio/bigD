@@ -106,7 +106,7 @@
 #'
 #' ## Year
 #'
-#' ### Year (little y)
+#' ### Calendar Year (little y)
 #'
 #' This yields the calendar year, which is always numeric. In most cases the
 #' length of the `"y"` field specifies the minimum number of digits to display,
