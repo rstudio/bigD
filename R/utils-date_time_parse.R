@@ -382,6 +382,10 @@ get_tz_long_specific <- function(long_tzid, input_dt, locale) {
   # Get the row of the `tz_metazone_names` table based on the supplied locale
   tz_metazone_names_row <- tz_metazone_names[tz_metazone_names$locale == locale, ]
 
+  if (nrow(tz_metazone_names_row) < 1) {
+    return(NA_character_)
+  }
+
   # Get the list entry corresponding to the metazone and the locale
   tz_metazone_names_entry <-
     unlist(
