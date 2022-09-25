@@ -100,9 +100,35 @@ get_milliseconds_in_day <- function(input) {
   )
 }
 
-get_week_in_month <- function(input) {
+get_locale_territory <- function(locale) {
+
+  locale_has_territory <- grepl("^[a-zA-Z_-]+?(-|_)?([A-Z]{2}|001|419|150)", locale)
+
+  if (locale_has_territory) {
+
+    territory <- gsub(".*([A-Z]{2}|001|419|150).*", "\\1", locale)
+    return(territory)
+  }
+
+  default_locales <- i18n::default_locales
+
+  default_locale_name <-
+    default_locales[default_locales$base_locale == gsub("_", "-", locale), ][["default_locale"]]
+
+  if (length(default_locale_name) < 1) {
+
+    default_locale_name <-
+      default_locales[grepl(paste0("^", locale), default_locales$base_locale), ][["default_locale"]][1]
+  }
+
+  gsub(".*([A-Z]{2}|001|419|150).*", "\\1", default_locale_name)
+}
+
+get_week_in_month <- function(input, locale) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
+
+  territory <- get_locale_territory(locale = locale)
 
   week_number <- as.integer(format(date_input, format = "%U"))
   min_date_in_month <- as.Date(paste0(format(date_input, "%Y-%m"), "-01"))
@@ -643,8 +669,8 @@ dt_ww <- function(input) {
 }
 
 # Week of month, numeric, 1 digit
-dt_W <- function(input) {
-  as.character(get_week_in_month(input))
+dt_W <- function(input, locale) {
+  as.character(get_week_in_month(input = input, locale = locale))
 }
 
 # Day of month, numeric, 1-2 digits
