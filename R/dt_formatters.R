@@ -1251,33 +1251,73 @@ dt_ZZZZZ <- function(input, tz_info, locale = NULL) {
 # TZ // short localized GMT format ("GMT-8")
 dt_O <- function(input, tz_info, locale = NULL) {
 
+  tz_formats_i <- tz_formats[tz_formats$locale == locale, ]
+
   tz_offset <- tz_info$tz_offset
+
   if (is.na(tz_offset)) tz_offset <- 0
 
-  format_tz_offset_min_sec(
-    tz_offset = tz_offset,
-    use_colon = TRUE,
-    optional_min = TRUE,
-    use_z = FALSE,
-    hours_width = 1,
-    prepend_with = "GMT"
-  )
+  if (tz_offset == 0) {
+    return(tz_formats_i[["gmt_zero_format"]])
+  }
+
+  gmt_format <- tz_formats_i[["gmt_format"]]
+  hour_format_combined <- tz_formats_i[["hour_format"]]
+
+  if (tz_offset < 0) {
+    hour_format <- unlist(strsplit(hour_format_combined, split = ";"))[2]
+  } else {
+    hour_format <- unlist(strsplit(hour_format_combined, split = ";"))[1]
+  }
+
+  hours_val <- zero_pad_to_width(abs(trunc(tz_offset)), 1)
+  minutes_val <- zero_pad_to_width(abs((tz_offset - trunc(tz_offset))) * 60, 2)
+
+  if (minutes_val == "00") {
+    hour_format <- gsub("mm", "", hour_format)
+    hour_format <- gsub(":", "", hour_format)
+  }
+
+  hours_minutes <- gsub("(H|HH)", hours_val, hour_format)
+  hours_minutes <- gsub("mm", minutes_val, hours_minutes)
+
+  gsub("{0}", hours_minutes, gmt_format, fixed = TRUE)
 }
 
 # TZ // long localized GMT format ("GMT-08:00")
 dt_OOOO <- function(input, tz_info, locale = NULL) {
 
+  tz_formats_i <- tz_formats[tz_formats$locale == locale, ]
+
   tz_offset <- tz_info$tz_offset
+
   if (is.na(tz_offset)) tz_offset <- 0
 
-  format_tz_offset_min_sec(
-    tz_offset = tz_offset,
-    use_colon = TRUE,
-    optional_min = FALSE,
-    use_z = FALSE,
-    hours_width = 2,
-    prepend_with = "GMT"
-  )
+  if (tz_offset == 0) {
+    return(tz_formats_i[["gmt_zero_format"]])
+  }
+
+  gmt_format <- tz_formats_i[["gmt_format"]]
+  hour_format_combined <- tz_formats_i[["hour_format"]]
+
+  if (tz_offset < 0) {
+    hour_format <- unlist(strsplit(hour_format_combined, split = ";"))[2]
+  } else {
+    hour_format <- unlist(strsplit(hour_format_combined, split = ";"))[1]
+  }
+
+  if (grepl("HH", hour_format)) {
+    hours_val <- zero_pad_to_width(abs(trunc(tz_offset)), 2)
+  } else {
+    hours_val <- zero_pad_to_width(abs(trunc(tz_offset)), 1)
+  }
+
+  minutes_val <- zero_pad_to_width(abs((tz_offset - trunc(tz_offset))) * 60, 2)
+
+  hours_minutes <- gsub("(H|HH)", hours_val, hour_format)
+  hours_minutes <- gsub("mm", minutes_val, hours_minutes)
+
+  gsub("{0}", hours_minutes, gmt_format, fixed = TRUE)
 }
 
 # TZ // short generic non-location format ("PT")
