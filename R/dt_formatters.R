@@ -31,6 +31,10 @@ format_tz_offset_min_sec <- function(
   )
 }
 
+get_iso_week <- function(input) {
+  as.integer(strftime(as.Date(input, format = "%Y-%m-%d"), format = "%V"))
+}
+
 format_yearweek <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
