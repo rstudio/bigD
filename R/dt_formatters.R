@@ -114,8 +114,6 @@ get_locale_territory <- function(locale) {
     return(territory)
   }
 
-  default_locales <- i18n::default_locales
-
   default_locale_name <-
     default_locales[default_locales$base_locale == gsub("_", "-", locale), ][["default_locale"]]
 
