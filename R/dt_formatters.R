@@ -123,7 +123,13 @@ get_locale_territory <- function(locale) {
       default_locales[grepl(paste0("^", locale), default_locales$base_locale), ][["default_locale"]][1]
   }
 
-  gsub(".*([A-Z]{2}|001|419|150).*", "\\1", default_locale_name)
+  territory <- gsub(".*([A-Z]{2}|001|419|150).*", "\\1", default_locale_name)
+
+  if (is.na(territory)) {
+    territory <- "001"
+  }
+
+  territory
 }
 
 get_week_in_month <- function(input, locale) {
