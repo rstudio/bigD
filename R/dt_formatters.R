@@ -31,6 +31,10 @@ format_tz_offset_min_sec <- function(
   )
 }
 
+get_iso_week <- function(input) {
+  as.integer(strftime(as.Date(input, format = "%Y-%m-%d"), format = "%V"))
+}
+
 format_yearweek <- function(input) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
@@ -38,7 +42,7 @@ format_yearweek <- function(input) {
   month_input <- as.integer(format(date_input, format = "%m"))
 
   yearweek_int <- as.integer(strftime(date_input, format = "%Y%V"))
-  week_int <- as.integer(strftime(date_input, format = "%V"))
+  week_int <- get_iso_week(input = date_input)
 
   yearweek_int_res <-
     ifelse(
@@ -100,11 +104,54 @@ get_milliseconds_in_day <- function(input) {
   )
 }
 
-get_week_in_month <- function(input) {
+get_locale_territory <- function(locale) {
+
+  locale_has_territory <- grepl("^[a-zA-Z_-]+?(-|_)?([A-Z]{2}|001|419|150)", locale)
+
+  if (locale_has_territory) {
+
+    territory <- gsub(".*([A-Z]{2}|001|419|150).*", "\\1", locale)
+    return(territory)
+  }
+
+  default_locale_name <-
+    default_locales[default_locales$base_locale == gsub("_", "-", locale), ][["default_locale"]]
+
+  if (length(default_locale_name) < 1) {
+
+    default_locale_name <-
+      default_locales[grepl(paste0("^", locale), default_locales$base_locale), ][["default_locale"]][1]
+  }
+
+  territory <- gsub(".*([A-Z]{2}|001|419|150).*", "\\1", default_locale_name)
+
+  if (is.na(territory)) {
+    territory <- "001"
+  }
+
+  territory
+}
+
+get_week_in_month <- function(input, locale) {
 
   date_input <- as.Date(input, format = "%Y-%m-%d")
 
-  week_number <- as.integer(format(date_input, format = "%U"))
+  territory <- get_locale_territory(locale = locale)
+
+  start_of_week_territory <- start_of_week[start_of_week$territory == territory, ]
+
+  if (nrow(start_of_week_territory) < 1) {
+    start_of_week <- "mon"
+  } else {
+    start_of_week <- start_of_week_territory[["day_of_week"]][[1]]
+  }
+
+  if (start_of_week == "mon") {
+    week_number <- get_iso_week(input = input)
+  } else {
+    week_number <- as.integer(format(date_input, format = "%U"))
+  }
+
   min_date_in_month <- as.Date(paste0(format(date_input, "%Y-%m"), "-01"))
   week_num_mininmum <- as.integer(format(min_date_in_month, format = "%U"))
 
@@ -643,8 +690,8 @@ dt_ww <- function(input) {
 }
 
 # Week of month, numeric, 1 digit
-dt_W <- function(input) {
-  as.character(get_week_in_month(input))
+dt_W <- function(input, locale) {
+  as.character(get_week_in_month(input = input, locale = locale))
 }
 
 # Day of month, numeric, 1-2 digits

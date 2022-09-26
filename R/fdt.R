@@ -1235,7 +1235,7 @@ fdt <- function(
     }
 
     if ("W" %in% dt_lett) {
-      dt <- u_gsub("{W}", dt_W(input_dt), dt, fixed = TRUE)
+      dt <- u_gsub("{W}", dt_W(input_dt, locale), dt, fixed = TRUE)
     }
 
     if ("d" %in% dt_lett) {
