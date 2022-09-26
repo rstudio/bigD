@@ -138,7 +138,20 @@ get_week_in_month <- function(input, locale) {
 
   territory <- get_locale_territory(locale = locale)
 
-  week_number <- as.integer(format(date_input, format = "%U"))
+  start_of_week_territory <- start_of_week[start_of_week$territory == territory, ]
+
+  if (nrow(start_of_week_territory) < 1) {
+    start_of_week <- "mon"
+  } else {
+    start_of_week <- start_of_week_territory[["day_of_week"]][[1]]
+  }
+
+  if (start_of_week == "mon") {
+    week_number <- get_iso_week(input = input)
+  } else {
+    week_number <- as.integer(format(date_input, format = "%U"))
+  }
+
   min_date_in_month <- as.Date(paste0(format(date_input, "%Y-%m"), "-01"))
   week_num_mininmum <- as.integer(format(min_date_in_month, format = "%U"))
 
