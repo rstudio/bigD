@@ -42,7 +42,7 @@ format_yearweek <- function(input) {
   month_input <- as.integer(format(date_input, format = "%m"))
 
   yearweek_int <- as.integer(strftime(date_input, format = "%Y%V"))
-  week_int <- as.integer(strftime(date_input, format = "%V"))
+  week_int <- get_iso_week(input = date_input)
 
   yearweek_int_res <-
     ifelse(
