@@ -1,4 +1,4 @@
-# bigD (development version)
+# bigD 0.3.0
 
 # bigD 0.2.0
 

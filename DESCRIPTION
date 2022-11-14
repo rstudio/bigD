@@ -1,7 +1,7 @@
 Type: Package
 Package: bigD
 Title: Flexibly Format Dates and Times to a Given Locale
-Version: 0.2.0.9000
+Version: 0.3.0
 Authors@R: person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3925-190X"))
 Description: Format dates and times flexibly and to whichever locales
