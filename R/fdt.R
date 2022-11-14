@@ -104,353 +104,445 @@
 #'
 #' `"2018-07-04T22:05:09.2358(America/Vancouver)"`
 #'
-#' ## The Era Designator (big G)
+#' ## Year
 #'
-#' | Formatting String              | Output                                 |
-#' |------------------------------- |----------------------------------------|
-#' | `"G"`, `"GG"`, or `"GGG"`      | `"AD"`                                 |
-#' | `"GGGG"`                       | `"Anno Domini"`                        |
-#' | `"GGGGG"`                      | `"A"`                                  |
+#' ### Calendar Year (little y)
 #'
+#' This yields the calendar year, which is always numeric. In most cases the
+#' length of the `"y"` field specifies the minimum number of digits to display,
+#' zero-padded as necessary. More digits will be displayed if needed to show the
+#' full year. There is an exception: `"yy"` gives use just the two low-order
+#' digits of the year, zero-padded as necessary. For most use cases, `"y"` or
+#' `"yy"` should be good enough.
 #'
-#' ## Year (little y)
-#'
-#' | Formatting String              | Output                                 |
+#' | Field Patterns                 | Output                                 |
 #' |------------------------------- |----------------------------------------|
 #' | `"y"`                          | `"2018"`                               |
 #' | `"yy"`                         | `"18"`                                 |
-#' | `"yyy"`                        | `"2018"`                               |
-#' | `"yyyy"`                       | `"2018"`                               |
-#' | `"yyyyy"`                      | `"02018"`                              |
-#' | `"yyyyyy"`                     | `"002018"`                             |
-#' | `"yyyyyyy"`                    | `"0002018"`                            |
-#' | `"yyyyyyyy"`                   | `"00002018"`                           |
-#' | `"yyyyyyyyy"`                  | `"000002018"`                          |
+#' | `"yyy"` to `"yyyyyyyyy"`       | `"2018"` to `"000002018"`              |
 #'
-#'
-#' ## Year in the Week in Year Calendar (big Y)
+#' ### Year in the Week in Year Calendar (big Y)
 #'
 #' This is the year in 'Week of Year' based calendars in which the year
-#' transition occurs on a week boundary. This may differ from calendar year 'y'
-#' near a year transition. This numeric year designation is used in conjunction
-#' with pattern character 'w' in the ISO year-week calendar as defined by ISO
-#' 8601.
+#' transition occurs on a week boundary. This may differ from calendar year
+#' `"y"` near a year transition. This numeric year designation is used in
+#' conjunction with pattern character `"w"` in the ISO year-week calendar as
+#' defined by ISO 8601.
 #'
-#' | Formatting String              | Output                                 |
+#' | Field Patterns                 | Output                                 |
 #' |--------------------------------|----------------------------------------|
 #' | `"Y"`                          | `"2018"`                               |
 #' | `"YY"`                         | `"18"`                                 |
-#' | `"YYY"`                        | `"2018"`                               |
-#' | `"YYYY"`                       | `"2018"`                               |
-#' | `"YYYYY"`                      | `"02018"`                              |
-#' | `"YYYYYY"`                     | `"002018"`                             |
-#' | `"YYYYYYY"`                    | `"0002018"`                            |
-#' | `"YYYYYYYY"`                   | `"00002018"`                           |
-#' | `"YYYYYYYYY"`                  | `"000002018"`                          |
+#' | `"YYY"` to `"YYYYYYYYY"`       | `"2018"` to `"000002018"`              |
 #'
+#' ## Quarter
 #'
-#' ## Quarter of the Year: formatting ver. (big Q)
+#' ### Quarter of the Year: formatting (big Q) and standalone (little q)
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"Q"`                          | `"3"`                                  |
-#' | `"QQ"`                         | `"03"`                                 |
-#' | `"QQQ"`                        | `"Q3"`                                 |
-#' | `"QQQQ"`                       | `"3rd quarter"`                        |
-#' | `"QQQQQ"`                      | `"3"`                                  |
+#' The quarter names are identified numerically, starting at `1` and ending at
+#' `4`. Quarter names may vary along two axes: the width and the context. The
+#' context is either 'formatting' (taken as a default), which the form used
+#' within a complete date format string, or, 'standalone', the form for date
+#' elements used independently (such as in calendar headers). The standalone
+#' form may be used in any other date format that shares the same form of the
+#' name. Here, the formatting form for quarters of the year consists of some run
+#' of `"Q"` values whereas the standalone form uses `"q"`.
 #'
+#' | Field Patterns    | Output          | Notes                             |
+#' |-------------------|-----------------|-----------------------------------|
+#' | `"Q"`/`"q"`       | `"3"`           | Numeric, one digit                |
+#' | `"QQ"`/`"qq"`     | `"03"`          | Numeric, two digits (zero padded) |
+#' | `"QQQ"`/`"qqq"`   | `"Q3"`          | Abbreviated                       |
+#' | `"QQQQ"`/`"qqqq"` | `"3rd quarter"` | Wide                              |
+#' | `"QQQQQ"`/`"qqqqq"` | `"3"`         | Narrow                            |
 #'
-#' ## Quarter of the Year: standalone ver. (little q)
+#' ## Month
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"q"`                          | `"3"`                                  |
-#' | `"qq"`                         | `"03"`                                 |
-#' | `"qqq"`                        | `"Q3"`                                 |
-#' | `"qqqq"`                       | `"3rd quarter"`                        |
-#' | `"qqqqq"`                      | `"3"`                                  |
+#' ### Month: formatting (big M) and standalone (big L)
 #'
+#' The month names are identified numerically, starting at `1` and ending at
+#' `12`. Month names may vary along two axes: the width and the context. The
+#' context is either 'formatting' (taken as a default), which the form used
+#' within a complete date format string, or, 'standalone', the form for date
+#' elements used independently (such as in calendar headers). The standalone
+#' form may be used in any other date format that shares the same form of the
+#' name. Here, the formatting form for months consists of some run of `"M"`
+#' values whereas the standalone form uses `"L"`.
 #'
-#' ## Month: formatting ver. (big M)
+#' | Field Patterns    | Output          | Notes                             |
+#' |-------------------|-----------------|-----------------------------------|
+#' | `"M"`/`"L"`       | `"7"`           | Numeric, minimum digits           |
+#' | `"MM"`/`"LL"`     | `"07"`          | Numeric, two digits (zero padded) |
+#' | `"MMM"`/`"LLL"`   | `"Jul"`         | Abbreviated                       |
+#' | `"MMMM"`/`"LLLL"` | `"July"`        | Wide                              |
+#' | `"MMMMM"`/`"LLLLL"` | `"J"`         | Narrow                            |
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"M"`                          | `"7"`                                  |
-#' | `"MM"`                         | `"07"`                                 |
-#' | `"MMM"`                        | `"Jul"`                                |
-#' | `"MMMM"`                       | `"July"`                               |
-#' | `"MMMMM"`                      | `"J"`                                  |
+#' ## Week
 #'
+#' ### Week of Year (little w)
 #'
-#' ## Month: standalone ver. (big L)
+#' Values calculated for the week of year range from `1` to `53`. Week `1` for a
+#' year is the first week that contains at least the specified minimum number of
+#' days from that year. Weeks between week `1` of one year and week `1` of the
+#' following year are numbered sequentially from `2` to `52` or `53` (if
+#' needed).
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"L"`                          | `"7"`                                  |
-#' | `"LL"`                         | `"07"`                                 |
-#' | `"LLL"`                        | `"Jul"`                                |
-#' | `"LLLL"`                       | `"July"`                               |
-#' | `"LLLLL"`                      | `"J"`                                  |
+#' There are two available field lengths. Both will display the week of year
+#' value but the `"ww"` width will always show two digits (where weeks `1` to
+#' `9` are zero padded).
 #'
+#' | Field Patterns   | Output    | Notes                                    |
+#' |------------------|-----------|------------------------------------------|
+#' | `"w"`            | `"27"`    | Minimum digits                           |
+#' | `"ww"`           | `"27"`    | Two digits (zero padded)                 |
 #'
-#' ## Week of Year (little w)
+#' ### Week of Month (big W)
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"w"`                          | `"27"` (minimal digits)                |
-#' | `"ww"`                         | `"27"` (two digits, zero padded)       |
+#' The week of a month can range from `1` to `5`. The first day of every month
+#' always begins at week `1` and with every transition into the beginning of a
+#' week, the week of month value is incremented by `1`.
 #'
+#' | Field Pattern    | Output                                               |
+#' |------------------|------------------------------------------------------|
+#' | `"W"`            | `"1"`                                                |
 #'
-#' ## Week of Month (big W)
+#' ## Day
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"W"`                          | `"1"`                                  |
+#' ### Day of Month (little d)
 #'
+#' The day of month value is always numeric and there are two available field
+#' length choices in its formatting. Both will display the day of month value
+#' but the `"dd"` formatting will always show two digits (where days `1` to `9`
+#' are zero padded).
 #'
-#' ## Day of Month (little d)
+#' | Field Patterns | Output    | Notes                                      |
+#' |----------------|-----------|--------------------------------------------|
+#' | `"d"`          | `"4"`     | Minimum digits                             |
+#' | `"dd"`         | `"04"`    | Two digits, zero padded                    |
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"d"`                          | `"4"` (minimal digits)                 |
-#' | `"dd"`                         | `"04"` (two digits, zero padded)       |
+#' ### Day of Year (big D)
 #'
+#' The day of year value ranges from `1` (January 1) to either `365` or `366`
+#' (December 31), where the higher value of the range indicates that the year is
+#' a leap year (29 days in February, instead of 28). The field length specifies
+#' the minimum number of digits, with zero-padding as necessary.
 #'
-#' ## Day of Year (big D)
+#' | Field Patterns  | Output   | Notes                                      |
+#' |-----------------|----------|--------------------------------------------|
+#' | `"D"`           | `"185"`  |                                            |
+#' | `"DD"`          | `"185"`  | Zero padded to minimum width of 2          |
+#' | `"DDD"`         | `"185"`  | Zero padded to minimum width of 3          |
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"D"`                          | `"185"`                                |
-#' | `"DD"`                         | `"185"` (zero padded to min-width of 2)|
-#' | `"DDD"`                        | `"185"` (zero padded to min-width of 3)|
+#' ### Day of Week in Month (big F)
 #'
+#' The day of week in month returns a numerical value indicating the number of
+#' times a given weekday had occurred in the month (e.g., '2nd Monday in
+#' March'). This conveniently resolves to predicable case structure where ranges
+#' of day of the month values return predictable day of week in month values:
 #'
-#' ## Day of Week in Month (big F)
+#' - days `1` - `7` -> `1`
+#' - days `8` - `14` -> `2`
+#' - days `15` - `21` -> `3`
+#' - days `22` - `28` -> `4`
+#' - days `29` - `31` -> `5`
 #'
-#' | Formatting String              | Output                                 |
+#' | Field Pattern                  | Output                                 |
 #' |--------------------------------|----------------------------------------|
 #' | `"F"`                          | `"1"`                                  |
 #'
+#' ### Modified Julian Date (little g)
 #'
-#' ## Modified Julian Day (little g)
+#' The modified version of the Julian date is obtained by subtracting
+#' 2,400,000.5 days from the Julian date (the number of days since January 1,
+#' 4713 BC). This essentially results in the number of days since midnight
+#' November 17, 1858. There is a half day offset (unlike the Julian date, the
+#' modified Julian date is referenced to midnight instead of noon).
 #'
-#' | Formatting String              | Output                                 |
+#' | Field Patterns                 | Output                                 |
 #' |--------------------------------|----------------------------------------|
-#' | `"g"`                          | `"58303"`                              |
-#' | `"gg"`                         | `"58303"`                              |
-#' | `"ggg"`                        | `"58303"`                              |
-#' | `"gggg"`                       | `"58303"`                              |
-#' | `"ggggg"`                      | `"58303"`                              |
-#' | `"gggggg"`                     | `"058303"`                             |
-#' | `"ggggggg"`                    | `"0058303"`                            |
-#' | `"gggggggg"`                   | `"00058303"`                           |
-#' | `"ggggggggg"`                  | `"000058303"`                          |
+#' | `"g"` to `"ggggggggg"`         | `"58303"` -> `"000058303"`             |
 #'
+#' ## Weekday
 #'
-#' ## Day of Week Name (big E)
+#' ### Day of Week Name (big E)
 #'
-#' | Formatting String              | Output                                 |
-#' |--------------------------------|----------------------------------------|
-#' | `"E"`                          | `"Wed"`                                |
-#' | `"EE"`                         | `"Wed"`                                |
-#' | `"EEE"`                        | `"Wed"`                                |
-#' | `"EEEE"`                       | `"Wednesday"`                          |
-#' | `"EEEEE"`                      | `"W"`                                  |
-#' | `"EEEEEE"`                     | `"We"`                                 |
+#' The name of the day of week is offered in four different widths.
 #'
+#' | Field Patterns             | Output         | Notes                     |
+#' |----------------------------|----------------|---------------------------|
+#' | `"E"`, `"EE"`, or `"EEE"`  | `"Wed"`        | Abbreviated               |
+#' | `"EEEE"`                   | `"Wednesday"`  | Wide                      |
+#' | `"EEEEE"`                  | `"W"`          | Narrow                    |
+#' | `"EEEEEE"`                 | `"We"`         | Short                     |
 #'
-#' ## AM/PM Period of Day (little a)
+#' ## Periods
 #'
-#' | Formatting String              | Output   | Note                        |
+#' ### AM/PM Period of Day (little a)
+#'
+#' This denotes before noon and after noon time periods. May be upper or
+#' lowercase depending on the locale and other options. The wide form may be
+#' the same as the short form if the 'real' long form (e.g. 'ante meridiem') is
+#' not customarily used. The narrow form must be unique, unlike some other
+#' fields.
+#'
+#' | Field Patterns                 | Output   | Notes                       |
 #' |--------------------------------|----------|-----------------------------|
 #' | `"a"`, `"aa"`, or `"aaa"`      | `"PM"`   | Abbreviated                 |
 #' | `"aaaa"`                       | `"PM"`   | Wide                        |
 #' | `"aaaaa"`                      | `"p"`    | Narrow                      |
 #'
+#' ### AM/PM Period of Day Plus Noon and Midnight (little b)
 #'
-#' ## AM/PM Period of Day Plus Noon and Midnight (little b)
+#' Provide AM and PM as well as phrases for exactly noon and midnight. May be
+#' upper or lowercase depending on the locale and other options. If the locale
+#' doesn't have the notion of a unique 'noon' (i.e., 12:00), then the PM form
+#' may be substituted. A similar behavior can occur for 'midnight' (00:00) and
+#' the AM form. The narrow form must be unique, unlike some other fields.
 #'
 #' (a) `input_midnight`: `"2020-05-05T00:00:00"`
-#'
 #' (b) `input_noon`: `"2020-05-05T12:00:00"`
 #'
-#' | Formatting String              | Output             | Note              |
+#' | Field Patterns                 | Output             | Notes             |
 #' |--------------------------------|--------------------|-------------------|
 #' | `"b"`, `"bb"`, or `"bbb"`      | (a) `"midnight"`   | Abbreviated       |
-#' | `"" "" ""`                     | (b) `"noon"`       | `"" "" ""`        |
+#' |                                | (b) `"noon"`       |                   |
 #' | `"bbbb"`                       | (a) `"midnight"`   | Wide              |
-#' | `"" "" ""`                     | (b) `"noon"`       | `"" "" ""`        |
+#' |                                | (b) `"noon"`       |                   |
 #' | `"bbbbb"`                      | (a) `"mi"`         | Narrow            |
-#' | `"" "" ""`                     | (b) `"n"`          | `"" "" ""`        |
+#' |                                | (b) `"n"`          |                   |
 #'
+#' ### Flexible Day Periods (big B)
 #'
-#' ## Flexible Day Periods (big B)
+#' Flexible day periods denotes things like 'in the afternoon', 'in the
+#' evening', etc., and the flexibility comes from a locale's language and
+#' script. Each locale has an associated rule set that specifies when the day
+#' periods start and end for that locale.
 #'
 #' (a) `input_morning`: `"2020-05-05T00:08:30"`
-#'
 #' (b) `input_afternoon`: `"2020-05-05T14:00:00"`
 #'
-#' | Formatting String          | Output                   | Note            |
+#' | Field Patterns             | Output                   | Notes           |
 #' |----------------------------|--------------------------|-----------------|
 #' | `"B"`, `"BB"`, or `"BBB"`  | (a) `"in the morning"`   | Abbreviated     |
-#' | `"" "" ""`                 | (b) `"in the afternoon"` | `"" "" ""`      |
+#' |                            | (b) `"in the afternoon"` |                 |
 #' | `"BBBB"`                   | (a) `"in the morning"`   | Wide            |
-#' | `"" "" ""`                 | (b) `"in the afternoon"` | `"" "" ""`      |
+#' |                            | (b) `"in the afternoon"` |                 |
 #' | `"BBBBB"`                  | (a) `"in the morning"`   | Narrow          |
-#' | `"" "" ""`                 | (b) `"in the afternoon"` | `"" "" ""`      |
+#' |                            | (b) `"in the afternoon"` |                 |
 #'
+#' ## Hours, Minutes, and Seconds
 #'
-#' ## Hour 1-12 (little h)
+#' ### Hour 0-23 (big H)
 #'
-#' Using: `"2015-08-01T08:35:09"`
+#' Hours from `0` to `23` are for a standard 24-hour clock cycle (midnight plus
+#' 1 minute is `00:01`) when using `"HH"` (which is the more common width that
+#' indicates zero-padding to 2 digits).
 #'
-#' | Formatting String      | Output  | Note                             |
-#' |------------------------|---------|----------------------------------|
-#' | `"h"`                  | `"8"`   | Numeric, minimum digits          |
-#' | `"hh"`                 | `"08"`  | Numeric, 2 digits (zero padded)  |
+#' Using `"2015-08-01T08:35:09"`:
 #'
+#' | Field Patterns         | Output  | Notes                                |
+#' |------------------------|---------|--------------------------------------|
+#' | `"H"`                  | `"8"`   | Numeric, minimum digits              |
+#' | `"HH"`                 | `"08"`  | Numeric, 2 digits (zero padded)      |
 #'
-#' ## Hour 0-23 (big H)
+#' ### Hour 1-12 (little h)
 #'
-#' Using: `"2015-08-01T08:35:09"`
+#' Hours from `1` to `12` are for a standard 12-hour clock cycle (midnight plus
+#' 1 minute is `12:01`) when using `"hh"` (which is the more common width that
+#' indicates zero-padding to 2 digits).
 #'
-#' | Formatting String      | Output  | Note                             |
-#' |------------------------|---------|----------------------------------|
-#' | `"H"`                  | `"8"`   | Numeric, minimum digits          |
-#' | `"HH"`                 | `"08"`  | Numeric, 2 digits (zero padded)  |
+#' Using `"2015-08-01T08:35:09"`:
 #'
+#' | Field Patterns         | Output  | Notes                                |
+#' |------------------------|---------|--------------------------------------|
+#' | `"h"`                  | `"8"`   | Numeric, minimum digits              |
+#' | `"hh"`                 | `"08"`  | Numeric, 2 digits (zero padded)      |
 #'
-#' ## Hour 0-11 (big K)
+#' ### Hour 1-24 (little k)
 #'
-#' Using: `"2015-08-01T08:35:09"`
+#' Using hours from `1` to `24` is a less common way to express a 24-hour clock
+#' cycle (midnight plus 1 minute is `24:01`) when using `"kk"` (which is the
+#' more common width that indicates zero-padding to 2 digits).
 #'
-#' | Formatting String      | Output  | Note                             |
-#' |------------------------|---------|----------------------------------|
-#' | `"K"`                  | `"7"`   | Numeric, minimum digits          |
-#' | `"KK"`                 | `"07"`  | Numeric, 2 digits (zero padded)  |
+#' Using `"2015-08-01T08:35:09"`:
 #'
+#' | Field Patterns         | Output  | Notes                                |
+#' |------------------------|---------|--------------------------------------|
+#' | `"k"`                  | `"9"`   | Numeric, minimum digits              |
+#' | `"kk"`                 | `"09"`  | Numeric, 2 digits (zero padded)      |
 #'
-#' ## Hour 1-24 (little k)
+#' ### Hour 0-11 (big K)
 #'
-#' Using: `"2015-08-01T08:35:09"`
+#' Using hours from `0` to `11` is a less common way to express a 12-hour clock
+#' cycle (midnight plus 1 minute is `00:01`) when using `"KK"` (which is the
+#' more common width that indicates zero-padding to 2 digits).
 #'
-#' | Formatting String      | Output  | Note                             |
-#' |------------------------|---------|----------------------------------|
-#' | `"k"`                  | `"9"`   | Numeric, minimum digits          |
-#' | `"kk"`                 | `"09"`  | Numeric, 2 digits (zero padded)  |
+#' Using `"2015-08-01T08:35:09"`:
 #'
+#' | Field Patterns         | Output  | Notes                                |
+#' |------------------------|---------|--------------------------------------|
+#' | `"K"`                  | `"7"`   | Numeric, minimum digits              |
+#' | `"KK"`                 | `"07"`  | Numeric, 2 digits (zero padded)      |
 #'
-#' ## Minute (little m)
+#' ### Minute (little m)
 #'
-#' | Formatting String      | Output  | Note                             |
-#' |------------------------|---------|----------------------------------|
-#' | `"m"`                  | `"5"`   | Numeric, minimum digits          |
-#' | `"mm"`                 | `"06"`  | Numeric, 2 digits (zero padded)  |
+#' The minute of the hour which can be any number from `0` to `59`. Use `"m"` to
+#' show the minimum number of digits, or `"mm"` to always show two digits
+#' (zero-padding, if necessary).
 #'
+#' | Field Patterns         | Output  | Notes                                |
+#' |------------------------|---------|--------------------------------------|
+#' | `"m"`                  | `"5"`   | Numeric, minimum digits              |
+#' | `"mm"`                 | `"06"`  | Numeric, 2 digits (zero padded)      |
 #'
-#' ## Second (little s)
+#' ### Seconds (little s)
 #'
-#' | Formatting String      | Output  | Note                             |
-#' |------------------------|---------|----------------------------------|
-#' | `"s"`                  | `"9"`   | Numeric, minimum digits          |
-#' | `"ss"`                 | `"09"`  | Numeric, 2 digits (zero padded)  |
+#' The second of the minute which can be any number from `0` to `59`. Use `"s"`
+#' to show the minimum number of digits, or `"ss"` to always show two digits
+#' (zero-padding, if necessary).
 #'
+#' | Field Patterns         | Output  | Notes                                |
+#' |------------------------|---------|--------------------------------------|
+#' | `"s"`                  | `"9"`   | Numeric, minimum digits              |
+#' | `"ss"`                 | `"09"`  | Numeric, 2 digits (zero padded)      |
 #'
-#' ## Fractional Second (big S)
+#' ### Fractional Second (big S)
 #'
-#' | Formatting String              | Output                                 |
+#' The fractional second truncates (like other time fields) to the width
+#' requested (i.e., count of letters). So using pattern `"SSSS"` will display
+#' four digits past the decimal (which, incidentally, needs to be added manually
+#' to the pattern).
+#'
+#' | Field Patterns                 | Output                                 |
 #' |--------------------------------|----------------------------------------|
-#' | `"S"`                          | `"2"`                                  |
-#' | `"SS"`                         | `"23"`                                 |
-#' | `"SSS"`                        | `"235"`                                |
-#' | `"SSSS"`                       | `"2350"`                               |
-#' | `"SSSSS"`                      | `"23500"`                              |
-#' | `"SSSSSS"`                     | `"235000"`                             |
-#' | `"SSSSSSS"`                    | `"2350000"`                            |
-#' | `"SSSSSSSS"`                   | `"23500000"`                           |
-#' | `"SSSSSSSSS"`                  | `"235000000"`                          |
+#' | `"S"` to `"SSSSSSSSS"`         | `"2"` -> `"235000000"`                 |
 #'
+#' ### Milliseconds Elapsed in Day (big A)
 #'
-#' ## Milliseconds Elapsed in Day (big A)
+#' There are 86,400,000 milliseconds in a day and the `"A"` pattern will provide
+#' the whole number. The width can go up to nine digits with `"AAAAAAAAA"` and
+#' these higher field widths will result in zero padding if necessary.
 #'
-#' Using: `"2011-07-27T00:07:19.7223"`
+#' Using `"2011-07-27T00:07:19.7223"`:
 #'
-#' | Formatting String              | Output                                 |
+#' | Field Patterns                 | Output                                 |
 #' |--------------------------------|----------------------------------------|
-#' | `"A"`                          | `"439722"`                             |
-#' | `"AA"`                         | `"439722"`                             |
-#' | `"AAA"`                        | `"439722"`                             |
-#' | `"AAAA"`                       | `"439722"`                             |
-#' | `"AAAAA"`                      | `"439722"`                             |
-#' | `"AAAAAA"`                     | `"439722"`                             |
-#' | `"AAAAAAA"`                    | `"0439722"`                            |
-#' | `"AAAAAAAA"`                   | `"00439722"`                           |
-#' | `"AAAAAAAAA"`                  | `"000439722"`                          |
+#' | `"A"` to `"AAAAAAAAA"`         | `"439722"` -> `"000439722"`            |
 #'
+#' ## Era
 #'
-#' ## TZ // Short and Long Specific non-Location Format (little z)
+#' ### The Era Designator (big G)
 #'
-#' | Formatting String          | Output                    | Note           |
+#' This provides the era name for the given date. The Gregorian calendar has two
+#' eras: AD and BC. In the AD year numbering system, AD 1 is immediately
+#' preceded by 1 BC, with nothing in between them (there was no year zero).
+#'
+#' | Field Patterns                 | Output          | Notes                |
+#' |--------------------------------|-----------------|----------------------|
+#' | `"G"`, `"GG"`, or `"GGG"`      | `"AD"`          | Abbreviated          |
+#' | `"GGGG"`                       | `"Anno Domini"` | Wide                 |
+#' | `"GGGGG"`                      | `"A"`           | Narrow               |
+#'
+#' ## Time Zones
+#'
+#' ### TZ // Short and Long Specific non-Location Format (little z)
+#'
+#' The short and long specific non-location formats for time zones are suggested
+#' for displaying a time with a user friendly time zone name. Where the short
+#' specific format is unavailable, it will fall back to the short localized GMT
+#' format (`"O"`). Where the long specific format is unavailable, it will fall
+#' back to the long localized GMT format (`"OOOO"`).
+#'
+#' | Field Patterns             | Output                    | Notes          |
 #' |----------------------------|---------------------------|----------------|
 #' | `"z"`, `"zz"`, or `"zzz"`  | `"PDT"`                   | Short Specific |
 #' | `"zzzz"`                   | `"Pacific Daylight Time"` | Long Specific  |
 #'
+#' ### TZ // Common UTC Offset Formats (big Z)
 #'
-#' ## TZ // Short and Long Specific non-Location Formats (big Z)
+#' The ISO8601 basic format with hours, minutes and optional seconds fields is
+#' represented by `"Z"`, `"ZZ"`, or `"ZZZ"`. The format is equivalent to RFC 822
+#' zone format (when the optional seconds field is absent). This is equivalent
+#' to the `"xxxx"` specifier. The field pattern `"ZZZZ"` represents the long
+#' localized GMT format. This is equivalent to the `"OOOO"` specifier. Finally,
+#' `"ZZZZZ"` pattern yields the ISO8601 extended format with hours, minutes and
+#' optional seconds fields. The ISO8601 UTC indicator `Z` is used when local
+#' time offset is `0`. This is equivalent to the `"XXXXX"` specifier.
 #'
-#' | Formatting String          | Output       | Note                      |
-#' |----------------------------|--------------|---------------------------|
-#' | `"Z"`, `"ZZ"`, or `"ZZZ"`  | `"-0700"`    | ISO 8601 basic format     |
-#' | `"ZZZZ"`                   | `"GMT-7:00"` | Long localized GMT format |
-#' | `"ZZZZZ"`                  | `"-07:00"`   | ISO 8601 extended format  |
+#' | Field Patterns             | Output       | Notes                       |
+#' |----------------------------|--------------|-----------------------------|
+#' | `"Z"`, `"ZZ"`, or `"ZZZ"`  | `"-0700"`    | ISO 8601 basic format       |
+#' | `"ZZZZ"`                   | `"GMT-7:00"` | Long localized GMT format   |
+#' | `"ZZZZZ"`                  | `"-07:00"`   | ISO 8601 extended format    |
 #'
+#' ### TZ // Short and Long Localized GMT Formats (big O)
 #'
-#' ## TZ // Short and Long Localized GMT Formats (big O)
+#' The localized GMT formats come in two widths `"O"` (which removes the minutes
+#' field if it's `0`) and `"OOOO"` (which always contains the minutes field).
+#' The use of the `GMT` indicator changes according to the locale.
 #'
-#' | Formatting String       | Output        | Note                        |
-#' |-------------------------|---------------|-----------------------------|
-#' | `"O"`                   | `"GMT-7"`     | Short localized GMT format  |
-#' | `"OOOO"`                | `"GMT-07:00"` | Long localized GMT format   |
+#' | Field Patterns          | Output        | Notes                         |
+#' |-------------------------|---------------|-------------------------------|
+#' | `"O"`                   | `"GMT-7"`     | Short localized GMT format    |
+#' | `"OOOO"`                | `"GMT-07:00"` | Long localized GMT format     |
 #'
+#' ### TZ // Short and Long Generic non-Location Formats (little v)
 #'
-#' ## TZ // Short and Long Localized GMT Formats (little v)
+#' The generic non-location formats are useful for displaying a recurring wall
+#' time (e.g., events, meetings) or anywhere people do not want to be overly
+#' specific. Where either of these is unavailable, there is a fallback to the
+#' generic location format (`"VVVV"`), then the short localized GMT format as
+#' the final fallback.
 #'
-#' | Formatting String  | Output           | Note                              |
-#' |--------------------|------------------|-----------------------------------|
-#' | `"v"`              | `"PT"`           | Short generic non-location format |
-#' | `"vvvv"`           | `"Pacific Time"` | Long generic non-location format  |
+#' | Field Patterns  | Output           | Notes                              |
+#' |-----------------|------------------|------------------------------------|
+#' | `"v"`           | `"PT"`           | Short generic non-location format  |
+#' | `"vvvv"`        | `"Pacific Time"` | Long generic non-location format   |
 #'
+#' ### TZ // Short Time Zone IDs and Exemplar City Formats (big V)
 #'
-#' ## TZ // Short Time Zone IDs and Exemplar City Formats (big V)
+#' These formats provide variations of the time zone ID and often include the
+#' exemplar city. The widest of these formats, `"VVVV"`, is useful for
+#' populating a choice list for time zones, because it supports 1-to-1 name/zone
+#' ID mapping and is more uniform than other text formats.
 #'
-#' | Formatting String  | Output                | Note                     |
-#' |--------------------|-----------------------|--------------------------|
-#' | `"V"`              | `"cavan"`             | Short time zone ID       |
-#' | `"VV"`             | `"America/Vancouver"` | Long time zone ID        |
-#' | `"VVV"`            | `"Vancouver"`         | The tz exemplar city     |
-#' | `"VVVV"`           | `"Vancouver Time"`    | Generic location format  |
+#' | Field Patterns     | Output                | Notes                      |
+#' |--------------------|-----------------------|----------------------------|
+#' | `"V"`              | `"cavan"`             | Short time zone ID         |
+#' | `"VV"`             | `"America/Vancouver"` | Long time zone ID          |
+#' | `"VVV"`            | `"Vancouver"`         | The tz exemplar city       |
+#' | `"VVVV"`           | `"Vancouver Time"`    | Generic location format    |
 #'
+#' ### TZ // ISO 8601 Formats with Z for +0000 (big X)
 #'
-#' ## TZ // ISO 8601 Formats with Z for +0000 (big X)
+#' The `"X"`-`"XXX"` field patterns represent valid ISO 8601 patterns for time
+#' zone offsets in datetimes. The final two widths, `"XXXX"` and `"XXXXX"` allow
+#' for optional seconds fields. The seconds field is *not* supported by the ISO
+#' 8601 specification. For all of these, the ISO 8601 UTC indicator `Z` is used
+#' when the local time offset is `0`.
 #'
-#' | Formatting String | Output     | Note                                      |
-#' |-------------------|------------|-------------------------------------------|
-#' | `"X"`             | `"-07"`    | ISO 8601 basic format (h; optional m)     |
-#' | `"XX"`            | `"-0700"`  | ISO 8601 basic format (h & m)             |
-#' | `"XXX"`           | `"-07:00"` | ISO 8601 extended format (h & m)          |
-#' | `"XXXX"`          | `"-0700"`  | ISO 8601 basic format (h & m, optional s) |
-#' | `"XXXXX"`         | `"-07:00"` | ISO 8601 extended format (h & m, optional s) |
+#' | Field Patterns | Output     | Notes                                     |
+#' |----------------|------------|-------------------------------------------|
+#' | `"X"`          | `"-07"`    | ISO 8601 basic format (h, optional m)     |
+#' | `"XX"`         | `"-0700"`  | ISO 8601 basic format (h & m)             |
+#' | `"XXX"`        | `"-07:00"` | ISO 8601 extended format (h & m)          |
+#' | `"XXXX"`       | `"-0700"`  | ISO 8601 basic format (h & m, optional s) |
+#' | `"XXXXX"`      | `"-07:00"` | ISO 8601 extended format (h & m, optional s) |
 #'
+#' ### TZ // ISO 8601 Formats (no use of Z for +0000) (little x)
 #'
-#' ## TZ // ISO 8601 Formats (no use of Z for +0000) (little x)
+#' The `"x"`-`"xxxxx"` field patterns represent valid ISO 8601 patterns for time
+#' zone offsets in datetimes. They are similar to the `"X"`-`"XXXXX"` field
+#' patterns except that the ISO 8601 UTC indicator `Z` *will not* be used when
+#' the local time offset is `0`.
 #'
-#' | Formatting String | Output     | Note                                      |
-#' |-------------------|------------|-------------------------------------------|
-#' | `"x"`             | `"-07"`    | ISO 8601 basic format (h; optional m)     |
-#' | `"xx"`            | `"-0700"`  | ISO 8601 basic format (h & m)             |
-#' | `"xxx"`           | `"-07:00"` | ISO 8601 extended format (h & m)          |
-#' | `"xxxx"`          | `"-0700"`  | ISO 8601 basic format (h & m, optional s) |
-#' | `"xxxxx"`         | `"-07:00"` | ISO 8601 extended format (h & m, optional s) |
+#' | Field Patterns | Output     | Notes                                     |
+#' |----------------|------------|-------------------------------------------|
+#' | `"x"`          | `"-07"`    | ISO 8601 basic format (h, optional m)     |
+#' | `"xx"`         | `"-0700"`  | ISO 8601 basic format (h & m)             |
+#' | `"xxx"`        | `"-07:00"` | ISO 8601 extended format (h & m)          |
+#' | `"xxxx"`       | `"-0700"`  | ISO 8601 basic format (h & m, optional s) |
+#' | `"xxxxx"`      | `"-07:00"` | ISO 8601 extended format (h & m, optional s) |
 #'
 #' @param input A vector of date, time, or datetime values. Several
 #'   representations are acceptable here including strings, `Date` objects, or
@@ -1143,7 +1235,7 @@ fdt <- function(
     }
 
     if ("W" %in% dt_lett) {
-      dt <- u_gsub("{W}", dt_W(input_dt), dt, fixed = TRUE)
+      dt <- u_gsub("{W}", dt_W(input_dt, locale), dt, fixed = TRUE)
     }
 
     if ("d" %in% dt_lett) {

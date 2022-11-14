@@ -64,11 +64,11 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss zzz") %>%
     expect_equal("2014-07-17 08:00:00 BST")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss zzz") %>%
-    expect_equal("2015-08-18 08:00:00 GMT+0")
+    expect_equal("2015-08-18 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss zzz") %>%
-    expect_equal("2015-09-19 08:00:00 GMT+0")
+    expect_equal("2015-09-19 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss zzz") %>%
-    expect_equal("2018-07-04 22:05:00 GMT+0")
+    expect_equal("2018-07-04 22:05:00 GMT")
 
   #
   # Checks with `z` and `zz` which should be equivalent to `zzz`
@@ -134,11 +134,11 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss zzzz") %>%
     expect_equal("2014-07-17 08:00:00 GMT+01:00")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2015-08-18 08:00:00 GMT+00:00")
+    expect_equal("2015-08-18 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2015-09-19 08:00:00 GMT+00:00")
+    expect_equal("2015-09-19 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss zzzz") %>%
-    expect_equal("2018-07-04 22:05:00 GMT+00:00")
+    expect_equal("2018-07-04 22:05:00 GMT")
 
 
   #
@@ -324,7 +324,7 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2018-07-04 22:05:00 GMT-7")
   fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss O") %>%
-    expect_equal("2018-09-06 08:00:00 GMT+0")
+    expect_equal("2018-09-06 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2012-11-26 08:00:00 GMT+2")
   fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss O") %>%
@@ -338,11 +338,11 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss O") %>%
     expect_equal("2014-07-17 08:00:00 GMT+1")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss O") %>%
-    expect_equal("2015-08-18 08:00:00 GMT+0")
+    expect_equal("2015-08-18 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss O") %>%
-    expect_equal("2015-09-19 08:00:00 GMT+0")
+    expect_equal("2015-09-19 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss O") %>%
-    expect_equal("2018-07-04 22:05:00 GMT+0")
+    expect_equal("2018-07-04 22:05:00 GMT")
 
   #
   # Checks with `OOOO`: the long localized GMT format (e.g., 'GMT-08:00')
@@ -369,7 +369,7 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_10, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2018-07-04 22:05:00 GMT-07:00")
   fdt(input = dt_list$iso_datetime_tz_11, format = "y-MM-dd HH:mm:ss OOOO") %>%
-    expect_equal("2018-09-06 08:00:00 GMT+00:00")
+    expect_equal("2018-09-06 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_12, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2012-11-26 08:00:00 GMT+02:00")
   fdt(input = dt_list$iso_datetime_tz_13, format = "y-MM-dd HH:mm:ss OOOO") %>%
@@ -383,11 +383,11 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss OOOO") %>%
     expect_equal("2014-07-17 08:00:00 GMT+01:00")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss OOOO") %>%
-    expect_equal("2015-08-18 08:00:00 GMT+00:00")
+    expect_equal("2015-08-18 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss OOOO") %>%
-    expect_equal("2015-09-19 08:00:00 GMT+00:00")
+    expect_equal("2015-09-19 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss OOOO") %>%
-    expect_equal("2018-07-04 22:05:00 GMT+00:00")
+    expect_equal("2018-07-04 22:05:00 GMT")
 
   #
   # Checks with `v`: the short generic non-location format (e.g., 'PT'); falls
@@ -429,11 +429,11 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss v") %>%
     expect_equal("2014-07-17 08:00:00 Greenwich Mean Time")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss v") %>%
-    expect_equal("2015-08-18 08:00:00 GMT+00:00")
+    expect_equal("2015-08-18 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss v") %>%
-    expect_equal("2015-09-19 08:00:00 GMT+00:00")
+    expect_equal("2015-09-19 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss v") %>%
-    expect_equal("2018-07-04 22:05:00 GMT+00:00")
+    expect_equal("2018-07-04 22:05:00 GMT")
 
   #
   # Checks with `vvvv`: the long generic non-location format (e.g.,
@@ -475,11 +475,11 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss vvvv") %>%
     expect_equal("2014-07-17 08:00:00 Greenwich Mean Time")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss vvvv") %>%
-    expect_equal("2015-08-18 08:00:00 GMT+00:00")
+    expect_equal("2015-08-18 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss vvvv") %>%
-    expect_equal("2015-09-19 08:00:00 GMT+00:00")
+    expect_equal("2015-09-19 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss vvvv") %>%
-    expect_equal("2018-07-04 22:05:00 GMT+00:00")
+    expect_equal("2018-07-04 22:05:00 GMT")
 
   #
   # Checks with `V`: the short time zone ID The short time zone ID. Where that
@@ -655,11 +655,11 @@ test_that("ISO datetimes with tz info can be parsed and formatted", {
   fdt(input = dt_list$iso_datetime_tz_17, format = "y-MM-dd HH:mm:ss VVVV") %>%
     expect_equal("2014-07-17 08:00:00 London Time")
   fdt(input = dt_list$iso_datetime_tz_18, format = "y-MM-dd HH:mm:ss VVVV") %>%
-    expect_equal("2015-08-18 08:00:00 GMT+00:00")
+    expect_equal("2015-08-18 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_19, format = "y-MM-dd HH:mm:ss VVVV") %>%
-    expect_equal("2015-09-19 08:00:00 GMT+00:00")
+    expect_equal("2015-09-19 08:00:00 GMT")
   fdt(input = dt_list$iso_datetime_tz_20, format = "y-MM-dd HH:mm:ss VVVV") %>%
-    expect_equal("2018-07-04 22:05:00 GMT+00:00")
+    expect_equal("2018-07-04 22:05:00 GMT")
 
   #
   # Checks with `X`: ISO8601 basic format with hours and optional minutes field;
