@@ -571,14 +571,14 @@ second, and the day of the month last (separated by hyphens):</p>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"y-MMM-dd"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2018-Jul-04"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "2018-Jul-04"</span></span></code></pre><p></p></div>
 <p>There are sometimes many options for each time part. Instead of using
 <code>"y-MMM-dd"</code>, let's try a variation on that with <code>"yy-MMMM-d"</code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"yy-MMMM-d"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "18-July-4"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "18-July-4"</span></span></code></pre><p></p></div>
 <p>The output is localizable and so elements will be translated when supplying
 the appropriate locale code. Let's use <code>locale = es</code> to get the month written
 in Spanish:</p>
@@ -587,19 +587,19 @@ in Spanish:</p>
 <span>  format <span class="op">=</span> <span class="st">"yy-MMMM-d"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="st">"es"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "18-julio-4"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "18-julio-4"</span></span></code></pre><p></p></div>
 <p><code>POSIXct</code> or <code>POSIXlt</code> datetimes can serve as an <code>input</code> to <code>fdt()</code>. Let's
 create a single datetime value where the timezone is set as <code>"Asia/Tokyo"</code>.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu">ymd_hms</span><span class="op">(</span><span class="st">"2020-03-15 19:09:12"</span>, tz <span class="op">=</span> <span class="st">"Asia/Tokyo"</span><span class="op">)</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"EEEE, MMMM d, y 'at' h:mm:ss B (VVVV)"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Sunday, March 15, 2020 at 7:09:12 in the evening (Tokyo Time)"</span></span></code></pre><p></p></div>
 <p>If you're going minimal, it's possible to supply an input datetime string
 without a <code>format</code> directive. What this gives us is formatted datetime
 output that conforms to ISO 8601. Note that the implied time zone is UTC.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2018-07-04T22:05:00Z"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "2018-07-04T22:05:00Z"</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
@@ -616,7 +616,7 @@ relatively simple).</p>
 <span>  format <span class="op">=</span> <span class="st">"yy-MMMM-d"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="va">fdt_locales_lst</span><span class="op">$</span><span class="va">it</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "18-luglio-4"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "18-luglio-4"</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
@@ -627,13 +627,13 @@ relatively simple).</p>
 portion implies midnight (and is just fine if you're only going to present
 the date anyway).</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"2018-07-04"</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2018-07-04T00:00:00Z"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "2018-07-04T00:00:00Z"</span></span></code></pre><p></p></div>
 <p>If you omit the date and just supply a time, <code>fdt()</code> will correctly parse
 this. The current date on the user system will be used because we need to
 create some sort of datetime value internally. Again, this is alright if
 you just intend to present a formatted time value.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"22:05"</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "2022-08-16T22:05:00Z"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "2022-08-16T22:05:00Z"</span></span></code></pre><p></p></div>
 <p>To see all of the supported locales, we can look at the vector supplied by
 the <code><a href="fdt_locales_vec.html">fdt_locales_vec()</a></code> function.</p>
 </div>
@@ -650,7 +650,7 @@ providing the correct formatting string. This function is invoked in the
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date_time.html">standard_date_time</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Wednesday, July 4, 2018 at 10:05:00 PM Pacific Daylight Time"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Wednesday, July 4, 2018 at 10:05:00 PM Pacific Daylight Time"</span></span></code></pre><p></p></div>
 <p>The locale can be changed and we don't have to worry about the particulars
 of the formatting string (they are standardized across locales).</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
@@ -658,34 +658,34 @@ of the formatting string (they are standardized across locales).</p>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date_time.html">standard_date_time</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span>,</span>
 <span>  locale <span class="op">=</span> <span class="va">fdt_locales_lst</span><span class="op">$</span><span class="va">nl</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "woensdag 4 juli 2018 om 22:05:00 Pacific-zomertijd"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "woensdag 4 juli 2018 om 22:05:00 Pacific-zomertijd"</span></span></code></pre><p></p></div>
 <p>We can use different <code>type</code> values to control the output datetime string. The
 default is <code>"short"</code>.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date_time.html">standard_date_time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "7/4/18, 10:05 PM"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "7/4/18, 10:05 PM"</span></span></code></pre><p></p></div>
 <p>After that, it's <code>"medium"</code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date_time.html">standard_date_time</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Jul 4, 2018, 10:05:00 PM"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Jul 4, 2018, 10:05:00 PM"</span></span></code></pre><p></p></div>
 <p>The <code>"short"</code> and <code>"medium"</code> types don't display time zone information in the
 output. Beginning with <code>"long"</code>, the tz is shown.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date_time.html">standard_date_time</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "July 4, 2018 at 10:05:00 PM PDT"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "July 4, 2018 at 10:05:00 PM PDT"</span></span></code></pre><p></p></div>
 <p>If you don't include time zone information in the input, the <code>"UTC"</code> time
 zone will be assumed:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date_time.html">standard_date_time</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Wednesday, July 4, 2018 at 10:05:00 PM GMT+00:00"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Wednesday, July 4, 2018 at 10:05:00 PM GMT+00:00"</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
@@ -701,7 +701,7 @@ from the <code>flex_d_lst</code> object, yielding a formatted date.</p>
 <span>  input <span class="op">=</span> <span class="st">"2021-01-09 16:32(America/Toronto)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="va">flex_d_lst</span><span class="op">$</span><span class="va">yMMMEd</span>,</span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Sat, Jan 9, 2021"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Sat, Jan 9, 2021"</span></span></code></pre><p></p></div>
 <p>If we wanted this in a different locale, the locale-specific <code>format</code> pattern
 behind the flexible date identifier would ensure consistency while moving to
 that locale.</p>
@@ -710,21 +710,21 @@ that locale.</p>
 <span>  format <span class="op">=</span> <span class="va">flex_d_lst</span><span class="op">$</span><span class="va">yMMMEd</span>,</span>
 <span>  locale <span class="op">=</span> <span class="st">"fr_CA"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "sam. 9 janv. 2021"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "sam. 9 janv. 2021"</span></span></code></pre><p></p></div>
 <p>Formatting as a 12-hour time with the <a href="flex_t12_lst.html">flex_t12_lst</a> list and using the
 <code>"hms"</code> flexible type:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2021-01-09 16:32(America/Toronto)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="va">flex_t12_lst</span><span class="op">$</span><span class="va">hms</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "4:32:00 PM"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "4:32:00 PM"</span></span></code></pre><p></p></div>
 <p>The 24-hour variant, <a href="flex_t24_lst.html">flex_t24_lst</a>, has a similar <code>"Hms"</code> flexible type that
 will give us a 24-hour version of the same clock time:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2021-01-09 16:32(America/Toronto)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="va">flex_t24_lst</span><span class="op">$</span><span class="va">Hms</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "16:32:00"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "16:32:00"</span></span></code></pre><p></p></div>
 <p>A flexible date and time can be used together by enveloping the two in a
 list (<strong>bigD</strong> will handle putting the date and time together in a sensible
 manner).</p>
@@ -732,7 +732,7 @@ manner).</p>
 <span>  input <span class="op">=</span> <span class="st">"2021-01-09 16:32(America/Toronto)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">flex_d_lst</span><span class="op">$</span><span class="va">yMMMEd</span>, <span class="va">flex_t24_lst</span><span class="op">$</span><span class="va">Hmv</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; "Sat, Jan 9, 2021, 16:32 ET"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; "Sat, Jan 9, 2021, 16:32 ET"</span></span></code></pre><p></p></div>
 </div>
 
     </div>

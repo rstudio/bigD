@@ -93,7 +93,7 @@ of <code><a href="fdt.html">fdt()</a></code>:</p>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date.html">standard_date</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Wednesday, July 4, 2018"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Wednesday, July 4, 2018"</span></span></code></pre><p></p></div>
 <p>The locale can be changed and we don't have to worry about the particulars
 of the formatting string (they are standardized across locales).</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
@@ -101,26 +101,26 @@ of the formatting string (they are standardized across locales).</p>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date.html">standard_date</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span>,</span>
 <span>  locale <span class="op">=</span> <span class="va">fdt_locales_lst</span><span class="op">$</span><span class="va">nl</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "woensdag 4 juli 2018"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "woensdag 4 juli 2018"</span></span></code></pre><p></p></div>
 <p>We can use different <code>type</code> values to control the output date string. The
 default is <code>"short"</code>.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date.html">standard_date</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "7/4/18"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "7/4/18"</span></span></code></pre><p></p></div>
 <p>After that, it's <code>"medium"</code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date.html">standard_date</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "Jul 4, 2018"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "Jul 4, 2018"</span></span></code></pre><p></p></div>
 <p>Then, <code>"long"</code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/fdt.html">fdt</a></span><span class="op">(</span></span>
 <span>  input <span class="op">=</span> <span class="st">"2018-07-04 22:05(America/Vancouver)"</span>,</span>
 <span>  format <span class="op">=</span> <span class="fu"><a href="../reference/standard_date.html">standard_date</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; [1] "July 4, 2018"</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "July 4, 2018"</span></span></code></pre><p></p></div>
 <p>And finally up to <code>"full"</code>, which was demonstrated in the first example.</p>
     </div>
 
