@@ -1,13 +1,13 @@
 <div align="center">
 
-<a href='https://rich-iannone.github.io/bigD/'><img src="man/figures/logo.svg" height="350px"/></a>
+<a href='https://rstudio.github.io/bigD/'><img src="man/figures/logo.svg" height="350px"/></a>
 
 <br />
 <!-- badges: start -->
 <a href="https://cran.r-project.org/package=bigD"><img src="https://www.r-pkg.org/badges/version/bigD" alt="CRAN status" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-<a href="https://github.com/rich-iannone/bigD/actions"><img src="https://github.com/rich-iannone/bigD/workflows/R-CMD-check/badge.svg" alt="R build status" /></a>
-<a href="https://app.codecov.io/gh/rich-iannone/bigD?branch=main"><img src="https://codecov.io/gh/rich-iannone/bigD/branch/main/graph/badge.svg" alt="Coverage status" /></a>
+<a href="https://github.com/rstudio/bigD/actions"><img src="https://github.com/rstudio/bigD/workflows/R-CMD-check/badge.svg" alt="R build status" /></a>
+<a href="https://app.codecov.io/gh/rstudio/bigD?branch=main"><img src="https://codecov.io/gh/rstudio/bigD/branch/main/graph/badge.svg" alt="Coverage status" /></a>
 
 <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed." /></a>
 <a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/bigD" alt="Monthly Downloads"></a>
@@ -113,14 +113,14 @@ install.packages("bigD")
 You can also install the development version of **bigD** from **GitHub**:
 
 ```r
-devtools::install_github("rich-iannone/bigD")
+devtools::install_github("rstudio/bigD")
 ```
 
-If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/bigD/issues).
+If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rstudio/bigD/issues).
 
 ##### Code of Conduct
 
-Please note that the `rich-iannone/bigD` project is released with a [contributor code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By participating in this project you agree to abide by its terms.
+Please note that the `rstudio/bigD` project is released with a [contributor code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By participating in this project you agree to abide by its terms.
 
 ##### 📄 License
 
