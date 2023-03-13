@@ -20,7 +20,7 @@ License: MIT + file LICENSE
 URL: https://github.com/rstudio/bigD
 BugReports: https://github.com/rstudio/bigD/issues
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Depends:
     R (>= 3.2.0)
 Suggests:
