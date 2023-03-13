@@ -8,7 +8,7 @@
 <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed." /></a>
 <a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/bigD" alt="Monthly Downloads"></a>
 <a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/grand-total/bigD" alt="Total Downloads"></a>
-<a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct/"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
+<a href="https://www.contributor-covenant.org/version/2/1/code_of_conduct.html"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.1%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
 <!-- badges: end -->
 
 <br />
@@ -119,9 +119,10 @@ Please note that the `rstudio/bigD` project is released with a [contributor code
 
 ##### 📄 License
 
-**bigD** is licensed under the MIT license.
-See the [`LICENSE.md`](LICENSE.md) file for more details.
+**bigD** is licensed under the MIT license. See the `LICENSE.md`](LICENSE.md) file for more details.
+
+© Posit Software, PBC.
 
 ##### 🏛️ Governance
 
-This project is maintained by [Rich Iannone](https://github.com/rich-iannone).
+This project is primarily maintained by [Rich Iannone](https://twitter.com/riannone). Should there also be other authors, they might occasionally assist with some of these duties.
