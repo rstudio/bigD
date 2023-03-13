@@ -23,4 +23,3 @@ Once there is consensus that a PR based on the issue would be helpful, adhering 
 *  The **bigD** package follows the tidyverse [style guide](http://style.tidyverse.org) so please adopt those style guidelines in your submitted code as best as possible.
 *  The internal documentation uses [roxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html); if your contribution requires new or revised documentation ensure that the roxygen comments are added/modified (do not modify any `.Rd` files in the `man` folder).
 *  We use [testthat](https://cran.r-project.org/web/packages/testthat/) for code coverage; those contributions with test cases included are helpful easier to accept.
-*  Add a bullet to the top of `NEWS.md` below the current development version header describing any user-facing changes made; include your GitHub username, and links to relevant issue(s)/PR(s).
