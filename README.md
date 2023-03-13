@@ -124,7 +124,7 @@ Please note that the `rstudio/bigD` project is released with a [contributor code
 
 ##### 📄 License
 
-**bigD** is licensed under the MIT license. See the `LICENSE.md`](LICENSE.md) file for more details.
+**bigD** is licensed under the MIT license. See the [`LICENSE.md`](LICENSE.md) file for more details.
 
 © Posit Software, PBC.
 
