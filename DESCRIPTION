@@ -17,7 +17,7 @@ Authors@R: c(
     person("Posit Software, PBC", role = c("cph", "fnd"))
     )
 License: MIT + file LICENSE
-URL: https://github.com/rstudio/bigD
+URL: https://rstudio.github.io/bigD/, https://github.com/rstudio/bigD
 BugReports: https://github.com/rstudio/bigD/issues
 Encoding: UTF-8
 RoxygenNote: 7.2.3
