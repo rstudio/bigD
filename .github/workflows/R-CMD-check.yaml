@@ -22,7 +22,10 @@ jobs:
           - {os: macos-11, r: '4.2'}
           - {os: windows-latest, r: '4.1'}
           - {os: windows-latest, r: '4.2'}
-          - {os: ubuntu-latest, r: '3.6'}
+          - {os: windows-latest, r: '4.3'}
+          - {os: windows-latest, r: '4.4'}
+
+        #  - {os: ubuntu-latest, r: '3.6'}
           - {os: ubuntu-latest, r: '4.0'}
           - {os: ubuntu-latest, r: '4.1'}
           - {os: ubuntu-latest, r: '4.2'}
