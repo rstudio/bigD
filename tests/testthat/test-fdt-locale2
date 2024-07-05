@@ -1,0 +1,36 @@
+# compare output of this test vs the other one.
+test_that("fdt() works with non-standard locale when LC_TIME = 'en_CA' (#11).", {
+  withr::local_locale("LC_TIME" = "en_CA")
+  expect_no_error(
+    res0 <- fdt(
+      input = "2021-01-09 16:32(America/Toronto)",
+      format = flex_t12_lst$hms,
+      locale = "en"
+    )
+  )
+  expect_no_error(
+    res1 <- fdt(
+      input = "2021-01-09 16:32(America/Toronto)",
+      format = flex_t12_lst$hms,
+      locale = "en"
+    )
+  )
+})
+
+test_that("fdt() works with non-standard locale when LC_TIME = 'fr_CA' (#11).", {
+  withr::local_locale("LC_TIME" = "fr_CA")
+
+  expect_no_error(
+    res0 <- fdt(
+      input = "2021-01-09 16:32(America/Toronto)",
+      format = flex_t12_lst$hms,
+    )
+  )
+  expect_no_error(
+    res1 <- fdt(
+      input = "2021-01-09 16:32(America/Toronto)",
+      format = flex_t12_lst$hms,
+      locale = "en"
+    )
+  )
+})
