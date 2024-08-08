@@ -8,8 +8,8 @@ test_that("A vector can be obtained from the `fdt_locales_vec()` function", {
 test_that("The `fdt_locales_lst` object has a particular structure", {
 
   expect_type(fdt_locales_lst, "list")
-  expect_equal(names(fdt_locales_lst), fdt_locales_vec())
-  expect_equal(unname(unlist(fdt_locales_lst)), fdt_locales_vec())
+  expect_named(fdt_locales_lst, fdt_locales_vec())
+  expect_equal(unlist(fdt_locales_lst, use.names = FALSE), fdt_locales_vec())
 })
 
 test_that("The `fdt_locales_lst` object can be used with `fdt()`", {

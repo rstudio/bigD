@@ -4,16 +4,16 @@
 
 <br />
 <!-- badges: start -->
-<a href="https://cran.r-project.org/package=bigD"><img src="https://www.r-pkg.org/badges/version/bigD" alt="CRAN status" /></a>
-<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-<a href="https://github.com/rstudio/bigD/actions"><img src="https://github.com/rstudio/bigD/workflows/R-CMD-check/badge.svg" alt="R build status" /></a>
-<a href="https://app.codecov.io/gh/rstudio/bigD?branch=main"><img src="https://codecov.io/gh/rstudio/bigD/branch/main/graph/badge.svg" alt="Coverage status" /></a>
+[![CRAN status](https://www.r-pkg.org/badges/version/bigD)](https://CRAN.R-project.org/package=bigD)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![R-CMD-check](https://github.com/rstudio/bigD/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rstudio/bigD/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/rstudio/bigD/graph/badge.svg)](https://app.codecov.io/gh/rstudio/bigD)
 
-<a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed." /></a>
-<a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/bigD" alt="Monthly Downloads"></a>
-<a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/grand-total/bigD" alt="Total Downloads"></a>
+[![The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Monthly Downloads](https://cranlogs.r-pkg.org/badges/bigD)](https://CRAN.R-project.org/package=bigD)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/bigD)](https://CRAN.R-project.org/package=bigD)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.1%20adopted-ff69b4.svg)](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)
 
-<a href="https://www.contributor-covenant.org/version/2/1/code_of_conduct.html"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.1%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
 <!-- badges: end -->
 <br />
 </div>
