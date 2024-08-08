@@ -114,11 +114,8 @@ normalize_long_tzid <- function(long_tzid) {
 # the (+/-)hhmm form
 long_tzid_to_tz_str <- function(long_tzid, input_dt) {
 
-  if (grepl("^Etc/", long_tzid)) {
-
-    if (long_tzid %in% c("Etc/GMT", "Etc/UTC")) {
-      return("+0000")
-    }
+  if (startsWith(long_tzid, "Etc/") && long_tzid %in% c("Etc/GMT", "Etc/UTC")) {
+    return("+0000")
   }
 
   tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
@@ -151,7 +148,7 @@ get_tz_str <- function(input) {
     out <- unlist(strsplit(input, split = "+", fixed = TRUE))[[2]]
     out <- paste0("+", out)
 
-  } else if (grepl("Z", input)) {
+  } else if (grepl("Z", input, fixed = TRUE)) {
 
     out <- "Z"
 
@@ -182,7 +179,7 @@ get_tz_offset_val_from_tz_str <- function(tz_str) {
       as.numeric(substr(tz_str, 2, 3)) +
       as.numeric(substr(tz_str, nchar(tz_str) - 1, nchar(tz_str))) / 60
 
-    if (grepl("-", tz_str)) {
+    if (grepl("-", tz_str, fixed = TRUE)) {
       offset_val <- offset_val * (-1)
     }
   }
@@ -287,7 +284,7 @@ get_tz_offset <- function(input) {
     },
     hhmm = {
       iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hhmm(), ".*"), "\\4", input)
-      offset_sign <- ifelse(substr(iso_tz_component, 1, 1) == "-", -1L, 1L)
+      offset_sign <- ifelse(startsWith(iso_tz_component, "-"), -1L, 1L)
       offset_h <- as.numeric(substr(iso_tz_component, 1, 3))
       offset_min <- as.numeric(substr_right(iso_tz_component, 2)) / 60.0
       tz_offset <- (abs(offset_h) + offset_min) * offset_sign
@@ -298,7 +295,7 @@ get_tz_offset <- function(input) {
 
 get_exemplar_city <- function(long_tzid) {
 
-  exemplar_city <- unlist(strsplit(long_tzid, "/")[[1]])[2]
+  exemplar_city <- unlist(strsplit(long_tzid, "/", fixed = TRUE)[[1]])[2]
 
   exemplar_city
 }
@@ -309,7 +306,7 @@ get_localized_exemplar_city <- function(
     yield_unknown = TRUE
 ) {
 
-  exemplar_city <- unlist(strsplit(long_tzid, "/")[[1]])[2]
+  exemplar_city <- unlist(strsplit(long_tzid, "/", fixed = TRUE)[[1]])[2]
 
   # TODO: Resolve links of exemplar cities to a canonical exemplar city
   #       This will require a separate lookup table
@@ -404,7 +401,7 @@ get_tz_long_specific <- function(long_tzid, input_dt, locale) {
 
   tz_metazone_name <-
     unname(tz_metazone_names_filtered[
-      grepl("long", names(tz_metazone_names_filtered))])
+      grepl("long", names(tz_metazone_names_filtered), fixed = TRUE)])
 
   tz_metazone_name
 }
@@ -467,18 +464,18 @@ get_tz_non_location <- function(
 
   target_item <- paste0(short_long, ".", type)
   available_items <- names(tz_metazone_names_entry)
-  has_long_items <- any(grepl("long", names(tz_metazone_names_entry)))
-  has_short_items <- any(grepl("short", names(tz_metazone_names_entry)))
+  has_long_items <- any(grepl("long", names(tz_metazone_names_entry), fixed = TRUE))
+  has_short_items <- any(grepl("short", names(tz_metazone_names_entry), fixed = TRUE))
 
   if (length(available_items) == 1) {
     tz_name <- tz_metazone_names_entry[[available_items]]
   } else if (target_item %in% available_items) {
     tz_name <- tz_metazone_names_entry[[target_item]]
   } else if (short_long == "short" && !has_short_items) {
-    if (!any(grepl(type, available_items))) {
-      tz_name <- tz_metazone_names_entry[["long.standard"]]
-    } else {
+    if (any(grepl(type, available_items))) {
       tz_name <- tz_metazone_names_entry[[paste0("long.", type)]]
+    } else {
+      tz_name <- tz_metazone_names_entry[["long.standard"]]
     }
   } else {
     tz_name <- tz_metazone_names_entry[[available_items[1]]]

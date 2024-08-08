@@ -210,4 +210,3 @@ first_day_of_week <- function() {
     "ZW" = "sun"
   )
 }
-
