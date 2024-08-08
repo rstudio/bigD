@@ -1,78 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/PULL_REQUEST_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdt_locales_lst.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdt_locales_vec.html</loc>
-  </url>
-  <url>
-    <loc>/reference/first_day_of_week.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flex_d_lst.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flex_d_vec.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flex_t12_lst.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flex_t12_vec.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flex_t24_lst.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flex_t24_vec.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/names_months.html</loc>
-  </url>
-  <url>
-    <loc>/reference/names_wkdays.html</loc>
-  </url>
-  <url>
-    <loc>/reference/standard_date.html</loc>
-  </url>
-  <url>
-    <loc>/reference/standard_date_time.html</loc>
-  </url>
-  <url>
-    <loc>/reference/standard_time.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/PULL_REQUEST_TEMPLATE.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/fdt.html</loc></url>
+<url><loc>/reference/fdt_locales_lst.html</loc></url>
+<url><loc>/reference/fdt_locales_vec.html</loc></url>
+<url><loc>/reference/first_day_of_week.html</loc></url>
+<url><loc>/reference/flex_d_lst.html</loc></url>
+<url><loc>/reference/flex_d_vec.html</loc></url>
+<url><loc>/reference/flex_t12_lst.html</loc></url>
+<url><loc>/reference/flex_t12_vec.html</loc></url>
+<url><loc>/reference/flex_t24_lst.html</loc></url>
+<url><loc>/reference/flex_t24_vec.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/names_months.html</loc></url>
+<url><loc>/reference/names_wkdays.html</loc></url>
+<url><loc>/reference/standard_date.html</loc></url>
+<url><loc>/reference/standard_date_time.html</loc></url>
+<url><loc>/reference/standard_time.html</loc></url>
 </urlset>
+
