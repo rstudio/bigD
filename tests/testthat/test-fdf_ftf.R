@@ -29,24 +29,21 @@ test_that("The `*_list` objects have a particular structure", {
 
   lapply(
     flex_d_lst, FUN = function(x) {
-      expect_s3_class(x, "date_time_pattern")
-      expect_s3_class(x, "flex_d")
+      expect_s3_class(x, c("date_time_pattern", "flex_d"))
       expect_type(x, "character")
     }
   )
 
   lapply(
     flex_t12_lst, FUN = function(x) {
-      expect_s3_class(x, "date_time_pattern")
-      expect_s3_class(x, "flex_t12")
+      expect_s3_class(x, c("date_time_pattern", "flex_t12"))
       expect_type(x, "character")
     }
   )
 
   lapply(
     flex_t24_lst, FUN = function(x) {
-      expect_s3_class(x, "date_time_pattern")
-      expect_s3_class(x, "flex_t24")
+      expect_s3_class(x, c("date_time_pattern", "flex_t24"))
       expect_type(x, "character")
     }
   )

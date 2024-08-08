@@ -244,11 +244,11 @@ which_tz_pattern <- function(input) {
     return("hhmm")
   }
 
-  if (!exists("tz_pattern")) {
-    return(NA)
-  } else {
+  if (exists("tz_pattern")) {
     return(tz_pattern)
   }
+
+  NA
 }
 
 which_iana_pattern <- function(input) {

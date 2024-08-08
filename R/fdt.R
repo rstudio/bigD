@@ -1025,7 +1025,7 @@ fdt <- function(
           input_dt <- as.POSIXct(input_str, tz = "UTC")
         }
 
-        if (grepl("W", input_str)) {
+        if (grepl("W", input_str, fixed = TRUE)) {
 
           # Case where week dates are possibly provided in one of
           # several permitted ISO 8601 formats
@@ -1050,7 +1050,7 @@ fdt <- function(
           input_dt <- week_date_as_datetime(input_str = input_str)
         }
 
-        if (grepl("^--", input_str)) {
+        if (startsWith(input_str, "--")) {
 
           if (!grepl("^--[0-9]{2}-?[0-9]{2}$", input_str)) {
             stop(
