@@ -19,13 +19,13 @@ test_that("The `*_list` objects have a particular structure", {
   expect_type(flex_t12_lst, "list")
   expect_type(flex_t24_lst, "list")
 
-  expect_equal(names(flex_d_lst), flex_d_vec())
-  expect_equal(names(flex_t12_lst), flex_t12_vec())
-  expect_equal(names(flex_t24_lst), flex_t24_vec())
+  expect_named(flex_d_lst, flex_d_vec())
+  expect_named(flex_t12_lst, flex_t12_vec())
+  expect_named(flex_t24_lst, flex_t24_vec())
 
-  expect_equal(unname(unlist(flex_d_lst)), flex_d_vec())
-  expect_equal(unname(unlist(flex_t12_lst)), flex_t12_vec())
-  expect_equal(unname(unlist(flex_t24_lst)), flex_t24_vec())
+  expect_equal(unlist(flex_d_lst, use.names = FALSE), flex_d_vec())
+  expect_equal(unlist(flex_t12_lst, use.names = FALSE), flex_t12_vec())
+  expect_equal(unlist(flex_t24_lst, use.names = FALSE), flex_t24_vec())
 
   lapply(
     flex_d_lst, FUN = function(x) {
