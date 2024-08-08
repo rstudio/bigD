@@ -280,7 +280,7 @@ get_tz_offset <- function(input) {
     },
     hh_mm = {
       iso_tz_component <- gsub(paste0(".*", get_tz_pattern_hh_mm(), ".*"), "\\4", input)
-      offset_sign <- ifelse(substr(iso_tz_component, 1, 1) == "-", -1L, 1L)
+      offset_sign <- ifelse(startsWith(iso_tz_component, "-"), -1L, 1L)
       offset_h <- as.numeric(substr(iso_tz_component, 1, 3))
       offset_min <- as.numeric(substr_right(iso_tz_component, 2)) / 60.0
       tz_offset <- (abs(offset_h) + offset_min) * offset_sign

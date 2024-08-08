@@ -68,7 +68,7 @@ format_fractional_seconds <- function(input, digits) {
   frac_s <- gsub("0.", "", as.character(as.POSIXlt(input)$sec %% 1), fixed = TRUE)
 
   if (frac_s == "0") {
-    return(paste(rep("0", digits), collapse = ""))
+    return(strrep("0", digits))
   }
 
   n_char <- nchar(frac_s)
