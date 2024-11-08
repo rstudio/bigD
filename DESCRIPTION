@@ -2,8 +2,6 @@ Type: Package
 Package: bigD
 Title: Flexibly Format Dates and Times to a Given Locale
 Version: 0.3.0
-Authors@R: person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"),
-                  comment = c(ORCID = "0000-0003-3925-190X"))
 Description: Format dates and times flexibly and to whichever locales
     make sense. Parses dates, times, and date-times in various formats
     (including string-based ISO 8601 constructions). The formatting syntax gives
