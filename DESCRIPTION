@@ -25,7 +25,8 @@ Depends:
     R (>= 3.3.0)
 Suggests:
     covr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tibble (>= 3.2.1)
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 Config/testthat/parallel: true
