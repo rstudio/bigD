@@ -1,8 +1,7 @@
 <div align="center">
 
-<a href='https://rstudio.github.io/bigD/'><img src="man/figures/logo.svg" height="350px"/></a>
+<a href='https://rstudio.github.io/bigD/'><img src="man/figures/logo.svg" width="350px"/></a>
 
-<br />
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/bigD)](https://CRAN.R-project.org/package=bigD)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -13,12 +12,12 @@
 [![Monthly Downloads](https://cranlogs.r-pkg.org/badges/bigD)](https://CRAN.R-project.org/package=bigD)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/bigD)](https://CRAN.R-project.org/package=bigD)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.1%20adopted-ff69b4.svg)](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)
-
 <!-- badges: end -->
+<hr style="color:transparent" />
 <br />
 </div>
 
-The goal of **bigD** is to give everyone an easy yet flexible solution for formatting dates and times. The main function, `fdt()`, can take dates, times, and datetimes in various formats (including just strings) and it provides a means to format the output in different locales. The formatting syntax is much more powerful than `strptime`-based formatting (plus no need for `%` everywhere). Time zones in the input can be expressed in multiple ways and there's a ton of options for formatting time zones in the output too.
+The goal of **bigD** is to provide an easy-to-use solution for formatting dates and times. The main function, `fdt()`, can take dates, times, and datetimes in various formats (including just strings) and it provides a means to format the output in different locales. The formatting syntax is much more powerful than `strptime`-based formatting (plus no need for `%` everywhere). Time zones in the input can be expressed in multiple ways and there's a ton of options for formatting time zones in the output too.
 
 ### Examples
 
