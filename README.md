@@ -112,7 +112,8 @@ install.packages("bigD")
 You can also install the development version of **bigD** from **GitHub**:
 
 ```r
-devtools::install_github("rstudio/bigD")
+# install.packages("pak")
+pak::pak("rstudio/bigD")
 ```
 
 If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rstudio/bigD/issues).
