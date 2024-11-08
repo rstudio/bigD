@@ -97,7 +97,7 @@
 #' strings produce which outputs (e.g., `"y"` for the year). A common pattern is
 #' characters that are used consecutively to produce variations on a date, time,
 #' or timezone output. Say that the year in the input is 2015. If using `"yy"`
-#' you'll get `"15"` but with `"yyyy"` the output becomes `"1999"`. There's a
+#' you'll get `"15"` but with `"yyyy"` the output becomes `"2015"`. There's a
 #' whole lot of this, so the following subsections try to illustrate as best as
 #' possible what each string will produce. All of the examples will use this
 #' string-based datetime input unless otherwise indicated:
