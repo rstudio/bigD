@@ -3,10 +3,10 @@ test_that("The `standard_*()` functions produce very specific objects", {
   expect_vector(standard_date_time())
   expect_type(standard_date_time(), "character")
   expect_length(standard_date_time(), 1)
-  expect_s3_class(standard_date_time(), "date_time_pattern")
-  expect_s3_class(standard_date_time(), "standard")
-  expect_s3_class(standard_date_time(), "date_time")
-  expect_s3_class(standard_date_time(), "short")
+  expect_s3_class(
+    standard_date_time(),
+    c("date_time_pattern", "standard", "date_time", "short")
+  )
   expect_s3_class(standard_date_time(type = "medium"), "medium")
   expect_s3_class(standard_date_time(type = "long"), "long")
   expect_s3_class(standard_date_time(type = "full"), "full")
@@ -14,10 +14,10 @@ test_that("The `standard_*()` functions produce very specific objects", {
   expect_vector(standard_date())
   expect_type(standard_date(), "character")
   expect_length(standard_date(), 1)
-  expect_s3_class(standard_date(), "date_time_pattern")
-  expect_s3_class(standard_date(), "standard")
-  expect_s3_class(standard_date(), "date")
-  expect_s3_class(standard_date(), "short")
+  expect_s3_class(
+    standard_date(),
+    c("date_time_pattern", "standard", "date", "short")
+  )
   expect_s3_class(standard_date(type = "medium"), "medium")
   expect_s3_class(standard_date(type = "long"), "long")
   expect_s3_class(standard_date(type = "full"), "full")
@@ -25,10 +25,10 @@ test_that("The `standard_*()` functions produce very specific objects", {
   expect_vector(standard_time())
   expect_type(standard_time(), "character")
   expect_length(standard_time(), 1)
-  expect_s3_class(standard_time(), "date_time_pattern")
-  expect_s3_class(standard_time(), "standard")
-  expect_s3_class(standard_time(), "time")
-  expect_s3_class(standard_time(), "short")
+  expect_s3_class(
+    standard_time(),
+    c("date_time_pattern", "standard", "time", "short")
+  )
   expect_s3_class(standard_time(type = "medium"), "medium")
   expect_s3_class(standard_time(type = "long"), "long")
   expect_s3_class(standard_time(type = "full"), "full")

@@ -1,24 +1,23 @@
 <div align="center">
 
-<a href='https://rich-iannone.github.io/bigD/'><img src="man/figures/logo.svg" height="350px"/></a>
+<a href='https://rstudio.github.io/bigD/'><img src="man/figures/logo.svg" width="350px"/></a>
 
-<br />
 <!-- badges: start -->
-<a href="https://cran.r-project.org/package=bigD"><img src="https://www.r-pkg.org/badges/version/bigD" alt="CRAN status" /></a>
-<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-<a href="https://github.com/rich-iannone/bigD/actions"><img src="https://github.com/rich-iannone/bigD/workflows/R-CMD-check/badge.svg" alt="R build status" /></a>
-<a href="https://app.codecov.io/gh/rich-iannone/bigD?branch=main"><img src="https://codecov.io/gh/rich-iannone/bigD/branch/main/graph/badge.svg" alt="Coverage status" /></a>
+[![CRAN status](https://www.r-pkg.org/badges/version/bigD)](https://CRAN.R-project.org/package=bigD)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![R-CMD-check](https://github.com/rstudio/bigD/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rstudio/bigD/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/rstudio/bigD/graph/badge.svg)](https://app.codecov.io/gh/rstudio/bigD)
 
-<a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed." /></a>
-<a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/bigD" alt="Monthly Downloads"></a>
-<a href="https://CRAN.R-project.org/package=bigD"><img src="https://cranlogs.r-pkg.org/badges/grand-total/bigD" alt="Total Downloads"></a>
-
-<a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct/"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
+[![The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Monthly Downloads](https://cranlogs.r-pkg.org/badges/bigD)](https://CRAN.R-project.org/package=bigD)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/bigD)](https://CRAN.R-project.org/package=bigD)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.1%20adopted-ff69b4.svg)](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)
 <!-- badges: end -->
+<hr style="color:transparent" />
 <br />
 </div>
 
-The goal of **bigD** is to give everyone an easy yet flexible solution for formatting dates and times. The main function, `fdt()`, can take dates, times, and datetimes in various formats (including just strings) and it provides a means to format the output in different locales. The formatting syntax is much more powerful than `strptime`-based formatting (plus no need for `%` everywhere). Time zones in the input can be expressed in multiple ways and there's a ton of options for formatting time zones in the output too.
+The goal of **bigD** is to provide an easy-to-use solution for formatting dates and times. The main function, `fdt()`, can take dates, times, and datetimes in various formats (including just strings) and it provides a means to format the output in different locales. The formatting syntax is much more powerful than `strptime`-based formatting (plus no need for `%` everywhere). Time zones in the input can be expressed in multiple ways and there's a ton of options for formatting time zones in the output too.
 
 ### Examples
 
@@ -113,20 +112,22 @@ install.packages("bigD")
 You can also install the development version of **bigD** from **GitHub**:
 
 ```r
-devtools::install_github("rich-iannone/bigD")
+# install.packages("pak")
+pak::pak("rstudio/bigD")
 ```
 
-If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/bigD/issues).
+If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rstudio/bigD/issues).
 
 ##### Code of Conduct
 
-Please note that the `rich-iannone/bigD` project is released with a [contributor code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By participating in this project you agree to abide by its terms.
+Please note that the `rstudio/bigD` project is released with a [contributor code of conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html).<br>By participating in this project you agree to abide by its terms.
 
 ##### 📄 License
 
-**bigD** is licensed under the MIT license.
-See the [`LICENSE.md`](LICENSE.md) file for more details.
+**bigD** is licensed under the MIT license. See the [`LICENSE.md`](LICENSE.md) file for more details.
+
+© Posit Software, PBC.
 
 ##### 🏛️ Governance
 
-This project is maintained by [Rich Iannone](https://github.com/rich-iannone).
+This project is primarily maintained by [Rich Iannone](https://twitter.com/riannone). Should there also be other authors, they might occasionally assist with some of these duties.

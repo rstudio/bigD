@@ -8,8 +8,8 @@ assignees: rich-iannone
 
 ## Prework
 
-- [ ] Read and abide by **bigD**'s [code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/) and [contributing guidelines](https://github.com/rich-iannone/bigD/blob/main/.github/CONTRIBUTING.md).
-- [ ] Search for duplicates among the [existing issues](https://github.com/rich-iannone/bigD/issues) (both open and closed).
+- [ ] Read and abide by **bigD**'s [code of conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html) and [contributing guidelines](https://github.com/rstudio/bigD/blob/main/.github/CONTRIBUTING.md).
+- [ ] Search for duplicates among the [existing issues](https://github.com/rstudio/bigD/issues) (both open and closed).
 
 ## Proposal
 

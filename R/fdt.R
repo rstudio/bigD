@@ -848,7 +848,7 @@ fdt <- function(
   # TODO: Validate locale
 
   if (!is.null(locale)) {
-    locale <- gsub("_", "-", locale)
+    locale <- gsub("_", "-", locale, fixed = TRUE)
   }
 
   if (is.null(locale)) {
@@ -1001,13 +1001,13 @@ fdt <- function(
       # Obtain the date and time
       if (date_present) {
 
-        input_dt <- as.POSIXct(gsub("T", " ", input_str), tz = "UTC")
+        input_dt <- as.POSIXct(gsub("T", " ", input_str, fixed = TRUE), tz = "UTC")
 
       } else if (!date_present && time_present) {
 
         date_now <- as.character(Sys.Date())
         input_str <- paste0(date_now, "T", input_str)
-        input_dt <- as.POSIXct(gsub("T", " ", input_str), tz = "UTC")
+        input_dt <- as.POSIXct(gsub("T", " ", input_str, fixed = TRUE), tz = "UTC")
 
       } else if (!date_present && !time_present) {
 
@@ -1025,7 +1025,7 @@ fdt <- function(
           input_dt <- as.POSIXct(input_str, tz = "UTC")
         }
 
-        if (grepl("W", input_str)) {
+        if (grepl("W", input_str, fixed = TRUE)) {
 
           # Case where week dates are possibly provided in one of
           # several permitted ISO 8601 formats
@@ -1045,12 +1045,12 @@ fdt <- function(
           }
 
           # Remove hyphens if any are present
-          input_str <- gsub("-", "", input_str)
+          input_str <- gsub("-", "", input_str, fixed = TRUE)
 
           input_dt <- week_date_as_datetime(input_str = input_str)
         }
 
-        if (grepl("^--", input_str)) {
+        if (startsWith(input_str, "--")) {
 
           if (!grepl("^--[0-9]{2}-?[0-9]{2}$", input_str)) {
             stop(
@@ -1061,7 +1061,7 @@ fdt <- function(
           }
 
           # Remove all hyphens from `input_str`
-          input_str <- gsub("-", "", input_str)
+          input_str <- gsub("-", "", input_str, fixed = TRUE)
 
           input_dt <- month_day_as_datetime(input_str = input_str)
         }
@@ -1069,8 +1069,8 @@ fdt <- function(
         if (grepl("[0-9]+\\s?(BC|AD|BCE|CE|B\\.C\\.E\\.|C\\.E\\.|EV)$", input_str)) {
 
           # Remove any spaces or periods from `input_str`
-          input_str <- gsub(" ", "", input_str)
-          input_str <- gsub("\\.", "", input_str)
+          input_str <- gsub(" ", "", input_str, fixed = TRUE)
+          input_str <- gsub(".", "", input_str, fixed = TRUE)
 
           year <- as.integer(gsub("([0-9]+).*", "\\1", input_str))
           era <- gsub("[0-9]+", "", input_str)
@@ -1503,7 +1503,7 @@ dt_format_pattern <- function(format) {
 
   dt_letters <-
     base::intersect(
-      unique(unlist(strsplit(format, ""))),
+      unique(unlist(strsplit(format, "", fixed = TRUE))),
       sub_letters()
     )
 
@@ -1526,7 +1526,7 @@ amend_week_pattern <- function(format, input) {
 
     year_week <- format_yearweek(input = input)
 
-    if (grepl("W01", year_week)) {
+    if (grepl("W01", year_week, fixed = TRUE)) {
       format <- paste0(format, "-count-one")
     } else {
       format <- paste0(format, "-count-other")
