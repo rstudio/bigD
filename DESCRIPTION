@@ -1,7 +1,7 @@
 Type: Package
 Package: bigD
-Version: 0.2.0.9000
 Title: Flexibly Format Dates and Times to a Given Locale
+Version: 0.3.0
 Description: Format dates and times flexibly and to whichever locales
     make sense. Parses dates, times, and date-times in various formats
     (including string-based ISO 8601 constructions). The formatting syntax gives
@@ -25,7 +25,8 @@ Depends:
     R (>= 3.3.0)
 Suggests:
     covr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tibble (>= 3.2.1)
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 Config/testthat/parallel: true
