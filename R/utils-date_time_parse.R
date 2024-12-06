@@ -327,6 +327,9 @@ get_tz_short_specific <- function(long_tzid, input_dt) {
   input_date <- as.Date(input_dt)
 
   tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
+  if (nrow(tzdb_entries_tzid) == 0) {
+    return(NA_character_)
+  }
 
   tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
 
@@ -346,7 +349,7 @@ get_tz_long_specific <- function(long_tzid, input_dt, locale) {
 
   tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
 
-  if (nrow(tzdb_entries_tzid) < 1) {
+  if (nrow(tzdb_entries_tzid) == 0L) {
     return(NA_character_)
   }
 
