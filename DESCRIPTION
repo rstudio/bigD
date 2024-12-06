@@ -22,9 +22,8 @@ BugReports: https://github.com/rstudio/bigD/issues
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 Depends:
-    R (>= 3.3.0)
+    R (>= 3.6.0)
 Suggests:
-    covr,
     testthat (>= 3.0.0),
     tibble (>= 3.2.1)
 Roxygen: list(markdown = TRUE)
