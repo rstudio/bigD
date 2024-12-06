@@ -851,9 +851,7 @@ fdt <- function(
     locale <- gsub("_", "-", locale, fixed = TRUE)
   }
 
-  if (is.null(locale)) {
-    locale <- "en"
-  }
+  locale <- locale %||% "en"
 
   if (inherits(input, "POSIXlt")) {
     input <- as.POSIXct(input)
@@ -958,7 +956,7 @@ fdt <- function(
     format <- gsub("{0}", time_format, format, fixed = TRUE)
   }
 
-  dt_out <- rep(NA_character_, length(input))
+  dt_out <- rep_len(NA_character_, length(input))
 
   for (i in seq_along(input)) {
 

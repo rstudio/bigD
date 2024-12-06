@@ -63,3 +63,8 @@ cldr_dates_bigd <- function(locale = "en", element) {
 
   as.list(values)
 }
+
+# TODO Remove this when depending on R 4.4
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}

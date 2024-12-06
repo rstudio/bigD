@@ -139,7 +139,7 @@ long_tzid_to_tz_str <- function(long_tzid, input_dt) {
 
 get_tz_str <- function(input) {
 
-  if (!is_tz_present(input = input)) {
+  if (is.null(input) || !is_tz_present(input = input)) {
     return("")
   }
 
@@ -189,9 +189,7 @@ get_tz_offset_val_from_tz_str <- function(tz_str) {
 
 get_tz_offset_val <- function(input, tz_str = NULL) {
 
-  if (is.null(tz_str)) {
-    tz_str <- get_tz_str(input = input)
-  }
+  tz_str <- tz_str %||% get_tz_str(input = input)
 
   get_tz_offset_val_from_tz_str(tz_str = tz_str)
 }

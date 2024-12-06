@@ -20,13 +20,15 @@ format_tz_offset_min_sec <- function(
   minutes_val <- zero_pad_to_width(abs((tz_offset - trunc(tz_offset))) * 60, 2)
 
   paste0(
-    if (!is.null(prepend_with)) prepend_with,
+    prepend_with, # can be NULL (will not print)
     ifelse(tz_offset >= 0, "+", "-"),
     hours_val,
-    if ((optional_min && minutes_val == "00")) {
+    if (optional_min && minutes_val == "00") {
       ""
+    } else if (use_colon) {
+      paste0(":", minutes_val)
     } else {
-      paste0(ifelse(use_colon, ":", ""), minutes_val)
+      minutes_val
     }
   )
 }
