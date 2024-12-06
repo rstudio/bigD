@@ -12,10 +12,11 @@ Description: Format dates and times flexibly and to whichever locales
     formatting patterns based on date/time skeleton formats and standardized
     date/time formats with varying specificity.
 Authors@R: c(
-    person("Richard", "Iannone", , "rich@posit.co", c("aut", "cre"),
+    person("Richard", "Iannone", , "rich@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3925-190X")),
+    person("Olivier", "Roy", role = "ctb"),
     person("Posit Software, PBC", role = c("cph", "fnd"))
-    )
+  )
 License: MIT + file LICENSE
 URL: https://rstudio.github.io/bigD/, https://github.com/rstudio/bigD
 BugReports: https://github.com/rstudio/bigD/issues

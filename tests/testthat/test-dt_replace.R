@@ -3,7 +3,7 @@ test_that("dt_replace() works", {
   skip_on_cran() # not sure how robust this is.
   result <- dt_replace(
     dt = "{yyyy}-{MM}-{dd}'1'{HH}:{mm}:{ss}{XXX}",
-    input_dt =as.POSIXct("2015-06-28 20:49:46", tz = "UTC"),
+    input_dt = as.POSIXct("2015-06-28 20:49:46", tz = "UTC"),
     dt_lett = c("y", "M", "d", "H", "m", "s", "X"),
     locale = "en",
     tz_info = list(

@@ -193,3 +193,11 @@ test_that("`flex_*_lst` can be used in `fdt()`", {
     )
   )
 })
+
+test_that("fdt() works in all contexts", {
+  expect_equal(
+    bigD::fdt("2024-03-01", format = "GyMMMEd", use_tz = "America/Toronto"),
+    "AD2024MarFri1"
+  )
+
+})

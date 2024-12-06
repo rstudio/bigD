@@ -99,8 +99,7 @@ normalize_long_tzid <- function(long_tzid) {
   if (long_tzid %in% tz_name_resolution$tz_alt) {
 
     long_tzid <-
-      tz_name_resolution[
-        tz_name_resolution$tz_alt == long_tzid, "tz_canonical"]
+      tz_name_resolution$tz_canonical[tz_name_resolution$tz_alt == long_tzid]
   }
 
   long_tzid
@@ -118,7 +117,8 @@ long_tzid_to_tz_str <- function(long_tzid, input_dt) {
     return("+0000")
   }
 
-  tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
+  tzdb_entries_tzid <- tzdb[
+    tzdb$zone_name == long_tzid, c("date_start", "gmt_offset_h")]
 
   if (nrow(tzdb_entries_tzid) == 0L) {
     return(NA_character_)
@@ -126,9 +126,9 @@ long_tzid_to_tz_str <- function(long_tzid, input_dt) {
 
   input_date <- as.Date(input_dt)
 
-  tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
+  tzdb_idx <- rle(tzdb_entries_tzid$date_start >= input_date)$lengths[1]
 
-  tz_offset <- tzdb_entries_tzid[tzdb_idx, ]$gmt_offset_h
+  tz_offset <- tzdb_entries_tzid[[tzdb_idx, "gmt_offset_h"]]
 
   minutes <- formatC(round((abs(tz_offset) %% 1) * 60, 0), width = 2, flag = "0")
   hours <- formatC(trunc(abs(tz_offset)), width = 2, flag = "0")
@@ -251,9 +251,8 @@ which_iana_pattern <- function(input) {
     return("wrapped")
   } else if (grepl(paste0(get_tz_pattern(), get_attached_iana_pattern()), input)) {
     return("attached")
-  } else {
-    return(NA_character_)
   }
+  NA_character_
 }
 
 get_tz_offset <- function(input) {
@@ -331,7 +330,7 @@ get_tz_short_specific <- function(long_tzid, input_dt) {
     return(NA_character_)
   }
 
-  tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
+  tzdb_idx <- rle(tzdb_entries_tzid$date_start >= input_date)$lengths[1]
 
   tz_short_specific <- tzdb_entries_tzid[tzdb_idx, "abbrev"]
 
@@ -353,7 +352,7 @@ get_tz_long_specific <- function(long_tzid, input_dt, locale) {
     return(NA_character_)
   }
 
-  tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
+  tzdb_idx <- rle(tzdb_entries_tzid$date_start >= input_date)$lengths[1]
 
   tzdb_entries_tzid_ln <- tzdb_entries_tzid[tzdb_idx, ]
 
@@ -485,32 +484,30 @@ long_tz_id_to_metazone_long_id <- function(long_tzid) {
     if (long_tzid %in% unique(tz_name_resolution$tz_canonical)) {
 
       alt_names <-
-        tz_name_resolution[tz_name_resolution$tz_canonical == long_tzid, "tz_alt"]
+        tz_name_resolution$tz_alt[tz_name_resolution$tz_canonical == long_tzid]
 
-      if (any(alt_names %in% tz_metazone_users$canonical_tz_name)) {
-
-        long_tzid <- alt_names[1]
-
-      } else {
+      if (!any(alt_names %in% tz_metazone_users$canonical_tz_name)) {
         return(NA_character_)
       }
+      long_tzid <- alt_names[1]
 
     } else {
       return(NA_character_)
     }
   }
 
+  rows <- which(tz_metazone_users$canonical_tz_name == long_tzid)
   tz_metazone_users_rows <-
-    tz_metazone_users[tz_metazone_users$canonical_tz_name == long_tzid, ]
+    tz_metazone_users[[rows, "metazone_long_id"]]
 
   # Return NA if number of rows in `tz_metazone_users_rows` is zero
-  if (nrow(tz_metazone_users_rows) == 0) {
+  if (length(tz_metazone_users_rows) == 0) {
     return(NA_character_)
   }
 
   # TODO: develop routine to further filter multirow `tz_metazone_users_rows`
   # to a single row based on `locale`; for now, obtain the first metazone
-  metazone <- tz_metazone_users_rows[1, "metazone_long_id"]
+  metazone <- tz_metazone_users_rows[1]
 
   metazone
 }

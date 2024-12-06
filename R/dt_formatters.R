@@ -1,4 +1,3 @@
-
 zero_pad_to_width <- function(value, width) {
   formatC(value, width = width, flag = "0", format = "d")
 }
@@ -238,11 +237,9 @@ get_flexible_day_period <- function(input, locale) {
   # table (use the base locale if necessary); return NA if not found
   if (!locale_in_day_periods_tbl) {
 
-    base_locale <- sub("^([a-z]*).*", "\\1", locale)
+    locale <- sub("^([a-z]*).*", "\\1", locale)
 
-    if (base_locale %in% day_periods[["locale"]]) {
-      locale <- base_locale
-    } else {
+    if (!locale %in% day_periods[["locale"]]) {
       return(NA_character_)
     }
   }
@@ -321,11 +318,10 @@ get_noon_midnight_period <- function(input, locale) {
   # table (use the base locale if necessary); return NA if not found
   if (!locale_in_day_periods_tbl) {
 
-    base_locale <- sub("^([a-z]*).*", "\\1", locale)
+    # Modify locale
+    locale <- sub("^([a-z]*).*", "\\1", locale)
 
-    if (base_locale %in% day_periods[["locale"]]) {
-      locale <- base_locale
-    } else {
+    if (!locale %in% day_periods[["locale"]]) {
       return(NA_character_)
     }
   }
