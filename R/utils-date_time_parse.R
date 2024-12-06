@@ -232,10 +232,6 @@ which_tz_pattern <- function(input) {
     return("z")
   }
 
-  if (grepl(get_tz_pattern_hh(), input)) {
-    tz_pattern <- "hh"
-  }
-
   if (grepl(get_tz_pattern_hh_mm(), input)) {
     return("hh_mm")
   }
@@ -244,8 +240,8 @@ which_tz_pattern <- function(input) {
     return("hhmm")
   }
 
-  if (exists("tz_pattern")) {
-    return(tz_pattern)
+  if (grepl(get_tz_pattern_hh(), input)) {
+    tz_pattern <- "hh"
   }
 
   NA
@@ -336,7 +332,7 @@ get_tz_short_specific <- function(long_tzid, input_dt) {
 
   tzdb_idx <- rle(!(tzdb_entries_tzid$date_start < input_date))$lengths[1]
 
-  tz_short_specific <- tzdb_entries_tzid[tzdb_idx, ]$abbrev
+  tz_short_specific <- tzdb_entries_tzid[tzdb_idx, "abbrev"]
 
   # TODO: add check to ensure that the `abbrev` value is a valid
   # short specific non-location time zone
@@ -379,7 +375,7 @@ get_tz_long_specific <- function(long_tzid, input_dt, locale) {
   # Get the row of the `tz_metazone_names` table based on the supplied locale
   tz_metazone_names_row <- tz_metazone_names[tz_metazone_names$locale == locale, ]
 
-  if (nrow(tz_metazone_names_row) < 1) {
+  if (nrow(tz_metazone_names_row) == 0) {
     return(NA_character_)
   }
 
@@ -432,13 +428,8 @@ get_tz_non_location <- function(
     type
 ) {
 
-  if (!(short_long %in% c("long", "short"))) {
-    stop("The `short_long` keyword should either be 'long' or 'short'.")
-  }
-
-  if (!(type %in% c("generic", "standard", "daylight"))) {
-    stop("The `short_long` keyword should either be 'long' or 'short'.")
-  }
+  short_long <- match.arg(short_long, c("long", "short"))
+  type <- match.arg(type, c("generic", "standard", "daylight"))
 
   # If the supplied `long_tzid` value is NA, return NA
   if (is.na(long_tzid)) {
@@ -512,7 +503,7 @@ long_tz_id_to_metazone_long_id <- function(long_tzid) {
     tz_metazone_users[tz_metazone_users$canonical_tz_name == long_tzid, ]
 
   # Return NA if number of rows in `tz_metazone_users_rows` is zero
-  if (nrow(tz_metazone_users_rows) < 1) {
+  if (nrow(tz_metazone_users_rows) == 0) {
     return(NA_character_)
   }
 

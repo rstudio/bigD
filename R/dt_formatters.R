@@ -117,10 +117,10 @@ get_locale_territory <- function(locale) {
   default_locale_name <-
     default_locales[default_locales$base_locale == gsub("_", "-", locale, fixed = TRUE), ][["default_locale"]]
 
-  if (length(default_locale_name) < 1) {
+  if (length(default_locale_name) == 0L) {
 
     default_locale_name <-
-      default_locales[grepl(paste0("^", locale), default_locales$base_locale), ][["default_locale"]][1]
+      default_locales[startsWith(default_locales$base_locale, locale), ][["default_locale"]][1]
   }
 
   territory <- gsub(".*([A-Z]{2}|001|419|150).*", "\\1", default_locale_name)
