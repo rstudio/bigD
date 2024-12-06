@@ -44,14 +44,14 @@ is_time_present <- function(input) {
 
 is_tz_present <- function(input) {
 
-  any(
-    c(
-      grepl(get_tz_pattern_z(), input),
-      grepl(get_tz_pattern_hh(), input),
-      grepl(get_tz_pattern_hh_mm(), input),
-      grepl(get_tz_pattern_hhmm(), input)
-    )
+  regex <- paste(
+    get_tz_pattern_z(),
+    get_tz_pattern_hh(),
+    get_tz_pattern_hh_mm(),
+    get_tz_pattern_hhmm(),
+    sep = "|"
   )
+  any(grepl(regex, input))
 }
 
 is_long_tzid_present <- function(input) {
