@@ -201,14 +201,11 @@ test_that("fdt() works in all contexts", {
   )
   # Copy of a test in gt
   expect_equal(
-    fdt(as.POSIXlt(
-      c(
-        "1970-01-01 15:35:00", "1970-01-01 16:36:00", "1970-01-01 17:37:00",
-        "1970-01-01 18:38:00", "1970-01-01 19:39:00"
-      ),
-      tz = "GMT"
-      ),
-      format = "EBhms"
+    fdt(c(
+      "1970-01-01 15:35:00", "1970-01-01 16:36:00", "1970-01-01 17:37:00",
+      "1970-01-01 18:38:00", "1970-01-01 19:39:00"
+    ),
+      format = "E h:m:ss B"
     ),
     c(
       "Thu 3:35:00 in the afternoon", "Thu 4:36:00 in the afternoon",
@@ -217,3 +214,4 @@ test_that("fdt() works in all contexts", {
     )
   )
 })
+

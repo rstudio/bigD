@@ -266,7 +266,9 @@ get_flexible_day_period <- function(input, locale) {
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "00:00", "period"
+          day_periods_locale$at == "00:00",
+        "period",
+        drop = TRUE
       ]
 
   } else if (time_str == "12:00" && "12:00" %in% day_periods_locale$at) {
@@ -274,7 +276,7 @@ get_flexible_day_period <- function(input, locale) {
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "12:00", "period"]
+          day_periods_locale$at == "12:00", "period", drop = TRUE]
 
   } else {
 
@@ -304,7 +306,7 @@ get_flexible_day_period <- function(input, locale) {
     period <-
       day_periods_locale_from_to[
         day_periods_locale_from_to$from <= time_str &
-          time_str < day_periods_locale_from_to$to, "period"]
+          time_str < day_periods_locale_from_to$to, "period", drop = TRUE]
   }
 
   period
@@ -348,14 +350,14 @@ get_noon_midnight_period <- function(input, locale) {
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "00:00", "period"]
+          day_periods_locale$at == "00:00", "period", drop = TRUE]
 
   } else if (time_str == "12:00" && "12:00" %in% day_periods_locale$at) {
 
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "12:00", "period"]
+          day_periods_locale$at == "12:00", "period", drop = TRUE]
 
   } else {
 
