@@ -86,9 +86,8 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("D" %in% dt_lett) {
-    dt <- sub("{D}", dt_D(input_dt), dt, fixed = TRUE)
-    dt <- sub("{DD}", dt_DD(input_dt), dt, fixed = TRUE)
-    dt <- sub("{DDD}", dt_DDD(input_dt), dt, fixed = TRUE)
+    pattern <- regmatches(dt, m = regexpr("\\{D+\\}", dt))
+    dt <- sub(pattern, dt_day_full[[pattern]](input_dt), dt, fixed = TRUE)
   }
 
   if ("F" %in% dt_lett) {
@@ -355,7 +354,7 @@ dt_year_full <- list(
 # (week in year calendar)
 dt_YYY_plus <- function(input, length) {
   zero_pad_to_width(
-    value = as.integer(dt_Y(input = input)),
+    value = as.integer(dt_year_full$`{Y}`(input = input)),
     width = length
   )
 }
@@ -580,23 +579,25 @@ dt_day <- list(
   }
 )
 
-# Day of year, numeric, 1-3 digits
-dt_D <- function(input) {
-  j_day <- as.integer(format(input, format = "%j"))
-  zero_pad_to_width(value = j_day, width = 1)
-}
+dt_day_full <- list(
+  # Day of year, numeric, 1-3 digits
+  `{D}` = function(input) {
+    j_day <- as.integer(format(input, format = "%j"))
+    zero_pad_to_width(value = j_day, width = 1)
+  },
 
-# Day of year, numeric, 2-3 digits zero-padded
-dt_DD <- function(input) {
-  j_day <- as.integer(format(input, format = "%j"))
-  zero_pad_to_width(value = j_day, width = 2)
-}
+  # Day of year, numeric, 2-3 digits zero-padded
+  `{DD}` =  function(input) {
+    j_day <- as.integer(format(input, format = "%j"))
+    zero_pad_to_width(value = j_day, width = 2)
+  },
 
-# Day of year, numeric, 3 digits zero-padded
-dt_DDD <- function(input) {
-  j_day <- as.integer(format(input, format = "%j"))
-  zero_pad_to_width(value = j_day, width = 3)
-}
+  # Day of year, numeric, 3 digits zero-padded
+  `{DDD}` = function(input) {
+    j_day <- as.integer(format(input, format = "%j"))
+    zero_pad_to_width(value = j_day, width = 3)
+  }
+)
 
 # Day of week in month, numeric, 1 digit ("2", as in the 2nd Wed in July")
 dt_F <- function(input) {
