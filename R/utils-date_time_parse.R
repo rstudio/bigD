@@ -121,7 +121,7 @@ long_tzid_to_tz_str <- function(long_tzid, input_dt) {
     tzdb$zone_name == long_tzid, c("date_start", "gmt_offset_h")]
 
   if (nrow(tzdb_entries_tzid) == 0L) {
-    return(NA_character_)
+    return(NULL)
   }
 
   input_date <- as.Date(input_dt)

@@ -196,8 +196,24 @@ test_that("`flex_*_lst` can be used in `fdt()`", {
 
 test_that("fdt() works in all contexts", {
   expect_equal(
-    bigD::fdt("2024-03-01", format = "GyMMMEd", use_tz = "America/Toronto"),
+    fdt("2024-03-01", format = "GyMMMEd", use_tz = "America/Toronto"),
     "AD2024MarFri1"
   )
-
+  # Copy of a test in gt
+  expect_equal(
+    fdt(as.POSIXlt(
+      c(
+        "1970-01-01 15:35:00", "1970-01-01 16:36:00", "1970-01-01 17:37:00",
+        "1970-01-01 18:38:00", "1970-01-01 19:39:00"
+      ),
+      tz = "GMT"
+      ),
+      format = "EBhms"
+    ),
+    c(
+      "Thu 3:35:00 in the afternoon", "Thu 4:36:00 in the afternoon",
+      "Thu 5:37:00 in the afternoon", "Thu 6:38:00 in the evening",
+      "Thu 7:39:00 in the evening"
+    )
+  )
 })
