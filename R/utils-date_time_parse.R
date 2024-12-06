@@ -241,7 +241,7 @@ which_tz_pattern <- function(input) {
   }
 
   if (grepl(get_tz_pattern_hh(), input)) {
-    tz_pattern <- "hh"
+    return("hh")
   }
 
   NA
