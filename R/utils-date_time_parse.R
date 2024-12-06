@@ -100,7 +100,7 @@ normalize_long_tzid <- function(long_tzid) {
 
     long_tzid <-
       tz_name_resolution[
-        tz_name_resolution$tz_alt == long_tzid, ][["tz_canonical"]]
+        tz_name_resolution$tz_alt == long_tzid, "tz_canonical"]
   }
 
   long_tzid
@@ -120,7 +120,7 @@ long_tzid_to_tz_str <- function(long_tzid, input_dt) {
 
   tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
 
-  if (nrow(tzdb_entries_tzid) < 1) {
+  if (nrow(tzdb_entries_tzid) == 0L) {
     return(NA_character_)
   }
 
@@ -309,14 +309,14 @@ get_localized_exemplar_city <- function(
 
     # Get localized variant of 'Unknown City'
     if (yield_unknown) {
-      return(tz_exemplar[tz_exemplar$locale == locale, ][["Unknown"]])
+      return(tz_exemplar[tz_exemplar$locale == locale, "Unknown"])
     } else {
       return(NA_character_)
     }
   }
 
   exemplar_city_localized <-
-    tz_exemplar[tz_exemplar$locale == locale, ][[exemplar_city]]
+    tz_exemplar[tz_exemplar$locale == locale, exemplar_city]
 
   exemplar_city_localized
 }
@@ -485,7 +485,7 @@ long_tz_id_to_metazone_long_id <- function(long_tzid) {
     if (long_tzid %in% unique(tz_name_resolution$tz_canonical)) {
 
       alt_names <-
-        tz_name_resolution[tz_name_resolution$tz_canonical == long_tzid, ][["tz_alt"]]
+        tz_name_resolution[tz_name_resolution$tz_canonical == long_tzid, "tz_alt"]
 
       if (any(alt_names %in% tz_metazone_users$canonical_tz_name)) {
 
@@ -510,7 +510,7 @@ long_tz_id_to_metazone_long_id <- function(long_tzid) {
 
   # TODO: develop routine to further filter multirow `tz_metazone_users_rows`
   # to a single row based on `locale`; for now, obtain the first metazone
-  metazone <- tz_metazone_users_rows[1, ][["metazone_long_id"]]
+  metazone <- tz_metazone_users_rows[1, "metazone_long_id"]
 
   metazone
 }
@@ -562,25 +562,23 @@ get_iana_tz <- function(input) {
 
   iana_pattern <- which_iana_pattern(input)
 
-  switch(
+  value <- switch(
     iana_pattern,
     wrapped = {
       tz_name <-
         gsub(
           paste0(".*", get_time_pattern(), get_tz_pattern()),
           "", input)
-      tz_name <- gsub("(\\(|\\[|\\)|\\])", "", tz_name)
+      gsub("(\\(|\\[|\\)|\\])", "", tz_name)
     },
-    attached = {
-      tz_name <-
-        gsub(
-          paste0(".*", get_time_pattern(), get_tz_pattern(), "(\\s-\\s|\\s|\\/|\\|)"),
-          "", input)
-    })
-
-  if (!exists("tz_name")) {
-    return(NA_character_)
-  }
+    attached = gsub(
+      paste0(".*", get_time_pattern(), get_tz_pattern(), "(\\s-\\s|\\s|\\/|\\|)"),
+      "",
+      input
+    ),
+    # default
+    NA_character_
+   )
 
   tz_name
 }

@@ -81,8 +81,8 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("d" %in% dt_lett) {
-    dt <- sub("{d}", dt_d(input_dt), dt, fixed = TRUE)
-    dt <- sub("{dd}", dt_dd(input_dt), dt, fixed = TRUE)
+    pattern <- regmatches(dt, m = regexpr("\\{d+\\}", dt))
+    dt <- sub(pattern, dt_day[[pattern]](input_dt), dt, fixed = TRUE)
   }
 
   if ("D" %in% dt_lett) {
@@ -152,8 +152,11 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("H" %in% dt_lett) {
-    dt <- sub("{H}", dt_H(input_dt), dt, fixed = TRUE)
-    dt <- sub("{HH}", dt_HH(input_dt), dt, fixed = TRUE)
+    pattern <- regmatches(dt, m = regexpr("\\{H+\\}", dt))
+    # Pattern will be of shape "{y+}" and will call the appropriate function
+    # For replacing the year in the final value
+    # Will call dt_year$`{MM}`(input_dt) and replace the resulting value
+    dt <- sub(pattern, dt_hour_full[[pattern]](input_dt), dt, fixed = TRUE)
   }
 
   if ("K" %in% dt_lett) {
@@ -479,11 +482,11 @@ dt_qqqqq <- function(input, locale = NULL) {
 # List of function to transform "{MM}" to the correct output
 dt_Month <- list(
   # Month (format), numeric form (1 digit) ("9")
-  `{M}` = function(input, locale) {
+  `{M}` = function(input, ...) {
     as.character(as.integer(format(input, format = "%m")))
   },
   # Month (format), numeric form (2 digit, zero padded) ("09")
-  `{MM}` = function(input, locale) {
+  `{MM}` = function(input, ...) {
     format(input, format = "%m")
   },
   # Month (format), abbreviated ("Sep")
@@ -565,15 +568,17 @@ dt_W <- function(input, locale) {
   as.character(get_week_in_month(input = input, locale = locale))
 }
 
-# Day of month, numeric, 1-2 digits
-dt_d <- function(input) {
-  as.character(as.integer(format(input, format = "%d")))
-}
 
-# Day of month, numeric, 2 digits zero padded
-dt_dd <- function(input) {
-  zero_pad_to_width(value = as.integer(format(input, format = "%d")), width = 2)
-}
+dt_day <- list(
+  # Day of month, numeric, 1-2 digits
+  `{d}` = function(input) {
+    as.character(as.integer(format(input, format = "%d")))
+  },
+  # Day of month, numeric, 2 digits zero padded
+  `{dd}` =  function(input) {
+    zero_pad_to_width(value = as.integer(format(input, format = "%d")), width = 2)
+  }
+)
 
 # Day of year, numeric, 1-3 digits
 dt_D <- function(input) {
@@ -923,15 +928,18 @@ dt_hh <- function(input) {
   zero_pad_to_width(value = as.integer(format(input, format = "%I")), width = 2)
 }
 
-# Hour [0-23] // numeric, 1-2 digits
-dt_H <- function(input) {
-  zero_pad_to_width(value = as.integer(format(input, format = "%H")), width = 1)
-}
 
-# Hour [0-23] // numeric, 2 digits, zero padded
-dt_HH <- function(input) {
-  zero_pad_to_width(value = as.integer(format(input, format = "%H")), width = 2)
-}
+dt_hour_full <- list(
+  # Hour [0-23] // numeric, 1-2 digits
+  `{H}` = function(input) {
+    zero_pad_to_width(value = as.integer(format(input, format = "%H")), width = 1)
+  },
+  # Hour [0-23] // numeric, 2 digits, zero padded
+  `{HH}` = function(input) {
+    zero_pad_to_width(value = as.integer(format(input, format = "%H")), width = 2)
+  }
+)
+
 
 # Hour [0-11] // numeric, 1-2 digits
 dt_K <- function(input) {
@@ -1313,7 +1321,7 @@ dt_VV <- function(input, tz_info, locale = NULL) {
   ""
 }
 
-# TZ // exemplar city locaation ("Los_Angeles")
+# TZ // exemplar city location ("Los_Angeles")
 #
 # The exemplar city (location) for the time zone. Where that is
 # unavailable, the localized exemplar city name for the special
@@ -1358,7 +1366,7 @@ dt_VVVV <- function(input, tz_info, locale = NULL) {
   }
 
   tz_generic_location_pattern <-
-    tz_formats[tz_formats$locale == locale, ][["region_format"]]
+    tz_formats[tz_formats$locale == locale, "region_format"]
 
   gsub("{0}", exemplar_city_localized, tz_generic_location_pattern, fixed = TRUE)
 }

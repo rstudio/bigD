@@ -56,7 +56,7 @@ dates_elements_bigd <-
 #
 cldr_dates_bigd <- function(locale = "en", element) {
 
-  values <- dates[dates$locale == locale, ][[element]]
+  values <- dates[dates$locale == locale, element]
   values <- unlist(values, use.names = TRUE)
 
   names(values) <- sub("^value\\.", "", names(values))

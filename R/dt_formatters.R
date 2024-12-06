@@ -12,7 +12,7 @@ format_tz_offset_min_sec <- function(
     prepend_with = NULL
 ) {
 
-  if (tz_offset == 0 && use_z) {
+  if (use_z && tz_offset == 0) {
     return("Z")
   }
 
@@ -117,12 +117,12 @@ get_locale_territory <- function(locale) {
   }
 
   default_locale_name <-
-    default_locales[default_locales$base_locale == gsub("_", "-", locale, fixed = TRUE), ][["default_locale"]]
+    default_locales[default_locales$base_locale == gsub("_", "-", locale, fixed = TRUE), "default_locale"]
 
   if (length(default_locale_name) == 0L) {
 
     default_locale_name <-
-      default_locales[startsWith(default_locales$base_locale, locale), ][["default_locale"]][1]
+      default_locales[startsWith(default_locales$base_locale, locale), "default_locale"][1]
   }
 
   territory <- gsub(".*([A-Z]{2}|001|419|150).*", "\\1", default_locale_name)
@@ -140,12 +140,12 @@ get_week_in_month <- function(input, locale) {
 
   territory <- get_locale_territory(locale = locale)
 
-  start_of_week_territory <- start_of_week[start_of_week$territory == territory, ]
+  start_of_week_territory <- start_of_week[start_of_week$territory == territory, "day_of_week"]
 
-  if (nrow(start_of_week_territory) < 1) {
+  if (length(start_of_week_territory) == 0L) {
     start_of_week <- "mon"
   } else {
-    start_of_week <- start_of_week_territory[["day_of_week"]][[1]]
+    start_of_week <- start_of_week_territory[[1]]
   }
 
   if (start_of_week == "mon") {
@@ -269,16 +269,15 @@ get_flexible_day_period <- function(input, locale) {
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "00:00", , drop = FALSE
-      ][["period"]]
+          day_periods_locale$at == "00:00", "period"
+      ]
 
   } else if (time_str == "12:00" && "12:00" %in% day_periods_locale$at) {
 
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "12:00", , drop = FALSE
-      ][["period"]]
+          day_periods_locale$at == "12:00", "period"]
 
   } else {
 
@@ -308,7 +307,7 @@ get_flexible_day_period <- function(input, locale) {
     period <-
       day_periods_locale_from_to[
         day_periods_locale_from_to$from <= time_str &
-          time_str < day_periods_locale_from_to$to, ][["period"]]
+          time_str < day_periods_locale_from_to$to, "period"]
   }
 
   period
@@ -353,16 +352,14 @@ get_noon_midnight_period <- function(input, locale) {
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "00:00", , drop = FALSE
-      ][["period"]]
+          day_periods_locale$at == "00:00", "period"]
 
   } else if (time_str == "12:00" && "12:00" %in% day_periods_locale$at) {
 
     period <-
       day_periods_locale[
         !is.na(day_periods_locale$at) &
-          day_periods_locale$at == "12:00", , drop = FALSE
-      ][["period"]]
+          day_periods_locale$at == "12:00", "period"]
 
   } else {
 
@@ -379,13 +376,13 @@ format_quarter <- function(input) {
   month_input <- as.integer(format(date_input, format = "%m"))
   year_input <- as.integer(format(date_input, format = "%Y"))
 
-  if (month_input < 4) {
+  if (month_input < 4L) {
     quarter <- 1
-  } else if (month_input >= 4 && month_input < 7) {
+  } else if (month_input >= 4L && month_input < 7L) {
     quarter <- 2
-  } else if (month_input >= 7 && month_input < 10) {
+  } else if (month_input >= 7L && month_input < 10L) {
     quarter <- 3
-  } else if (month_input >= 10) {
+  } else if (month_input >= 10L) {
     quarter <- 4
   }
 
