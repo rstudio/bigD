@@ -425,15 +425,25 @@ dt_GGGGG <- function(input, locale = NULL) {
   )[[if (year < 0) "0" else "1"]]
 }
 
-# Calendar year
-dt_y <- function(input) {
-  as.character(abs(as.integer(format(input, format = "%Y"))))
-}
 
-# Abbreviated year (final 2 digits)
-dt_yy <- function(input) {
-  format(input, format = "%y")
-}
+dt_year <- list(
+  # Calendar year
+  `{y}` = function(input) {
+    as.character(abs(as.integer(format(input, format = "%Y"))))
+  },
+  # Abbreviated year (final 2 digits)
+  `{yy}` = function(input) {
+    format(input, format = "%y")
+  },
+  # Calendar year (min 3-9 digits wide)
+  `{yyy}` = function(input) dt_yyy_plus(input = input, length = 3),
+  `{yyyy}` = function(input) dt_yyy_plus(input = input, length = 4),
+  `{yyyyy}` = function(input) dt_yyy_plus(input = input, length = 5),
+  `{yyyyyy}` = function(input) dt_yyy_plus(input = input, length = 6),
+  `{yyyyyyy}` = function(input) dt_yyy_plus(input = input, length = 7),
+  `{yyyyyyyy}` = function(input) dt_yyy_plus(input = input, length = 8),
+  `{yyyyyyyyy}` = function(input) dt_yyy_plus(input = input, length = 9)
+)
 
 # Full year with minimum zero padding (yyy -> 2, yyyy -> 3, etc.)
 dt_yyy_plus <- function(input, length) {
@@ -442,15 +452,6 @@ dt_yyy_plus <- function(input, length) {
     width = length
   )
 }
-
-# Calendar year (min 3-9 digits wide)
-dt_yyy <- function(input) dt_yyy_plus(input = input, length = 3)
-dt_yyyy <- function(input) dt_yyy_plus(input = input, length = 4)
-dt_yyyyy <- function(input) dt_yyy_plus(input = input, length = 5)
-dt_yyyyyy <- function(input) dt_yyy_plus(input = input, length = 6)
-dt_yyyyyyy <- function(input) dt_yyy_plus(input = input, length = 7)
-dt_yyyyyyyy <- function(input) dt_yyy_plus(input = input, length = 8)
-dt_yyyyyyyyy <- function(input) dt_yyy_plus(input = input, length = 9)
 
 # Full year (week in year calendar)
 dt_Y <- function(input) {
@@ -606,39 +607,38 @@ dt_qqqqq <- function(input, locale = NULL) {
   )[[quarter]]
 }
 
-# Month (format), numeric form (1 digit) ("9")
-dt_M <- function(input) {
-  as.character(as.integer(format(input, format = "%m")))
-}
-
-# Month (format), numeric form (2 digit, zero padded) ("09")
-dt_MM <- function(input) {
-  format(input, format = "%m")
-}
-
-# Month (format), abbreviated ("Sep")
-dt_MMM <- function(input, locale = NULL) {
-  cldr_dates_bigd(
-    locale = locale,
-    element = dates_elements_bigd$months_format_abbrev
-  )[[as.integer(format(input, format = "%m"))]]
-}
-
-# Month (format), full ("September")
-dt_MMMM <- function(input, locale = NULL) {
-  cldr_dates_bigd(
-    locale = locale,
-    element = dates_elements_bigd$months_format_wide
-  )[[as.integer(format(input, format = "%m"))]]
-}
-
-# Month (format), narrow ("S")
-dt_MMMMM <- function(input, locale = NULL) {
-  cldr_dates_bigd(
-    locale = locale,
-    element = dates_elements_bigd$months_format_narrow
-  )[[as.integer(format(input, format = "%m"))]]
-}
+# List of function to transform "{MM}" to the correct output
+dt_Month <- list(
+  # Month (format), numeric form (1 digit) ("9")
+  `{M}` = function(input) {
+    as.character(as.integer(format(input, format = "%m")))
+  },
+  # Month (format), numeric form (2 digit, zero padded) ("09")
+  `{MM}` = function(input) {
+    format(input, format = "%m")
+  },
+  # Month (format), abbreviated ("Sep")
+  `{MMM}` = function(input, locale = NULL) {
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$months_format_abbrev
+    )[[as.integer(format(input, format = "%m"))]]
+  },
+  # Month (format), full ("September")
+  `{MMMM}` = function(input, locale = NULL) {
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$months_format_wide
+    )[[as.integer(format(input, format = "%m"))]]
+  },
+  # Month (format), narrow ("S")
+  `{MMMMM}` = function(input, locale = NULL) {
+    cldr_dates_bigd(
+      locale = locale,
+      element = dates_elements_bigd$months_format_narrow
+    )[[as.integer(format(input, format = "%m"))]]
+  }
+)
 
 # Month (standalone), numeric form (1 digit) ("9")
 dt_L <- function(input) {

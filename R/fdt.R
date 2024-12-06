@@ -1167,15 +1167,12 @@ fdt <- function(
     }
 
     if ("y" %in% dt_lett) {
-      dt <- gsub("{y}", dt_y(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yy}", dt_yy(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yyy}", dt_yyy(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yyyy}", dt_yyyy(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yyyyy}", dt_yyyyy(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yyyyyy}", dt_yyyyyy(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yyyyyyy}", dt_yyyyyyy(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yyyyyyyy}", dt_yyyyyyyy(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{yyyyyyyyy}", dt_yyyyyyyyy(input_dt), dt, fixed = TRUE)
+      # Like stringr::str_extract()
+      pattern <- regmatches(dt, m = regexpr("\\{y+\\}", dt))
+      # Pattern will be of shape "{y+}" and will call the appropriate function
+      # For replacing the year in the final value
+      # Will call dt_year$`{yy}`(input_dt) and replace the resulting value
+      dt <- gsub(pattern, dt_year[[pattern]](input_dt), dt, fixed = TRUE)
     }
 
     if ("Y" %in% dt_lett) {
@@ -1212,11 +1209,12 @@ fdt <- function(
     }
 
     if ("M" %in% dt_lett) {
-      dt <- gsub("{M}", dt_M(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{MM}", dt_MM(input_dt), dt, fixed = TRUE)
-      dt <- gsub("{MMM}", dt_MMM(input_dt, locale), dt, fixed = TRUE)
-      dt <- gsub("{MMMM}", dt_MMMM(input_dt, locale), dt, fixed = TRUE)
-      dt <- gsub("{MMMMM}", dt_MMMMM(input_dt, locale), dt, fixed = TRUE)
+      # Like stringr::str_extract()
+      pattern <- regmatches(dt, m = regexpr("\\{M+\\}", dt))
+      # Pattern will be of shape "{y+}" and will call the appropriate function
+      # For replacing the year in the final value
+      # Will call dt_year$`{MM}`(input_dt) and replace the resulting value
+      dt <- gsub(pattern, dt_Month[[pattern]](input_dt), dt, fixed = TRUE)
     }
 
     if ("L" %in% dt_lett) {
