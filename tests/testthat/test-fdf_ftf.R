@@ -193,3 +193,54 @@ test_that("`flex_*_lst` can be used in `fdt()`", {
     )
   )
 })
+
+test_that("fdt() works in all contexts", {
+  expect_equal(
+    fdt("2024-03-01", format = "GyMMMEd", use_tz = "America/Toronto"),
+    "AD2024MarFri1"
+  )
+  # Copy of a test in gt
+  expect_equal(
+    fdt(c(
+      "1970-01-01 15:35:00", "1970-01-01 16:36:00", "1970-01-01 17:37:00",
+      "1970-01-01 18:38:00", "1970-01-01 19:39:00"
+    ),
+      format = "E h:m:ss B"
+    ),
+    c(
+      "Thu 3:35:00 in the afternoon", "Thu 4:36:00 in the afternoon",
+      "Thu 5:37:00 in the afternoon", "Thu 6:38:00 in the evening",
+      "Thu 7:39:00 in the evening"
+    )
+  )
+
+  # Copy of a test in gt
+  expect_equal(
+    fdt(c(
+      "1970-01-01 15:35:00", "1970-01-01 16:36:00", "1970-01-01 17:37:00",
+      "1970-01-01 18:38:00", "1970-01-01 19:39:00"
+    ),
+    format = "'Q'q k:m"
+    ),
+    c(
+      "Q1 16:35", "Q1 17:36",
+      "Q1 18:37", "Q1 19:38",
+      "Q1 20:39"
+    )
+  )
+
+  expect_equal(
+    fdt(c(
+      "1970-01-01 15:35:00", "1970-01-01 16:36:00", "1970-01-01 17:37:00",
+      "1970-01-01 18:38:00", "1970-01-01 19:39:00"
+    ),
+    format = "QQQQ k:m"
+    ),
+    c(
+      "1st quarter 16:35", "1st quarter 17:36",
+      "1st quarter 18:37", "1st quarter 19:38",
+      "1st quarter 20:39"
+    )
+  )
+})
+

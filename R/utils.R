@@ -56,10 +56,16 @@ dates_elements_bigd <-
 #
 cldr_dates_bigd <- function(locale = "en", element) {
 
-  values <- dates[dates$locale == locale, ][[element]]
+  rows <- which(dates$locale == locale)
+  values <- dates[[rows, element]]
   values <- unlist(values, use.names = TRUE)
 
   names(values) <- sub("^value\\.", "", names(values))
 
   as.list(values)
+}
+
+# TODO Remove this when depending on R 4.4
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
 }
