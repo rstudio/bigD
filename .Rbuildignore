@@ -14,3 +14,4 @@ man/figures/
 tests/testthat/_snaps
 tests/testthat/test-fdf_ftf.R
 tests/testthat/test-standard_date_time.R
+^\.covrignore$
