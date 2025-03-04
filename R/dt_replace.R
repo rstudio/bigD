@@ -7,6 +7,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   # This means we can use sub() instead of gsub()
 
   if ("G" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{G}", dt_G(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{GG}", dt_G(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{GGG}", dt_G(input_dt, locale), dt, fixed = TRUE)
@@ -34,6 +35,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("U" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{U}", dt_U(input_dt), dt, fixed = TRUE)
     dt <- sub("{UU}", dt_U(input_dt), dt, fixed = TRUE)
     dt <- sub("{UUU}", dt_U(input_dt), dt, fixed = TRUE)
@@ -47,6 +49,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("q" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{q}", dt_q(input_dt), dt, fixed = TRUE)
     dt <- sub("{qq}", dt_qq(input_dt), dt, fixed = TRUE)
     dt <- sub("{qqq}", dt_qqq(input_dt, locale), dt, fixed = TRUE)
@@ -64,6 +67,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("L" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{L}", dt_L(input_dt), dt, fixed = TRUE)
     dt <- sub("{LL}", dt_LL(input_dt), dt, fixed = TRUE)
     dt <- sub("{LLL}", dt_LLL(input_dt, locale), dt, fixed = TRUE)
@@ -72,6 +76,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("w" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{w}", dt_w(input_dt), dt, fixed = TRUE)
     dt <- sub("{ww}", dt_ww(input_dt), dt, fixed = TRUE)
   }
@@ -95,6 +100,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("E" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{E}", dt_E(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{EE}", dt_E(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{EEE}", dt_E(input_dt, locale), dt, fixed = TRUE)
@@ -104,6 +110,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("e" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{e}", dt_e(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{ee}", dt_ee(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{eee}", dt_eee(input_dt, locale), dt, fixed = TRUE)
@@ -113,6 +120,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("c" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{c}", dt_c(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{cc}", dt_cc(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{ccc}", dt_ccc(input_dt, locale), dt, fixed = TRUE)
@@ -122,6 +130,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("a" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{a}", dt_a(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{aa}", dt_a(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{aaa}", dt_a(input_dt, locale), dt, fixed = TRUE)
@@ -130,6 +139,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("b" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{b}", dt_b(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{bb}", dt_b(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{bbb}", dt_b(input_dt, locale), dt, fixed = TRUE)
@@ -138,6 +148,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("B" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{B}", dt_B(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{BB}", dt_B(input_dt, locale), dt, fixed = TRUE)
     dt <- sub("{BBB}", dt_B(input_dt, locale), dt, fixed = TRUE)
@@ -146,6 +157,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("h" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{h}", dt_h(input_dt), dt, fixed = TRUE)
     dt <- sub("{hh}", dt_hh(input_dt), dt, fixed = TRUE)
   }
@@ -159,26 +171,31 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("K" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{K}", dt_K(input_dt), dt, fixed = TRUE)
     dt <- sub("{KK}", dt_KK(input_dt), dt, fixed = TRUE)
   }
 
   if ("k" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{k}", dt_k(input_dt), dt, fixed = TRUE)
     dt <- sub("{kk}", dt_kk(input_dt), dt, fixed = TRUE)
   }
 
   if ("m" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{m}", dt_m(input_dt), dt, fixed = TRUE)
     dt <- sub("{mm}", dt_mm(input_dt), dt, fixed = TRUE)
   }
 
   if ("s" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{s}", dt_s(input_dt), dt, fixed = TRUE)
     dt <- sub("{ss}", dt_ss(input_dt), dt, fixed = TRUE)
   }
 
   if ("S" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{S}", dt_S(input_dt), dt, fixed = TRUE)
     dt <- sub("{SS}", dt_SS(input_dt), dt, fixed = TRUE)
     dt <- sub("{SSS}", dt_SSS(input_dt), dt, fixed = TRUE)
@@ -191,6 +208,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("A" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{A}", dt_A(input_dt), dt, fixed = TRUE)
     dt <- sub("{AA}", dt_AA(input_dt), dt, fixed = TRUE)
     dt <- sub("{AAA}", dt_AAA(input_dt), dt, fixed = TRUE)
@@ -203,6 +221,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("z" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{z}", dt_z(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{zz}", dt_z(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{zzz}", dt_z(input_dt, tz_info, locale), dt, fixed = TRUE)
@@ -210,6 +229,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("Z" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{Z}", dt_Z(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{ZZ}", dt_Z(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{ZZZ}", dt_Z(input_dt, tz_info, locale), dt, fixed = TRUE)
@@ -228,6 +248,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("V" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{V}", dt_V(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{VV}", dt_VV(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{VVV}", dt_VVV(input_dt, tz_info, locale), dt, fixed = TRUE)
@@ -235,6 +256,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("X" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{X}", dt_X(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{XX}", dt_XX(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{XXX}", dt_XXX(input_dt, tz_info, locale), dt, fixed = TRUE)
@@ -243,6 +265,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("x" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{x}", dt_x(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{xx}", dt_xx(input_dt, tz_info, locale), dt, fixed = TRUE)
     dt <- sub("{xxx}", dt_xxx(input_dt, tz_info, locale), dt, fixed = TRUE)
@@ -251,6 +274,7 @@ dt_replace <- function(dt, input_dt, dt_lett, locale, tz_info) {
   }
 
   if ("g" %in% dt_lett) {
+    # TODO extract the exact substitution to do to avoid problematic
     dt <- sub("{g}", dt_g(input_dt), dt, fixed = TRUE)
     dt <- sub("{gg}", dt_gg(input_dt), dt, fixed = TRUE)
     dt <- sub("{ggg}", dt_ggg(input_dt), dt, fixed = TRUE)

@@ -958,6 +958,11 @@ fdt <- function(
 
   dt_out <- rep_len(NA_character_, length(input))
 
+  # Verify if each entry has timezone (checking before loop for performance)
+  if (is.character(input)) {
+    tz_present <-  is_tz_present(input = input)
+  }
+
   for (i in seq_along(input)) {
 
     input_i <- input[i]
@@ -981,14 +986,13 @@ fdt <- function(
       time_present <- is_time_present(input = input_i)
 
       # Determine if tz information is present, either as:
-      # [1] a tz offset in hours from GMT
+      # [1] a tz offset in hours from GMT (defined above before loop)
       # [2] a long tz identifier (either canonical or an alias)
-
-      tz_present <- is_tz_present(input = input_i)
+      tz_present_i <- tz_present[i]
       long_tzid_present <- is_long_tzid_present(input = input_i)
 
       # Strip away tz information from the input and return as `input_str`
-      if (tz_present) {
+      if (tz_present_i) {
         input_str <- strip_tz(input = input_i)
       } else if (long_tzid_present) {
         input_str <- strip_long_tzid(input = input_i)
@@ -1108,7 +1112,7 @@ fdt <- function(
         tz_info$tz_short_specific <- get_tz_short_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt)
         tz_info$tz_long_specific <- get_tz_long_specific(long_tzid = tz_info$long_tzid, input_dt = input_dt, locale = locale)
 
-      } else if (tz_present) {
+      } else if (tz_present_i) {
 
         tz_info$tz_str <- get_tz_str(input = input_i)
         tz_info$tz_offset <- get_tz_offset_val(input = input_i)
@@ -1254,7 +1258,7 @@ dt_format_pattern <- function(format) {
       unique(unlist(strsplit(format, "", fixed = TRUE))),
       sub_letters()
     )
-
+  # Bad error if length(dt_letters) == 0
   pattern <- paste0("(", paste0("[", dt_letters, "]+", collapse = "|"), ")")
 
   format <- gsub(pattern, "\\{\\1\\}", format)

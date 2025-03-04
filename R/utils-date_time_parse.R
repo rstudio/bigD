@@ -42,8 +42,8 @@ is_time_present <- function(input) {
   grepl(get_time_pattern(), input)
 }
 
+# returns a vector of length of input
 is_tz_present <- function(input) {
-
   regex <- paste(
     get_tz_pattern_z(),
     get_tz_pattern_hh(),
@@ -51,7 +51,7 @@ is_tz_present <- function(input) {
     get_tz_pattern_hhmm(),
     sep = "|"
   )
-  any(grepl(regex, input))
+  grepl(regex, input)
 }
 
 is_long_tzid_present <- function(input) {
@@ -323,21 +323,18 @@ get_localized_exemplar_city <- function(
 # The short specific non-location format (e.g., 'PST') from a `long_tzid`
 get_tz_short_specific <- function(long_tzid, input_dt) {
 
-  input_date <- as.Date(input_dt)
-
   tzdb_entries_tzid <- tzdb[tzdb$zone_name == long_tzid, ]
   if (nrow(tzdb_entries_tzid) == 0) {
     return(NA_character_)
   }
 
-  tzdb_idx <- rle(tzdb_entries_tzid$date_start >= input_date)$lengths[1]
+  input_date <- as.Date(input_dt)
 
-  tz_short_specific <- tzdb_entries_tzid[tzdb_idx, "abbrev"]
+  tzdb_idx <- rle(tzdb_entries_tzid$date_start >= input_date)$lengths[1]
 
   # TODO: add check to ensure that the `abbrev` value is a valid
   # short specific non-location time zone
-
-  tz_short_specific
+  tzdb_entries_tzid[tzdb_idx, "abbrev"]
 }
 
 # The long specific non-location format (e.g., 'Pacific Standard Time') from
@@ -462,7 +459,7 @@ get_tz_non_location <- function(
     tz_name <- tz_metazone_names_entry[[available_items]]
   } else if (target_item %in% available_items) {
     tz_name <- tz_metazone_names_entry[[target_item]]
-  } else if (short_long == "short" && !has_short_items) {
+  } else if (!has_short_items && short_long == "short") {
     if (any(grepl(type, available_items))) {
       tz_name <- tz_metazone_names_entry[[paste0("long.", type)]]
     } else {
