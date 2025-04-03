@@ -1,6 +1,6 @@
-# bigD (development version)
+# bigD 0.3.1
 
-* Introduced performance improvements (@olivroy, #15, #16).
+* Introduced performance improvements (@olivroy, #15, #16, #17).
 
   * Internal functions `dt_MM()`, `dt_yyy()` and friends are no longer used, as we
     use a new internal structure to avoid duplicate calculations
