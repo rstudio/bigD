@@ -12,6 +12,9 @@
 ^docs$
 man/figures/
 tests/testthat/_snaps
+tests/testthat/test-dates_times.R
+tests/testthat/test-dt_replace.R
 tests/testthat/test-fdf_ftf.R
 tests/testthat/test-standard_date_time.R
+tests/testthat/test-time_zones.R
 ^\.covrignore$
